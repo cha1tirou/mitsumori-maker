@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
-import Script from "next/script";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -26,11 +25,10 @@ export default function RootLayout({
   return (
     <html lang="ja" className={notoSansJP.variable}>
       <head>
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875835900503056"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body className="font-sans antialiased">
