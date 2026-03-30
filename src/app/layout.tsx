@@ -36,7 +36,13 @@ export default function RootLayout({
         <footer className="border-t border-gray-200 bg-white mt-8">
           <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
             <span>© 2026 見積書メーカー</span>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/how-to" className="hover:text-gray-800 transition-colors">
+                使い方
+              </Link>
+              <Link href="/faq" className="hover:text-gray-800 transition-colors">
+                よくある質問
+              </Link>
               <Link href="/privacy" className="hover:text-gray-800 transition-colors">
                 プライバシーポリシー
               </Link>
