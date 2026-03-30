@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description:
     "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。3種類のデザインテンプレートからお選びいただけます。",
   keywords: "見積書, 見積書作成, 無料, PDF, テンプレート, 見積書メーカー",
+  verification: {
+    google: "GjZNFGBtFEmvoeEUPesUdP0p2GDKfXrOjrbToCGVptQ",
+  },
   openGraph: {
     title: "見積書メーカー｜無料で見積書をサクッと作成・PDF出力",
     description:
