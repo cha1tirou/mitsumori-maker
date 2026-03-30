@@ -26,12 +26,21 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "見積書メーカー｜無料で見積書をサクッと作成・PDF出力",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "見積書メーカー｜無料で見積書をサクッと作成・PDF出力",
     description:
       "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。",
+    images: ["https://mitsumori-maker.com/og-image.png"],
   },
   metadataBase: new URL("https://mitsumori-maker.com"),
   alternates: {
@@ -51,6 +60,27 @@ export default function RootLayout({
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875835900503056"
           crossOrigin="anonymous"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "見積書メーカー",
+              url: "https://mitsumori-maker.com",
+              description:
+                "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。3種類のデザインテンプレートからお選びいただけます。",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "JPY",
+              },
+              inLanguage: "ja",
+            }),
+          }}
         />
       </head>
       <body className="font-sans antialiased">
