@@ -163,6 +163,36 @@ export default function FreelanceGuidePage() {
           </ul>
         </article>
 
+        <div className="mt-10 bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">
+            会計ソフトを活用して見積書・確定申告をもっとラクに
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            フリーランスにとって、見積書の作成だけでなく日々の帳簿付けや確定申告も大きな負担です。会計ソフトを導入すれば、見積書から請求書への変換、売上・経費の自動仕訳、確定申告書類の作成まで一元管理できます。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            特に<strong>やよいの青色申告オンライン</strong>は、フリーランス・個人事業主に人気の定番ソフトです。初年度無料で使えるプランがあり、簿記の知識がなくても画面の案内に沿って入力するだけで青色申告の書類が完成します。インボイス制度にも対応しており、適格請求書の発行もスムーズです。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JDCT6+35XE+5YJRM"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center text-sm"
+            >
+              やよいの青色申告オンラインを見る →
+            </a>
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JDCT6+35XE+601S2"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors text-center text-sm"
+            >
+              やよいの白色申告オンラインを見る →
+            </a>
+          </div>
+        </div>
+
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
           <ul className="space-y-2">

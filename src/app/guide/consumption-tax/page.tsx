@@ -177,6 +177,36 @@ export default function ConsumptionTaxGuidePage() {
           </ul>
         </article>
 
+        <div className="mt-10 bg-green-50 border border-green-200 rounded-xl p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">
+            インボイス対応の会計ソフトで消費税管理をカンタンに
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            インボイス制度への対応は、適格請求書の発行だけでなく、消費税の計算・端数処理・税率ごとの集計など経理業務の負担が大きくなります。会計ソフトを使えば、これらの複雑な処理を自動化できます。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>やよいの青色申告オンライン</strong>は、インボイス制度に完全対応。適格請求書の作成・発行はもちろん、税率ごとの自動仕訳、消費税申告書の作成まで一括で対応できます。初年度は無料で利用でき、フリーランスから法人まで幅広く使われています。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JDCT6+35XE+5YJRM"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 transition-colors text-center text-sm"
+            >
+              やよいの青色申告オンラインを見る →
+            </a>
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JDCT6+35XE+601S2"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-white text-green-600 font-bold px-6 py-3 rounded-lg border border-green-300 hover:bg-green-50 transition-colors text-center text-sm"
+            >
+              やよいの白色申告オンラインを見る →
+            </a>
+          </div>
+        </div>
+
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
           <ul className="space-y-2">
