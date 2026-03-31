@@ -26,18 +26,18 @@
 - [x] guide/how-to-write 作成・push済み
 
 ## 進行中
-- [ ] guide/template-excel 作成
-- [ ] guide/freelance 作成
-- [ ] guide/difference 作成
-- [ ] guide/consumption-tax 作成
-- [ ] guide/valid-period 作成
-- [ ] guide/electronic 作成
+- [x] guide/template-excel 作成
+- [x] guide/freelance 作成
+- [x] guide/difference 作成
+- [x] guide/consumption-tax 作成
+- [x] guide/valid-period 作成
+- [x] guide/electronic 作成
+- [x] トップページにガイド記事へのリンク一覧を追加
+- [x] Google Analytics設定
 
-## 次フェーズ（コンテンツ完成後）
+## 次フェーズ（アフィリエイト・改善）
 - [ ] AdSense承認確認・広告ユニット設置
-- [ ] Google Analytics設定
 - [ ] アフィリエイトリンク挿入（会計ソフト・印鑑・名刺）
-- [ ] トップページにガイド記事へのリンク一覧を追加
 - [ ] サイトデザイン改修（信頼性・CVR向上）
 - [ ] Search Consoleでインデックス状況確認
 - [ ] サイトマップ再送信

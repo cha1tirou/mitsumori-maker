@@ -97,6 +97,34 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* ガイド記事リンク */}
+        <section className="mt-12">
+          <h2 className="text-lg font-bold text-gray-800 mb-4">
+            見積書お役立ちガイド
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { href: "/guide/how-to-write", title: "見積書の書き方・必要項目を解説", desc: "初心者向けに記載項目やポイントを解説" },
+              { href: "/guide/template-excel", title: "見積書テンプレートの選び方", desc: "Excel・PDF・オンラインツール別に比較" },
+              { href: "/guide/freelance", title: "フリーランスの見積書ガイド", desc: "個人事業主向けの書き方・単価の決め方" },
+              { href: "/guide/difference", title: "見積書・請求書・納品書の違い", desc: "3つの書類の役割と使い分けを解説" },
+              { href: "/guide/consumption-tax", title: "消費税の書き方・インボイス対応", desc: "税率記載・端数処理・登録番号の扱い" },
+              { href: "/guide/valid-period", title: "見積書の有効期限の設定方法", desc: "業種別の目安と期限切れ時の対応" },
+              { href: "/guide/electronic", title: "見積書の電子化・PDF化のメリット", desc: "コスト削減・電子帳簿保存法への対応" },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-400 hover:shadow-sm transition-all"
+              >
+                <h3 className="text-sm font-semibold text-gray-800 mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-500">{item.desc}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
 
       {/* フッター */}
