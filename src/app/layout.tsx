@@ -105,6 +105,7 @@ export default function RootLayout({
               <Link href="/how-to" className="hover:text-gray-800 transition-colors">使い方</Link>
               <Link href="/faq" className="hover:text-gray-800 transition-colors">よくある質問</Link>
               <Link href="/privacy" className="hover:text-gray-800 transition-colors">プライバシーポリシー</Link>
+              <Link href="/tools/invoice" className="hover:text-gray-800 transition-colors">請求書メーカー</Link>
               <Link href="/contact" className="hover:text-gray-800 transition-colors">お問い合わせ</Link>
             </div>
           </div>
