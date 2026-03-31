@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const action = payload.actions?.[0];
   if (!action) return NextResponse.json({ error: "no action" }, { status: 400 });
 
-  const value = action.value;
+  const value = action.selected_option?.value || action.value;
   const userName = payload.user?.name || "unknown";
 
   const token = process.env.GITHUB_TOKEN;
