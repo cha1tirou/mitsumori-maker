@@ -204,6 +204,29 @@ export default function FreelanceGuidePage() {
               マネーフォワード クラウド確定申告を見る →
             </a>
           </div>
+          <div className="mt-5 pt-5 border-t border-blue-200">
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              <strong>freee会計</strong>はクラウド会計ソフトシェアNo.1。スマホアプリからでもレシート撮影や経費入力ができ、外出先でもサクサク作業できます。初めての確定申告でも質問に答えていくだけで書類が完成する「ステップ入力」が好評です。
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JU+3SPO+9FDAJ6"
+                rel="nofollow"
+                target="_blank"
+                className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors text-center text-sm"
+              >
+                freee会計を見る →
+              </a>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JU+3SPO+9FL80Y"
+                rel="nofollow"
+                target="_blank"
+                className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors text-center text-sm"
+              >
+                freee会計を無料でお試し →
+              </a>
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 border-t border-gray-200 pt-8">
