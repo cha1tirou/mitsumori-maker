@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "フリーランス・個人事業主のための見積書ガイド | 見積書メーカー",
   description:
     "フリーランス・個人事業主向けに見積書の作り方を解説。記載すべき項目、単価の決め方、インボイス対応、よくある失敗例まで実践的にまとめました。",
+  openGraph: {
+    title: "フリーランス・個人事業主のための見積書ガイド | 見積書メーカー",
+    description: "フリーランス・個人事業主向けに見積書の作り方を解説。記載すべき項目、単価の決め方、インボイス対応まで。",
+    url: "https://mitsumori-maker.com/guide/freelance",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/freelance",
+  },
 };
 
 export default function FreelanceGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="フリーランス・個人事業主のための見積書ガイド"
+        description="フリーランス・個人事業主向けに見積書の作り方を解説。記載すべき項目、単価の決め方、インボイス対応まで。"
+        slug="freelance"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">フリーランスの見積書</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

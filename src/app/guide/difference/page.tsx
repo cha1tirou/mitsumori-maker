@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書・請求書・納品書の違いをわかりやすく解説 | 見積書メーカー",
   description:
     "見積書・請求書・納品書の違いと役割を図解付きで解説。それぞれの発行タイミング、記載項目の違い、正しい使い分け方をまとめました。",
+  openGraph: {
+    title: "見積書・請求書・納品書の違いをわかりやすく解説 | 見積書メーカー",
+    description: "見積書・請求書・納品書の違いと役割を解説。発行タイミング、記載項目の違い、使い分け方をまとめました。",
+    url: "https://mitsumori-maker.com/guide/difference",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/difference",
+  },
 };
 
 export default function DifferenceGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書・請求書・納品書の違いをわかりやすく解説"
+        description="見積書・請求書・納品書の違いと役割を解説。発行タイミング、記載項目の違い、正しい使い分け方をまとめました。"
+        slug="difference"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">見積書・請求書・納品書の違い</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

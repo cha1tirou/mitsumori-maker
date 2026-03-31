@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書テンプレート（Excel・PDF）の選び方と活用法 | 見積書メーカー",
   description:
     "見積書テンプレートの選び方をExcel・PDF・オンラインツール別に解説。業種や用途に合ったテンプレートの選び方、カスタマイズのコツを紹介します。",
+  openGraph: {
+    title: "見積書テンプレート（Excel・PDF）の選び方と活用法 | 見積書メーカー",
+    description: "見積書テンプレートの選び方をExcel・PDF・オンラインツール別に解説。業種や用途に合った選び方を紹介。",
+    url: "https://mitsumori-maker.com/guide/template-excel",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/template-excel",
+  },
 };
 
 export default function TemplateExcelGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書テンプレート（Excel・PDF）の選び方と活用法"
+        description="見積書テンプレートの選び方をExcel・PDF・オンラインツール別に解説。業種や用途に合ったテンプレートの選び方を紹介。"
+        slug="template-excel"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">テンプレートの選び方</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

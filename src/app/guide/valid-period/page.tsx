@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書の有効期限の設定方法と適切な期間の決め方 | 見積書メーカー",
   description:
     "見積書の有効期限の設定方法を解説。適切な期間の目安、業種別の設定例、有効期限を過ぎた場合の対応方法など、実務で役立つ情報をまとめました。",
+  openGraph: {
+    title: "見積書の有効期限の設定方法と適切な期間の決め方 | 見積書メーカー",
+    description: "見積書の有効期限の設定方法を解説。適切な期間の目安、業種別の設定例、期限切れ時の対応方法をまとめました。",
+    url: "https://mitsumori-maker.com/guide/valid-period",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/valid-period",
+  },
 };
 
 export default function ValidPeriodGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書の有効期限の設定方法と適切な期間の決め方"
+        description="見積書の有効期限の設定方法を解説。適切な期間の目安、業種別の設定例、期限切れ時の対応方法をまとめました。"
+        slug="valid-period"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">有効期限の設定方法</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書の消費税の書き方・インボイス対応ガイド | 見積書メーカー",
   description:
     "見積書における消費税の正しい書き方を解説。税率10%・8%の記載方法、インボイス制度への対応、適格請求書発行事業者番号の記載ルールをまとめました。",
+  openGraph: {
+    title: "見積書の消費税の書き方・インボイス対応ガイド | 見積書メーカー",
+    description: "見積書における消費税の正しい書き方を解説。税率の記載方法、インボイス制度対応、登録番号の記載ルールまで。",
+    url: "https://mitsumori-maker.com/guide/consumption-tax",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/consumption-tax",
+  },
 };
 
 export default function ConsumptionTaxGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書の消費税の書き方・インボイス対応ガイド"
+        description="見積書における消費税の正しい書き方を解説。税率の記載方法、インボイス制度への対応をまとめました。"
+        slug="consumption-tax"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">消費税の書き方</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

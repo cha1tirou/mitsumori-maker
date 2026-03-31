@@ -148,6 +148,7 @@ export default function Home() {
               { href: "/guide/consumption-tax", title: "消費税の書き方・インボイス対応", desc: "税率記載・端数処理・登録番号の扱い" },
               { href: "/guide/valid-period", title: "見積書の有効期限の設定方法", desc: "業種別の目安と期限切れ時の対応" },
               { href: "/guide/electronic", title: "見積書の電子化・PDF化のメリット", desc: "コスト削減・電子帳簿保存法への対応" },
+              { href: "/guide/construction", title: "建設業の見積書の書き方", desc: "工事見積書の項目・階層構造・諸経費の記載" },
             ].map((item) => (
               <a
                 key={item.href}

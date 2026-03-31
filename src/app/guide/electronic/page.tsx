@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書を電子化・PDF化するメリットと方法 | 見積書メーカー",
   description:
     "見積書の電子化・PDF化のメリットと具体的な方法を解説。電子帳簿保存法への対応、紙との違い、導入手順をわかりやすくまとめました。",
+  openGraph: {
+    title: "見積書を電子化・PDF化するメリットと方法 | 見積書メーカー",
+    description: "見積書の電子化・PDF化のメリットと方法を解説。電子帳簿保存法への対応、導入手順をまとめました。",
+    url: "https://mitsumori-maker.com/guide/electronic",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/electronic",
+  },
 };
 
 export default function ElectronicGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書を電子化・PDF化するメリットと方法"
+        description="見積書の電子化・PDF化のメリットと具体的な方法を解説。電子帳簿保存法への対応、導入手順をまとめました。"
+        slug="electronic"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">電子化・PDF化のメリット</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">

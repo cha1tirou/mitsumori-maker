@@ -1,20 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書の書き方・必要項目をわかりやすく解説【初心者向け】 | 見積書メーカー",
   description:
     "見積書の書き方を初心者向けにわかりやすく解説。必要な記載項目や作成時の注意点、すぐ使えるテンプレート情報まで、見積書作成に必要な知識をまとめました。",
+  openGraph: {
+    title: "見積書の書き方・必要項目をわかりやすく解説【初心者向け】 | 見積書メーカー",
+    description: "見積書の書き方を初心者向けにわかりやすく解説。必要な記載項目や作成時の注意点、すぐ使えるテンプレート情報まで。",
+    url: "https://mitsumori-maker.com/guide/how-to-write",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/how-to-write",
+  },
 };
 
 export default function HowToWriteGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書の書き方・必要項目をわかりやすく解説"
+        description="見積書の書き方を初心者向けにわかりやすく解説。必要な記載項目や作成時の注意点、すぐ使えるテンプレート情報まで。"
+        slug="how-to-write"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
+            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">見積書の書き方</span>
+          </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">
