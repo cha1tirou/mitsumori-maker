@@ -46,6 +46,25 @@ export default function Home() {
         </div>
       </header>
 
+      {/* 特徴セクション */}
+      <section className="bg-gray-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: "完全無料", sub: "すべての機能が0円" },
+              { label: "登録不要", sub: "個人情報の入力なし" },
+              { label: "PDF出力", sub: "ワンクリックでDL" },
+              { label: "3種のテンプレート", sub: "業種に合わせて選択" },
+            ].map((f) => (
+              <div key={f.label} className="text-center">
+                <p className="text-sm font-bold text-gray-800">{f.label}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{f.sub}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* メインコンテンツ */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex gap-6">
@@ -97,6 +116,24 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* こんな方におすすめ */}
+        <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6">
+          <h2 className="text-lg font-bold text-gray-800 mb-4">こんな方におすすめ</h2>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              "初めて見積書を作成するフリーランスの方",
+              "Excelテンプレートを探す手間を省きたい方",
+              "急ぎで見積書が必要になった個人事業主の方",
+              "会員登録なしで今すぐPDFが欲しい方",
+            ].map((text) => (
+              <div key={text} className="flex items-start gap-2">
+                <span className="text-green-500 text-sm mt-0.5">&#10003;</span>
+                <p className="text-sm text-gray-700">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ガイド記事リンク */}
         <section className="mt-12">
           <h2 className="text-lg font-bold text-gray-800 mb-4">
