@@ -1,0 +1,210 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "見積書の有効期限の設定方法と適切な期間の決め方 | 見積書メーカー",
+  description:
+    "見積書の有効期限の設定方法を解説。適切な期間の目安、業種別の設定例、有効期限を過ぎた場合の対応方法など、実務で役立つ情報をまとめました。",
+};
+
+export default function ValidPeriodGuidePage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-3xl mx-auto px-4 py-4">
+          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
+            ← 見積書メーカーに戻る
+          </Link>
+        </div>
+      </header>
+      <main className="max-w-3xl mx-auto px-4 py-10">
+        <article>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            見積書の有効期限の設定方法と適切な期間の決め方
+          </h1>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+
+          <p className="text-gray-700 leading-relaxed mb-8">
+            見積書に有効期限を設定していますか？有効期限のない見積書は、数ヶ月後や数年後に「この金額でお願いします」と言われるリスクがあります。原材料費や人件費の変動、為替の影響などを考えると、有効期限の設定は自社を守るために欠かせません。この記事では、見積書の有効期限の設定方法と、業種別の適切な期間の決め方を解説します。
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            見積書に有効期限を設定する理由
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書の有効期限は、見積もった金額や条件が有効である期間を示すものです。設定する主な理由は以下の通りです。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <strong>価格変動リスクへの対応</strong>：原材料費、為替レート、人件費などは時間とともに変動します。有効期限を設けることで、見積もり時点の価格で無期限に拘束されることを防ぎます。
+            </li>
+            <li>
+              <strong>リソースの確保</strong>：見積書は「この時期にこの人員でこの仕事ができます」という前提で作成されます。期限を過ぎると人員の確保が難しくなったり、スケジュールが変わったりする可能性があります。
+            </li>
+            <li>
+              <strong>意思決定の促進</strong>：有効期限があることで、取引先は期限内に発注の可否を判断する動機が生まれます。商談をスムーズに進める効果があります。
+            </li>
+            <li>
+              <strong>管理コストの削減</strong>：有効期限のない見積書が大量に残ると、どれが有効でどれが無効かの管理が煩雑になります。期限を設定することで、自動的に古い見積もりを無効にできます。
+            </li>
+          </ul>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            有効期限の記載方法
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            有効期限の記載方法にはいくつかのパターンがあります。相手に伝わりやすい書き方を選びましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            具体的な日付で記載する方法
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-gray-700 text-sm">
+              <strong>記載例</strong>：見積有効期限：2026年4月30日まで
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            最もわかりやすい方法です。いつまでに返事をすればよいか取引先が一目で判断できます。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            発行日からの期間で記載する方法
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-gray-700 text-sm">
+              <strong>記載例</strong>：見積有効期限：発行日より30日間
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            テンプレートとして使い回しやすい方法です。発行日と組み合わせて、取引先が期限日を計算します。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            記載する場所
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            有効期限は以下のいずれかの場所に記載するのが一般的です。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+            <li>見積書の上部（タイトル付近）に独立した項目として記載</li>
+            <li>合計額の下に補足情報として記載</li>
+            <li>備考欄に記載</li>
+          </ul>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見落とされないよう、できるだけ目立つ位置に記載することをおすすめします。
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            業種別・有効期限の目安
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            有効期限の長さは業種や取引内容によって異なります。以下は一般的な目安です。
+          </p>
+
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full border-collapse border border-gray-300 text-sm">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border border-gray-300 px-4 py-2 text-left">業種・取引内容</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">有効期限の目安</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">理由</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">IT・Web制作</td>
+                  <td className="border border-gray-300 px-4 py-2">2週間〜1ヶ月</td>
+                  <td className="border border-gray-300 px-4 py-2">技術者のスケジュール確保が必要</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">建設・リフォーム</td>
+                  <td className="border border-gray-300 px-4 py-2">1〜3ヶ月</td>
+                  <td className="border border-gray-300 px-4 py-2">資材価格の変動が大きい</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">製造業</td>
+                  <td className="border border-gray-300 px-4 py-2">1〜2ヶ月</td>
+                  <td className="border border-gray-300 px-4 py-2">原材料費・為替の影響を受ける</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">コンサルティング</td>
+                  <td className="border border-gray-300 px-4 py-2">2週間〜1ヶ月</td>
+                  <td className="border border-gray-300 px-4 py-2">コンサルタントの稼働スケジュールによる</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">物品販売</td>
+                  <td className="border border-gray-300 px-4 py-2">1〜2週間</td>
+                  <td className="border border-gray-300 px-4 py-2">在庫状況や仕入れ価格が変わりやすい</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">デザイン・クリエイティブ</td>
+                  <td className="border border-gray-300 px-4 py-2">2週間〜1ヶ月</td>
+                  <td className="border border-gray-300 px-4 py-2">デザイナーのスケジュール確保が必要</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            迷った場合は「発行日より30日間」を基本とし、取引先の検討期間や業界の慣習に応じて調整するのがおすすめです。
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            有効期限が過ぎた場合の対応
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            有効期限を過ぎた後に取引先から「この見積もりでお願いしたい」と連絡が来ることは珍しくありません。この場合の対応方法を整理しておきましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            条件が変わらない場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            原材料費や人件費に変動がなく、同じ条件で対応できる場合は、有効期限を更新した新しい見積書を発行しましょう。見積書番号を新たに振り、発行日と有効期限を更新します。旧見積書の番号を備考に記載しておくと、経緯がわかりやすくなります。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            条件が変わった場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            価格が変動していたり、スケジュールが変わっていたりする場合は、新しい条件で再見積書を作成します。取引先には「前回の見積もりから状況が変わったため、改めてお見積もりいたします」と丁寧に説明しましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            対応できない場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            リソースの問題でそもそも対応が難しい場合は、早めにその旨を伝えましょう。代替案（時期をずらす、範囲を調整するなど）を提示できると、取引先との関係を良好に保てます。
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            まとめ
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書の有効期限は、自社の利益を守りつつ、取引先にスムーズな意思決定を促す重要な要素です。以下のポイントを押さえて適切に設定しましょう。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-1">
+            <li>有効期限は必ず設定する（設定しないのはリスク）</li>
+            <li>具体的な日付または「発行日より〇日間」で記載する</li>
+            <li>業種・取引内容に応じた適切な期間を設定する</li>
+            <li>迷ったら「30日間」を基本にする</li>
+            <li>期限切れの見積書は再発行で対応する</li>
+          </ul>
+        </article>
+
+        <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
+          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
+          <p className="text-gray-400 mb-4 text-sm">
+            登録不要・完全無料・PDF出力対応
+          </p>
+          <Link
+            href="/"
+            className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            見積書メーカーを使う →
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}
