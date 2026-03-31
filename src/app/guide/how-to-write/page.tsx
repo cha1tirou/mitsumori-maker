@@ -221,6 +221,27 @@ export default function HowToWriteGuidePage() {
           </p>
         </article>
 
+        <div className="mt-10 border-t border-gray-200 pt-8">
+          <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/guide/template-excel" className="text-blue-600 hover:underline text-sm">
+                見積書テンプレート（Excel・PDF）の選び方と活用法
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
+                フリーランス・個人事業主のための見積書ガイド
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/consumption-tax" className="text-blue-600 hover:underline text-sm">
+                見積書の消費税の書き方・インボイス対応ガイド
+              </Link>
+            </li>
+          </ul>
+        </div>
+
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
           <p className="text-gray-400 mb-4 text-sm">
