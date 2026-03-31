@@ -191,6 +191,19 @@ export default function FreelanceGuidePage() {
               やよいの白色申告オンラインを見る →
             </a>
           </div>
+          <div className="mt-6 pt-5 border-t border-blue-200">
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              他にもこんな会計ソフトが人気です。<strong>マネーフォワード クラウド確定申告</strong>は、銀行口座やクレジットカードと自動連携して仕訳を提案してくれるのが特徴。複数の取引先とやり取りが多いフリーランスには、データ連携の手軽さが好評です。
+            </p>
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1MXYFU+4JGQ+BWVTE"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors text-center text-sm"
+            >
+              マネーフォワード クラウド確定申告を見る →
+            </a>
+          </div>
         </div>
 
         <div className="mt-10 border-t border-gray-200 pt-8">

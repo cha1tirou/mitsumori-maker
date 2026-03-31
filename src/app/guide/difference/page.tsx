@@ -227,6 +227,26 @@ export default function DifferenceGuidePage() {
           </p>
         </article>
 
+        <div className="mt-10 bg-purple-50 border border-purple-200 rounded-xl p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">
+            見積書・請求書・納品書を会計ソフトでまとめて管理
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書・請求書・納品書をバラバラに管理していると、金額の不一致や発行漏れが起きがちです。会計ソフトを使えば、見積書の内容をそのまま納品書・請求書に変換でき、転記ミスを防ぎながら書類管理を一元化できます。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>マネーフォワード クラウド確定申告</strong>は、見積書・請求書の作成から経理・確定申告までをワンストップで管理できるクラウドサービスです。銀行口座やクレジットカードとの自動連携で仕訳を提案してくれるため、経理にかかる時間を大幅に削減できます。
+          </p>
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1MXYFU+4JGQ+BWVTE"
+            rel="nofollow"
+            target="_blank"
+            className="inline-block bg-purple-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors text-center text-sm"
+          >
+            マネーフォワード クラウド確定申告を見る →
+          </a>
+        </div>
+
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
           <ul className="space-y-2">
