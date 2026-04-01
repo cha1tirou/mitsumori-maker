@@ -116,6 +116,57 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* 使い方3ステップ */}
+        <section className="mt-12">
+          <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
+            3ステップで見積書が完成
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              {
+                step: "01",
+                title: "情報を入力",
+                desc: "会社名・品目・金額など必要事項をフォームに入力するだけ。テンプレートを3種類から選べます。",
+                icon: (
+                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                  </svg>
+                ),
+              },
+              {
+                step: "02",
+                title: "リアルタイムでプレビュー",
+                desc: "入力と同時に右側にA4サイズの見積書が表示されます。仕上がりを確認しながら編集できます。",
+                icon: (
+                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                ),
+              },
+              {
+                step: "03",
+                title: "PDFでダウンロード",
+                desc: "「PDFダウンロード」ボタンを押すだけで即座に保存。登録不要・完全無料で何度でも使えます。",
+                icon: (
+                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                ),
+              },
+            ].map((item) => (
+              <div key={item.step} className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+                <div className="flex justify-center mb-3">{item.icon}</div>
+                <div className="inline-block bg-gray-900 text-white text-xs font-bold px-2 py-0.5 rounded mb-2">
+                  STEP {item.step}
+                </div>
+                <h3 className="text-sm font-bold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* こんな方におすすめ */}
         <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6">
           <h2 className="text-lg font-bold text-gray-800 mb-4">こんな方におすすめ</h2>
@@ -149,6 +200,7 @@ export default function Home() {
               { href: "/guide/valid-period", title: "見積書の有効期限の設定方法", desc: "業種別の目安と期限切れ時の対応" },
               { href: "/guide/electronic", title: "見積書の電子化・PDF化のメリット", desc: "コスト削減・電子帳簿保存法への対応" },
               { href: "/guide/construction", title: "建設業の見積書の書き方", desc: "工事見積書の項目・階層構造・諸経費の記載" },
+              { href: "/guide/it-web", title: "IT・Web業界の見積書の書き方", desc: "工数・単価・修正範囲の記載ポイントを解説" },
             ].map((item) => (
               <a
                 key={item.href}
