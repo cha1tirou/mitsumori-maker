@@ -2,6 +2,7 @@
 
 import { InvoiceData, InvoiceItem } from "@/types/invoice";
 import { useCompanyInfo } from "@/hooks/useCompanyInfo";
+import { useBankInfo } from "@/hooks/useBankInfo";
 
 interface Props {
   data: InvoiceData;
@@ -39,6 +40,7 @@ const inputClass =
 
 export default function InvoiceForm({ data, onChange }: Props) {
   const { save, isSaved } = useCompanyInfo(data, onChange);
+  const { save: saveBank, isSaved: isBankSaved } = useBankInfo(data, onChange);
 
   const update = <K extends keyof InvoiceData>(key: K, value: InvoiceData[K]) => {
     onChange({ ...data, [key]: value });
@@ -308,7 +310,20 @@ export default function InvoiceForm({ data, onChange }: Props) {
 
       {/* 振込先 */}
       <section className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-        <SectionTitle>振込先</SectionTitle>
+        <div className="flex items-center justify-between mb-3">
+          <SectionTitle>振込先</SectionTitle>
+          <button
+            type="button"
+            onClick={saveBank}
+            className={`text-xs px-3 py-1 rounded-lg transition-colors ${
+              isBankSaved()
+                ? "bg-gray-100 text-gray-400"
+                : "bg-blue-50 text-blue-600 hover:bg-blue-100"
+            }`}
+          >
+            {isBankSaved() ? "保存済み" : "振込先を保存"}
+          </button>
+        </div>
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <Field label="銀行名">
