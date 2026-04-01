@@ -127,36 +127,79 @@ export default function Home() {
                 step: "01",
                 title: "情報を入力",
                 desc: "会社名・品目・金額など必要事項をフォームに入力するだけ。テンプレートを3種類から選べます。",
-                icon: (
-                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                  </svg>
+                illustration: (
+                  <div className="bg-gray-50 rounded-lg p-3 mb-3 w-full max-w-[180px] mx-auto">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-10 h-2 bg-gray-300 rounded text-[0px]">.</div>
+                        <div className="flex-1 h-5 bg-white border border-gray-200 rounded text-[0px]">.</div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-10 h-2 bg-gray-300 rounded text-[0px]">.</div>
+                        <div className="flex-1 h-5 bg-white border border-blue-300 rounded text-[0px]">.</div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-10 h-2 bg-gray-300 rounded text-[0px]">.</div>
+                        <div className="flex-1 h-5 bg-white border border-gray-200 rounded text-[0px]">.</div>
+                      </div>
+                    </div>
+                  </div>
                 ),
               },
               {
                 step: "02",
                 title: "リアルタイムでプレビュー",
                 desc: "入力と同時に右側にA4サイズの見積書が表示されます。仕上がりを確認しながら編集できます。",
-                icon: (
-                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+                illustration: (
+                  <div className="bg-gray-50 rounded-lg p-3 mb-3 w-full max-w-[180px] mx-auto">
+                    <div className="bg-white border border-gray-200 rounded p-2 shadow-sm">
+                      <div className="text-center mb-1">
+                        <div className="h-1.5 w-12 bg-gray-800 rounded mx-auto text-[0px]">.</div>
+                      </div>
+                      <div className="h-1 w-16 bg-gray-200 rounded mx-auto mb-1.5 text-[0px]">.</div>
+                      <div className="space-y-1">
+                        <div className="flex justify-between">
+                          <div className="h-1 w-10 bg-gray-200 rounded text-[0px]">.</div>
+                          <div className="h-1 w-6 bg-gray-200 rounded text-[0px]">.</div>
+                        </div>
+                        <div className="flex justify-between">
+                          <div className="h-1 w-8 bg-gray-200 rounded text-[0px]">.</div>
+                          <div className="h-1 w-6 bg-gray-200 rounded text-[0px]">.</div>
+                        </div>
+                        <div className="border-t border-gray-200 pt-1 flex justify-between">
+                          <div className="h-1 w-6 bg-gray-800 rounded text-[0px]">.</div>
+                          <div className="h-1 w-8 bg-gray-800 rounded text-[0px]">.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ),
               },
               {
                 step: "03",
                 title: "PDFでダウンロード",
                 desc: "「PDFダウンロード」ボタンを押すだけで即座に保存。登録不要・完全無料で何度でも使えます。",
-                icon: (
-                  <svg className="w-8 h-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                  </svg>
+                illustration: (
+                  <div className="bg-gray-50 rounded-lg p-3 mb-3 w-full max-w-[180px] mx-auto">
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="bg-white border border-gray-200 rounded p-1.5 w-10">
+                        <div className="h-1 w-full bg-red-400 rounded mb-0.5 text-[0px]">.</div>
+                        <div className="h-1 w-full bg-gray-200 rounded mb-0.5 text-[0px]">.</div>
+                        <div className="h-1 w-3/4 bg-gray-200 rounded text-[0px]">.</div>
+                      </div>
+                      <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                      <div className="bg-gray-900 text-white text-[8px] font-bold px-2.5 py-1 rounded">
+                        PDF
+                      </div>
+                    </div>
+                  </div>
                 ),
               },
             ].map((item) => (
               <div key={item.step} className="bg-white border border-gray-200 rounded-xl p-6 text-center">
-                <div className="flex justify-center mb-3">{item.icon}</div>
+                {item.illustration}
                 <div className="inline-block bg-gray-900 text-white text-xs font-bold px-2 py-0.5 rounded mb-2">
                   STEP {item.step}
                 </div>
@@ -201,6 +244,7 @@ export default function Home() {
               { href: "/guide/electronic", title: "見積書の電子化・PDF化のメリット", desc: "コスト削減・電子帳簿保存法への対応" },
               { href: "/guide/construction", title: "建設業の見積書の書き方", desc: "工事見積書の項目・階層構造・諸経費の記載" },
               { href: "/guide/it-web", title: "IT・Web業界の見積書の書き方", desc: "工数・単価・修正範囲の記載ポイントを解説" },
+              { href: "/guide/restaurant", title: "飲食店・レストランの見積書の書き方", desc: "ケータリング・仕出し・宴会プランの見積書ガイド" },
             ].map((item) => (
               <a
                 key={item.href}
