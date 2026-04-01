@@ -1,102 +1,146 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
+import { InvoiceData, defaultInvoiceData } from "@/types/invoice";
+import InvoiceForm from "@/components/InvoiceForm";
+import InvoicePreview from "@/components/InvoicePreview";
+import InvoicePdfDownloadButton from "@/components/InvoicePdfDownloadButton";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "請求書メーカー｜無料で請求書を作成・PDF出力【準備中】 | 見積書メーカー",
-  description:
-    "登録不要・完全無料の請求書作成ツールを準備中です。見積書メーカーと連携して、見積書から請求書をワンクリックで作成できる機能を開発予定。",
-};
-
 export default function InvoicePage() {
+  const [data, setData] = useState<InvoiceData>(defaultInvoiceData);
+  const [showPreview, setShowPreview] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← 見積書メーカーに戻る
-          </Link>
+    <div className="min-h-screen">
+      {/* ヘッダー */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-800 to-blue-500 flex items-center justify-center">
+                <span className="text-white text-sm font-bold">請</span>
+              </div>
+              <div>
+                <h1 className="text-base sm:text-lg font-bold text-blue-900 leading-tight">
+                  請求書メーカー
+                </h1>
+                <p className="text-[10px] text-gray-400 hidden sm:block">
+                  無料・登録不要でプロの請求書を作成
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Link
+                href="/"
+                className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
+              >
+                見積書メーカー
+              </Link>
+              {/* モバイル：プレビュー切り替え */}
+              <button
+                onClick={() => setShowPreview(!showPreview)}
+                className="lg:hidden bg-blue-800 text-white text-xs px-3 py-2 rounded-lg font-medium"
+              >
+                {showPreview ? "編集に戻る" : "プレビュー"}
+              </button>
+            </div>
+          </div>
         </div>
       </header>
-      <main className="max-w-3xl mx-auto px-4 py-10">
-        <article>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            請求書メーカー（準備中）
-          </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-            <p className="text-blue-800 font-semibold mb-2">
-              請求書メーカーは現在開発中です
-            </p>
-            <p className="text-blue-700 text-sm">
-              見積書メーカーと連携して、作成済みの見積書から請求書をワンクリックで生成できる機能を準備しています。リリースまでの間は、見積書メーカーをご活用ください。
-            </p>
+      {/* 特徴セクション */}
+      <section className="bg-gray-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: "完全無料", sub: "すべての機能が0円" },
+              { label: "登録不要", sub: "個人情報の入力なし" },
+              { label: "インボイス対応", sub: "適格請求書形式で出力" },
+              { label: "PDF出力", sub: "ワンクリックでDL" },
+            ].map((f) => (
+              <div key={f.label} className="text-center">
+                <p className="text-sm font-bold text-gray-800">{f.label}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{f.sub}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* メインコンテンツ */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <div className="flex gap-6">
+          {/* 左：入力フォーム */}
+          <div
+            className={`w-full lg:w-[420px] lg:flex-shrink-0 ${
+              showPreview ? "hidden lg:block" : ""
+            }`}
+          >
+            <div className="lg:sticky lg:top-[100px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+              <InvoiceForm data={data} onChange={setData} />
+
+              {/* PDF出力エリア */}
+              <div className="mt-6 space-y-4">
+                <InvoicePdfDownloadButton data={data} />
+              </div>
+            </div>
           </div>
 
-          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
-            請求書メーカーで実現予定の機能
-          </h2>
-          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-6 space-y-2">
-            <li>
-              <strong>見積書からの自動変換</strong>：見積書メーカーで作成した見積書のデータをそのまま請求書に変換。二度手間を解消します。
-            </li>
-            <li>
-              <strong>インボイス制度対応</strong>：適格請求書の要件を満たしたフォーマットで出力。登録番号・税率ごとの消費税額を自動記載します。
-            </li>
-            <li>
-              <strong>PDF出力</strong>：見積書メーカーと同様に、ワンクリックでPDFをダウンロード可能。
-            </li>
-            <li>
-              <strong>振込先情報の保存</strong>：銀行口座情報を保存して、毎回の入力を省略できます。
-            </li>
-          </ul>
+          {/* 右：リアルタイムプレビュー */}
+          <div
+            className={`flex-1 min-w-0 ${
+              showPreview ? "" : "hidden lg:block"
+            }`}
+          >
+            <div className="lg:sticky lg:top-[100px]">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  Preview
+                </h2>
+                <span className="text-[10px] text-gray-300 bg-gray-100 px-2 py-1 rounded">
+                  A4サイズ
+                </span>
+              </div>
+              <InvoicePreview data={data} />
 
-          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
-            見積書と請求書の違い
-          </h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            見積書は取引前に金額と条件を提示する書類で、請求書は納品後に代金の支払いを求める書類です。見積書で合意した金額を、そのまま請求書に転記するのが基本的な流れです。
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            請求書には見積書にはない「振込先情報」「支払期限」の記載が必要です。また、インボイス制度に対応する場合は「適格請求書発行事業者の登録番号」「税率ごとの消費税額」の記載も求められます。
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            詳しくは以下のガイド記事で解説しています。
-          </p>
-          <ul className="space-y-2 mb-6">
-            <li>
-              <Link href="/guide/difference" className="text-blue-600 hover:underline text-sm">
-                見積書・請求書・納品書の違いをわかりやすく解説
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/consumption-tax" className="text-blue-600 hover:underline text-sm">
-                見積書の消費税の書き方・インボイス対応ガイド
-              </Link>
-            </li>
-          </ul>
+              {/* モバイル用 PDF出力 */}
+              <div className="lg:hidden mt-6 space-y-4">
+                <InvoicePdfDownloadButton data={data} />
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
-            今すぐ見積書を作成する
+        {/* 見積書メーカーへの誘導 */}
+        <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6 text-center">
+          <h2 className="text-lg font-bold text-gray-800 mb-2">
+            見積書も無料で作成できます
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            請求書メーカーの完成をお待ちの間は、まず見積書メーカーで見積書を作成しましょう。登録不要・完全無料で、プロフェッショナルな見積書をすぐに作成できます。
-          </p>
-        </article>
-
-        <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
-          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
-          <p className="text-gray-400 mb-4 text-sm">
-            登録不要・完全無料・PDF出力対応
+          <p className="text-sm text-gray-500 mb-4">
+            見積書メーカーなら、3種類のテンプレートからプロの見積書をすぐに作成できます。
           </p>
           <Link
             href="/"
-            className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+            className="inline-block bg-gray-900 text-white font-bold px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors text-sm"
           >
-            見積書メーカーを使う →
+            見積書メーカーを使う &rarr;
           </Link>
-        </div>
+        </section>
       </main>
+
+      {/* フッター */}
+      <footer className="border-t border-gray-100 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center">
+          <p className="text-xs text-gray-400">
+            請求書メーカー — 無料・登録不要の請求書作成ツール |{" "}
+            <Link href="/" className="hover:text-gray-600">
+              見積書メーカー
+            </Link>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
