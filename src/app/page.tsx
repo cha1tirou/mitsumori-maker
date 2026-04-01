@@ -89,10 +89,6 @@ export default function Home() {
               <div className="mt-6 space-y-4">
                 <PdfDownloadButton data={data} template={template} />
 
-                {/* AdSense プレースホルダー */}
-                <div className="bg-gray-50 border border-dashed border-gray-200 rounded-xl p-4 text-center">
-                  <p className="text-[10px] text-gray-300">広告スペース</p>
-                </div>
               </div>
             </div>
           </div>
@@ -117,9 +113,6 @@ export default function Home() {
               {/* モバイル用 PDF出力 */}
               <div className="lg:hidden mt-6 space-y-4">
                 <PdfDownloadButton data={data} template={template} />
-                <div className="bg-gray-50 border border-dashed border-gray-200 rounded-xl p-4 text-center">
-                  <p className="text-[10px] text-gray-300">広告スペース</p>
-                </div>
               </div>
             </div>
           </div>
@@ -313,10 +306,6 @@ export default function Home() {
       {/* フッター */}
       <footer className="border-t border-gray-100 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center">
-          {/* AdSense プレースホルダー */}
-          <div className="bg-gray-50 border border-dashed border-gray-200 rounded-xl p-6 mb-6 text-center">
-            <p className="text-[10px] text-gray-300">広告スペース（フッター）</p>
-          </div>
           <p className="text-xs text-gray-400">
             見積書メーカー — 無料・登録不要の見積書作成ツール |{" "}
             <a href="/tools/invoice" className="hover:text-gray-600">
