@@ -32,13 +32,21 @@ export default function Home() {
               </div>
             </div>
 
-            {/* モバイル：プレビュー切り替え */}
-            <button
-              onClick={() => setShowPreview(!showPreview)}
-              className="lg:hidden bg-primary text-white text-xs px-3 py-2 rounded-lg font-medium"
-            >
-              {showPreview ? "編集に戻る" : "プレビュー"}
-            </button>
+            <div className="flex items-center gap-3">
+              <a
+                href="/tools/invoice"
+                className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
+              >
+                請求書メーカー
+              </a>
+              {/* モバイル：プレビュー切り替え */}
+              <button
+                onClick={() => setShowPreview(!showPreview)}
+                className="lg:hidden bg-primary text-white text-xs px-3 py-2 rounded-lg font-medium"
+              >
+                {showPreview ? "編集に戻る" : "プレビュー"}
+              </button>
+            </div>
           </div>
 
           {/* テンプレート切り替え */}
@@ -259,6 +267,35 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* 関連ツール */}
+        <section className="mt-12">
+          <h2 className="text-lg font-bold text-gray-800 mb-4">関連ツール</h2>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <a
+              href="/tools/invoice"
+              className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition-all"
+            >
+              <h3 className="text-sm font-semibold text-gray-800 mb-1">
+                請求書メーカー
+              </h3>
+              <p className="text-xs text-gray-500">
+                無料・登録不要で請求書を作成。インボイス対応・PDF出力
+              </p>
+            </a>
+            <a
+              href="/tools/invoice-calc"
+              className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition-all"
+            >
+              <h3 className="text-sm font-semibold text-gray-800 mb-1">
+                インボイス計算機
+              </h3>
+              <p className="text-xs text-gray-500">
+                軽減税率8%・標準税率10%の消費税額を自動計算
+              </p>
+            </a>
+          </div>
+        </section>
       </main>
 
       {/* フッター */}
@@ -269,7 +306,14 @@ export default function Home() {
             <p className="text-[10px] text-gray-300">広告スペース（フッター）</p>
           </div>
           <p className="text-xs text-gray-400">
-            見積書メーカー — 無料・登録不要の見積書作成ツール
+            見積書メーカー — 無料・登録不要の見積書作成ツール |{" "}
+            <a href="/tools/invoice" className="hover:text-gray-600">
+              請求書メーカー
+            </a>{" "}
+            |{" "}
+            <a href="/tools/invoice-calc" className="hover:text-gray-600">
+              インボイス計算機
+            </a>
           </p>
         </div>
       </footer>
