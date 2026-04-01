@@ -253,6 +253,7 @@ export default function Home() {
               { href: "/guide/construction", title: "建設業の見積書の書き方", desc: "工事見積書の項目・階層構造・諸経費の記載" },
               { href: "/guide/it-web", title: "IT・Web業界の見積書の書き方", desc: "工数・単価・修正範囲の記載ポイントを解説" },
               { href: "/guide/restaurant", title: "飲食店・レストランの見積書の書き方", desc: "ケータリング・仕出し・宴会プランの見積書ガイド" },
+              { href: "/guide/pdf", title: "見積書をPDFで作成・出力する方法", desc: "オンラインツール・Excel・Wordの3つの方法を比較" },
             ].map((item) => (
               <a
                 key={item.href}
