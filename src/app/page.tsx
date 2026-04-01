@@ -271,7 +271,7 @@ export default function Home() {
         {/* 関連ツール */}
         <section className="mt-12">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ツール</h2>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <a
               href="/tools/invoice"
               className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-sm transition-all"
@@ -281,6 +281,17 @@ export default function Home() {
               </h3>
               <p className="text-xs text-gray-500">
                 無料・登録不要で請求書を作成。インボイス対応・PDF出力
+              </p>
+            </a>
+            <a
+              href="/tools/delivery"
+              className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-green-400 hover:shadow-sm transition-all"
+            >
+              <h3 className="text-sm font-semibold text-gray-800 mb-1">
+                納品書メーカー
+              </h3>
+              <p className="text-xs text-gray-500">
+                無料・登録不要で納品書を作成。インボイス対応・PDF出力
               </p>
             </a>
             <a
@@ -309,6 +320,10 @@ export default function Home() {
             見積書メーカー — 無料・登録不要の見積書作成ツール |{" "}
             <a href="/tools/invoice" className="hover:text-gray-600">
               請求書メーカー
+            </a>{" "}
+            |{" "}
+            <a href="/tools/delivery" className="hover:text-gray-600">
+              納品書メーカー
             </a>{" "}
             |{" "}
             <a href="/tools/invoice-calc" className="hover:text-gray-600">

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { InvoiceData, defaultInvoiceData } from "@/types/invoice";
-import InvoiceForm from "@/components/InvoiceForm";
-import InvoicePreview from "@/components/InvoicePreview";
-import InvoicePdfDownloadButton from "@/components/InvoicePdfDownloadButton";
+import { DeliveryData, defaultDeliveryData } from "@/types/delivery";
+import DeliveryForm from "@/components/DeliveryForm";
+import DeliveryPreview from "@/components/DeliveryPreview";
+import DeliveryPdfDownloadButton from "@/components/DeliveryPdfDownloadButton";
 import Link from "next/link";
 
-export default function InvoicePage() {
-  const [data, setData] = useState<InvoiceData>(defaultInvoiceData);
+export default function DeliveryPage() {
+  const [data, setData] = useState<DeliveryData>(defaultDeliveryData);
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -18,15 +18,15 @@ export default function InvoicePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-800 to-blue-500 flex items-center justify-center">
-                <span className="text-white text-sm font-bold">請</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-800 to-green-500 flex items-center justify-center">
+                <span className="text-white text-sm font-bold">納</span>
               </div>
               <div>
-                <h1 className="text-base sm:text-lg font-bold text-blue-900 leading-tight">
-                  請求書メーカー
+                <h1 className="text-base sm:text-lg font-bold text-green-900 leading-tight">
+                  納品書メーカー
                 </h1>
                 <p className="text-[10px] text-gray-400 hidden sm:block">
-                  無料・登録不要でプロの請求書を作成
+                  無料・登録不要でプロの納品書を作成
                 </p>
               </div>
             </div>
@@ -39,15 +39,15 @@ export default function InvoicePage() {
                 見積書メーカー
               </Link>
               <Link
-                href="/tools/delivery"
+                href="/tools/invoice"
                 className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
               >
-                納品書メーカー
+                請求書メーカー
               </Link>
               {/* モバイル：プレビュー切り替え */}
               <button
                 onClick={() => setShowPreview(!showPreview)}
-                className="lg:hidden bg-blue-800 text-white text-xs px-3 py-2 rounded-lg font-medium"
+                className="lg:hidden bg-green-800 text-white text-xs px-3 py-2 rounded-lg font-medium"
               >
                 {showPreview ? "編集に戻る" : "プレビュー"}
               </button>
@@ -85,11 +85,11 @@ export default function InvoicePage() {
             }`}
           >
             <div className="lg:sticky lg:top-[100px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
-              <InvoiceForm data={data} onChange={setData} />
+              <DeliveryForm data={data} onChange={setData} />
 
               {/* PDF出力エリア */}
               <div className="mt-6 space-y-4">
-                <InvoicePdfDownloadButton data={data} />
+                <DeliveryPdfDownloadButton data={data} />
               </div>
             </div>
           </div>
@@ -109,23 +109,23 @@ export default function InvoicePage() {
                   A4サイズ
                 </span>
               </div>
-              <InvoicePreview data={data} />
+              <DeliveryPreview data={data} />
 
               {/* モバイル用 PDF出力 */}
               <div className="lg:hidden mt-6 space-y-4">
-                <InvoicePdfDownloadButton data={data} />
+                <DeliveryPdfDownloadButton data={data} />
               </div>
             </div>
           </div>
         </div>
 
-        {/* 見積書・納品書メーカーへの誘導 */}
+        {/* 見積書・請求書メーカーへの誘導 */}
         <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6 text-center">
           <h2 className="text-lg font-bold text-gray-800 mb-2">
-            見積書・納品書も無料で作成できます
+            見積書・請求書も無料で作成できます
           </h2>
           <p className="text-sm text-gray-500 mb-6">
-            見積書メーカー・納品書メーカーも完全無料・登録不要でご利用いただけます。
+            見積書メーカー・請求書メーカーも完全無料・登録不要でご利用いただけます。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -135,10 +135,10 @@ export default function InvoicePage() {
               見積書メーカーを使う &rarr;
             </Link>
             <Link
-              href="/tools/delivery"
-              className="inline-block bg-green-700 text-white font-bold px-8 py-3 rounded-lg hover:bg-green-800 transition-colors text-sm"
+              href="/tools/invoice"
+              className="inline-block bg-blue-700 text-white font-bold px-8 py-3 rounded-lg hover:bg-blue-800 transition-colors text-sm"
             >
-              納品書メーカーを使う &rarr;
+              請求書メーカーを使う &rarr;
             </Link>
           </div>
         </section>
@@ -148,13 +148,13 @@ export default function InvoicePage() {
       <footer className="border-t border-gray-100 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center">
           <p className="text-xs text-gray-400">
-            請求書メーカー — 無料・登録不要の請求書作成ツール |{" "}
+            納品書メーカー — 無料・登録不要の納品書作成ツール |{" "}
             <Link href="/" className="hover:text-gray-600">
               見積書メーカー
             </Link>
             {" "}|{" "}
-            <Link href="/tools/delivery" className="hover:text-gray-600">
-              納品書メーカー
+            <Link href="/tools/invoice" className="hover:text-gray-600">
+              請求書メーカー
             </Link>
           </p>
         </div>
