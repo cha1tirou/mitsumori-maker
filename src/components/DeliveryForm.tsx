@@ -1,6 +1,7 @@
 "use client";
 
 import { DeliveryData, DeliveryItem } from "@/types/delivery";
+import { useCompanyInfo } from "@/hooks/useCompanyInfo";
 
 interface Props {
   data: DeliveryData;
@@ -37,6 +38,8 @@ const inputClass =
   "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm transition-colors hover:border-gray-300 focus:border-green-500";
 
 export default function DeliveryForm({ data, onChange }: Props) {
+  const { save, isSaved } = useCompanyInfo(data, onChange);
+
   const update = <K extends keyof DeliveryData>(key: K, value: DeliveryData[K]) => {
     onChange({ ...data, [key]: value });
   };
@@ -139,7 +142,20 @@ export default function DeliveryForm({ data, onChange }: Props) {
 
       {/* 自社情報 */}
       <section className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-        <SectionTitle>自社情報</SectionTitle>
+        <div className="flex items-center justify-between mb-3">
+          <SectionTitle>自社情報</SectionTitle>
+          <button
+            type="button"
+            onClick={save}
+            className={`text-xs px-3 py-1 rounded-lg transition-colors ${
+              isSaved()
+                ? "bg-gray-100 text-gray-400"
+                : "bg-green-50 text-green-600 hover:bg-green-100"
+            }`}
+          >
+            {isSaved() ? "保存済み" : "自社情報を保存"}
+          </button>
+        </div>
         <div className="space-y-3">
           <Field label="会社名">
             <input
