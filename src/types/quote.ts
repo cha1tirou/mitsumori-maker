@@ -35,7 +35,7 @@ export interface QuoteData {
   taxRate: number;
 }
 
-export type TemplateName = "standard" | "minimal" | "premium";
+export type TemplateName = "standard" | "minimal" | "premium" | "blue" | "mono" | "colorful" | "construction" | "lined";
 
 export const defaultQuoteData: QuoteData = {
   clientName: "",

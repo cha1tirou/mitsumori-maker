@@ -139,6 +139,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mitsumori-maker.com/guide/rejection</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/reissue</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/addressing</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/tools/excel-template</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mitsumori-maker.com/tools/invoice-calc</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>

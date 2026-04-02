@@ -4,6 +4,11 @@ import { QuoteData, TemplateName } from "@/types/quote";
 import StandardTemplate from "./templates/StandardTemplate";
 import MinimalTemplate from "./templates/MinimalTemplate";
 import PremiumTemplate from "./templates/PremiumTemplate";
+import BlueTemplate from "./templates/BlueTemplate";
+import MonoTemplate from "./templates/MonoTemplate";
+import ColorfulTemplate from "./templates/ColorfulTemplate";
+import ConstructionTemplate from "./templates/ConstructionTemplate";
+import LinedTemplate from "./templates/LinedTemplate";
 import { useRef, useState, useEffect } from "react";
 
 interface Props {
@@ -15,6 +20,11 @@ const templateComponents = {
   standard: StandardTemplate,
   minimal: MinimalTemplate,
   premium: PremiumTemplate,
+  blue: BlueTemplate,
+  mono: MonoTemplate,
+  colorful: ColorfulTemplate,
+  construction: ConstructionTemplate,
+  lined: LinedTemplate,
 };
 
 export default function QuotePreview({ data, template }: Props) {

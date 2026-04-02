@@ -267,6 +267,9 @@ export default function Home() {
               { href: "/guide/bank-info", title: "見積書の振込先・口座情報の書き方", desc: "正しい記載例・手数料負担・セキュリティ注意点" },
               { href: "/guide/numbering", title: "見積書番号のつけ方・採番ルール", desc: "業種別の番号体系と管理のコツを解説" },
               { href: "/guide/delivery-howto", title: "納品書の書き方ガイド", desc: "必要項目・発行タイミング・電子化のメリット" },
+              { href: "/guide/rejection", title: "見積書の断り方・お断りメール例文", desc: "状況別のお断りメール例文とマナーを解説" },
+              { href: "/guide/reissue", title: "見積書の再発行の方法", desc: "再発行ルール・依頼メール例文・管理のコツ" },
+              { href: "/guide/addressing", title: "見積書の宛名の書き方", desc: "「御中」「様」の使い分けと注意点を解説" },
             ].map((item) => (
               <a
                 key={item.href}
