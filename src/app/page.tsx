@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { QuoteData, TemplateName, defaultQuoteData } from "@/types/quote";
+import { useDraftSave } from "@/hooks/useDraftSave";
+import DraftBanner from "@/components/DraftBanner";
 import ToolHeader from "@/components/ToolHeader";
 import TemplateSelector from "@/components/TemplateSelector";
 import QuoteForm from "@/components/QuoteForm";
@@ -22,32 +24,37 @@ const PdfDownloadButton = dynamic(
 );
 
 export default function Home() {
-  const [data, setData] = useState<QuoteData>(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const shared = params.get("s");
-      if (shared) {
-        try {
-          const decoded = JSON.parse(decodeURIComponent(escape(atob(shared))));
-          if (decoded.d) return decoded.d;
-        } catch { /* ignore */ }
-      }
+  // Check if URL share parameter is present (takes priority over draft)
+  const isSharedUrl = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).has("s");
+  }, []);
+
+  const [sharedData] = useState<{ d?: QuoteData; t?: TemplateName } | null>(() => {
+    if (typeof window === "undefined") return null;
+    const params = new URLSearchParams(window.location.search);
+    const shared = params.get("s");
+    if (!shared) return null;
+    try {
+      return JSON.parse(decodeURIComponent(escape(atob(shared))));
+    } catch {
+      return null;
     }
-    return defaultQuoteData;
   });
-  const [template, setTemplate] = useState<TemplateName>(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const shared = params.get("s");
-      if (shared) {
-        try {
-          const decoded = JSON.parse(decodeURIComponent(escape(atob(shared))));
-          if (decoded.t) return decoded.t;
-        } catch { /* ignore */ }
-      }
-    }
-    return "standard";
+
+  const draft = useDraftSave<QuoteData>({
+    key: "draft_quote_v1",
+    version: 1,
+    defaultData: sharedData?.d ?? defaultQuoteData,
   });
+
+  // When shared URL is used, use shared data directly; otherwise use draft
+  const data = isSharedUrl && sharedData?.d ? sharedData.d : draft.data;
+  const setData = draft.setData;
+
+  const [template, setTemplate] = useState<TemplateName>(
+    sharedData?.t ?? "standard"
+  );
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -87,6 +94,13 @@ export default function Home() {
             }`}
           >
             <div className="lg:sticky lg:top-[70px] lg:max-h-[calc(100vh-90px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+              {/* 下書き復元バナー */}
+              {draft.hasDraft && !isSharedUrl && (
+                <DraftBanner
+                  onRestore={draft.restoreDraft}
+                  onDiscard={draft.discardDraft}
+                />
+              )}
               {/* テンプレート選択 */}
               <div className="mb-4">
                 <p className="text-xs font-semibold text-gray-500 mb-2">テンプレート</p>
@@ -118,6 +132,16 @@ export default function Home() {
                     URLで共有
                   </button>
                 </div>
+                <button
+                  onClick={() => {
+                    if (confirm("保存された下書きを削除しますか？")) {
+                      draft.clearDraft();
+                    }
+                  }}
+                  className="w-full text-xs text-gray-400 hover:text-gray-600 transition-colors py-1"
+                >
+                  下書きを削除
+                </button>
               </div>
             </div>
           </div>
@@ -162,7 +186,7 @@ export default function Home() {
               {
                 step: "01",
                 title: "情報を入力",
-                desc: "会社名・品目・金額など必要事項をフォームに入力するだけ。テンプレートを3種類から選べます。",
+                desc: "会社名・品目・金額など必要事項をフォームに入力するだけ。テンプレートを8種類から選べます。",
                 illustration: (
                   <div className="bg-gray-50 rounded-lg p-3 mb-3 w-full max-w-[180px] mx-auto">
                     <div className="space-y-1.5">

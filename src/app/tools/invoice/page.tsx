@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { InvoiceData, defaultInvoiceData } from "@/types/invoice";
+import { useDraftSave } from "@/hooks/useDraftSave";
+import DraftBanner from "@/components/DraftBanner";
 import InvoiceForm from "@/components/InvoiceForm";
 import InvoicePreview from "@/components/InvoicePreview";
 import InvoicePdfDownloadButton from "@/components/InvoicePdfDownloadButton";
@@ -9,7 +11,12 @@ import ToolHeader from "@/components/ToolHeader";
 import Link from "next/link";
 
 export default function InvoicePage() {
-  const [data, setData] = useState<InvoiceData>(defaultInvoiceData);
+  const draft = useDraftSave<InvoiceData>({
+    key: "draft_invoice_v1",
+    version: 1,
+    defaultData: defaultInvoiceData,
+  });
+  const { data, setData } = draft;
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -49,11 +56,28 @@ export default function InvoicePage() {
             }`}
           >
             <div className="lg:sticky lg:top-[100px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+              {/* 下書き復元バナー */}
+              {draft.hasDraft && (
+                <DraftBanner
+                  onRestore={draft.restoreDraft}
+                  onDiscard={draft.discardDraft}
+                />
+              )}
               <InvoiceForm data={data} onChange={setData} />
 
               {/* PDF出力エリア */}
               <div className="mt-6 space-y-4">
                 <InvoicePdfDownloadButton data={data} />
+                <button
+                  onClick={() => {
+                    if (confirm("保存された下書きを削除しますか？")) {
+                      draft.clearDraft();
+                    }
+                  }}
+                  className="w-full text-xs text-gray-400 hover:text-gray-600 transition-colors py-1"
+                >
+                  下書きを削除
+                </button>
               </div>
             </div>
           </div>

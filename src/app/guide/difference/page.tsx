@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
   title: "見積書・請求書・納品書の違いをわかりやすく解説 | 見積書メーカー",
@@ -50,6 +51,7 @@ export default function DifferenceGuidePage() {
             見積書・請求書・納品書の違いをわかりやすく解説
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+          <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             ビジネスの取引では「見積書」「請求書」「納品書」という3つの書類が頻繁に登場します。似たような書類に見えますが、それぞれ発行するタイミングや役割が異なります。この記事では、3つの書類の違いを整理し、正しい使い分け方を解説します。

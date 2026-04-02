@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "見積書Excelテンプレート｜無料ダウンロード | 見積書メーカー",
+  title: "見積書Excelテンプレート（公開準備中）| 見積書メーカー",
   description:
-    "見積書のExcelテンプレートを無料でダウンロード。シンプル版・標準版・インボイス対応版の3種類を用意。オンラインで即作成できる見積書メーカーも提供中。",
+    "見積書のExcelテンプレートを準備中です。今すぐ見積書を作成したい方は、登録不要・無料のオンラインツール「見積書メーカー」をご利用ください。",
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
-    title: "見積書Excelテンプレート｜無料ダウンロード | 見積書メーカー",
+    title: "見積書Excelテンプレート（公開準備中）| 見積書メーカー",
     description:
-      "見積書のExcelテンプレートを無料でダウンロード。シンプル版・標準版・インボイス対応版の3種類。",
+      "見積書のExcelテンプレートを準備中。今すぐ作成したい方はオンラインツールをご利用ください。",
     url: "https://mitsumori-maker.com/tools/excel-template",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -84,11 +88,15 @@ export default function ExcelTemplatePage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         {/* タイトル・説明 */}
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          見積書Excelテンプレート｜無料ダウンロード
+          見積書Excelテンプレート（公開準備中）
         </h1>
         <p className="text-gray-500 text-sm mb-2">更新日: 2026年4月2日</p>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p className="text-blue-800 text-sm font-medium mb-1">Excelテンプレートは現在準備中です</p>
+          <p className="text-blue-700 text-xs">今すぐ見積書を作成したい方は、登録不要・無料のオンラインツールをご利用ください。</p>
+        </div>
         <p className="text-gray-700 leading-relaxed mb-10">
-          見積書メーカーでは、ブラウザ上で見積書を作成できるオンラインツールに加え、Excel形式のテンプレートも無料で提供しています。用途に合わせて「シンプル版」「標準版」「インボイス対応版」の3種類からお選びいただけます。Excelに慣れている方は、テンプレートをダウンロードしてカスタマイズしてお使いください。
+          見積書メーカーでは、ブラウザ上で見積書を作成できるオンラインツールを提供しています。Excelテンプレートの配布も準備中です。公開までの間は、登録不要・無料で使えるオンラインツールをぜひご活用ください。
         </p>
 
         {/* テンプレートカード */}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
   title: "フリーランス・個人事業主のための見積書ガイド | 見積書メーカー",
@@ -50,6 +51,7 @@ export default function FreelanceGuidePage() {
             フリーランス・個人事業主のための見積書ガイド
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+          <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             フリーランスや個人事業主として仕事を受けるとき、見積書の作成は避けて通れません。しかし「何を書けばいいのかわからない」「単価の出し方がわからない」と悩む方も多いのではないでしょうか。この記事では、フリーランスが見積書を作成する際に押さえるべきポイントを実践的に解説します。

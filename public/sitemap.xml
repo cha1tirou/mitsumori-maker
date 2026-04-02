@@ -157,10 +157,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/tools/excel-template</loc>
+    <loc>https://mitsumori-maker.com/about</loc>
     <lastmod>2026-04-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/terms</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/ads-policy</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/tools/invoice-calc</loc>

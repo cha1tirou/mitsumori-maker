@@ -2,6 +2,7 @@
 
 import { QuoteData, TemplateName } from "@/types/quote";
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 interface Props {
   data: QuoteData;
@@ -17,6 +18,7 @@ export default function PdfDownloadButton({ data, template }: Props) {
       // 動的インポートでバンドルサイズを削減
       const { generatePdf } = await import("@/lib/pdfGenerator");
       const blob = await generatePdf(data, template);
+      trackEvent("pdf_download", { tool: "estimate", template });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;

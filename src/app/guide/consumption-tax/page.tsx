@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
   title: "見積書の消費税の書き方・インボイス対応ガイド | 見積書メーカー",
@@ -50,6 +51,7 @@ export default function ConsumptionTaxGuidePage() {
             見積書の消費税の書き方・インボイス対応ガイド
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+          <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成するとき、消費税の記載方法に迷う方は少なくありません。特に2023年10月から始まったインボイス制度（適格請求書等保存方式）により、消費税に関する記載ルールが厳格化されました。この記事では、見積書における消費税の正しい書き方と、インボイス制度への対応方法を解説します。

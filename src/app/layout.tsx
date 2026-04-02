@@ -14,7 +14,7 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "見積書メーカー｜無料で見積書をサクッと作成・PDF出力",
   description:
-    "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。3種類のデザインテンプレートからお選びいただけます。",
+    "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。8種類のデザインテンプレートからお選びいただけます。",
   keywords: "見積書, 見積書作成, 無料, PDF, テンプレート, 見積書メーカー",
   verification: {
     google: "GjZNFGBtFEmvoeEUPesUdP0p2GDKfXrOjrbToCGVptQ",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "見積書メーカー｜無料で見積書をサクッと作成・PDF出力",
     description:
-      "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。3種類のデザインテンプレートからお選びいただけます。",
+      "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。8種類のデザインテンプレートからお選びいただけます。",
     url: "https://mitsumori-maker.com",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -66,7 +66,7 @@ export default function RootLayout({
               name: "見積書メーカー",
               url: "https://mitsumori-maker.com",
               description:
-                "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。3種類のデザインテンプレートからお選びいただけます。",
+                "登録不要・完全無料の見積書作成ツール。リアルタイムプレビューで簡単作成、PDF出力対応。8種類のデザインテンプレートからお選びいただけます。",
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web",
               offers: {
@@ -110,7 +110,10 @@ export default function RootLayout({
               <Link href="/tools/invoice" className="hover:text-gray-800 transition-colors">請求書メーカー</Link>
               <Link href="/tools/delivery" className="hover:text-gray-800 transition-colors">納品書メーカー</Link>
               <Link href="/tools/purchase-order" className="hover:text-gray-800 transition-colors">発注書メーカー</Link>
+              <Link href="/about" className="hover:text-gray-800 transition-colors">運営者情報</Link>
+              <Link href="/terms" className="hover:text-gray-800 transition-colors">利用規約</Link>
               <Link href="/privacy" className="hover:text-gray-800 transition-colors">プライバシーポリシー</Link>
+              <Link href="/ads-policy" className="hover:text-gray-800 transition-colors">広告掲載ポリシー</Link>
               <Link href="/contact" className="hover:text-gray-800 transition-colors">お問い合わせ</Link>
             </div>
           </div>

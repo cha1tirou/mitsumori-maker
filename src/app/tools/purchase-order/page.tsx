@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { PurchaseOrderData, defaultPurchaseOrderData } from "@/types/purchaseOrder";
+import { useDraftSave } from "@/hooks/useDraftSave";
+import DraftBanner from "@/components/DraftBanner";
 import PurchaseOrderForm from "@/components/PurchaseOrderForm";
 import PurchaseOrderPreview from "@/components/PurchaseOrderPreview";
 import PurchaseOrderPdfDownloadButton from "@/components/PurchaseOrderPdfDownloadButton";
@@ -9,7 +11,12 @@ import ToolHeader from "@/components/ToolHeader";
 import Link from "next/link";
 
 export default function PurchaseOrderPage() {
-  const [data, setData] = useState<PurchaseOrderData>(defaultPurchaseOrderData);
+  const draft = useDraftSave<PurchaseOrderData>({
+    key: "draft_purchase_order_v1",
+    version: 1,
+    defaultData: defaultPurchaseOrderData,
+  });
+  const { data, setData } = draft;
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -49,11 +56,28 @@ export default function PurchaseOrderPage() {
             }`}
           >
             <div className="lg:sticky lg:top-[100px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+              {/* 下書き復元バナー */}
+              {draft.hasDraft && (
+                <DraftBanner
+                  onRestore={draft.restoreDraft}
+                  onDiscard={draft.discardDraft}
+                />
+              )}
               <PurchaseOrderForm data={data} onChange={setData} />
 
               {/* PDF出力エリア */}
               <div className="mt-6 space-y-4">
                 <PurchaseOrderPdfDownloadButton data={data} />
+                <button
+                  onClick={() => {
+                    if (confirm("保存された下書きを削除しますか？")) {
+                      draft.clearDraft();
+                    }
+                  }}
+                  className="w-full text-xs text-gray-400 hover:text-gray-600 transition-colors py-1"
+                >
+                  下書きを削除
+                </button>
               </div>
             </div>
           </div>
