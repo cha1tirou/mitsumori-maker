@@ -1,11 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { QuoteData, TemplateName, defaultQuoteData } from "@/types/quote";
 import TemplateSelector from "@/components/TemplateSelector";
 import QuoteForm from "@/components/QuoteForm";
-import QuotePreview from "@/components/QuotePreview";
-import PdfDownloadButton from "@/components/PdfDownloadButton";
+
+const QuotePreview = dynamic(() => import("@/components/QuotePreview"), {
+  loading: () => (
+    <div className="bg-white border border-gray-200 rounded-lg p-8 flex items-center justify-center min-h-[400px]">
+      <p className="text-gray-400 text-sm">プレビューを読み込み中...</p>
+    </div>
+  ),
+  ssr: false,
+});
+
+const PdfDownloadButton = dynamic(
+  () => import("@/components/PdfDownloadButton"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [data, setData] = useState<QuoteData>(defaultQuoteData);
