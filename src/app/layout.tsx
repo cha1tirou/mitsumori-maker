@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import Script from "next/script";
 import Link from "next/link";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
   variable: "--font-noto-sans-jp",
   display: "swap",
 });
@@ -55,24 +56,6 @@ export default function RootLayout({
   return (
     <html lang="ja" className={notoSansJP.variable}>
       <head>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-13VR2YEZKB" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-13VR2YEZKB');
-            `,
-          }}
-        />
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875835900503056"
-          crossOrigin="anonymous"
-        />
         {/* JSON-LD */}
         <script
           type="application/ld+json"
@@ -98,6 +81,25 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
+        {/* Google Analytics — afterInteractive で遅延読み込み */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-13VR2YEZKB"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-13VR2YEZKB');
+          `}
+        </Script>
+        {/* Google AdSense — lazyOnload で最も遅延 */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875835900503056"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
         <footer className="border-t border-gray-200 bg-white mt-8">
           <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
             <span>© 2026 見積書メーカー</span>

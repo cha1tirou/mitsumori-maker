@@ -101,10 +101,10 @@ export default function Home() {
           >
             <div className="lg:sticky lg:top-[140px]">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Preview
-                </h2>
-                <span className="text-[10px] text-gray-300 bg-gray-100 px-2 py-1 rounded">
+                </p>
+                <span className="text-[10px] text-gray-500 bg-gray-100 px-2 py-1 rounded">
                   A4サイズ
                 </span>
               </div>
@@ -317,28 +317,28 @@ export default function Home() {
             <div>
               <h3 className="text-xs font-semibold text-gray-600 mb-2">ツール</h3>
               <ul className="space-y-1">
-                <li><a href="/tools/invoice" className="text-xs text-gray-400 hover:text-gray-600">請求書メーカー</a></li>
-                <li><a href="/tools/delivery" className="text-xs text-gray-400 hover:text-gray-600">納品書メーカー</a></li>
-                <li><a href="/tools/invoice-calc" className="text-xs text-gray-400 hover:text-gray-600">インボイス計算機</a></li>
+                <li><a href="/tools/invoice" className="text-xs text-gray-500 hover:text-gray-700">請求書メーカー</a></li>
+                <li><a href="/tools/delivery" className="text-xs text-gray-500 hover:text-gray-700">納品書メーカー</a></li>
+                <li><a href="/tools/invoice-calc" className="text-xs text-gray-500 hover:text-gray-700">インボイス計算機</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-xs font-semibold text-gray-600 mb-2">ガイド</h3>
               <ul className="space-y-1">
-                <li><a href="/guide/how-to-write" className="text-xs text-gray-400 hover:text-gray-600">見積書の書き方</a></li>
-                <li><a href="/guide/freelance" className="text-xs text-gray-400 hover:text-gray-600">フリーランス向けガイド</a></li>
-                <li><a href="/guide/invoice-howto" className="text-xs text-gray-400 hover:text-gray-600">請求書の書き方</a></li>
-                <li><a href="/guide/email" className="text-xs text-gray-400 hover:text-gray-600">メール送付マナー</a></li>
-                <li><a href="/guide/consumption-tax" className="text-xs text-gray-400 hover:text-gray-600">消費税・インボイス対応</a></li>
+                <li><a href="/guide/how-to-write" className="text-xs text-gray-500 hover:text-gray-700">見積書の書き方</a></li>
+                <li><a href="/guide/freelance" className="text-xs text-gray-500 hover:text-gray-700">フリーランス向けガイド</a></li>
+                <li><a href="/guide/invoice-howto" className="text-xs text-gray-500 hover:text-gray-700">請求書の書き方</a></li>
+                <li><a href="/guide/email" className="text-xs text-gray-500 hover:text-gray-700">メール送付マナー</a></li>
+                <li><a href="/guide/consumption-tax" className="text-xs text-gray-500 hover:text-gray-700">消費税・インボイス対応</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-xs font-semibold text-gray-600 mb-2">サポート</h3>
               <ul className="space-y-1">
-                <li><a href="/how-to" className="text-xs text-gray-400 hover:text-gray-600">使い方</a></li>
-                <li><a href="/faq" className="text-xs text-gray-400 hover:text-gray-600">よくある質問</a></li>
-                <li><a href="/contact" className="text-xs text-gray-400 hover:text-gray-600">お問い合わせ</a></li>
-                <li><a href="/privacy" className="text-xs text-gray-400 hover:text-gray-600">プライバシーポリシー</a></li>
+                <li><a href="/how-to" className="text-xs text-gray-500 hover:text-gray-700">使い方</a></li>
+                <li><a href="/faq" className="text-xs text-gray-500 hover:text-gray-700">よくある質問</a></li>
+                <li><a href="/contact" className="text-xs text-gray-500 hover:text-gray-700">お問い合わせ</a></li>
+                <li><a href="/privacy" className="text-xs text-gray-500 hover:text-gray-700">プライバシーポリシー</a></li>
               </ul>
             </div>
           </div>
