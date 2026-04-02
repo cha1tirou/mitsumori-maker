@@ -236,6 +236,11 @@ export default function PdfGuidePage() {
                 見積書を電子化・PDF化するメリット
               </Link>
             </li>
+            <li>
+              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
+                見積書のメール送付マナー・例文テンプレート
+              </Link>
+            </li>
           </ul>
         </div>
 

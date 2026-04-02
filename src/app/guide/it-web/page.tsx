@@ -282,6 +282,11 @@ export default function ItWebGuidePage() {
                 見積書の消費税の書き方・インボイス対応ガイド
               </Link>
             </li>
+            <li>
+              <Link href="/guide/english" className="text-blue-600 hover:underline text-sm">
+                見積書を英語で作成する方法・テンプレート付き
+              </Link>
+            </li>
           </ul>
         </div>
 

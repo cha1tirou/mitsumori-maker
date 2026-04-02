@@ -265,6 +265,11 @@ export default function DifferenceGuidePage() {
                 見積書を電子化・PDF化するメリットと方法
               </Link>
             </li>
+            <li>
+              <Link href="/guide/invoice-howto" className="text-blue-600 hover:underline text-sm">
+                請求書の書き方ガイド・必要な記載項目を解説
+              </Link>
+            </li>
           </ul>
         </div>
 

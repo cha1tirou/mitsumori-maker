@@ -115,6 +115,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mitsumori-maker.com/guide/discount</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/bank-info</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/numbering</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/delivery-howto</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mitsumori-maker.com/tools/invoice-calc</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>

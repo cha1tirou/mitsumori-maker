@@ -258,6 +258,11 @@ export default function HowToWriteGuidePage() {
                 見積書の消費税の書き方・インボイス対応ガイド
               </Link>
             </li>
+            <li>
+              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
+                見積書のメール送付マナー・例文テンプレート
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -247,6 +247,11 @@ export default function FreelanceGuidePage() {
                 見積書の有効期限の設定方法と適切な期間の決め方
               </Link>
             </li>
+            <li>
+              <Link href="/guide/english" className="text-blue-600 hover:underline text-sm">
+                見積書を英語で作成する方法・テンプレート付き
+              </Link>
+            </li>
           </ul>
         </div>
 

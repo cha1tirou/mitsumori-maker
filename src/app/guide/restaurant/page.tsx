@@ -206,6 +206,11 @@ export default function RestaurantGuidePage() {
                 フリーランス・個人事業主のための見積書ガイド
               </Link>
             </li>
+            <li>
+              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
+                見積書のメール送付マナー・例文テンプレート
+              </Link>
+            </li>
           </ul>
         </div>
 

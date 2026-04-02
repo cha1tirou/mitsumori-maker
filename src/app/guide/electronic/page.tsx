@@ -207,6 +207,11 @@ export default function ElectronicGuidePage() {
                 見積書・請求書・納品書の違いをわかりやすく解説
               </Link>
             </li>
+            <li>
+              <Link href="/guide/pdf" className="text-blue-600 hover:underline text-sm">
+                見積書をPDFで作成・出力する方法
+              </Link>
+            </li>
           </ul>
         </div>
 

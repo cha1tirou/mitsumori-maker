@@ -205,6 +205,11 @@ export default function ConstructionGuidePage() {
                 見積書の消費税の書き方・インボイス対応ガイド
               </Link>
             </li>
+            <li>
+              <Link href="/guide/invoice-howto" className="text-blue-600 hover:underline text-sm">
+                請求書の書き方ガイド・必要な記載項目を解説
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -1,0 +1,354 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "見積書の振込先・口座情報の書き方を解説【記載例あり】 | 見積書メーカー",
+  description:
+    "見積書に振込先や口座情報を記載する方法を解説。正しい書き方・記載例、複数口座の対応、振込手数料の負担表記、セキュリティ上の注意点をまとめました。",
+};
+
+export default function GuideBankInfoPage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-3xl mx-auto px-4 py-4">
+          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
+            &larr; 見積書メーカーに戻る
+          </Link>
+        </div>
+      </header>
+
+      <main className="max-w-3xl mx-auto px-4 py-10">
+        <article>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            見積書の振込先・口座情報の書き方を解説【記載例あり】
+          </h1>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月2日</p>
+
+          <p className="text-gray-700 leading-relaxed mb-6">
+            見積書を作成する際、「振込先を書くべきか？」「どのように記載すればよいか？」と迷う方は少なくありません。振込先の記載は取引をスムーズに進めるために重要なポイントです。この記事では、見積書における振込先・口座情報の正しい書き方を、具体的な記載例とともに解説します。
+          </p>
+
+          {/* --- H2: 1 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            見積書に振込先を記載すべきか？
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            結論から言うと、見積書への振込先記載は「任意」です。見積書は取引前に金額や条件を提示するための書類であり、法的に振込先の記載が義務付けられているわけではありません。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            ただし、以下のようなケースでは見積書に振込先を記載しておくと、取引先とのやり取りがスムーズになります。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>見積書がそのまま発注書として使われる場合</li>
+            <li>取引先から「見積書に振込先を入れてほしい」と依頼された場合</li>
+            <li>小規模な取引で、見積書と請求書を兼用する場合</li>
+            <li>初めての取引先で、事前に口座情報を共有しておきたい場合</li>
+          </ul>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            一方、正式な請求書を別途発行する場合は、見積書には振込先を記載せず、請求書に記載するのが一般的です。取引の流れや取引先の要望に合わせて判断しましょう。
+          </p>
+
+          {/* --- H2: 2 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            振込先の正しい書き方・記載例
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書に振込先を記載する場合、以下の項目を正確に記載することが大切です。誤った情報を記載すると、振込エラーや入金遅延の原因になります。
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            必要な記載項目
+          </h3>
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="text-left px-4 py-2 font-semibold text-gray-800">
+                    項目
+                  </th>
+                  <th className="text-left px-4 py-2 font-semibold text-gray-800">
+                    内容・注意点
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">金融機関名</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    正式名称で記載（例: 三菱UFJ銀行）
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">支店名</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    正式な支店名を記載（例: 渋谷支店）
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">口座種別</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    普通・当座のいずれかを明記
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">口座番号</td>
+                  <td className="px-4 py-2 text-gray-700">7桁の数字を正確に記載</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">口座名義</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    カタカナで記載するのが一般的
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            記載例（個人事業主の場合）
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-5 mb-4">
+            <p className="text-gray-700 text-sm leading-loose">
+              <strong>お振込先</strong>
+              <br />
+              三菱UFJ銀行 渋谷支店
+              <br />
+              普通 1234567
+              <br />
+              口座名義: ヤマダ タロウ
+            </p>
+          </div>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            記載例（法人の場合）
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-5 mb-6">
+            <p className="text-gray-700 text-sm leading-loose">
+              <strong>お振込先</strong>
+              <br />
+              みずほ銀行 新宿支店
+              <br />
+              普通 7654321
+              <br />
+              口座名義: カ）ヤマダショウジ
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            法人の場合、口座名義は「カ）」（株式会社）や「ユ）」（有限会社）のように略称を使うのが一般的です。通帳に記載されている名義をそのまま転記するのが確実です。
+          </p>
+
+          {/* --- H2: 3 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            複数の振込先がある場合の対応
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            事業の規模や取引先に応じて、複数の銀行口座を使い分けているケースもあります。見積書に複数の振込先を記載する場合は、以下の点に注意しましょう。
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            複数口座を記載する場合のポイント
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>
+              取引先が振込しやすい口座を優先して記載する（同一銀行だと手数料が安い場合がある）
+            </li>
+            <li>
+              「いずれかの口座にお振込みください」と一言添えると親切
+            </li>
+            <li>
+              口座が3つ以上になる場合は、見積書が煩雑になるため2つ程度に絞るのがおすすめ
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            記載例
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-5 mb-6">
+            <p className="text-gray-700 text-sm leading-loose">
+              <strong>お振込先（いずれかにお振込みください）</strong>
+              <br />
+              <br />
+              【口座1】三菱UFJ銀行 渋谷支店 / 普通 1234567 / ヤマダ タロウ
+              <br />
+              【口座2】ゆうちょ銀行 / 記号 10000 / 番号 12345678 / ヤマダ タロウ
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            ゆうちょ銀行の場合は「記号・番号」で記載するのが通例ですが、他行から振込を受ける場合は「店名・口座番号」の形式も併記しておくと親切です。ゆうちょ銀行のWebサイトで振込用の店名・口座番号を確認できます。
+          </p>
+
+          {/* --- H2: 4 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            振込手数料の負担についての記載方法
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            振込手数料の負担先は、トラブルを防ぐために見積書の段階で明記しておくことをおすすめします。民法第485条では「弁済の費用は債務者（支払う側）の負担」と定められていますが、実務では取引先との関係性によって異なるケースもあります。
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            振込手数料の記載パターン
+          </h3>
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="text-left px-4 py-2 font-semibold text-gray-800">
+                    パターン
+                  </th>
+                  <th className="text-left px-4 py-2 font-semibold text-gray-800">
+                    記載例
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">
+                    取引先負担（一般的）
+                  </td>
+                  <td className="px-4 py-2 text-gray-700">
+                    「振込手数料はお客様のご負担にてお願いいたします」
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">自社負担</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    「振込手数料は弊社にて負担いたします」
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 text-gray-700">折半</td>
+                  <td className="px-4 py-2 text-gray-700">
+                    「振込手数料は各自ご負担ください」
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書のフッター部分や備考欄に、振込手数料の負担について一文を添えるのが一般的です。特に初めての取引先の場合は、事前に手数料負担の取り決めを確認しておくとスムーズです。
+          </p>
+
+          {/* --- H2: 5 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            振込先記載時の注意点・セキュリティ
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            口座情報は個人情報・機密情報に該当するため、取り扱いには十分な注意が必要です。以下のポイントを押さえておきましょう。
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            メール送信時の注意
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>
+              見積書をメールで送る場合は、PDFファイルにパスワードを設定するか、パスワードを別メールで送る方法が安全です
+            </li>
+            <li>
+              宛先の入力ミスによる情報漏洩に注意する
+            </li>
+            <li>
+              CCやBCCで不必要な関係者に口座情報が共有されないよう確認する
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            Web上での取り扱い
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>
+              クラウドサービスで見積書を共有する場合は、アクセス権限を適切に設定する
+            </li>
+            <li>
+              URLで誰でもアクセスできる状態にしない
+            </li>
+            <li>
+              取引終了後は共有リンクを無効化する
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            口座情報の正確性
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+            <li>
+              口座番号や名義に誤りがあると振込エラーになるため、通帳やオンラインバンキングの情報と照合して正確に記載する
+            </li>
+            <li>
+              銀行の合併・支店統合で情報が変わっている場合があるため、定期的に最新情報を確認する
+            </li>
+            <li>
+              テンプレートに口座情報を保存しておくと、毎回入力する手間を省けて入力ミスも防げる
+            </li>
+          </ul>
+
+          {/* --- まとめ --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            まとめ
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書に振込先を記載するかどうかは取引の状況によりますが、記載する場合は金融機関名・支店名・口座種別・口座番号・口座名義の5項目を正確に記載することが大切です。振込手数料の負担についても備考欄に明記しておくと、取引先との認識のズレを防げます。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            口座情報は機密性が高いため、メール送信やクラウド共有の際にはセキュリティにも配慮しましょう。見積書メーカーなら、口座情報を含めた見積書をブラウザ上で簡単に作成し、PDFで安全にダウンロードできます。
+          </p>
+
+          {/* --- 関連記事リンク --- */}
+          <div className="mt-10 bg-white border border-gray-200 rounded-lg p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              関連ガイド
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/guide/how-to-write"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
+                >
+                  見積書の書き方・必要な記載項目を解説
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/invoice-howto"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
+                >
+                  請求書の書き方ガイド・必要な記載項目を解説
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/freelance"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
+                >
+                  フリーランス・個人事業主のための見積書ガイド
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/email"
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
+                >
+                  見積書をメールで送る際のマナーと例文
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        {/* CTA */}
+        <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
+          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
+          <p className="text-gray-400 mb-4 text-sm">
+            登録不要・完全無料・PDF出力対応
+          </p>
+          <Link
+            href="/"
+            className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            見積書メーカーを使う &rarr;
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}

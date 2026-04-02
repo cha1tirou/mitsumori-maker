@@ -250,6 +250,10 @@ export default function Home() {
               { href: "/guide/email", title: "見積書のメール送付マナー・例文", desc: "件名の書き方・送付メールの例文テンプレート" },
               { href: "/guide/english", title: "見積書を英語で作成する方法", desc: "Quotationの書き方・頻出フレーズ・テンプレート" },
               { href: "/guide/invoice-howto", title: "請求書の書き方ガイド", desc: "必要項目・インボイス対応・発行タイミングを解説" },
+              { href: "/guide/discount", title: "見積書の値引きの書き方", desc: "一律・端数・数量値引きの表記方法を解説" },
+              { href: "/guide/bank-info", title: "見積書の振込先・口座情報の書き方", desc: "正しい記載例・手数料負担・セキュリティ注意点" },
+              { href: "/guide/numbering", title: "見積書番号のつけ方・採番ルール", desc: "業種別の番号体系と管理のコツを解説" },
+              { href: "/guide/delivery-howto", title: "納品書の書き方ガイド", desc: "必要項目・発行タイミング・電子化のメリット" },
             ].map((item) => (
               <a
                 key={item.href}
