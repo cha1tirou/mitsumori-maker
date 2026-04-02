@@ -39,7 +39,18 @@ function formatDate(dateStr: string): string {
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }
 
-// カラーパレット
+// テンプレートごとのカラーパレット
+const palettes: Record<TemplateName, { primary: string; primaryLight: string; accent: string; title: string }> = {
+  standard:     { primary: "#1a1a2e", primaryLight: "#2d2d4a", accent: "#e94560", title: "見 積 書" },
+  minimal:      { primary: "#374151", primaryLight: "#4b5563", accent: "#9ca3af", title: "見積書" },
+  premium:      { primary: "#1a1a2e", primaryLight: "#2d2d4a", accent: "#e94560", title: "見 積 書" },
+  blue:         { primary: "#2563eb", primaryLight: "#3b82f6", accent: "#2563eb", title: "見 積 書" },
+  mono:         { primary: "#000000", primaryLight: "#1f2937", accent: "#000000", title: "見 積 書" },
+  colorful:     { primary: "#ea580c", primaryLight: "#f97316", accent: "#ec4899", title: "見積書" },
+  construction: { primary: "#166534", primaryLight: "#15803d", accent: "#166534", title: "工事見積書" },
+  lined:        { primary: "#374151", primaryLight: "#4b5563", accent: "#374151", title: "御 見 積 書" },
+};
+
 const colors = {
   primary: "#1a1a2e",
   primaryLight: "#2d2d4a",
@@ -185,7 +196,8 @@ const baseStyles = StyleSheet.create({
   },
 });
 
-function StandardPdf({ data }: { data: QuoteData }) {
+function TemplatePdf({ data, template }: { data: QuoteData; template: TemplateName }) {
+  const palette = palettes[template];
   const subtotal = calcSubtotal(data.items);
   const tax = Math.floor(subtotal * (data.taxRate / 100));
   const total = subtotal + tax;
@@ -193,12 +205,12 @@ function StandardPdf({ data }: { data: QuoteData }) {
   return (
     <Document>
       <Page size="A4" style={baseStyles.page}>
-        <Text style={baseStyles.title}>見 積 書</Text>
-        <View style={baseStyles.divider} />
+        <Text style={[baseStyles.title, { color: palette.primary }]}>{palette.title}</Text>
+        <View style={[baseStyles.divider, { backgroundColor: palette.accent }]} />
 
         <View style={baseStyles.row}>
           <View style={{ width: "48%" }}>
-            <Text style={baseStyles.clientName}>
+            <Text style={[baseStyles.clientName, { color: palette.primary, borderBottomColor: palette.primary }]}>
               {data.clientName || "（宛先）"} {data.clientTitle}
             </Text>
             {data.subject ? (
@@ -215,7 +227,7 @@ function StandardPdf({ data }: { data: QuoteData }) {
             </View>
           </View>
           <View style={{ width: "40%" }}>
-            <Text style={baseStyles.companyName}>
+            <Text style={[baseStyles.companyName, { color: palette.primary }]}>
               {data.companyName || "（自社名）"}
             </Text>
             {data.companyZip ? (
@@ -254,7 +266,7 @@ function StandardPdf({ data }: { data: QuoteData }) {
         </View>
 
         {/* テーブル */}
-        <View style={baseStyles.tableHeader}>
+        <View style={[baseStyles.tableHeader, { backgroundColor: palette.primary }]}>
           <Text style={[baseStyles.tableHeaderText, { width: 24 }]}>#</Text>
           <Text style={[baseStyles.tableHeaderText, { flex: 1 }]}>品目</Text>
           <Text
@@ -318,11 +330,11 @@ function StandardPdf({ data }: { data: QuoteData }) {
             </Text>
             <Text style={{ fontSize: 9 }}>{formatCurrency(tax)}</Text>
           </View>
-          <View style={baseStyles.summaryTotal}>
-            <Text style={{ fontSize: 10, fontWeight: 700, color: colors.primary }}>
+          <View style={[baseStyles.summaryTotal, { borderTopColor: palette.primary }]}>
+            <Text style={{ fontSize: 10, fontWeight: 700, color: palette.primary }}>
               合計（税込）
             </Text>
-            <Text style={{ fontSize: 10, fontWeight: 700, color: colors.primary }}>
+            <Text style={{ fontSize: 10, fontWeight: 700, color: palette.primary }}>
               {formatCurrency(total)}
             </Text>
           </View>
@@ -341,10 +353,8 @@ function StandardPdf({ data }: { data: QuoteData }) {
 
 export async function generatePdf(
   data: QuoteData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   template: TemplateName
 ): Promise<Blob> {
-  // テンプレート別のPDFは段階的に対応。現時点ではStandard共通
-  const blob = await pdf(<StandardPdf data={data} />).toBlob();
+  const blob = await pdf(<TemplatePdf data={data} template={template} />).toBlob();
   return blob;
 }

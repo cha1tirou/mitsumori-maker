@@ -21,8 +21,32 @@ const PdfDownloadButton = dynamic(
 );
 
 export default function Home() {
-  const [data, setData] = useState<QuoteData>(defaultQuoteData);
-  const [template, setTemplate] = useState<TemplateName>("standard");
+  const [data, setData] = useState<QuoteData>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const shared = params.get("s");
+      if (shared) {
+        try {
+          const decoded = JSON.parse(decodeURIComponent(escape(atob(shared))));
+          if (decoded.d) return decoded.d;
+        } catch { /* ignore */ }
+      }
+    }
+    return defaultQuoteData;
+  });
+  const [template, setTemplate] = useState<TemplateName>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const shared = params.get("s");
+      if (shared) {
+        try {
+          const decoded = JSON.parse(decodeURIComponent(escape(atob(shared))));
+          if (decoded.t) return decoded.t;
+        } catch { /* ignore */ }
+      }
+    }
+    return "standard";
+  });
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -98,10 +122,30 @@ export default function Home() {
             <div className="lg:sticky lg:top-[140px] lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
               <QuoteForm data={data} onChange={setData} />
 
-              {/* PDF出力エリア */}
-              <div className="mt-6 space-y-4">
+              {/* 出力エリア */}
+              <div className="mt-6 space-y-3">
                 <PdfDownloadButton data={data} template={template} />
-
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => window.print()}
+                    className="flex-1 bg-white border border-gray-200 text-gray-700 text-sm font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    印刷
+                  </button>
+                  <button
+                    onClick={() => {
+                      const shareData = { d: data, t: template };
+                      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(shareData))));
+                      const url = `${window.location.origin}?s=${encoded}`;
+                      navigator.clipboard.writeText(url).then(() => {
+                        alert("共有URLをコピーしました");
+                      });
+                    }}
+                    className="flex-1 bg-white border border-gray-200 text-gray-700 text-sm font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    URLで共有
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -123,9 +167,15 @@ export default function Home() {
               </div>
               <QuotePreview data={data} template={template} />
 
-              {/* モバイル用 PDF出力 */}
-              <div className="lg:hidden mt-6 space-y-4">
+              {/* モバイル用 出力 */}
+              <div className="lg:hidden mt-6 space-y-3">
                 <PdfDownloadButton data={data} template={template} />
+                <button
+                  onClick={() => window.print()}
+                  className="w-full bg-white border border-gray-200 text-gray-700 text-sm font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  印刷
+                </button>
               </div>
             </div>
           </div>
