@@ -53,39 +53,42 @@ export default function Home() {
     <div className="min-h-screen">
       {/* ヘッダー */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex items-center justify-between mb-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <span className="text-white text-sm font-bold">見</span>
               </div>
-              <div>
-                <h1 className="text-base sm:text-lg font-bold text-primary leading-tight">
-                  見積書メーカー
-                </h1>
-                <p className="text-[10px] text-gray-400 hidden sm:block">
-                  無料・登録不要でプロの見積書を作成
-                </p>
-              </div>
+              <h1 className="text-base sm:text-lg font-bold text-primary leading-tight">
+                見積書メーカー
+              </h1>
             </div>
 
-            <div className="flex items-center gap-3">
-              <a href="/tools/invoice" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">請求書</a>
-              <a href="/tools/delivery" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">納品書</a>
-              <a href="/tools/purchase-order" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">発注書</a>
-              <a href="/tools/invoice-calc" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">インボイス計算機</a>
-              {/* モバイル：プレビュー切り替え */}
-              <button
-                onClick={() => setShowPreview(!showPreview)}
-                className="lg:hidden bg-primary text-white text-xs px-3 py-2 rounded-lg font-medium"
-              >
-                {showPreview ? "編集に戻る" : "プレビュー"}
-              </button>
-            </div>
+            <nav className="hidden sm:flex items-center gap-1">
+              {[
+                { href: "/tools/invoice", label: "請求書" },
+                { href: "/tools/delivery", label: "納品書" },
+                { href: "/tools/purchase-order", label: "発注書" },
+                { href: "/tools/invoice-calc", label: "計算機" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2.5 py-1.5 rounded-md transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* モバイル：プレビュー切り替え */}
+            <button
+              onClick={() => setShowPreview(!showPreview)}
+              className="lg:hidden bg-primary text-white text-xs px-3 py-2 rounded-lg font-medium"
+            >
+              {showPreview ? "編集に戻る" : "プレビュー"}
+            </button>
           </div>
-
-          {/* テンプレート切り替え */}
-          <TemplateSelector selected={template} onChange={setTemplate} />
         </div>
       </header>
 
@@ -97,7 +100,7 @@ export default function Home() {
               { label: "完全無料", sub: "すべての機能が0円" },
               { label: "登録不要", sub: "個人情報の入力なし" },
               { label: "PDF出力", sub: "ワンクリックでDL" },
-              { label: "3種のテンプレート", sub: "業種に合わせて選択" },
+              { label: "8種のテンプレート", sub: "業種に合わせて選択" },
             ].map((f) => (
               <div key={f.label} className="text-center">
                 <p className="text-sm font-bold text-gray-800">{f.label}</p>
@@ -117,7 +120,12 @@ export default function Home() {
               showPreview ? "hidden lg:block" : ""
             }`}
           >
-            <div className="lg:sticky lg:top-[140px] lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+            <div className="lg:sticky lg:top-[70px] lg:max-h-[calc(100vh-90px)] lg:overflow-y-auto custom-scrollbar lg:pr-2">
+              {/* テンプレート選択 */}
+              <div className="mb-4">
+                <p className="text-xs font-semibold text-gray-500 mb-2">テンプレート</p>
+                <TemplateSelector selected={template} onChange={setTemplate} />
+              </div>
               <QuoteForm data={data} onChange={setData} />
 
               {/* 出力エリア */}
