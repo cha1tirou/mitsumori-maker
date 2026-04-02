@@ -5,6 +5,7 @@ import { DeliveryData, defaultDeliveryData } from "@/types/delivery";
 import DeliveryForm from "@/components/DeliveryForm";
 import DeliveryPreview from "@/components/DeliveryPreview";
 import DeliveryPdfDownloadButton from "@/components/DeliveryPdfDownloadButton";
+import ToolHeader from "@/components/ToolHeader";
 import Link from "next/link";
 
 export default function DeliveryPage() {
@@ -13,48 +14,11 @@ export default function DeliveryPage() {
 
   return (
     <div className="min-h-screen">
-      {/* ヘッダー */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-800 to-green-500 flex items-center justify-center">
-                <span className="text-white text-sm font-bold">納</span>
-              </div>
-              <div>
-                <h1 className="text-base sm:text-lg font-bold text-green-900 leading-tight">
-                  納品書メーカー
-                </h1>
-                <p className="text-[10px] text-gray-400 hidden sm:block">
-                  無料・登録不要でプロの納品書を作成
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Link
-                href="/"
-                className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
-              >
-                見積書メーカー
-              </Link>
-              <Link
-                href="/tools/invoice"
-                className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
-              >
-                請求書メーカー
-              </Link>
-              {/* モバイル：プレビュー切り替え */}
-              <button
-                onClick={() => setShowPreview(!showPreview)}
-                className="lg:hidden bg-green-800 text-white text-xs px-3 py-2 rounded-lg font-medium"
-              >
-                {showPreview ? "編集に戻る" : "プレビュー"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <ToolHeader
+        showPreviewToggle
+        showPreview={showPreview}
+        onTogglePreview={() => setShowPreview(!showPreview)}
+      />
 
       {/* 特徴セクション */}
       <section className="bg-gray-50 border-b border-gray-100">

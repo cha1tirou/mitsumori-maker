@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ToolHeader from "@/components/ToolHeader";
 
 interface TaxItem {
   name: string;
@@ -51,17 +52,7 @@ export default function InvoiceCalcPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-3xl mx-auto px-4 py-4">
-          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
-            <Link href="/" className="hover:text-gray-900">
-              見積書メーカー
-            </Link>
-            <span className="mx-2">&rsaquo;</span>
-            <span className="text-gray-800">インボイス計算機</span>
-          </nav>
-        </div>
-      </header>
+      <ToolHeader />
 
       <main className="max-w-3xl mx-auto px-4 py-10">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">

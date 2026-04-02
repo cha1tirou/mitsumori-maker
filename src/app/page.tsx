@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { QuoteData, TemplateName, defaultQuoteData } from "@/types/quote";
+import ToolHeader from "@/components/ToolHeader";
 import TemplateSelector from "@/components/TemplateSelector";
 import QuoteForm from "@/components/QuoteForm";
 
@@ -51,46 +52,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* ヘッダー */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-white text-sm font-bold">見</span>
-              </div>
-              <h1 className="text-base sm:text-lg font-bold text-primary leading-tight">
-                見積書メーカー
-              </h1>
-            </div>
-
-            <nav className="hidden sm:flex items-center gap-1">
-              {[
-                { href: "/tools/invoice", label: "請求書" },
-                { href: "/tools/delivery", label: "納品書" },
-                { href: "/tools/purchase-order", label: "発注書" },
-                { href: "/tools/invoice-calc", label: "計算機" },
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-xs text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2.5 py-1.5 rounded-md transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* モバイル：プレビュー切り替え */}
-            <button
-              onClick={() => setShowPreview(!showPreview)}
-              className="lg:hidden bg-primary text-white text-xs px-3 py-2 rounded-lg font-medium"
-            >
-              {showPreview ? "編集に戻る" : "プレビュー"}
-            </button>
-          </div>
-        </div>
-      </header>
+      <ToolHeader
+        showPreviewToggle
+        showPreview={showPreview}
+        onTogglePreview={() => setShowPreview(!showPreview)}
+      />
 
       {/* 特徴セクション */}
       <section className="bg-gray-50 border-b border-gray-100">
