@@ -312,20 +312,38 @@ export default function Home() {
 
       {/* フッター */}
       <footer className="border-t border-gray-100 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center">
-          <p className="text-xs text-gray-400">
-            見積書メーカー — 無料・登録不要の見積書作成ツール |{" "}
-            <a href="/tools/invoice" className="hover:text-gray-600">
-              請求書メーカー
-            </a>{" "}
-            |{" "}
-            <a href="/tools/delivery" className="hover:text-gray-600">
-              納品書メーカー
-            </a>{" "}
-            |{" "}
-            <a href="/tools/invoice-calc" className="hover:text-gray-600">
-              インボイス計算機
-            </a>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
+            <div>
+              <h3 className="text-xs font-semibold text-gray-600 mb-2">ツール</h3>
+              <ul className="space-y-1">
+                <li><a href="/tools/invoice" className="text-xs text-gray-400 hover:text-gray-600">請求書メーカー</a></li>
+                <li><a href="/tools/delivery" className="text-xs text-gray-400 hover:text-gray-600">納品書メーカー</a></li>
+                <li><a href="/tools/invoice-calc" className="text-xs text-gray-400 hover:text-gray-600">インボイス計算機</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-gray-600 mb-2">ガイド</h3>
+              <ul className="space-y-1">
+                <li><a href="/guide/how-to-write" className="text-xs text-gray-400 hover:text-gray-600">見積書の書き方</a></li>
+                <li><a href="/guide/freelance" className="text-xs text-gray-400 hover:text-gray-600">フリーランス向けガイド</a></li>
+                <li><a href="/guide/invoice-howto" className="text-xs text-gray-400 hover:text-gray-600">請求書の書き方</a></li>
+                <li><a href="/guide/email" className="text-xs text-gray-400 hover:text-gray-600">メール送付マナー</a></li>
+                <li><a href="/guide/consumption-tax" className="text-xs text-gray-400 hover:text-gray-600">消費税・インボイス対応</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-gray-600 mb-2">サポート</h3>
+              <ul className="space-y-1">
+                <li><a href="/how-to" className="text-xs text-gray-400 hover:text-gray-600">使い方</a></li>
+                <li><a href="/faq" className="text-xs text-gray-400 hover:text-gray-600">よくある質問</a></li>
+                <li><a href="/contact" className="text-xs text-gray-400 hover:text-gray-600">お問い合わせ</a></li>
+                <li><a href="/privacy" className="text-xs text-gray-400 hover:text-gray-600">プライバシーポリシー</a></li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 text-center border-t border-gray-100 pt-4">
+            見積書メーカー — 無料・登録不要の見積書作成ツール
           </p>
         </div>
       </footer>

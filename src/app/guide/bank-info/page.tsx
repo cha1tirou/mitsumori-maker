@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "見積書の振込先・口座情報の書き方を解説【記載例あり】 | 見積書メーカー",
@@ -10,8 +11,22 @@ export const metadata: Metadata = {
 export default function GuideBankInfoPage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="見積書の振込先・口座情報の書き方を解説"
+        description="見積書に振込先や口座情報を記載する方法を解説。正しい書き方・記載例をまとめました。"
+        slug="bank-info"
+        datePublished="2026-04-02"
+        dateModified="2026-04-02"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
+          <nav className="text-xs text-gray-500 mb-2">
+            <Link href="/" className="hover:text-gray-700">見積書メーカー</Link>
+            <span className="mx-1">/</span>
+            <span>ガイド</span>
+            <span className="mx-1">/</span>
+            <span className="text-gray-700">振込先の書き方</span>
+          </nav>
           <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
             &larr; 見積書メーカーに戻る
           </Link>

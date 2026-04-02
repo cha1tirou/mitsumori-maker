@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
   title: "請求書の書き方ガイド・必要な記載項目を解説 | 見積書メーカー",
@@ -10,8 +11,22 @@ export const metadata: Metadata = {
 export default function GuideInvoiceHowtoPage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <GuideJsonLd
+        title="請求書の書き方ガイド・必要な記載項目を解説"
+        description="請求書の書き方を初心者向けに解説。必要な記載項目、インボイス制度対応のポイントをまとめました。"
+        slug="invoice-howto"
+        datePublished="2026-04-02"
+        dateModified="2026-04-02"
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
+          <nav className="text-xs text-gray-500 mb-2">
+            <Link href="/" className="hover:text-gray-700">見積書メーカー</Link>
+            <span className="mx-1">/</span>
+            <span>ガイド</span>
+            <span className="mx-1">/</span>
+            <span className="text-gray-700">請求書の書き方</span>
+          </nav>
           <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
             &larr; 見積書メーカーに戻る
           </Link>
