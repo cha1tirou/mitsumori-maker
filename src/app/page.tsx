@@ -54,9 +54,15 @@ export default function Home() {
   const data = isSharedUrl && sharedData?.d ? sharedData.d : draft.data;
   const setData = draft.setData;
 
-  const [template, setTemplate] = useState<TemplateName>(
-    sharedData?.t ?? "standard"
-  );
+  const validTemplates: TemplateName[] = ["standard", "minimal", "premium", "blue", "mono", "colorful", "construction", "lined"];
+  const [template, setTemplate] = useState<TemplateName>(() => {
+    if (sharedData?.t) return sharedData.t;
+    if (typeof window !== "undefined") {
+      const t = new URLSearchParams(window.location.search).get("template") as TemplateName;
+      if (t && validTemplates.includes(t)) return t;
+    }
+    return "standard";
+  });
   const [showPreview, setShowPreview] = useState(false);
 
   return (
@@ -154,6 +160,29 @@ export default function Home() {
                     URLで共有
                   </button>
                 </div>
+                <a
+                  href="/tools/invoice"
+                  onClick={() => {
+                    const invoiceData = {
+                      clientName: data.clientName,
+                      clientTitle: data.clientTitle,
+                      companyName: data.companyName,
+                      companyZip: data.companyZip,
+                      companyAddress: data.companyAddress,
+                      companyTel: data.companyTel,
+                      companyEmail: data.companyEmail,
+                      companyRegistrationNumber: data.companyRegistrationNumber,
+                      items: data.items,
+                      notes: data.notes,
+                      taxRate: data.taxRate,
+                    };
+                    localStorage.setItem("quote_to_invoice", JSON.stringify(invoiceData));
+                    trackEvent("cross_tool_click", { from: "/", to: "/tools/invoice", type: "data_copy" });
+                  }}
+                  className="block w-full text-center bg-blue-50 border border-blue-200 text-blue-700 text-sm font-medium py-2.5 rounded-lg hover:bg-blue-100 transition-colors"
+                >
+                  この内容で請求書を作成 &rarr;
+                </a>
                 <button
                   onClick={() => {
                     if (confirm("保存された下書きを削除しますか？")) {

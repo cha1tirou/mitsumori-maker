@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InvoiceData, defaultInvoiceData } from "@/types/invoice";
 import { useDraftSave } from "@/hooks/useDraftSave";
 import DraftBanner from "@/components/DraftBanner";
@@ -19,6 +19,18 @@ export default function InvoicePage() {
   });
   const { data, setData } = draft;
   const [showPreview, setShowPreview] = useState(false);
+
+  // 見積書からのデータ複製を受け取る
+  useEffect(() => {
+    try {
+      const copied = localStorage.getItem("quote_to_invoice");
+      if (copied) {
+        const parsed = JSON.parse(copied);
+        setData({ ...defaultInvoiceData, ...parsed });
+        localStorage.removeItem("quote_to_invoice");
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   return (
     <div className="min-h-screen">

@@ -299,15 +299,15 @@ export default function ItWebGuidePage() {
         </div>
 
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
-          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
+          <h2 className="text-xl font-bold mb-2">IT・Web業界の見積書を作成</h2>
           <p className="text-gray-400 mb-4 text-sm">
-            登録不要・完全無料・PDF出力対応
+            登録不要・完全無料・工数ベースの見積りにも対応
           </p>
           <Link
             href="/"
             className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            見積書メーカーを使う →
+            見積書メーカーを使う &rarr;
           </Link>
         </div>
       </main>

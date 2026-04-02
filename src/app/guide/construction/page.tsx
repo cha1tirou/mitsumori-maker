@@ -222,15 +222,15 @@ export default function ConstructionGuidePage() {
         </div>
 
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
-          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
+          <h2 className="text-xl font-bold mb-2">建設業向けテンプレートで見積書を作成</h2>
           <p className="text-gray-400 mb-4 text-sm">
-            登録不要・完全無料・PDF出力対応
+            登録不要・完全無料・工事見積書テンプレート対応
           </p>
           <Link
-            href="/"
+            href="/?template=construction"
             className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            見積書メーカーを使う →
+            工事見積書を作成する &rarr;
           </Link>
         </div>
       </main>

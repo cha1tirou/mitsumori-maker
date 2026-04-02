@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
+import GuideCta from "@/components/GuideCta";
 
 export const metadata: Metadata = {
   title: "見積書の消費税の書き方・インボイス対応ガイド | 見積書メーカー",
@@ -266,18 +267,7 @@ export default function ConsumptionTaxGuidePage() {
           </ul>
         </div>
 
-        <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
-          <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
-          <p className="text-gray-400 mb-4 text-sm">
-            登録不要・完全無料・PDF出力対応
-          </p>
-          <Link
-            href="/"
-            className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            見積書メーカーを使う →
-          </Link>
-        </div>
+        <GuideCta type="tax-calc" />
       </main>
     </div>
   );
