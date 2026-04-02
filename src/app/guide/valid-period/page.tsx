@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E6%9C%89%E5%8A%B9%E6%9C%9F%E9%99%90%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95",
+        width: 1200,
+        height: 630,
+        alt: "見積書の有効期限の設定方法",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/valid-period",

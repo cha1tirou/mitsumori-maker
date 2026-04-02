@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%83%BB%E5%BF%85%E8%A6%81%E9%A0%85%E7%9B%AE%E3%82%92%E8%A7%A3%E8%AA%AC",
+        width: 1200,
+        height: 630,
+        alt: "見積書の書き方・必要項目を解説",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/how-to-write",

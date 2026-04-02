@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E5%BB%BA%E8%A8%AD%E6%A5%AD%E3%81%AE%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9",
+        width: 1200,
+        height: 630,
+        alt: "建設業の見積書の書き方",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/construction",

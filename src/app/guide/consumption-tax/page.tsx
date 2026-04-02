@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E6%B6%88%E8%B2%BB%E7%A8%8E%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%9C%E3%82%A4%E3%82%B9%E5%AF%BE%E5%BF%9C",
+        width: 1200,
+        height: 630,
+        alt: "消費税の書き方・インボイス対応",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/consumption-tax",

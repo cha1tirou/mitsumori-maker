@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9",
+        width: 1200,
+        height: 630,
+        alt: "見積書テンプレートの選び方",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/template-excel",

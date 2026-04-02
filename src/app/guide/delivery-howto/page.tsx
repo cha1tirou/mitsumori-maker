@@ -6,6 +6,25 @@ export const metadata: Metadata = {
   title: "納品書の書き方ガイド・必要な記載項目を解説 | 見積書メーカー",
   description:
     "納品書の書き方を初心者向けに解説。必要な記載項目、見積書・請求書との違い、発行タイミング、電子納品書のメリット、無料で作成する方法をまとめました。",
+  openGraph: {
+    title: "納品書の書き方ガイド・必要な記載項目を解説 | 見積書メーカー",
+    description: "納品書の書き方を初心者向けに解説。必要な記載項目、発行タイミングをまとめました。",
+    url: "https://mitsumori-maker.com/guide/delivery-howto",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E7%B4%8D%E5%93%81%E6%9B%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%82%AC%E3%82%A4%E3%83%89",
+        width: 1200,
+        height: 630,
+        alt: "納品書の書き方ガイド",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/delivery-howto",
+  },
 };
 
 export default function GuideDeliveryHowtoPage() {

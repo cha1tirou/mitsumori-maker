@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E9%9B%BB%E5%AD%90%E5%8C%96%E3%83%BBPDF%E5%8C%96%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88",
+        width: 1200,
+        height: 630,
+        alt: "見積書の電子化・PDF化のメリット",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/electronic",

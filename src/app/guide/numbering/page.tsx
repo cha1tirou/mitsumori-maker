@@ -6,6 +6,25 @@ export const metadata: Metadata = {
   title: "見積書番号のつけ方・採番ルールを解説【業種別の例付き】 | 見積書メーカー",
   description:
     "見積書番号のつけ方・採番ルールを分かりやすく解説。連番・日付ベースなど具体的な番号体系の例や、業種別のナンバリング方法、管理のコツを紹介します。",
+  openGraph: {
+    title: "見積書番号のつけ方・採番ルールを解説 | 見積書メーカー",
+    description: "見積書番号のつけ方・採番ルールを解説。業種別のナンバリング方法、管理のコツを紹介。",
+    url: "https://mitsumori-maker.com/guide/numbering",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E7%95%AA%E5%8F%B7%E3%81%AE%E3%81%A4%E3%81%91%E6%96%B9%E3%83%BB%E6%8E%A1%E7%95%AA%E3%83%AB%E3%83%BC%E3%83%AB",
+        width: 1200,
+        height: 630,
+        alt: "見積書番号のつけ方・採番ルール",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/numbering",
+  },
 };
 
 export default function GuideNumberingPage() {

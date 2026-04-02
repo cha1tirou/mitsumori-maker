@@ -6,6 +6,25 @@ export const metadata: Metadata = {
   title: "見積書のメール送付マナー・例文テンプレート | 見積書メーカー",
   description:
     "見積書をメールで送る際の基本マナー・件名の書き方・送付メールの例文を紹介。PDF添付の注意点やよくある失敗も解説します。",
+  openGraph: {
+    title: "見積書のメール送付マナー・例文テンプレート | 見積書メーカー",
+    description: "見積書をメールで送る際の基本マナー・件名の書き方・送付メールの例文を紹介。",
+    url: "https://mitsumori-maker.com/guide/email",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E3%83%A1%E3%83%BC%E3%83%AB%E9%80%81%E4%BB%98%E3%83%9E%E3%83%8A%E3%83%BC%E3%83%BB%E4%BE%8B%E6%96%87",
+        width: 1200,
+        height: 630,
+        alt: "見積書のメール送付マナー・例文",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/email",
+  },
 };
 
 export default function GuideEmailPage() {

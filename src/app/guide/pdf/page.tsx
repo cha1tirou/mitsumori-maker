@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%82%92PDF%E3%81%A7%E4%BD%9C%E6%88%90%E3%83%BB%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95",
+        width: 1200,
+        height: 630,
+        alt: "見積書をPDFで作成・出力する方法",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/pdf",

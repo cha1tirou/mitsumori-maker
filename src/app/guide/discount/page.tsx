@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E5%80%A4%E5%BC%95%E3%81%8D%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9",
+        width: 1200,
+        height: 630,
+        alt: "見積書の値引きの書き方",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/discount",

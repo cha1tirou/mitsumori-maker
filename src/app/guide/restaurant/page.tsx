@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E9%A3%B2%E9%A3%9F%E5%BA%97%E3%81%AE%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9",
+        width: 1200,
+        height: 630,
+        alt: "飲食店の見積書の書き方",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/restaurant",

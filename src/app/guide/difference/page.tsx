@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%83%BB%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%83%BB%E7%B4%8D%E5%93%81%E6%9B%B8%E3%81%AE%E9%81%95%E3%81%84",
+        width: 1200,
+        height: 630,
+        alt: "見積書・請求書・納品書の違い",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/difference",

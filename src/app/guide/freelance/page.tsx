@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "見積書メーカー",
     locale: "ja_JP",
     type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9%E3%83%BB%E5%80%8B%E4%BA%BA%E4%BA%8B%E6%A5%AD%E4%B8%BB%E3%81%AE%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%82%AC%E3%82%A4%E3%83%89",
+        width: 1200,
+        height: 630,
+        alt: "フリーランス・個人事業主の見積書ガイド",
+      },
+    ],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/guide/freelance",

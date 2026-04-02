@@ -6,6 +6,25 @@ export const metadata: Metadata = {
   title: "見積書の振込先・口座情報の書き方を解説【記載例あり】 | 見積書メーカー",
   description:
     "見積書に振込先や口座情報を記載する方法を解説。正しい書き方・記載例、複数口座の対応、振込手数料の負担表記、セキュリティ上の注意点をまとめました。",
+  openGraph: {
+    title: "見積書の振込先・口座情報の書き方を解説 | 見積書メーカー",
+    description: "見積書に振込先や口座情報を記載する方法を解説。正しい書き方・記載例をまとめました。",
+    url: "https://mitsumori-maker.com/guide/bank-info",
+    siteName: "見積書メーカー",
+    locale: "ja_JP",
+    type: "article",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/api/og?title=%E8%A6%8B%E7%A9%8D%E6%9B%B8%E3%81%AE%E6%8C%AF%E8%BE%BC%E5%85%88%E3%83%BB%E5%8F%A3%E5%BA%A7%E6%83%85%E5%A0%B1%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9",
+        width: 1200,
+        height: 630,
+        alt: "見積書の振込先・口座情報の書き方",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://mitsumori-maker.com/guide/bank-info",
+  },
 };
 
 export default function GuideBankInfoPage() {
