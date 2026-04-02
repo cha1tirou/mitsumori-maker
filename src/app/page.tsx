@@ -70,12 +70,10 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-3">
-              <a
-                href="/tools/invoice"
-                className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block"
-              >
-                請求書メーカー
-              </a>
+              <a href="/tools/invoice" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">請求書</a>
+              <a href="/tools/delivery" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">納品書</a>
+              <a href="/tools/purchase-order" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">発注書</a>
+              <a href="/tools/invoice-calc" className="text-xs text-gray-500 hover:text-gray-900 hidden sm:block">インボイス計算機</a>
               {/* モバイル：プレビュー切り替え */}
               <button
                 onClick={() => setShowPreview(!showPreview)}
