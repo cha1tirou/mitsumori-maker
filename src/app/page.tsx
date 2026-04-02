@@ -247,6 +247,9 @@ export default function Home() {
               { href: "/guide/it-web", title: "IT・Web業界の見積書の書き方", desc: "工数・単価・修正範囲の記載ポイントを解説" },
               { href: "/guide/restaurant", title: "飲食店・レストランの見積書の書き方", desc: "ケータリング・仕出し・宴会プランの見積書ガイド" },
               { href: "/guide/pdf", title: "見積書をPDFで作成・出力する方法", desc: "オンラインツール・Excel・Wordの3つの方法を比較" },
+              { href: "/guide/email", title: "見積書のメール送付マナー・例文", desc: "件名の書き方・送付メールの例文テンプレート" },
+              { href: "/guide/english", title: "見積書を英語で作成する方法", desc: "Quotationの書き方・頻出フレーズ・テンプレート" },
+              { href: "/guide/invoice-howto", title: "請求書の書き方ガイド", desc: "必要項目・インボイス対応・発行タイミングを解説" },
             ].map((item) => (
               <a
                 key={item.href}

@@ -97,6 +97,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mitsumori-maker.com/guide/english</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/email</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/guide/invoice-howto</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mitsumori-maker.com/tools/invoice-calc</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
