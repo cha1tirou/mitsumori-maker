@@ -372,6 +372,17 @@ export default function Home() {
                 軽減税率8%・標準税率10%の消費税額を自動計算
               </p>
             </a>
+            <a
+              href="/tools/purchase-order"
+              className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-sm transition-all"
+            >
+              <h3 className="text-sm font-semibold text-gray-800 mb-1">
+                発注書メーカー
+              </h3>
+              <p className="text-xs text-gray-500">
+                無料・登録不要で発注書を作成。PDF出力対応
+              </p>
+            </a>
           </div>
         </section>
       </main>
@@ -386,6 +397,7 @@ export default function Home() {
                 <li><a href="/tools/invoice" className="text-xs text-gray-500 hover:text-gray-700">請求書メーカー</a></li>
                 <li><a href="/tools/delivery" className="text-xs text-gray-500 hover:text-gray-700">納品書メーカー</a></li>
                 <li><a href="/tools/invoice-calc" className="text-xs text-gray-500 hover:text-gray-700">インボイス計算機</a></li>
+                <li><a href="/tools/purchase-order" className="text-xs text-gray-500 hover:text-gray-700">発注書メーカー</a></li>
               </ul>
             </div>
             <div>
