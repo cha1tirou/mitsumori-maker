@@ -8,6 +8,7 @@ import InvoiceForm from "@/components/InvoiceForm";
 import InvoicePreview from "@/components/InvoicePreview";
 import InvoicePdfDownloadButton from "@/components/InvoicePdfDownloadButton";
 import ToolHeader from "@/components/ToolHeader";
+import RelatedTools from "@/components/RelatedTools";
 import Link from "next/link";
 
 export default function InvoicePage() {
@@ -130,6 +131,7 @@ export default function InvoicePage() {
             </Link>
           </div>
         </section>
+        <RelatedTools />
       </main>
 
       {/* フッター */}

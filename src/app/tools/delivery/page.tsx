@@ -8,6 +8,7 @@ import DeliveryForm from "@/components/DeliveryForm";
 import DeliveryPreview from "@/components/DeliveryPreview";
 import DeliveryPdfDownloadButton from "@/components/DeliveryPdfDownloadButton";
 import ToolHeader from "@/components/ToolHeader";
+import RelatedTools from "@/components/RelatedTools";
 import Link from "next/link";
 
 export default function DeliveryPage() {
@@ -130,6 +131,7 @@ export default function DeliveryPage() {
             </Link>
           </div>
         </section>
+        <RelatedTools />
       </main>
 
       {/* フッター */}

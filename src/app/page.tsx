@@ -8,6 +8,8 @@ import DraftBanner from "@/components/DraftBanner";
 import ToolHeader from "@/components/ToolHeader";
 import TemplateSelector from "@/components/TemplateSelector";
 import QuoteForm from "@/components/QuoteForm";
+import RelatedTools from "@/components/RelatedTools";
+import { trackEvent } from "@/lib/analytics";
 
 const QuotePreview = dynamic(() => import("@/components/QuotePreview"), {
   loading: () => (
@@ -65,27 +67,46 @@ export default function Home() {
         onTogglePreview={() => setShowPreview(!showPreview)}
       />
 
-      {/* 特徴セクション */}
+      {/* Hero */}
       <section className="bg-gray-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: "完全無料", sub: "すべての機能が0円" },
-              { label: "登録不要", sub: "個人情報の入力なし" },
-              { label: "PDF出力", sub: "ワンクリックでDL" },
-              { label: "8種のテンプレート", sub: "業種に合わせて選択" },
-            ].map((f) => (
-              <div key={f.label} className="text-center">
-                <p className="text-sm font-bold text-gray-800">{f.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{f.sub}</p>
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          <p className="text-center text-xs sm:text-sm text-gray-600 mb-3">
+            フリーランス・個人事業主・小規模法人向け
+          </p>
+          <h2 className="text-center text-lg sm:text-xl font-bold text-gray-900 mb-4">
+            見積書を30秒で作成。登録不要・完全無料。
+          </h2>
+          <div className="flex flex-wrap justify-center gap-2 mb-5">
+            {["完全無料", "登録不要", "PDF出力", "8テンプレート", "サーバー保存なし"].map((badge) => (
+              <span
+                key={badge}
+                className="text-xs bg-white border border-gray-200 text-gray-700 px-3 py-1 rounded-full"
+              >
+                {badge}
+              </span>
             ))}
+          </div>
+          <div className="flex justify-center gap-3">
+            <a
+              href="#form"
+              className="bg-gray-900 text-white text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-colors"
+              onClick={() => trackEvent("hero_cta_click", { target: "estimate" })}
+            >
+              見積書を作る
+            </a>
+            <a
+              href="/tools/invoice"
+              className="bg-white border border-gray-200 text-gray-700 text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+              onClick={() => trackEvent("hero_cta_click", { target: "invoice" })}
+            >
+              請求書を作る
+            </a>
           </div>
         </div>
       </section>
 
       {/* メインコンテンツ */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+      <main id="form" className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex gap-6">
           {/* 左：入力フォーム */}
           <div
@@ -104,7 +125,7 @@ export default function Home() {
               {/* テンプレート選択 */}
               <div className="mb-4">
                 <p className="text-xs font-semibold text-gray-500 mb-2">テンプレート</p>
-                <TemplateSelector selected={template} onChange={setTemplate} />
+                <TemplateSelector selected={template} onChange={(t) => { setTemplate(t); trackEvent("template_change", { template: t }); }} />
               </div>
               <QuoteForm data={data} onChange={setData} />
 
@@ -124,6 +145,7 @@ export default function Home() {
                       const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(shareData))));
                       const url = `${window.location.origin}?s=${encoded}`;
                       navigator.clipboard.writeText(url).then(() => {
+                        trackEvent("share_url_click", { tool: "estimate" });
                         alert("共有URLをコピーしました");
                       });
                     }}
@@ -176,6 +198,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* 関連ツール導線 */}
+        <RelatedTools />
+
         {/* 使い方3ステップ */}
         <section className="mt-12">
           <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">

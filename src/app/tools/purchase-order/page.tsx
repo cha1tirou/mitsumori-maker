@@ -8,6 +8,7 @@ import PurchaseOrderForm from "@/components/PurchaseOrderForm";
 import PurchaseOrderPreview from "@/components/PurchaseOrderPreview";
 import PurchaseOrderPdfDownloadButton from "@/components/PurchaseOrderPdfDownloadButton";
 import ToolHeader from "@/components/ToolHeader";
+import RelatedTools from "@/components/RelatedTools";
 import Link from "next/link";
 
 export default function PurchaseOrderPage() {
@@ -136,6 +137,7 @@ export default function PurchaseOrderPage() {
             </Link>
           </div>
         </section>
+        <RelatedTools />
       </main>
 
       {/* フッター */}
