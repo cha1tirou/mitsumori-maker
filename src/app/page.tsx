@@ -370,6 +370,9 @@ export default function Home() {
               { href: "/guide/rejection", title: "見積書の断り方・お断りメール例文", desc: "状況別のお断りメール例文とマナーを解説" },
               { href: "/guide/reissue", title: "見積書の再発行の方法", desc: "再発行ルール・依頼メール例文・管理のコツ" },
               { href: "/guide/addressing", title: "見積書の宛名の書き方", desc: "「御中」「様」の使い分けと注意点を解説" },
+              { href: "/guide/lump-sum", title: "見積書の「一式」の書き方", desc: "一式の意味・使い方・内訳を求められた場合の対応" },
+              { href: "/guide/purchase-order-howto", title: "発注書の書き方ガイド", desc: "必要項目・発行タイミング・下請法の注意点" },
+              { href: "/guide/invoice-bank-info", title: "請求書の振込先の書き方", desc: "口座情報の記載例・ネット銀行・手数料負担" },
             ].map((item) => (
               <a
                 key={item.href}
