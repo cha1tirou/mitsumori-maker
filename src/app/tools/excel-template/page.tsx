@@ -2,17 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "見積書Excelテンプレート（公開準備中）| 見積書メーカー",
+  title: "見積書Excelテンプレート｜無料ダウンロード | 見積書メーカー",
   description:
-    "見積書のExcelテンプレートを準備中です。今すぐ見積書を作成したい方は、登録不要・無料のオンラインツール「見積書メーカー」をご利用ください。",
-  robots: {
-    index: false,
-    follow: true,
-  },
+    "見積書のExcel・CSVテンプレートを無料でダウンロード。シンプル版・標準ビジネス版・インボイス対応版の3種類。UTF-8対応でExcelでそのまま使えます。",
   openGraph: {
-    title: "見積書Excelテンプレート（公開準備中）| 見積書メーカー",
+    title: "見積書Excelテンプレート｜無料ダウンロード | 見積書メーカー",
     description:
-      "見積書のExcelテンプレートを準備中。今すぐ作成したい方はオンラインツールをご利用ください。",
+      "見積書のExcel・CSVテンプレートを無料ダウンロード。シンプル版・標準版・インボイス対応版の3種類。",
     url: "https://mitsumori-maker.com/tools/excel-template",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -43,6 +39,7 @@ const templates = [
       "発行日・宛名・差出人の記載欄",
       "合計金額の自動計算（数式設定済み）",
     ],
+    downloadUrl: "/templates/estimate-simple.csv",
   },
   {
     name: "標準版",
@@ -55,6 +52,7 @@ const templates = [
       "備考欄・有効期限・支払条件の記載欄",
       "会社ロゴ・印影の挿入スペース付き",
     ],
+    downloadUrl: "/templates/estimate-standard.csv",
   },
   {
     name: "インボイス対応版",
@@ -67,6 +65,7 @@ const templates = [
       "税率ごと（10%・8%）の消費税額を自動計算",
       "インボイス制度の必須記載事項をすべて網羅",
     ],
+    downloadUrl: "/templates/estimate-invoice.csv",
   },
 ];
 
@@ -79,7 +78,7 @@ export default function ExcelTemplatePage() {
             <Link href="/" className="hover:text-gray-900">
               見積書メーカー
             </Link>
-            <span className="mx-2">›</span>
+            <span className="mx-2">&rsaquo;</span>
             <span className="text-gray-800">Excelテンプレート</span>
           </nav>
         </div>
@@ -88,15 +87,12 @@ export default function ExcelTemplatePage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         {/* タイトル・説明 */}
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          見積書Excelテンプレート（公開準備中）
+          見積書Excelテンプレート｜無料ダウンロード
         </h1>
         <p className="text-gray-500 text-sm mb-2">更新日: 2026年4月2日</p>
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <p className="text-blue-800 text-sm font-medium mb-1">Excelテンプレートは現在準備中です</p>
-          <p className="text-blue-700 text-xs">今すぐ見積書を作成したい方は、登録不要・無料のオンラインツールをご利用ください。</p>
-        </div>
         <p className="text-gray-700 leading-relaxed mb-10">
-          見積書メーカーでは、ブラウザ上で見積書を作成できるオンラインツールを提供しています。Excelテンプレートの配布も準備中です。公開までの間は、登録不要・無料で使えるオンラインツールをぜひご活用ください。
+          見積書のCSVテンプレートを無料でダウンロードできます。シンプル版・標準ビジネス版・インボイス対応版の3種類をご用意。UTF-8
+          BOM付きCSVなので、Excelで開いても文字化けしません。ダウンロード後、Excelやスプレッドシートで自由に編集してご利用ください。
         </p>
 
         {/* テンプレートカード */}
@@ -136,11 +132,50 @@ export default function ExcelTemplatePage() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm text-orange-600 font-medium bg-orange-50 border border-orange-200 rounded-lg px-4 py-2.5">
-                  ※ ダウンロード準備中です。公開までしばらくお待ちください。
-                </p>
+                <a
+                  href={tpl.downloadUrl}
+                  download
+                  className="inline-block bg-gray-900 text-white text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  ダウンロード（CSV）
+                </a>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* 使い方の説明 */}
+        <section className="mb-14">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">
+            テンプレートの使い方
+          </h2>
+          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <ol className="space-y-3 text-sm text-gray-700">
+              <li className="flex items-start gap-3">
+                <span className="bg-gray-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  1
+                </span>
+                上のボタンからCSVファイルをダウンロードします
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="bg-gray-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  2
+                </span>
+                Excel・Googleスプレッドシート・Numbersなどで開きます
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="bg-gray-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  3
+                </span>
+                必要な項目を入力・編集します（品目名・数量・単価など）
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="bg-gray-900 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  4
+                </span>
+                完成したらExcel形式（.xlsx）やPDFで保存・印刷してください
+              </li>
+            </ol>
           </div>
         </section>
 
@@ -148,7 +183,7 @@ export default function ExcelTemplatePage() {
         <section className="mb-14">
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-8 text-center">
             <h2 className="text-xl font-bold text-gray-900 mb-2">
-              今すぐ作りたい方はこちら
+              もっと簡単に作りたい方はこちら
             </h2>
             <p className="text-gray-600 text-sm mb-6 leading-relaxed">
               Excelテンプレートよりも簡単に、ブラウザ上で見積書を作成できます。

@@ -374,6 +374,7 @@ export default function Home() {
               { href: "/guide/purchase-order-howto", title: "発注書の書き方ガイド", desc: "必要項目・発行タイミング・下請法の注意点" },
               { href: "/guide/invoice-bank-info", title: "請求書の振込先の書き方", desc: "口座情報の記載例・ネット銀行・手数料負担" },
               { href: "/guide/remarks", title: "見積書の備考欄の書き方", desc: "記載例・業種別の書き方・注意点を解説" },
+              { href: "/guide/prerequisites", title: "見積書の前提条件の書き方", desc: "作業範囲・納期・価格の前提条件の記載例" },
             ].map((item) => (
               <a
                 key={item.href}
