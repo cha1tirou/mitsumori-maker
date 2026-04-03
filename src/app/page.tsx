@@ -203,7 +203,12 @@ export default function Home() {
               showPreview ? "" : "hidden lg:block"
             }`}
           >
-            <div className="lg:sticky lg:top-[140px]">
+            <div className="lg:sticky lg:top-[70px]">
+              {/* モバイル用テンプレート選択（プレビュー画面でも変更可能に） */}
+              <div className="lg:hidden mb-4">
+                <p className="text-xs font-semibold text-gray-500 mb-2">テンプレート</p>
+                <TemplateSelector selected={template} onChange={(t) => { setTemplate(t); trackEvent("template_change", { template: t }); }} />
+              </div>
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Preview
@@ -375,6 +380,9 @@ export default function Home() {
               { href: "/guide/invoice-bank-info", title: "請求書の振込先の書き方", desc: "口座情報の記載例・ネット銀行・手数料負担" },
               { href: "/guide/remarks", title: "見積書の備考欄の書き方", desc: "記載例・業種別の書き方・注意点を解説" },
               { href: "/guide/prerequisites", title: "見積書の前提条件の書き方", desc: "作業範囲・納期・価格の前提条件の記載例" },
+              { href: "/guide/design", title: "デザイン業の見積書の書き方", desc: "料金体系・修正回数・著作権の扱いを解説" },
+              { href: "/guide/consulting", title: "コンサル業の見積書の書き方", desc: "時間制・プロジェクト制・スコープの明記方法" },
+              { href: "/guide/video", title: "動画制作の見積書の書き方", desc: "制作費の内訳・修正回数・素材の扱いを解説" },
             ].map((item) => (
               <a
                 key={item.href}

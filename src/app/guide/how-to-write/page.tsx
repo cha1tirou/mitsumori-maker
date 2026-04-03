@@ -49,7 +49,7 @@ export default function HowToWriteGuidePage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             見積書の書き方・必要項目をわかりやすく解説
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月3日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書は、取引先に対して商品やサービスの金額・条件を事前に提示するための重要なビジネス書類です。正確でわかりやすい見積書を作成することで、取引先からの信頼を得られ、スムーズな商談につながります。この記事では、見積書に必要な項目や書き方のポイントを初心者向けにわかりやすく解説します。
@@ -145,6 +145,72 @@ export default function HowToWriteGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             上記に収まらない補足情報を記載します。送料の扱い、分割納品の条件、特記事項などを必要に応じて追記しましょう。
           </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            見積書の記載例
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            実際の見積書の記載例を見てみましょう。以下は、Web制作会社がクライアントに提出する見積書の例です。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 text-sm text-gray-700 leading-relaxed mb-6 font-mono whitespace-pre-line">
+{`御見積書
+
+見積番号: MTS-2026-042
+見積日:   2026年4月3日
+有効期限: 2026年5月3日
+
+【宛先】
+株式会社〇〇 営業部 山田太郎 様
+
+【件名】
+コーポレートサイト リニューアル
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+No  品目                    数量  単価        金額
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1   トップページデザイン      1   ¥200,000   ¥200,000
+2   下層ページデザイン(5P)    5   ¥ 80,000   ¥400,000
+3   コーディング             1   ¥300,000   ¥300,000
+4   CMS構築(WordPress)       1   ¥150,000   ¥150,000
+5   動作テスト・修正          1   ¥ 50,000   ¥ 50,000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                           小計  ¥1,100,000
+                     消費税(10%)    ¥110,000
+                     合計(税込)  ¥1,210,000
+
+【備考】
+・納期：ご発注から約6週間
+・支払条件：納品月末締め翌月末払い
+・修正回数：デザイン修正は各ページ2回まで
+・有効期限を過ぎた場合は再見積りとなります`}
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            このように、品名を具体的に書き、数量・単価を明確にすることで、取引先にとって分かりやすい見積書になります。備考欄には納期・支払条件・修正回数の上限など、後でトラブルになりやすい項目を明記しておきましょう。
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            見積書でよくある失敗例
+          </h2>
+          <div className="space-y-4 mb-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">品名が曖昧すぎる</p>
+              <p className="text-gray-600 text-sm mb-2">NG：「作業費一式 ¥500,000」</p>
+              <p className="text-gray-600 text-sm">OK：「Webサイトデザイン（トップページ＋下層5ページ）¥500,000」</p>
+              <p className="text-gray-500 text-xs mt-1">→ 何に対する費用か分からないと、後で「思っていた内容と違う」とトラブルになります</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">有効期限を設定していない</p>
+              <p className="text-gray-600 text-sm">半年後に「この見積もりでお願いします」と言われても、原材料費や人件費が変わっている可能性があります。必ず有効期限を明記しましょう。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">税込・税抜が不明確</p>
+              <p className="text-gray-600 text-sm">金額が税込なのか税抜なのか曖昧だと、最終的な支払額で認識のズレが生じます。特にインボイス制度導入後は、税率ごとの消費税額を正確に記載する必要があります。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">宛名の敬称を間違える</p>
+              <p className="text-gray-600 text-sm">会社名に「御中」、個人名に「様」が基本です。「御中」と「様」を併用するのはNGです。</p>
+            </div>
+          </div>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             見積書を書くときの5つのポイント
@@ -269,6 +335,21 @@ export default function HowToWriteGuidePage() {
             <li>
               <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
                 見積書のメール送付マナー・例文テンプレート
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">
+                見積書の備考欄の書き方・記載例まとめ
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/addressing" className="text-blue-600 hover:underline text-sm">
+                見積書の宛名の書き方・敬称の使い分け
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/lump-sum" className="text-blue-600 hover:underline text-sm">
+                見積書の「一式」の書き方・使い方ガイド
               </Link>
             </li>
           </ul>
