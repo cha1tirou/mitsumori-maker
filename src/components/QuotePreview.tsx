@@ -35,14 +35,26 @@ export default function QuotePreview({ data, template }: Props) {
     const updateScale = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.clientWidth;
-        // A4 width = 210mm ≈ 794px
-        const newScale = Math.min(containerWidth / 794, 1);
-        setScale(newScale);
+        if (containerWidth > 0) {
+          const newScale = Math.min(containerWidth / 794, 1);
+          setScale(newScale);
+        }
       }
     };
+
     updateScale();
     window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+
+    // hidden→表示の切り替え時にも再計算するためResizeObserverを使用
+    const observer = new ResizeObserver(updateScale);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      observer.disconnect();
+    };
   }, []);
 
   const Template = templateComponents[template];
@@ -54,6 +66,7 @@ export default function QuotePreview({ data, template }: Props) {
         style={{
           transform: `scale(${scale})`,
           width: "210mm",
+          height: `${297 * scale}mm`,
           transformOrigin: "top left",
         }}
       >
