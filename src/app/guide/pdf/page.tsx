@@ -3,9 +3,9 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書をPDFで作成・出力する方法まとめ｜無料ツールも紹介 | 見積書メーカー",
+  title: "見積書PDFの作り方｜無料で作成・出力する3つの方法 | 見積書メーカー",
   description:
-    "見積書をPDFで作成・出力する方法を解説。無料オンラインツール、Excel・Wordからの変換方法、PDF見積書のメリットと注意点をわかりやすくまとめました。",
+    "見積書をPDFで作る方法を3つ紹介。無料オンラインツールで即PDF出力、ExcelからPDF変換、WordからPDF保存。見積書PDFのメリットと送付時の注意点も解説。",
   openGraph: {
     title: "見積書をPDFで作成・出力する方法まとめ｜無料ツールも紹介",
     description:
