@@ -224,6 +224,37 @@ export default function DiscountGuidePage() {
             も参考にしてください。
           </p>
 
+          {/* 値引き見積書の完成イメージ */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            値引き見積書の記載例（完成イメージ）
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            実際に値引きを含む見積書の記載例を見てみましょう。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 text-sm text-gray-700 leading-relaxed mb-6 font-mono whitespace-pre-line">
+{`御見積書
+
+No  品目                   数量  単価        金額
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1   Webサイトデザイン         1   ¥300,000   ¥300,000
+2   コーディング              1   ¥200,000   ¥200,000
+3   CMS構築                  1   ¥150,000   ¥150,000
+4   初回取引値引き            1          -   -¥65,000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                          小計  ¥585,000
+                    消費税(10%)   ¥58,500
+                    合計(税込)  ¥643,500
+
+【備考】
+・初回取引につき、合計金額より10%の値引きを
+  適用しております
+・本値引きは今回限りの特別価格です
+・有効期限：発行日より14日間`}
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            ポイントは、値引き行を明細の最後に独立した行として記載し、金額にマイナス記号を付けること。備考欄で値引きの理由と条件（今回限り等）を明記しておくと、次回以降の交渉もスムーズです。
+          </p>
+
           {/* H2-5: 値引き記載時の注意点 */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             値引き記載時の注意点

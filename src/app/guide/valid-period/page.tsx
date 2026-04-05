@@ -205,6 +205,48 @@ export default function ValidPeriodGuidePage() {
           </p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            有効期限の記載例
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書での有効期限の記載方法にはいくつかのパターンがあります。
+          </p>
+          <div className="space-y-3 mb-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 text-sm mb-1">パターン1：具体的な日付で記載</p>
+              <p className="text-gray-600 text-sm font-mono">有効期限：2026年5月3日</p>
+              <p className="text-gray-500 text-xs mt-1">最も明確で誤解が生じにくい書き方です</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 text-sm mb-1">パターン2：発行日からの日数で記載</p>
+              <p className="text-gray-600 text-sm font-mono">有効期限：発行日より30日間</p>
+              <p className="text-gray-500 text-xs mt-1">テンプレートに組み込みやすい書き方です</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 text-sm mb-1">パターン3：備考欄に記載</p>
+              <p className="text-gray-600 text-sm font-mono">※本見積書の有効期限は発行日より30日間です。期限を過ぎた場合は再見積りとなります。</p>
+              <p className="text-gray-500 text-xs mt-1">有効期限欄がない場合や、注意事項を添えたい場合に使います</p>
+            </div>
+          </div>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            有効期限に関するよくある質問
+          </h2>
+          <div className="space-y-4 mb-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">Q. 有効期限を設定しないとどうなる？</p>
+              <p className="text-gray-600 text-sm">法律上の問題はありませんが、数ヶ月後に古い金額で発注される可能性があります。原材料費や人件費が変動した場合に損失を被るリスクがあるため、必ず設定することをおすすめします。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">Q. 有効期限を延長してほしいと言われたら？</p>
+              <p className="text-gray-600 text-sm">条件に変更がなければ、有効期限を更新した新しい見積書を発行しましょう。「有効期限の延長」ではなく「再発行」として扱うのが管理上安全です。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">Q. 官公庁向けの見積書は有効期限が必要？</p>
+              <p className="text-gray-600 text-sm">官公庁の入札や見積もり合わせでは、有効期限を指定されるケースがあります。指定がない場合でも「発行日より60日間」程度を設定するのが一般的です。</p>
+            </div>
+          </div>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             まとめ
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">

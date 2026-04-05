@@ -3,9 +3,9 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書を英語で作成する方法・英語テンプレートと頻出フレーズ集 | 見積書メーカー",
+  title: "見積書の英語テンプレート・Quotationの書き方と頻出フレーズ集 | 見積書メーカー",
   description:
-    "見積書を英語で作成する方法を解説。Quotationの書き方、英語見積書に必要な項目、よく使うフレーズ、テンプレート例、注意点をまとめました。",
+    "見積書の英語テンプレートとQuotationの書き方を解説。英語見積書の必要項目、頻出フレーズ、記載例付き。海外取引・外資系企業との見積りに対応。",
   openGraph: {
     title: "見積書を英語で作成する方法・英語テンプレートと頻出フレーズ集",
     description:
