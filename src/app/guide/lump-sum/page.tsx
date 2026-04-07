@@ -3,13 +3,13 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書の「一式」の書き方・使い方ガイド | 見積書メーカー",
+  title: "見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】 | 見積書メーカー",
   description:
-    "見積書における「一式」の正しい書き方を解説。一式で見積もる場面や記載例、メリット・デメリット、内訳明細を求められた場合の対応方法まで詳しく紹介します。",
+    "見積書・請求書における「一式」の正しい書き方と使い方を解説。一式で見積もる場面、記載例、メリット・デメリット、内訳明細の対応、請求書での一式表記まで網羅。",
   openGraph: {
-    title: "見積書の「一式」の書き方・使い方ガイド | 見積書メーカー",
+    title: "見積書・請求書の「一式」の書き方・使い方ガイド | 見積書メーカー",
     description:
-      "見積書の「一式」の正しい書き方を解説。使う場面や記載例、注意点、内訳明細の対応まで網羅。",
+      "見積書・請求書の「一式」の正しい書き方を解説。使う場面や記載例、請求書での一式表記まで網羅。",
     url: "https://mitsumori-maker.com/guide/lump-sum",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -32,11 +32,11 @@ export default function LumpSumGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <GuideJsonLd
-        title="見積書の「一式」の書き方・使い方ガイド"
-        description="見積書における「一式」の正しい書き方を解説。一式で見積もる場面や記載例、メリット・デメリット、内訳明細を求められた場合の対応方法まで。"
+        title="見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】"
+        description="見積書・請求書における「一式」の正しい書き方と使い方を解説。記載例、請求書での一式表記まで網羅。"
         slug="lump-sum"
         datePublished="2026-04-03"
-        dateModified="2026-04-03"
+        dateModified="2026-04-08"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -47,7 +47,7 @@ export default function LumpSumGuidePage() {
             <span className="mx-1">/</span>
             <span>ガイド</span>
             <span className="mx-1">/</span>
-            <span className="text-gray-700">一式の書き方</span>
+            <span className="text-gray-700">一式の書き方・使い方</span>
           </nav>
           <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
             ← 見積書メーカーに戻る
@@ -57,9 +57,9 @@ export default function LumpSumGuidePage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         <article>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            見積書の「一式」の書き方・使い方ガイド
+            見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月3日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成する際、明細欄に「一式」と記載するケースがあります。工事費用やシステム開発費など、細かい項目を一つひとつ列挙するよりもまとめて提示したほうが分かりやすい場面で使われます。しかし、「一式」の使い方を誤ると、取引先に不信感を与えたり、後からトラブルになったりすることもあります。この記事では、見積書における「一式」の正しい書き方、使う場面、メリット・デメリット、そして内訳明細を求められた場合の対応方法まで詳しく解説します。
@@ -287,6 +287,47 @@ export default function LumpSumGuidePage() {
             </p>
           </div>
 
+          {/* H2: 請求書での一式 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            請求書で「一式」と書く場合の注意点
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書だけでなく、請求書でも「一式」と記載するケースがあります。請求書は代金の支払いを正式に求める書類であるため、見積書以上に記載内容の正確性が求められます。請求書で「一式」を使う場合は、以下のポイントに注意しましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            インボイス制度との関係
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            2023年10月から開始されたインボイス制度（適格請求書等保存方式）では、請求書に「適用税率」と「税率ごとに区分した消費税額」の記載が義務付けられています。「一式」で金額をまとめている場合でも、税率10%と8%（軽減税率）が混在する取引では、税率ごとの内訳を明記する必要があります。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            たとえば「イベント運営一式」に飲食物（軽減税率8%）と設備レンタル（標準税率10%）が含まれる場合、一式のままでは適格請求書の要件を満たしません。税率が異なる項目は分けて記載するか、備考欄に税率ごとの内訳を補記しましょう。消費税の記載方法については<Link href="/guide/consumption-tax" className="text-blue-600 hover:text-blue-800 underline">見積書の消費税・インボイス対応ガイド</Link>で詳しく解説しています。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            請求書で一式を使う場合の記載例
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-500 mb-2">記載例: システム開発の請求書</p>
+            <div className="text-gray-800 font-mono text-sm space-y-1">
+              <p>品名: 業務管理システム開発一式（要件定義・設計・実装・テスト含む）</p>
+              <p>数量: 1　単位: 式　単価: 3,000,000　金額: 3,000,000</p>
+              <p className="text-gray-500 mt-2">※消費税（10%）: 300,000円</p>
+            </div>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2">記載例: リフォーム工事の請求書</p>
+            <div className="text-gray-800 font-mono text-sm space-y-1">
+              <p>品名: キッチンリフォーム工事一式（解体・配管・設備・内装含む）</p>
+              <p>数量: 1　単位: 式　単価: 2,500,000　金額: 2,500,000</p>
+              <p className="text-gray-500 mt-2">※消費税（10%）: 250,000円</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            請求書で「一式」を使う場合も、見積書の段階から一式の範囲を明確にしておくことが重要です。見積書と請求書で「一式」に含まれる範囲が異なると、支払い時にトラブルの原因となります。見積書の段階で備考欄に「一式」の内容を明記しておき、請求書にも同じ内容を引き継ぎましょう。請求書の基本的な書き方は<Link href="/guide/invoice-howto" className="text-blue-600 hover:text-blue-800 underline">請求書の書き方ガイド</Link>をご参照ください。
+          </p>
+
           {/* 関連記事リンク */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             関連ガイド
@@ -322,6 +363,38 @@ export default function LumpSumGuidePage() {
                 className="text-blue-600 hover:text-blue-800 underline"
               >
                 見積書の有効期限の設定方法
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guide/remarks"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                見積書の備考欄の書き方・例文集
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guide/invoice-howto"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                請求書の書き方ガイド・必要な記載項目を解説
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guide/breakdown"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                見積書の内訳・明細の書き方ガイド
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guide/misc-expenses"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                見積書の諸経費の書き方を解説
               </Link>
             </li>
           </ul>

@@ -64,7 +64,7 @@ const defaultData: InvoiceData = {
   companyRegistrationNumber: "",
   invoiceNumber: "",
   invoiceDate: today,
-  dueDate: "",
+  dueDate: defaultDueDate,
   subject: "",
   bankName: "",
   bankBranch: "",

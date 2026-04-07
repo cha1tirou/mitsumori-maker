@@ -3,13 +3,13 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書の備考欄の書き方・記載例まとめ | 見積書メーカー",
+  title: "見積書の備考欄の書き方・例文集【コピペOK】業種別テンプレ付き | 見積書メーカー",
   description:
-    "見積書の備考欄に書くべき内容を徹底解説。支払条件・有効期限・納期・振込手数料など、すぐに使える記載例を業種別にまとめました。備考欄の正しい書き方がわかります。",
+    "見積書の備考欄の書き方を例文付きで解説。支払条件・有効期限・納期・振込手数料などコピペで使える例文を業種別に紹介。備考欄に何を書くべきか迷ったらこの記事で解決。",
   openGraph: {
-    title: "見積書の備考欄の書き方・記載例まとめ | 見積書メーカー",
+    title: "見積書の備考欄の書き方・例文集【コピペOK】 | 見積書メーカー",
     description:
-      "見積書の備考欄に書くべき内容を徹底解説。すぐに使える記載例を業種別にまとめました。",
+      "見積書の備考欄の書き方を例文付きで解説。コピペで使える業種別テンプレート付き。",
     url: "https://mitsumori-maker.com/guide/remarks",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -32,11 +32,11 @@ export default function GuideRemarksPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <GuideJsonLd
-        title="見積書の備考欄の書き方・記載例まとめ"
-        description="見積書の備考欄に書くべき内容を徹底解説。すぐに使える記載例を業種別にまとめました。"
+        title="見積書の備考欄の書き方・例文集【コピペOK】業種別テンプレ付き"
+        description="見積書の備考欄の書き方を例文付きで解説。コピペで使える業種別テンプレート付き。"
         slug="remarks"
         datePublished="2026-04-03"
-        dateModified="2026-04-03"
+        dateModified="2026-04-08"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -61,9 +61,9 @@ export default function GuideRemarksPage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         <article>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            見積書の備考欄の書き方・記載例まとめ
+            見積書の備考欄の書き方・例文集【コピペOK】業種別テンプレ付き
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月3日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
 
           <p className="text-gray-700 leading-relaxed mb-6">
             見積書を作成する際、金額や品目は慎重に記載しても、備考欄は空欄のまま提出してしまうケースが少なくありません。しかし、備考欄は取引条件を明確にし、後のトラブルを防ぐための重要な項目です。この記事では、見積書の備考欄に何を書けばよいか、業種別の記載例とあわせて解説します。
@@ -345,6 +345,61 @@ export default function GuideRemarksPage() {
             こうしたトラブルを未然に防ぐためにも、備考欄は必ず設けて、取引に必要な条件を明記しましょう。見積書メーカーでは、備考欄に自由にテキストを入力でき、PDF出力にも反映されます。
           </p>
 
+          {/* H2: コピペで使える備考欄の例文テンプレート */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            コピペで使える備考欄の例文テンプレート
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            備考欄に何を書けばよいか迷ったら、以下の例文をそのままコピーしてお使いください。自社の状況に合わせて日付や金額部分を書き換えるだけで、すぐに使えます。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            汎用テンプレート（どの業種でも使える）
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2 font-medium">例文（コピペ用）</p>
+            <div className="text-gray-700 text-sm space-y-1">
+              <p>・本見積書の有効期限は発行日より30日間とさせていただきます</p>
+              <p>・お支払条件：月末締め翌月末日払い（銀行振込）</p>
+              <p>・振込手数料はお客様のご負担にてお願いいたします</p>
+              <p>・上記金額には消費税（10%）が含まれております</p>
+              <p>・ご不明な点がございましたらお気軽にお問い合わせください</p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            フリーランス・個人事業主向けテンプレート
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2 font-medium">例文（コピペ用）</p>
+            <div className="text-gray-700 text-sm space-y-1">
+              <p>・お支払条件：納品後14日以内に銀行振込にてお支払いください</p>
+              <p>・振込手数料はお客様のご負担にてお願いいたします</p>
+              <p>・源泉徴収税額（10.21%）を差し引いてのお支払いをお願いいたします</p>
+              <p>・適格請求書発行事業者登録番号：T○○○○○○○○○○○○○</p>
+              <p>・本見積書の有効期限は発行日より14日間です</p>
+              <p>・仕様変更が生じた場合は再見積りとなります</p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            工事・建設業向けテンプレート
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2 font-medium">例文（コピペ用）</p>
+            <div className="text-gray-700 text-sm space-y-1">
+              <p>・本見積もりは現地調査に基づく概算です</p>
+              <p>・着工後に追加工事が必要と判断された場合は別途お見積りいたします</p>
+              <p>・廃材処理費・産業廃棄物処理費は上記金額に含まれています</p>
+              <p>・資材費の大幅な変動があった場合、金額を見直させていただく場合がございます</p>
+              <p>・天候等により工期が変動する場合がございます</p>
+              <p>・お支払条件：着工時50%、完了時50%</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            備考欄のテンプレートは、取引先や案件の内容に応じてカスタマイズしてお使いください。見積書メーカーなら備考欄に自由にテキストを入力でき、PDF出力にもそのまま反映されます。よく使う文面を備考欄に毎回コピペすることで、見積書作成の効率が大幅に上がります。
+          </p>
+
           {/* 関連リンク */}
           <div className="mt-10 bg-white border border-gray-200 rounded-lg p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
@@ -381,6 +436,30 @@ export default function GuideRemarksPage() {
                   className="text-blue-600 hover:text-blue-800 text-sm"
                 >
                   建設業の見積書の書き方ガイド →
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/freelance"
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  フリーランス・個人事業主のための見積書ガイド →
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/consumption-tax"
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  見積書の消費税の書き方・インボイス対応 →
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guide/discount"
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  見積書の値引き・割引の書き方を解説 →
                 </Link>
               </li>
             </ul>

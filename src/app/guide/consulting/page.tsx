@@ -3,13 +3,13 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "コンサルティング業の見積書の書き方ガイド | 見積書メーカー",
+  title: "コンサルタント見積書の書き方ガイド【料金相場・記載例付き】 | 見積書メーカー",
   description:
-    "コンサルティング業の見積書の書き方を解説。時間制・プロジェクト制・成果報酬制の料金体系、スコープの明記方法、トラブル防止策をわかりやすくまとめました。",
+    "コンサルタント・コンサルティング業の見積書の書き方を解説。時間制・プロジェクト制・成果報酬制の料金相場、記載例、スコープの明記方法、トラブル防止策まで網羅。",
   openGraph: {
-    title: "コンサルティング業の見積書の書き方ガイド | 見積書メーカー",
+    title: "コンサルタント見積書の書き方ガイド【料金相場・記載例付き】 | 見積書メーカー",
     description:
-      "コンサルティング業の見積書の書き方を解説。料金体系、スコープの明記方法、トラブル防止策をまとめました。",
+      "コンサルタント・コンサルティング業の見積書の書き方を解説。料金相場、記載例、スコープの明記方法をまとめました。",
     url: "https://mitsumori-maker.com/guide/consulting",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -32,11 +32,11 @@ export default function ConsultingGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <GuideJsonLd
-        title="コンサルティング業の見積書の書き方ガイド"
-        description="コンサルティング業の見積書の書き方を解説。料金体系、スコープの明記方法、トラブル防止策をまとめました。"
+        title="コンサルタント見積書の書き方ガイド【料金相場・記載例付き】"
+        description="コンサルタント・コンサルティング業の見積書の書き方を解説。料金相場、記載例、スコープの明記方法をまとめました。"
         slug="consulting"
         datePublished="2026-04-03"
-        dateModified="2026-04-03"
+        dateModified="2026-04-08"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -45,16 +45,16 @@ export default function ConsultingGuidePage() {
             <span className="mx-2">/</span>
             <span>ガイド</span>
             <span className="mx-2">/</span>
-            <span className="text-gray-800">コンサルティング業の見積書</span>
+            <span className="text-gray-800">コンサルタント見積書</span>
           </nav>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">
         <article>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            コンサルティング業の見積書の書き方ガイド
+            コンサルタント見積書の書き方ガイド【料金相場・記載例付き】
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月3日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             経営コンサルティング、ITコンサルティング、人事・採用コンサルティングなど、コンサルティング業では専門的な知見やアドバイスを提供するため、見積書の作成方法に独特のポイントがあります。物理的な成果物がない場合も多く、「何に対していくら支払うのか」を明確にしないと、クライアントとの間で認識のズレが生じやすくなります。この記事では、コンサルティング業の見積書の特徴、料金体系の種類、記載すべき項目、スコープの明記方法、注意点を詳しく解説します。
@@ -262,6 +262,48 @@ export default function ConsultingGuidePage() {
           </p>
         </article>
 
+        {/* フリーランスコンサルタント向けセクション */}
+        <div className="mt-10">
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            フリーランスコンサルタントの見積書のポイント
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            近年、独立してフリーランスとしてコンサルティングサービスを提供する方が増えています。フリーランスコンサルタントが見積書を作成する際は、法人のコンサルティングファームとは異なる配慮が必要です。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            信頼性を高めるための工夫
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <strong>経歴・実績の記載</strong>：見積書の添付資料として、過去の支援実績やプロフィールを付けると、初回取引の信頼性が高まります。
+            </li>
+            <li>
+              <strong>屋号・登録番号の明記</strong>：開業届を提出している場合は屋号を記載し、インボイス制度に対応している場合は適格請求書発行事業者登録番号（T番号）を明記しましょう。
+            </li>
+            <li>
+              <strong>源泉徴収への対応</strong>：フリーランスコンサルタントへの報酬は源泉徴収の対象となるケースがあります。備考欄に「源泉徴収税額（10.21%）を差し引いてのお支払いをお願いいたします」と記載しておくと、支払い時の手続きがスムーズです。
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            フリーランスコンサルタントの見積書記載例
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-500 mb-2 font-medium">備考欄の例</p>
+            <ul className="text-gray-700 text-sm space-y-1">
+              <li>・お支払条件：納品後14日以内に銀行振込にてお支払いください</li>
+              <li>・源泉徴収税額（10.21%）を差し引いてのお支払いをお願いいたします</li>
+              <li>・適格請求書発行事業者登録番号：T○○○○○○○○○○○○○</li>
+              <li>・本コンサルティングは助言・提案の提供を目的とし、特定の成果を保証するものではありません</li>
+              <li>・業務範囲外の追加依頼が発生した場合は、別途お見積りいたします</li>
+            </ul>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            フリーランスの見積書の基本的な書き方については、<Link href="/guide/freelance" className="text-blue-600 hover:text-blue-800 underline">フリーランス・個人事業主のための見積書ガイド</Link>もあわせてご確認ください。
+          </p>
+        </div>
+
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
           <ul className="space-y-2">
@@ -277,7 +319,22 @@ export default function ConsultingGuidePage() {
             </li>
             <li>
               <Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">
-                見積書の備考欄の書き方・活用術
+                見積書の備考欄の書き方・例文集
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
+                フリーランス・個人事業主のための見積書ガイド
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/lump-sum" className="text-blue-600 hover:underline text-sm">
+                見積書の「一式」の書き方・使い方ガイド
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/consumption-tax" className="text-blue-600 hover:underline text-sm">
+                見積書の消費税の書き方・インボイス対応
               </Link>
             </li>
           </ul>
