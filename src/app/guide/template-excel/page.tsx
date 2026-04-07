@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
   title: "見積書テンプレート（Excel・PDF）の選び方と活用法 | 見積書メーカー",
@@ -50,6 +51,7 @@ export default function TemplateExcelGuidePage() {
             見積書テンプレート（Excel・PDF）の選び方と活用法
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年3月31日</p>
+          <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成するとき、ゼロから作るのは非効率です。テンプレートを活用すれば、必要な項目が最初から揃っており、入力するだけでプロフェッショナルな見積書が完成します。この記事では、Excel・PDF・オンラインツールそれぞれの見積書テンプレートの特徴と、業種や用途に合った選び方を解説します。
@@ -179,6 +181,39 @@ export default function TemplateExcelGuidePage() {
             テンプレートのダウンロードやセットアップの手間をかけたくない方には、ブラウザで入力するだけですぐに見積書を作成できるオンラインツールがおすすめです。
           </p>
         </article>
+
+        <div className="mt-10 bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">
+            会計ソフトで見積書・請求書を一元管理
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Excelテンプレートの管理に限界を感じたら、会計ソフトへの移行を検討しましょう。見積書から請求書への自動変換、売掛金の管理、確定申告まで一元化でき、バージョン管理のミスも防げます。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>マネーフォワード クラウド確定申告</strong>は、銀行口座・クレジットカードと自動連携して仕訳を提案。複数取引先とのやり取りが多い事業者に好評です。
+          </p>
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1MXYFU+4JGQ+BWVTE"
+            rel="nofollow"
+            target="_blank"
+            className="inline-block bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center text-sm mb-5"
+          >
+            マネーフォワード クラウド確定申告を見る →
+          </a>
+          <div className="pt-4 border-t border-blue-200">
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              <strong>やよいの青色申告オンライン</strong>は初年度無料で使えるプランあり。簿記の知識がなくても見積書・請求書の発行からインボイス対応まで完結します。
+            </p>
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4B1ATI+1JDCT6+35XE+5YJRM"
+              rel="nofollow"
+              target="_blank"
+              className="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors text-center text-sm"
+            >
+              やよいの青色申告オンラインを見る →
+            </a>
+          </div>
+        </div>
 
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
