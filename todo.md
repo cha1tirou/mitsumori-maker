@@ -54,4 +54,5 @@
 - [ ] Twitter/X SNS流入施策
 - [ ] A8.net登録・アフィリエイトリンク挿入（印鑑・名刺サービス）※手動作業：実際のA8.net提携URLが必要
 - [x] ガイド記事追加（送付状・内訳・諸経費）→ cover-letter / breakdown / misc-expenses 実装済み（2026-04-07）
+- [x] ガイド記事追加（交通費・前払い・端数処理）→ travel-expense / prepayment / rounding 実装済み（2026-04-08）
 - [ ] AdSense承認後の広告ユニット設置
