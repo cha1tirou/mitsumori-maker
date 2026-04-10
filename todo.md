@@ -56,3 +56,6 @@
 - [x] ガイド記事追加（送付状・内訳・諸経費）→ cover-letter / breakdown / misc-expenses 実装済み（2026-04-07）
 - [x] ガイド記事追加（交通費・前払い・端数処理）→ travel-expense / prepayment / rounding 実装済み（2026-04-08）
 - [ ] AdSense承認後の広告ユニット設置
+- [x] ガイド記事追加（値上げ・価格改定）→ guide/price-increase 実装済み（2026-04-10）
+- [x] ガイド記事追加（スプレッドシートテンプレート）→ guide/spreadsheet 実装済み（2026-04-10）
+- [x] ガイド記事追加（Wordテンプレート）→ guide/word-template 実装済み（2026-04-10）
