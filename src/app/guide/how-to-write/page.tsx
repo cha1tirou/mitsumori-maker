@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 import AuthorProfile from "@/components/AuthorProfile";
 import ToolCallout from "@/components/ToolCallout";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き | 見積書メーカー",
@@ -696,6 +697,11 @@ No  品目                    数量    単価      金額
             </li>
           </ul>
         </div>
+
+        <ShareButtons
+          url="https://mitsumori-maker.com/guide/how-to-write"
+          title="見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き"
+        />
 
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>

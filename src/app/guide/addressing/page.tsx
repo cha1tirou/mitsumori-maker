@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import AuthorProfile from "@/components/AuthorProfile";
 import ToolCallout from "@/components/ToolCallout";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "見積書の宛名の書き方・「御中」「様」の使い分け | 見積書メーカー",
@@ -109,6 +110,12 @@ export default function GuideAddressingPage() {
           </ul>
         </article>
         <AuthorProfile />
+
+        <ShareButtons
+          url="https://mitsumori-maker.com/guide/addressing"
+          title="見積書の宛名の書き方・「御中」「様」の使い分け"
+        />
+
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
           <p className="text-gray-400 mb-4 text-sm">登録不要・完全無料・PDF出力対応</p>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import AuthorProfile from "@/components/AuthorProfile";
 import ToolCallout from "@/components/ToolCallout";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "見積書の振込先・口座情報の正しい書き方【記載例・テンプレ付き】 | 見積書メーカー",
@@ -516,6 +517,11 @@ export default function GuideBankInfoPage() {
         </article>
 
         <AuthorProfile />
+
+        <ShareButtons
+          url="https://mitsumori-maker.com/guide/bank-info"
+          title="見積書の振込先・口座情報の正しい書き方【記載例・テンプレ付き】"
+        />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

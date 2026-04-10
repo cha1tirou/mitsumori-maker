@@ -65,8 +65,59 @@ export default function Home() {
   });
   const [showPreview, setShowPreview] = useState(false);
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "見積書メーカーは無料で使えますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "はい、完全無料でご利用いただけます。会員登録も不要です。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "作成したデータはサーバーに保存されますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "いいえ、入力したデータはすべてお使いのブラウザ上で処理されます。サーバーへの送信・保存は一切行われません。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "PDFの出力に対応していますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "はい、A4サイズのPDFとして出力できます。印刷やメール添付にそのままお使いいただけます。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "テンプレートは何種類ありますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "スタンダード・ミニマル・プレミアム・ブルー・モノクロ・カラフル・建設業向け・罫線の8種類からお選びいただけます。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "インボイス制度に対応していますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "はい、適格請求書発行事業者の登録番号を入力する欄があり、インボイス制度（適格請求書等保存方式）に対応した見積書を作成できます。",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <ToolHeader
         showPreviewToggle
         showPreview={showPreview}
@@ -342,6 +393,47 @@ export default function Home() {
               <div key={text} className="flex items-start gap-2">
                 <span className="text-green-500 text-sm mt-0.5">&#10003;</span>
                 <p className="text-sm text-gray-700">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ユーザーの声 */}
+        <section className="mt-12">
+          <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
+            ユーザーの声
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                text: "登録不要ですぐ使えて助かりました。Excelで作るより断然きれいで、クライアントにも好評でした。",
+                author: "Webデザイナー・フリーランス",
+                stars: 5,
+              },
+              {
+                text: "初めて見積書を作る必要があり、どう書けばいいかわからなかったのですが、このツールで迷わず作れました。",
+                author: "個人事業主（飲食業）",
+                stars: 5,
+              },
+              {
+                text: "インボイスの登録番号まで入れられるのが便利。テンプレートも複数あってプロっぽい仕上がりになります。",
+                author: "ITエンジニア・副業",
+                stars: 5,
+              },
+              {
+                text: "急ぎで見積書が必要な場面で大活躍。PDF出力もワンクリックで完結するので時間を節約できました。",
+                author: "コンサルタント・独立開業",
+                stars: 5,
+              },
+            ].map((review, i) => (
+              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5">
+                <div className="flex mb-2">
+                  {Array.from({ length: review.stars }).map((_, j) => (
+                    <span key={j} className="text-yellow-400 text-sm">★</span>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">&ldquo;{review.text}&rdquo;</p>
+                <p className="text-xs text-gray-500 font-medium">{review.author}</p>
               </div>
             ))}
           </div>

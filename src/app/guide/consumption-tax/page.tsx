@@ -5,6 +5,7 @@ import ArticleDisclosure from "@/components/ArticleDisclosure";
 import GuideCta from "@/components/GuideCta";
 import AuthorProfile from "@/components/AuthorProfile";
 import ToolCallout from "@/components/ToolCallout";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "見積書の消費税の書き方【税込・税抜・別途表記】記載例付き | 見積書メーカー",
@@ -650,6 +651,11 @@ No  品目                数量  単価        金額
             </li>
           </ul>
         </div>
+
+        <ShareButtons
+          url="https://mitsumori-maker.com/guide/consumption-tax"
+          title="見積書の消費税の書き方【税込・税抜・別途表記】記載例付き"
+        />
 
         <GuideCta type="tax-calc" />
       </main>

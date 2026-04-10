@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import AuthorProfile from "@/components/AuthorProfile";
 import ToolCallout from "@/components/ToolCallout";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "見積書の有効期限の設定方法と適切な期間の決め方 | 見積書メーカー",
@@ -297,6 +298,11 @@ export default function ValidPeriodGuidePage() {
             </li>
           </ul>
         </div>
+
+        <ShareButtons
+          url="https://mitsumori-maker.com/guide/valid-period"
+          title="見積書の有効期限の設定方法と適切な期間の決め方"
+        />
 
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
