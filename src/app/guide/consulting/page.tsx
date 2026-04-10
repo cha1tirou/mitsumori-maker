@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "コンサルタント見積書の書き方ガイド【料金相場・記載例付き】 | 見積書メーカー",
@@ -345,7 +347,17 @@ export default function ConsultingGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             見積書は契約書ではありませんが、後の契約書のベースになります。見積書の内容と契約書の内容に矛盾があるとトラブルの元になるため、見積書の段階から正確な記載を心がけましょう。特にスコープ・報酬・期間・支払条件は、見積書と契約書で完全に一致させることが重要です。
           </p>
+
+          <ToolCallout steps={[
+            "品目欄に「コンサルティング費用」「顧問料」等を入力",
+            "単位を「月」「時間」「回」など契約形態に合わせて設定",
+            "数量・単価を入力すると合計が自動計算",
+            "備考欄に契約期間・成果物・守秘義務等の条件を記入",
+            "テンプレートを選んでPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* フリーランスコンサルタント向けセクション */}
         <div className="mt-10">

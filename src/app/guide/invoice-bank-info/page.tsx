@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "請求書の振込先・口座情報の書き方 | 見積書メーカー",
@@ -387,7 +389,16 @@ export default function InvoiceBankInfoPage() {
               </Link>
             </li>
           </ul>
+
+          <ToolCallout steps={[
+            "見積書メーカーの姉妹ツール「請求書メーカー」を開く",
+            "備考欄に振込先情報を入力（銀行名・支店名・口座番号・名義）",
+            "「振込手数料はお客様負担にてお願いいたします」等の一文も記載",
+            "PDFダウンロードして請求書として送付"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

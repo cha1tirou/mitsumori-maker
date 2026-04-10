@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の有効期限の設定方法と適切な期間の決め方 | 見積書メーカー",
@@ -259,7 +261,16 @@ export default function ValidPeriodGuidePage() {
             <li>迷ったら「30日間」を基本にする</li>
             <li>期限切れの見積書は再発行で対応する</li>
           </ul>
+
+          <ToolCallout steps={[
+            "見積書メーカーの「備考欄」に有効期限を入力",
+            "例：「本見積書の有効期限: 発行日より30日間」",
+            "発行日は自動で今日の日付が入るので、期限の計算が簡単",
+            "プレビューで確認してPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "デザイン業の見積書の書き方ガイド | 見積書メーカー",
   description:
     "デザイン業の見積書の書き方を解説。ロゴ・Web・グラフィックデザインの料金体系や相場、修正回数・著作権の扱い、トラブル防止策をわかりやすくまとめました。",

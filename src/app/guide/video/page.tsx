@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "動画制作・映像制作の見積書の書き方ガイド | 見積書メーカー",
   description:
     "動画制作・映像制作の見積書の書き方を解説。企画・撮影・編集の内訳と相場、修正回数・素材・著作権の扱い、トラブル防止策をわかりやすくまとめました。",

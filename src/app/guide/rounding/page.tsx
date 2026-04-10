@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の端数処理の方法｜切り捨て・切り上げ・四捨五入のルール | 見積書メーカー",
   description: "見積書の端数処理（切り捨て・切り上げ・四捨五入）の方法を解説。消費税計算時のルール、取引先との合意方法、インボイス対応の端数処理まで詳しく説明します。",
 };

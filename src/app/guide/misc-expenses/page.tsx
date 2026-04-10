@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の諸経費の書き方・計上方法を解説 | 見積書メーカー",
   description:
     "見積書における諸経費の書き方・計上方法を解説。諸経費の相場（3〜10%）、内訳の書き方、建設業・IT業でよく使われる諸経費の種類と記載例を紹介します。",

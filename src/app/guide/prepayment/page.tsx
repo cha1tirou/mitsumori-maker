@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書に前払い・着手金を記載する方法｜書き方と注意点 | 見積書メーカー",
   description: "見積書への前払い・着手金の書き方を解説。着手金・内金・手付金の違い、記載例文、トラブルを防ぐ注意点、請求書・領収書との連携まで詳しく説明します。",
 };

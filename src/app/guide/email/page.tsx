@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書のメール送付マナー・例文テンプレート | 見積書メーカー",
   description:
     "見積書をメールで送る際の基本マナー・件名の書き方・送付メールの例文を紹介。PDF添付の注意点やよくある失敗も解説します。",

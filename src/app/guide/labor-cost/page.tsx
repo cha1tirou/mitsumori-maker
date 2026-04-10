@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の人件費の書き方｜工数・単価の記載例 | 見積書メーカー",
   description:
     "見積書における人件費の書き方を解説。人日・人月の工数計算、単価の設定方法、IT業界・建設業での具体的な記載例を紹介。適正な人件費の見積もり方がわかります。",

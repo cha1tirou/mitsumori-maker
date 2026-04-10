@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】 | 見積書メーカー",
@@ -497,7 +499,17 @@ export default function LumpSumGuidePage() {
               </Link>
             </li>
           </ul>
+
+          <ToolCallout steps={[
+            "品目欄に「○○工事 一式」のように入力",
+            "単位は空欄のまま、数量を「1」、単価に合計金額を入力",
+            "必要に応じて複数行に分けて内訳を記載（例：設計費・施工費・材料費）",
+            "備考欄に「内訳明細は別紙参照」と記入可能",
+            "テンプレートを選んでPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書を電子化・PDF化するメリットと方法 | 見積書メーカー",
   description:
     "見積書の電子化・PDF化のメリットと具体的な方法を解説。電子帳簿保存法への対応、紙との違い、導入手順をわかりやすくまとめました。",

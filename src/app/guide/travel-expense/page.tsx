@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書に交通費を書く方法｜記載例・計算方法を解説 | 見積書メーカー",
   description: "見積書に交通費を記載する方法を解説。実費精算・定額・距離計算の違い、消費税の扱い、記載例テーブルまで、フリーランス・個人事業主向けに詳しく説明します。",
 };

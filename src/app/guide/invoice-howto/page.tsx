@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "請求書の書き方ガイド・必要な記載項目を解説 | 見積書メーカー",
   description:
     "請求書の書き方を初心者向けに解説。必要な記載項目、インボイス制度対応のポイント、発行タイミング、無料で作成する方法をまとめました。",

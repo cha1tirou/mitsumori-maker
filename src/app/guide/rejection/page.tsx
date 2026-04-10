@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の断り方・お断りメールの例文テンプレート | 見積書メーカー",
   description:
     "見積書を断る際のマナーとお断りメールの例文を紹介。金額が合わない場合・他社に決めた場合など、状況別の文例と注意点を解説します。",

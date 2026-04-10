@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "IT・Web業界の見積書の書き方・テンプレートガイド | 見積書メーカー",
   description:
     "IT・Web業界向けの見積書の書き方を解説。システム開発・Web制作・デザインに必要な項目、工数・単価の記載方法、納期や修正範囲の明記ポイントを詳しく紹介します。",

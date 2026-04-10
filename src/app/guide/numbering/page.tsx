@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書番号のつけ方・採番ルールを解説【業種別の例付き】 | 見積書メーカー",
   description:
     "見積書番号のつけ方・採番ルールを分かりやすく解説。連番・日付ベースなど具体的な番号体系の例や、業種別のナンバリング方法、管理のコツを紹介します。",

@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書のフォーマット・書式の選び方ガイド | 見積書メーカー",
   description:
     "見積書のフォーマット・書式の選び方を解説。業種別フォーマットの違い、必須項目と任意項目、Excel・PDF・Webツールの比較など、最適な書式選びのポイントを紹介します。",

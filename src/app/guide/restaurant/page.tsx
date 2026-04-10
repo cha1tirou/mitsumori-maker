@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "飲食店・レストランの見積書の書き方ガイド | 見積書メーカー",
@@ -194,7 +196,17 @@ export default function RestaurantGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             丁寧で分かりやすい見積書は、お客様からの信頼獲得にもつながります。テンプレートを用意しておけば、毎回の見積作成がスムーズになるので、ぜひ活用してみてください。
           </p>
+
+          <ToolCallout steps={[
+            "トップページで「差出人」に店舗名・住所を入力",
+            "品目にメニュー名やケータリング内容を入力",
+            "数量・単価を入力すると消費税（軽減税率8%対応）が自動計算",
+            "備考欄に提供条件（配達エリア・キャンセルポリシー等）を記入",
+            "テンプレートを選んでPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         <div className="mt-10 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>

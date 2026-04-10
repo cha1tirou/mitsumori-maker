@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書のWordテンプレートの作り方・使い方｜無料で簡単作成 | 見積書メーカー",
   description: "見積書をWordで作成する方法を解説。Wordテンプレートの設定方法、表の使い方、PDF保存まで、フリーランス・個人事業主向けにわかりやすく説明します。",
   openGraph: {

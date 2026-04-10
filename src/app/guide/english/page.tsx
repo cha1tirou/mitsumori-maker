@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書を英語で作成｜英語テンプレート・Quotationの書き方と例文集 | 見積書メーカー",
@@ -527,6 +529,14 @@ export default function EnglishQuotationGuidePage() {
             </div>
           </div>
 
+          <ToolCallout steps={[
+            "見積書メーカーを開き、各項目を英語で入力（フリーテキスト対応）",
+            "品目：英語の商品名やサービス名をそのまま入力可能",
+            "宛先・差出人も英語表記で入力OK",
+            "備考欄にPayment Terms・Validityなどを英語で記入",
+            "PDFダウンロードしてメール添付で送付"
+          ]} />
+
           {/* 関連記事リンク */}
           <div className="bg-white rounded-lg border border-gray-200 p-6 mb-4">
             <h2 className="text-lg font-bold text-gray-900 mb-3">関連ガイド</h2>
@@ -564,6 +574,8 @@ export default function EnglishQuotationGuidePage() {
             </ul>
           </div>
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書テンプレート（Excel・PDF）の選び方と活用法 | 見積書メーカー",
   description:
     "見積書テンプレートの選び方をExcel・PDF・オンラインツール別に解説。業種や用途に合ったテンプレートの選び方、カスタマイズのコツを紹介します。",

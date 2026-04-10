@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の宛名の書き方・「御中」「様」の使い分け | 見積書メーカー",
@@ -92,6 +94,13 @@ export default function GuideAddressingPage() {
           <p className="text-gray-700 leading-relaxed mb-4">見積書は正式なビジネス文書であり、修正の跡がある書類は信頼性が低下します。オンラインツールを使えば、入力内容を修正して再度PDFを出力するだけなので、手間なく正しい見積書を再作成できます。</p>
           <p className="text-gray-700 leading-relaxed mb-4">既に送付済みの見積書に誤りが見つかった場合は、お詫びのメールとともに正しい見積書を再送しましょう。</p>
 
+          <ToolCallout steps={[
+            "「宛先」欄に会社名を入力（「御中」は文脈に応じて付けてください）",
+            "担当者名がある場合は「○○株式会社 △△部 □□様」の形式で入力",
+            "差出人欄にも正式な会社名・担当者名を入力",
+            "プレビューで宛名の表示を確認してPDFダウンロード"
+          ]} />
+
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">関連ガイド</h2>
           <ul className="space-y-2 mb-4">
             <li><Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">見積書の書き方・必要項目を解説</Link></li>
@@ -99,6 +108,7 @@ export default function GuideAddressingPage() {
             <li><Link href="/guide/reissue" className="text-blue-600 hover:underline text-sm">見積書の再発行の方法・対応マニュアル</Link></li>
           </ul>
         </article>
+        <AuthorProfile />
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
           <p className="text-gray-400 mb-4 text-sm">登録不要・完全無料・PDF出力対応</p>

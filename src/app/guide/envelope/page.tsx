@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の封筒の書き方・郵送マナー | 見積書メーカー",
   description:
     "見積書を郵送する際の封筒の書き方・マナーを解説。封筒サイズの選び方、宛名の書き方、「見積書在中」の記載方法、送付状の同封など郵送時の注意点を紹介します。",

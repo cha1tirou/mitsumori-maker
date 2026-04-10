@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の値引き・割引の書き方【記載例付き】調整値引きも解説 | 見積書メーカー",
@@ -511,7 +513,17 @@ No  品目                   数量  単価        金額
               </Link>
             </li>
           </ul>
+
+          <ToolCallout steps={[
+            "まず通常の品目・数量・単価を入力",
+            "値引き行を追加：品目に「値引き」、単価にマイナス金額を入力",
+            "合計金額に値引きが自動反映される",
+            "備考欄に値引き理由（初回割引・まとめ割等）を記入するとより丁寧",
+            "テンプレートを選んでPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "美容院・エステ・ネイルサロンの見積書の書き方ガイド | 見積書メーカー",
   description:
     "美容院・エステ・ネイルサロン向けに見積書の書き方を解説。施術メニューの明細化、カウンセリング料・材料費の記載方法、キャンセルポリシーの書き方まで実践的にまとめました。",

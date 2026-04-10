@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き | 見積書メーカー",
@@ -579,7 +581,17 @@ No  品目                    数量    単価      金額
           <p className="text-gray-700 leading-relaxed mb-4">
             これらを押さえておけば、初めてでもプロフェッショナルな見積書を作成できます。見積書メーカーを使えば、上記の項目をフォームに入力するだけで、整った見積書がPDFで完成します。
           </p>
+
+          <ToolCallout steps={[
+            "トップページを開き、「発行日」「見積番号」を入力",
+            "「宛先」に取引先名を入力（「御中」は自動付与）",
+            "品目・数量・単価を入力すると小計・消費税・合計が自動計算",
+            "「備考欄」に有効期限・支払い条件を記入",
+            "テンプレートを選んでPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         <div className="mt-10 bg-blue-50 border border-blue-200 rounded-xl p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-3">

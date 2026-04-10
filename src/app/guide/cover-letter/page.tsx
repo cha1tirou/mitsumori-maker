@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の送付状の書き方・テンプレート【例文付き】 | 見積書メーカー",
   description:
     "見積書に添える送付状の書き方を例文テンプレート付きで解説。メール・FAX・郵送それぞれの送付状の書き方、必須項目、注意点をまとめました。",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書PDFの作り方｜無料で作成・出力する3つの方法 | 見積書メーカー",
   description:
     "見積書をPDFで作る方法を3つ紹介。無料オンラインツールで即PDF出力、ExcelからPDF変換、WordからPDF保存。見積書PDFのメリットと送付時の注意点も解説。",

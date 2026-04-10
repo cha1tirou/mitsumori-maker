@@ -3,6 +3,8 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 import GuideCta from "@/components/GuideCta";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の消費税の書き方【税込・税抜・別途表記】記載例付き | 見積書メーカー",
@@ -539,7 +541,16 @@ No  品目                数量  単価        金額
           <p className="text-gray-700 leading-relaxed mb-4">
             見積書メーカーでは、消費税の自動計算・税率ごとの表示・インボイス対応の登録番号欄を標準装備しています。面倒な消費税の計算をツールに任せて、正確な見積書を作成しましょう。
           </p>
+
+          <ToolCallout steps={[
+            "品目ごとに数量・単価を入力すると消費税が自動計算",
+            "税率は10%がデフォルト（軽減税率8%にも対応）",
+            "小計・消費税額・合計が自動でPDFに反映",
+            "インボイス対応：適格請求書発行事業者番号を差出人欄に入力可能"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         <div className="mt-10 bg-green-50 border border-green-200 rounded-xl p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-3">

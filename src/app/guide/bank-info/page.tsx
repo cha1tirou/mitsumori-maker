@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の振込先・口座情報の正しい書き方【記載例・テンプレ付き】 | 見積書メーカー",
@@ -504,7 +506,16 @@ export default function GuideBankInfoPage() {
               </li>
             </ul>
           </div>
+
+          <ToolCallout steps={[
+            "トップページの「備考欄」に振込先情報を入力",
+            "銀行名・支店名・口座種別・口座番号・口座名義を記載",
+            "振込手数料の負担先（「振込手数料はご負担ください」等）も記入",
+            "テンプレートを選んでPDFダウンロード — 備考欄が自動でレイアウトされます"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

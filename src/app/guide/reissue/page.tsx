@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の再発行の方法・依頼メール例文付き【そのまま使える】 | 見積書メーカー",
@@ -114,7 +116,16 @@ export default function GuideReissuePage() {
             <li><Link href="/guide/valid-period" className="text-blue-600 hover:underline text-sm">見積書の有効期限の設定方法</Link></li>
             <li><Link href="/guide/email" className="text-blue-600 hover:underline text-sm">見積書のメール送付マナー・例文</Link></li>
           </ul>
+
+          <ToolCallout steps={[
+            "見積書メーカーを開き、元の見積書と同じ内容を入力",
+            "見積番号を「元の番号-R1」のように再発行がわかる形式で設定",
+            "発行日を再発行日に変更",
+            "備考欄に「○年○月○日付 見積書No.XXXの再発行」と明記",
+            "PDFダウンロードして送付"
+          ]} />
         </article>
+        <AuthorProfile />
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">見積書を今すぐ無料で作成</h2>
           <p className="text-gray-400 mb-4 text-sm">登録不要・完全無料・PDF出力対応</p>

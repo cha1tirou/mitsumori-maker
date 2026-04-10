@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の前提条件の書き方【記載例・テンプレ付き】そのまま使える | 見積書メーカー",
@@ -292,7 +294,16 @@ export default function GuidePrerequisitesPage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             業種や案件の特性に合わせて、作業範囲・納期・価格・技術的前提を具体的に記載しましょう。曖昧な表現を避け、数字や条件を明確にすることが、トラブルのない取引への第一歩です。
           </p>
+
+          <ToolCallout steps={[
+            "見積書メーカーの「備考欄」に前提条件を入力",
+            "例：「本見積もりは○○を前提としています」",
+            "納期・仕様変更時の対応・追加費用の条件などを明記",
+            "プレビューで見え方を確認してPDFダウンロード"
+          ]} />
         </article>
+
+        <AuthorProfile />
 
         {/* 関連記事 */}
         <div className="mt-12 border-t border-gray-200 pt-8">

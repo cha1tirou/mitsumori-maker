@@ -3,6 +3,7 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "建設業の見積書の書き方【工事見積書の記載例・テンプレ付き】 | 見積書メーカー",
   description:
     "建設業・工事の見積書の書き方を記載例付きで解説。材料費・労務費・経費の内訳、建設業法のルール、追加工事の対応方法まで。すぐ使える工事見積書テンプレート付き。",

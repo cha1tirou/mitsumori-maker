@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書・請求書・納品書の違いをわかりやすく解説 | 見積書メーカー",
   description:
     "見積書・請求書・納品書の違いと役割を図解付きで解説。それぞれの発行タイミング、記載項目の違い、正しい使い分け方をまとめました。",

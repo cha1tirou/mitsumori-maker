@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の内訳（明細）の書き方・記載例まとめ | 見積書メーカー",
   description:
     "見積書の内訳・明細の書き方を記載例付きで解説。品名・数量・単価の書き方、内訳を詳しく書くメリット、一式との使い分けなど実践的なポイントをまとめました。",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書のスプレッドシートテンプレート｜Googleスプレッドシートで無料作成 | 見積書メーカー",
   description: "見積書をGoogleスプレッドシートで作成する方法を解説。無料テンプレートの活用法、数式の設定、PDF出力まで、フリーランス・個人事業主向けにわかりやすく説明します。",
   openGraph: {

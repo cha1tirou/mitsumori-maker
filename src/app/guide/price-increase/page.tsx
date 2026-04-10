@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "見積書の値上げ・価格改定の書き方｜文例・注意点を解説 | 見積書メーカー",
   description: "見積書で価格を値上げ・改定する際の書き方を解説。取引先への伝え方、値上げ理由の記載方法、文例テンプレートまでフリーランス・個人事業主向けにわかりやすく説明します。",
   openGraph: {

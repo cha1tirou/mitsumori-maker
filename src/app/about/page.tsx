@@ -29,9 +29,55 @@ export default function AboutPage() {
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">運営者情報</h1>
-        <p className="text-gray-500 text-sm mb-8">最終更新日: 2026年4月2日</p>
+        <p className="text-gray-500 text-sm mb-8">最終更新日: 2026年4月10日</p>
 
         <div className="bg-white rounded-lg shadow-sm p-8 space-y-8 text-gray-700 leading-relaxed">
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              見積書メーカーを作った理由
+            </h2>
+            <p className="mb-4">
+              中小企業の経理業務に携わる中で、「見積書を1枚作るためだけに有料ソフトを契約するのは負担が大きい」という声を数多く耳にしました。Excelテンプレートは計算ミスが起きやすく、フォーマットの統一も難しい。かといって、既存のクラウドサービスは会員登録が必須で、無料プランには制限がある。
+            </p>
+            <p className="mb-4">
+              「登録不要・完全無料で、ブラウザだけで見積書が完成するツールがあれば」——その思いから、2026年3月に見積書メーカーを公開しました。入力データはサーバーに保存せず、すべてブラウザ上で処理する設計にすることで、セキュリティ面の不安なく安心してご利用いただけます。
+            </p>
+            <p>
+              開発者自身が経理実務で感じた不便を解消するために作ったツールだからこそ、実務で本当に必要な機能を優先的に実装しています。ガイド記事も、現場でよくある疑問や失敗例をもとに執筆しています。
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              運営者プロフィール
+            </h2>
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-xl">M</span>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900">見積書メーカー 編集部</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  中小企業の経理・バックオフィス業務の経験をもとに、帳票作成の効率化ツールとノウハウを提供しています。
+                </p>
+              </div>
+            </div>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start">
+                <span className="text-gray-400 mr-2 mt-0.5">-</span>
+                <span>中小企業の経理実務経験（見積書・請求書・納品書の作成・管理）</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-gray-400 mr-2 mt-0.5">-</span>
+                <span>Webアプリケーション開発（Next.js / TypeScript）</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-gray-400 mr-2 mt-0.5">-</span>
+                <span>インボイス制度・電子帳簿保存法の実務対応経験</span>
+              </li>
+            </ul>
+          </section>
+
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               サービス概要

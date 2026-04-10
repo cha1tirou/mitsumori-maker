@@ -4,6 +4,7 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "フリーランス・個人事業主のための見積書ガイド | 見積書メーカー",
   description:
     "フリーランス・個人事業主向けに見積書の作り方を解説。記載すべき項目、単価の決め方、インボイス対応、よくある失敗例まで実践的にまとめました。",

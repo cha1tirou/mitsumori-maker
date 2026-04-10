@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import AuthorProfile from "@/components/AuthorProfile";
+import ToolCallout from "@/components/ToolCallout";
 
 export const metadata: Metadata = {
   title: "見積書の備考欄の書き方・例文集【コピペOK】業種別テンプレ付き | 見積書メーカー",
@@ -400,6 +402,13 @@ export default function GuideRemarksPage() {
             備考欄のテンプレートは、取引先や案件の内容に応じてカスタマイズしてお使いください。見積書メーカーなら備考欄に自由にテキストを入力でき、PDF出力にもそのまま反映されます。よく使う文面を備考欄に毎回コピペすることで、見積書作成の効率が大幅に上がります。
           </p>
 
+          <ToolCallout steps={[
+            "トップページの「備考欄」テキストエリアに自由に入力",
+            "有効期限・支払い条件・納品条件など、必要事項を改行区切りで記載",
+            "プレビューでレイアウトを確認",
+            "PDFダウンロード — 備考欄の内容がそのまま見積書に反映されます"
+          ]} />
+
           {/* 関連リンク */}
           <div className="mt-10 bg-white border border-gray-200 rounded-lg p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
@@ -465,6 +474,8 @@ export default function GuideRemarksPage() {
             </ul>
           </div>
         </article>
+
+        <AuthorProfile />
 
         {/* CTA */}
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
