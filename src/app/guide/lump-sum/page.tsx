@@ -36,7 +36,7 @@ export default function LumpSumGuidePage() {
         description="見積書・請求書における「一式」の正しい書き方と使い方を解説。記載例、請求書での一式表記まで網羅。"
         slug="lump-sum"
         datePublished="2026-04-03"
-        dateModified="2026-04-08"
+        dateModified="2026-04-10"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -59,7 +59,7 @@ export default function LumpSumGuidePage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成する際、明細欄に「一式」と記載するケースがあります。工事費用やシステム開発費など、細かい項目を一つひとつ列挙するよりもまとめて提示したほうが分かりやすい場面で使われます。しかし、「一式」の使い方を誤ると、取引先に不信感を与えたり、後からトラブルになったりすることもあります。この記事では、見積書における「一式」の正しい書き方、使う場面、メリット・デメリット、そして内訳明細を求められた場合の対応方法まで詳しく解説します。
@@ -187,6 +187,84 @@ export default function LumpSumGuidePage() {
               相見積もりの際、他社が詳細な内訳を出していると、「一式」の見積書は比較対象から外されることがあります。
             </li>
           </ul>
+
+          {/* H2: 使うべきケース・避けるべきケース */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            「一式」を使うべきケースと避けるべきケースの判断基準
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            「一式」はあらゆる場面で使えるわけではありません。取引の内容や相手に応じて、一式表記が適切かどうかを判断する必要があります。以下の基準を参考にしてください。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            一式を使うべきケース
+          </h3>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <span className="font-semibold">作業工程が多岐にわたり、個別に単価を出すのが現実的でない場合:</span>{" "}
+              例えば建設工事やリフォームでは、材料費・人件費・運搬費・廃材処理費などが複雑に絡み合うため、一式でまとめるのが合理的です。
+            </li>
+            <li>
+              <span className="font-semibold">取引先が概算金額を把握したい初期段階:</span>{" "}
+              正式発注前の概算見積もりでは、詳細な内訳よりも全体のコスト感を伝えることが重要です。一式で提示し、正式見積もりで詳細化する二段階方式も有効です。
+            </li>
+            <li>
+              <span className="font-semibold">業界の商慣習として一式が定着している場合:</span>{" "}
+              建設業・設備工事業・イベント業などでは「一式」見積もりが広く受け入れられており、無理に分解するとかえって違和感を与えることがあります。
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            一式を避けるべきケース
+          </h3>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <span className="font-semibold">官公庁や自治体への見積もり:</span>{" "}
+              公共工事や行政機関との取引では、項目ごとの内訳提示が原則として求められます。一式のみの見積書は受理されないケースが大半です。
+            </li>
+            <li>
+              <span className="font-semibold">相見積もり（複数社比較）が前提の場合:</span>{" "}
+              取引先が他社と比較検討する場面では、内訳が見える詳細見積もりのほうが選ばれやすくなります。一式だけでは「高いのか安いのか判断できない」と思われがちです。
+            </li>
+            <li>
+              <span className="font-semibold">単価が明確な物品販売:</span>{" "}
+              PC10台、椅子20脚など、1つあたりの単価が明らかな商品を納品する場合は、数量と単価を分けて記載するのが基本です。「PC一式」と書くと、台数や保証内容が曖昧になります。
+            </li>
+            <li>
+              <span className="font-semibold">取引先が大企業で内部稟議が必要な場合:</span>{" "}
+              大企業では経理部門や購買部門のチェックが入るため、内訳が不明瞭な見積書は差し戻されることがあります。
+            </li>
+          </ul>
+
+          {/* H2: 二式・三式の使い方 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            「二式」「三式」など複数式の使い方
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            「一式」と同じ考え方で、「二式」「三式」という表記を使うこともあります。これは同じ内容のセットが複数必要な場合に使われる書き方です。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            例えば、同じ仕様のオフィスレイアウト工事を2フロア分まとめて見積もる場合、「オフィスレイアウト工事」を数量「2」・単位「式」として記載します。この場合の表現が「二式」です。同様に3セット分であれば「三式」となります。
+          </p>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-500 mb-2">記載例: 複数フロアの工事</p>
+            <div className="text-gray-800 font-mono text-sm space-y-1">
+              <p>品名: オフィス内装工事（1フロアあたり）</p>
+              <p>数量: 2　単位: 式　単価: 1,200,000　金額: 2,400,000</p>
+            </div>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2">記載例: 複数拠点のネットワーク構築</p>
+            <div className="text-gray-800 font-mono text-sm space-y-1">
+              <p>品名: 拠点ネットワーク構築（1拠点あたり・機器・配線・設定含む）</p>
+              <p>数量: 3　単位: 式　単価: 450,000　金額: 1,350,000</p>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            「二式」「三式」を使う際の注意点として、各セットの内容が同一であることが前提です。フロアごとに面積や仕様が異なる場合は、それぞれ別の行として「一式」ずつ記載したほうが正確です。また、「式」という単位はあくまで商慣習上の表現であり、「個」「セット」「件」など他の単位で代替できる場合もあります。取引先に伝わりやすい表現を選びましょう。
+          </p>
 
           {/* H2-4 */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
@@ -327,6 +405,27 @@ export default function LumpSumGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             請求書で「一式」を使う場合も、見積書の段階から一式の範囲を明確にしておくことが重要です。見積書と請求書で「一式」に含まれる範囲が異なると、支払い時にトラブルの原因となります。見積書の段階で備考欄に「一式」の内容を明記しておき、請求書にも同じ内容を引き継ぎましょう。請求書の基本的な書き方は<Link href="/guide/invoice-howto" className="text-blue-600 hover:text-blue-800 underline">請求書の書き方ガイド</Link>をご参照ください。
           </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            請求書で一式を使う際の実務上の注意
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            請求書は経理処理や税務調査の根拠書類となるため、見積書よりも厳密な記載が求められます。特に以下の点を意識しましょう。
+          </p>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <span className="font-semibold">見積書・発注書との整合性:</span>{" "}
+              請求書の「一式」の金額が、見積書や発注書の金額と一致しているか確認しましょう。追加作業が発生した場合は、追加分を別の行として記載するのが原則です。
+            </li>
+            <li>
+              <span className="font-semibold">分割請求時の記載:</span>{" "}
+              大型案件では着手金・中間金・完了時の3回に分けて請求することがあります。この場合、「システム開発一式（第1回・着手金30%）」のように、一式の何割を請求しているのかを明記しましょう。
+            </li>
+            <li>
+              <span className="font-semibold">電子帳簿保存法への対応:</span>{" "}
+              電子データで請求書を発行・保存する場合、「一式」の内容が検索可能な形で記録されていると、税務調査時にスムーズに対応できます。品名に内容の概要を含めておくことが実務上有効です。
+            </li>
+          </ul>
 
           {/* 関連記事リンク */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">

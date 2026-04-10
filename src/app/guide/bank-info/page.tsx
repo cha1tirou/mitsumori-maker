@@ -35,7 +35,7 @@ export default function GuideBankInfoPage() {
         description="見積書に振込先・口座情報を記載する方法を解説。個人事業主・法人の記載例、すぐ使えるテンプレート付き。"
         slug="bank-info"
         datePublished="2026-04-02"
-        dateModified="2026-04-08"
+        dateModified="2026-04-10"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -57,7 +57,7 @@ export default function GuideBankInfoPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             見積書の振込先・口座情報の正しい書き方【記載例・テンプレ付き】
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
 
           <p className="text-gray-700 leading-relaxed mb-6">
             見積書を作成する際、「振込先を書くべきか？」「どのように記載すればよいか？」と迷う方は少なくありません。振込先の記載は取引をスムーズに進めるために重要なポイントです。この記事では、見積書における振込先・口座情報の正しい書き方を、具体的な記載例とともに解説します。
@@ -263,6 +263,19 @@ export default function GuideBankInfoPage() {
             見積書のフッター部分や備考欄に、振込手数料の負担について一文を添えるのが一般的です。特に初めての取引先の場合は、事前に手数料負担の取り決めを確認しておくとスムーズです。
           </p>
 
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            振込手数料の相場と節約のポイント
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            振込手数料は金融機関や振込方法によって異なります。一般的にはインターネットバンキング経由で同一銀行宛てなら無料、他行宛てでも220〜440円程度で済みます。一方、窓口での振込は660〜880円程度かかるケースもあります。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            取引先と同じ銀行に口座を持っている場合は「同行宛て振込手数料無料」の恩恵を受けられるため、見積書に同行の口座を優先的に記載しておくと、取引先からの印象も良くなります。複数の金融機関の口座を記載し、「同行口座がある場合はそちらをご利用ください」と一言添える方法も効果的です。
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            また、フリーランスや個人事業主の場合、手数料負担の記載が曖昧だと入金額が想定より少なくなるトラブルが起きがちです。見積書の段階で「振込手数料はお客様のご負担にてお願いいたします」と明記しておけば、後から請求書で揉めることを防げます。
+          </p>
+
           {/* --- H2: 5 --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             振込先記載時の注意点・セキュリティ
@@ -315,6 +328,54 @@ export default function GuideBankInfoPage() {
               テンプレートに口座情報を保存しておくと、毎回入力する手間を省けて入力ミスも防げる
             </li>
           </ul>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            ネットバンク口座の記載方法
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            楽天銀行・PayPay銀行・住信SBIネット銀行などのネットバンクを利用している場合は、支店名が独特な名称になっていることがあります（例：楽天銀行 ジャズ支店）。取引先が混乱しないよう、以下の点に気をつけましょう。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>
+              支店名だけでなく支店番号（3桁）も併記すると、振込時の検索がスムーズになる
+            </li>
+            <li>
+              口座名義はオンラインバンキングの「振込先口座情報」画面で確認できる正式なカタカナ表記を使う
+            </li>
+            <li>
+              取引先がネットバンクに馴染みがない場合は、従来の都市銀行・地方銀行の口座も選択肢として併記しておくと親切
+            </li>
+          </ul>
+          <div className="bg-white border border-gray-200 rounded-lg p-5 mb-6">
+            <p className="text-gray-500 text-xs mb-2">記載例（ネットバンクの場合）</p>
+            <p className="text-gray-700 text-sm leading-loose">
+              <strong>【お振込先】</strong><br />
+              楽天銀行 ジャズ支店（支店番号221）<br />
+              普通 1234567<br />
+              口座名義: ヤマダ タロウ
+            </p>
+          </div>
+
+          <h3 className="text-lg font-bold text-gray-800 mt-6 mb-3">
+            フィッシング詐欺・なりすましへの対策
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            近年、取引先を装って偽の口座情報を記載したメールを送り、振込金をだまし取る「ビジネスメール詐欺（BEC）」が増加しています。見積書の送付・受領の両方で以下の対策を意識しましょう。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
+            <li>
+              口座情報を変更した場合は、メールだけでなく電話でも変更の事実を取引先に確認してもらう
+            </li>
+            <li>
+              見積書の送付元メールアドレスが正規のものか、受領側も必ず確認する
+            </li>
+            <li>
+              見積書のPDFには電子署名やタイムスタンプを付与すると、改ざんの検知が可能になる
+            </li>
+          </ul>
+          <p className="text-gray-700 leading-relaxed mb-6">
+            特に高額な取引では、口座情報の真正性を複数の手段で確認することが重要です。見積書をPDFでダウンロードして送付することで、文書の改ざんリスクを軽減できます。
+          </p>
 
           {/* --- H2: 6 見積書と請求書の振込先の使い分け --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
@@ -427,30 +488,6 @@ export default function GuideBankInfoPage() {
               </li>
               <li>
                 <Link
-                  href="/guide/invoice-howto"
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
-                >
-                  請求書の書き方ガイド・必要な記載項目を解説
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/guide/freelance"
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
-                >
-                  フリーランス・個人事業主のための見積書ガイド
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/guide/email"
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
-                >
-                  見積書をメールで送る際のマナーと例文
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/guide/remarks"
                   className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
                 >
@@ -463,14 +500,6 @@ export default function GuideBankInfoPage() {
                   className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
                 >
                   請求書の振込先の書き方ガイド
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/guide/consumption-tax"
-                  className="text-blue-600 hover:text-blue-800 hover:underline text-sm"
-                >
-                  見積書の消費税の書き方・インボイス対応
                 </Link>
               </li>
             </ul>

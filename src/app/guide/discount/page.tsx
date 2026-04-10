@@ -3,13 +3,13 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書の値引きの書き方・表記方法を解説 | 見積書メーカー",
+  title: "見積書の値引き・割引の書き方【記載例付き】調整値引きも解説 | 見積書メーカー",
   description:
-    "見積書に値引きを記載する正しい書き方を解説。一律値引き・端数値引き・数量値引きの表記パターン、消費税の計算方法、値引き交渉への対応例文まで。",
+    "見積書の値引き・割引の正しい書き方を記載例付きで解説。調整値引き・端数値引き・出精値引きの書き分け、値引き後の消費税計算まで。そのまま使えるテンプレート付き。",
   openGraph: {
-    title: "見積書の値引きの書き方・表記方法を解説 | 見積書メーカー",
+    title: "見積書の値引き・割引の書き方【記載例付き】調整値引きも解説 | 見積書メーカー",
     description:
-      "見積書の値引き・割引の正しい書き方を解説。表記パターンや消費税計算、交渉対応まで網羅。",
+      "見積書の値引き・割引の正しい書き方を記載例付きで解説。調整値引き・端数値引き・出精値引きの書き分け、値引き後の消費税計算まで。",
     url: "https://mitsumori-maker.com/guide/discount",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -36,7 +36,7 @@ export default function DiscountGuidePage() {
         description="見積書に値引きを記載する正しい書き方を解説。一律値引き・端数値引き・数量値引きの表記パターン、消費税の計算方法まで。"
         slug="discount"
         datePublished="2026-04-02"
-        dateModified="2026-04-02"
+        dateModified="2026-04-10"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -54,7 +54,7 @@ export default function DiscountGuidePage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             見積書の値引きの書き方・表記方法を解説
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月2日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書に値引きや割引を記載するケースは、取引先との交渉や、リピーター向けの優遇措置など多くの場面で発生します。しかし、値引きの書き方が不適切だと、金額の根拠が不明確になったり、消費税の計算でトラブルが起きたりすることがあります。この記事では、見積書における値引きの正しい書き方・表記方法から、消費税の計算、値引き交渉への対応まで詳しく解説します。
@@ -298,9 +298,184 @@ No  品目                   数量  単価        金額
             </li>
           </ul>
 
+          {/* H2-6: 調整値引き・出精値引きの書き方 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            調整値引き・出精値引きの書き方と使いどころ
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            建設業や製造業でよく使われる「調整値引き」と「出精値引き」は、通常の値引きとは意味合いが異なります。それぞれの違いと適切な使い方を理解しておきましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            調整値引きとは
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            調整値引きは、見積金額を取引先の予算に合わせるために行う値引きです。品名には「調整値引き」「金額調整」と記載します。予算が500万円の案件で見積合計が520万円になった場合に、20万円を調整値引きとして差し引くような使い方をします。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-500 mb-2">記載例</p>
+            <p className="text-gray-800 font-mono text-sm">
+              品名: 調整値引き　数量: 1　単価: -200,000　金額: -200,000
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            調整値引きを使う際は、備考欄に「ご予算に合わせた金額調整」などと理由を記載するのが一般的です。ただし、過度な調整値引きは原価割れのリスクがあるため、社内で利益率を確認したうえで適用しましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            出精値引きとは
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            出精値引き（しゅっせいねびき）は、「企業努力による値引き」を意味します。特定の理由や条件なく、自社の営業判断で行う値引きです。品名には「出精値引き」「出精値引」と記載します。長期的な取引関係の構築や、競合他社との差別化のために使われることが多い表現です。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500 mb-2">記載例</p>
+            <p className="text-gray-800 font-mono text-sm">
+              品名: 出精値引き　数量: 1　単価: -50,000　金額: -50,000
+            </p>
+          </div>
+
+          {/* H2-7: 値引き率の計算例 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            値引き率の計算例（10%引き・端数調整）
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            値引き額を算出する際は、値引き率を使って計算するケースが多くあります。よくある値引きパターンを具体的な金額で紹介します。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            パターン1: 10%値引き
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <div className="text-gray-800 text-sm space-y-1">
+              <p>見積合計（税抜）: 480,000円</p>
+              <p>値引き率: 10%</p>
+              <p>値引き額: 480,000 x 10% = <span className="font-bold">-48,000円</span></p>
+              <p className="border-t border-gray-200 pt-1 mt-1">値引き後小計: 432,000円</p>
+              <p>消費税（10%）: 43,200円</p>
+              <p className="font-bold">合計: 475,200円</p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            パターン2: 端数調整で切りの良い金額にする
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <div className="text-gray-800 text-sm space-y-1">
+              <p>見積合計（税抜）: 253,800円</p>
+              <p>端数値引き: <span className="font-bold">-3,800円</span></p>
+              <p className="border-t border-gray-200 pt-1 mt-1">値引き後小計: 250,000円</p>
+              <p>消費税（10%）: 25,000円</p>
+              <p className="font-bold">合計: 275,000円（税込でもきりの良い金額）</p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            パターン3: 5%値引き + 端数調整の合わせ技
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <div className="text-gray-800 text-sm space-y-1">
+              <p>見積合計（税抜）: 860,000円</p>
+              <p>5%値引き: 860,000 x 5% = -43,000円</p>
+              <p>値引き後: 817,000円</p>
+              <p>端数調整: <span className="font-bold">-17,000円</span></p>
+              <p className="border-t border-gray-200 pt-1 mt-1">値引き後小計: 800,000円</p>
+              <p>消費税（10%）: 80,000円</p>
+              <p className="font-bold">合計: 880,000円</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            5%値引きと端数調整を組み合わせる場合は、見積書の明細にそれぞれ別の行として記載すると、値引きの内訳が明確になります。
+          </p>
+
+          {/* H2-8: 値引き交渉を断る場合の対応 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            値引き交渉を断る場合の対応方法
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            すべての値引き要請に応じる必要はありません。利益を確保するために、値引きをお断りする判断も重要です。断る際は、価格の根拠を丁寧に説明し、代替案を提示することで、取引先との関係を損なわずに対応できます。
+          </p>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>見積金額の内訳や根拠を具体的に説明する</li>
+            <li>値引きの代わりに、納期の延長や仕様の簡素化など代替案を提示する</li>
+            <li>「次回のご発注時に検討させていただきます」と将来の余地を残す</li>
+          </ul>
+
+          <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+            値引きをお断りするメール例文
+          </h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-line">
+              {`株式会社〇〇
+〇〇様
+
+お世話になっております。
+お見積りの金額調整につきまして、社内で慎重に検討いたしました。
+
+誠に恐れ入りますが、今回のお見積りにつきましては、
+資材費・人件費を精査したうえでの金額となっており、
+これ以上のお値引きが難しい状況でございます。
+
+代替案として、以下のご提案が可能です。
+・納期を2週間延長いただく場合：合計より20,000円の調整が可能
+・〇〇の仕様を簡易版に変更する場合：50,000円のコスト削減が可能
+
+ご予算に合わせた最善のプランをご提案いたしますので、
+ご検討のうえ、お気軽にご相談ください。
+
+何卒よろしくお願いいたします。`}
+            </p>
+          </div>
+
+          {/* H2-9: インボイス制度での値引きと消費税 */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            インボイス制度での値引きの消費税計算の注意点
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            インボイス制度（適格請求書等保存方式）のもとでは、値引きがある場合の消費税計算にいくつかの注意点があります。
+          </p>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <span className="font-semibold">税率ごとの区分が必須:</span>{" "}
+              標準税率（10%）と軽減税率（8%）の商品が混在する場合、値引き額をそれぞれの税率に合理的に按分する必要があります。
+            </li>
+            <li>
+              <span className="font-semibold">按分の計算方法:</span>{" "}
+              各税率の取引金額の割合に応じて値引き額を按分します。例えば、10%対象が80万円、8%対象が20万円で合計100万円の見積もりから10万円を値引く場合、10%対象から8万円、8%対象から2万円を値引きます。
+            </li>
+            <li>
+              <span className="font-semibold">値引き後の税額を正確に記載:</span>{" "}
+              按分後の税率ごとの合計金額と、それぞれの消費税額を見積書に明記します。
+            </li>
+          </ul>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-500 mb-2">按分計算の具体例</p>
+            <div className="text-gray-800 text-sm space-y-1">
+              <p>10%対象商品: 800,000円</p>
+              <p>8%対象商品: 200,000円</p>
+              <p>合計: 1,000,000円</p>
+              <p className="border-t border-gray-200 pt-1 mt-1">値引き額: -100,000円</p>
+              <p>10%対象からの値引き: -100,000 x (800,000/1,000,000) = -80,000円</p>
+              <p>8%対象からの値引き: -100,000 x (200,000/1,000,000) = -20,000円</p>
+              <p className="border-t border-gray-200 pt-1 mt-1">10%対象 値引き後: 720,000円 → 消費税 72,000円</p>
+              <p>8%対象 値引き後: 180,000円 → 消費税 14,400円</p>
+              <p className="font-bold">合計（税込）: 986,400円</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            インボイス制度に対応した消費税の詳しい計算方法は、
+            <Link
+              href="/guide/consumption-tax"
+              className="text-blue-600 hover:text-blue-800 underline"
+            >
+              見積書の消費税の書き方・インボイス対応ガイド
+            </Link>
+            で解説しています。
+          </p>
+
           {/* 関連記事リンク */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
-            関連ガイド
+            関連記事
           </h2>
           <ul className="text-gray-700 leading-relaxed space-y-2">
             <li>
@@ -321,18 +496,18 @@ No  品目                   数量  単価        金額
             </li>
             <li>
               <Link
-                href="/guide/email"
+                href="/guide/remarks"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                見積書メールの書き方・送付時の例文集
+                見積書の備考欄の書き方・記載例
               </Link>
             </li>
             <li>
               <Link
-                href="/guide/valid-period"
+                href="/guide/lump-sum"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                見積書の有効期限の設定方法
+                見積書の「一式」の書き方・使い方
               </Link>
             </li>
           </ul>

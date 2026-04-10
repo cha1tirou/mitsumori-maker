@@ -4,12 +4,12 @@ import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
 
 export const metadata: Metadata = {
-  title: "見積書の書き方｜必要項目・作り方・記載例をわかりやすく解説 | 見積書メーカー",
+  title: "見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き | 見積書メーカー",
   description:
-    "見積書の書き方を初心者向けに徹底解説。見積書に必要な記載項目、具体的な作り方の手順、業種別の記載例、よくある失敗例まで網羅。見積もりの作り方がわかるガイド。",
+    "見積書の書き方を初心者向けに完全解説。必須項目の一覧、正しい記載例、よくある間違いまで。個人事業主・フリーランスにも対応。すぐ使える無料テンプレート付き。",
   openGraph: {
-    title: "見積書の書き方｜必要項目・作り方・記載例をわかりやすく解説",
-    description: "見積書の書き方を初心者向けに徹底解説。必要項目、作り方の手順、記載例まで。",
+    title: "見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き",
+    description: "見積書の書き方を初心者向けに完全解説。必須項目の一覧、正しい記載例、よくある間違いまで。個人事業主・フリーランスにも対応。",
     url: "https://mitsumori-maker.com/guide/how-to-write",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -32,8 +32,8 @@ export default function HowToWriteGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <GuideJsonLd
-        title="見積書の書き方｜必要項目・作り方・記載例をわかりやすく解説"
-        description="見積書の書き方を初心者向けに徹底解説。必要項目、作り方の手順、業種別の記載例まで。"
+        title="見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き"
+        description="見積書の書き方を初心者向けに完全解説。必須項目の一覧、正しい記載例、よくある間違いまで。個人事業主・フリーランスにも対応。"
         slug="how-to-write"
       />
       <header className="bg-white border-b border-gray-200">
@@ -48,13 +48,13 @@ export default function HowToWriteGuidePage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         <article>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            見積書の書き方｜必要項目・作り方・記載例をわかりやすく解説
+            見積書の書き方【完全ガイド】必須項目・記載例・テンプレ付き
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
           <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
-            「見積書を作りたいけど、何を書けばいいかわからない」「見積書の正しい書き方を知りたい」という方に向けて、見積書の書き方を基礎から徹底解説します。見積書に必要な記載項目、具体的な作り方の手順、業種別の記載例、よくある失敗例まで、この1記事で見積書作成に必要な知識がすべてわかります。
+            「見積書を作りたいけど、何を書けばいいかわからない」「見積書の正しい書き方を知りたい」という方に向けて、見積書の書き方を基礎から完全解説します。見積書に必要な記載項目（発行日・見積番号・宛名・差出人・品目・数量・単価・合計・消費税・振込先・有効期限・備考）の一つひとつの書き方ポイント、業種別の記載例、初心者がやりがちな間違い、見積書の送り方まで、この1記事で見積書作成に必要な知識がすべてわかります。
           </p>
 
           {/* --- H2-1 --- */}
@@ -131,10 +131,17 @@ export default function HowToWriteGuidePage() {
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
-            見積書番号・発行日の書き方
+            見積書番号の書き方
           </h3>
           <p className="text-gray-700 leading-relaxed mb-4">
-            見積書番号は管理のために振る連番です。「MTS-2026-001」のように年度や種別がわかる形式にすると、後から検索しやすくなります。取引先ごとにプレフィックスを変えるのも効果的です。発行日は見積書を作成した日付を「2026年4月8日」のように記載します。
+            見積書番号は管理のために振る連番です。「MTS-2026-001」のように年度や種別がわかる形式にすると、後から検索しやすくなります。取引先ごとにプレフィックスを変えるのも効果的です。番号は一度発行したら変更せず、修正が必要な場合は新しい番号で再発行するのが原則です。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            発行日の書き方
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            発行日は見積書を作成・提出した日付を「2026年4月10日」のように和暦または西暦で記載します。取引先との間で「いつ時点の見積もりか」を明確にする重要な項目です。見積書の有効期限の起算日にもなるため、正確に記載しましょう。日付を空欄のまま渡すのはNGです。
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
@@ -153,10 +160,10 @@ export default function HowToWriteGuidePage() {
           </div>
 
           <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
-            発行者情報の書き方
+            発行者情報（差出人）の書き方
           </h3>
           <p className="text-gray-700 leading-relaxed mb-4">
-            自社の会社名・住所・電話番号・メールアドレス・担当者名を記載します。社印（角印）を押すのが一般的です。電子見積書の場合は電子印鑑でも問題ありません。インボイス制度に対応する場合は、ここに適格請求書発行事業者の登録番号（T+13桁）も記載しましょう。
+            自社の会社名・住所・電話番号・メールアドレス・担当者名を記載します。社印（角印）を押すのが一般的です。電子見積書の場合は電子印鑑でも問題ありません。個人事業主の場合は屋号と氏名の両方を記載し、連絡先として電話番号またはメールアドレスを必ず入れましょう。インボイス制度に対応する場合は、ここに適格請求書発行事業者の登録番号（T+13桁）も記載します。
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
@@ -200,15 +207,29 @@ export default function HowToWriteGuidePage() {
             有効期限・納期・支払条件の書き方
           </h3>
           <p className="text-gray-700 leading-relaxed mb-4">
-            見積もりの有効期限は必ず設定しましょう。一般的には「発行日より2週間」「発行日より30日間」が目安です。原材料費の変動リスクがある業種では短めに設定するのが安全です。
+            見積もりの有効期限は必ず設定しましょう。一般的には「発行日より2週間」「発行日より30日間」が目安です。原材料費の変動リスクがある業種では短めに設定するのが安全です。有効期限を書かないと、何ヶ月も後に古い金額で発注される恐れがあります。
           </p>
           <div className="bg-white border border-gray-200 rounded-lg p-5 mb-4">
             <ul className="space-y-1 text-gray-700 text-sm">
-              <li><strong>有効期限</strong>：発行日より30日間（2026年5月8日まで）</li>
+              <li><strong>有効期限</strong>：発行日より30日間（2026年5月10日まで）</li>
               <li><strong>納期</strong>：ご発注から約4週間</li>
               <li><strong>支払条件</strong>：納品月末締め翌月末払い</li>
             </ul>
           </div>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            振込先（支払先口座）の書き方
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書の段階で振込先を記載するかは取引先や業界の慣習によりますが、記載しておくとスムーズに支払いに移行できます。銀行名・支店名・口座種別（普通/当座）・口座番号・口座名義を正確に記載しましょう。口座名義はカタカナ表記にするのが一般的です。振込手数料の負担についても「振込手数料はご負担ください」など明記しておくとトラブルを防げます。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            備考欄の書き方
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            備考欄は、明細や条件欄に書ききれない補足事項を記載するスペースです。送料の扱い（「送料別途」「送料込み」）、追加費用が発生する条件、修正回数の上限、キャンセルポリシーなど、後からトラブルになりやすい項目を明記しておくと安心です。ただし、長文になりすぎると読まれなくなるため、箇条書きで簡潔にまとめましょう。
+          </p>
 
           {/* --- H2-4: 記載例 --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
@@ -352,6 +373,22 @@ No  品目                    数量    単価      金額
               <p className="font-semibold text-gray-800 mb-1">見積書番号を振っていない</p>
               <p className="text-gray-600 text-sm">番号がないと、後から「あの見積書」と特定するのが困難になります。必ず一意の番号を振り、発行した見積書は控えを保管しましょう。</p>
             </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">発行日を空欄にしている</p>
+              <p className="text-gray-600 text-sm">発行日が空欄だと有効期限の起算日が不明になり、いつ時点の金額なのかも分かりません。作成日を必ず記入しましょう。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">数量や単位が曖昧</p>
+              <p className="text-gray-600 text-sm">「デザイン費 ¥300,000」だけでは何ページ分なのか不明です。「トップページデザイン 1ページ ¥300,000」のように数量と単位を明記しましょう。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">合計金額の計算ミス</p>
+              <p className="text-gray-600 text-sm">手入力で作成すると単価×数量の掛け算や消費税の計算で間違いが起こりがちです。見積書メーカーなどのツールを使えば自動計算されるためミスを防げます。</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <p className="font-semibold text-gray-800 mb-1">振込先の口座名義が間違っている</p>
+              <p className="text-gray-600 text-sm">口座名義のカタカナ表記を間違えると、取引先が振り込めないトラブルになります。通帳やネットバンキングで正確な口座名義を確認してから記載しましょう。</p>
+            </div>
           </div>
 
           {/* --- H2-7: 見積書を書くときのポイント --- */}
@@ -458,7 +495,36 @@ No  品目                    数量    単価      金額
             初めて見積書を作成する方や、テンプレートを用意する手間を省きたい方には、ブラウザ上で簡単に作成できるオンラインツールがおすすめです。見積書メーカーなら、必要な項目を入力するだけで整ったデザインの見積書がすぐに完成し、PDFでダウンロードできます。
           </p>
 
-          {/* --- H2-9: FAQ --- */}
+          {/* --- H2-9: 見積書の送り方 --- */}
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            見積書の送り方｜メール・郵送・PDFの使い分け
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            見積書が完成したら、取引先に送付します。送り方は主に3つあり、それぞれ注意点が異なります。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            メール（PDF添付）で送る場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            最も一般的な送付方法です。見積書をPDFに変換してメールに添付します。件名は「【見積書送付】〇〇の件（株式会社△△）」のように案件名と社名を入れると、相手が見つけやすくなります。本文には挨拶と見積書の概要（合計金額・有効期限）を簡潔に書き添えましょう。ファイル名は「御見積書_株式会社△△_20260410.pdf」のように相手先名と日付を含めると親切です。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            郵送で送る場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            紙の見積書を郵送する場合は、送付状（カバーレター）を同封するのがビジネスマナーです。送付状には送付書類の一覧と簡単な挨拶文を記載します。封筒の表面左下に「見積書在中」と朱書きすると、相手の担当者に確実に届きやすくなります。重要な見積書の場合は簡易書留での送付も検討しましょう。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            クラウドツール・チャットで共有する場合
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            最近ではSlackやChatworkなどのビジネスチャットでPDFを直接共有するケースも増えています。手軽ですが、重要な書類がチャットの会話に埋もれやすいため、メールでも正式に送付することをおすすめします。見積書メーカーならブラウザ上で作成してすぐにPDFをダウンロードできるので、どの送付方法にも対応できます。
+          </p>
+
+          {/* --- H2-10: FAQ --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             よくある質問（FAQ）
           </h2>
@@ -562,6 +628,31 @@ No  品目                    数量    単価      金額
           <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
           <ul className="space-y-2">
             <li>
+              <Link href="/guide/consumption-tax" className="text-blue-600 hover:underline text-sm">
+                見積書の消費税の書き方・インボイス対応ガイド
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">
+                見積書の備考欄の書き方・記載例まとめ
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/valid-period" className="text-blue-600 hover:underline text-sm">
+                見積書の有効期限の設定方法・書き方ガイド
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/addressing" className="text-blue-600 hover:underline text-sm">
+                見積書の宛名の書き方・敬称の使い分け
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/bank-info" className="text-blue-600 hover:underline text-sm">
+                見積書の振込先の書き方・記載例
+              </Link>
+            </li>
+            <li>
               <Link href="/guide/template-excel" className="text-blue-600 hover:underline text-sm">
                 見積書テンプレート（Excel・PDF）の選び方と活用法
               </Link>
@@ -572,23 +663,8 @@ No  品目                    数量    単価      金額
               </Link>
             </li>
             <li>
-              <Link href="/guide/consumption-tax" className="text-blue-600 hover:underline text-sm">
-                見積書の消費税の書き方・インボイス対応ガイド
-              </Link>
-            </li>
-            <li>
               <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
                 見積書のメール送付マナー・例文テンプレート
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">
-                見積書の備考欄の書き方・記載例まとめ
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/addressing" className="text-blue-600 hover:underline text-sm">
-                見積書の宛名の書き方・敬称の使い分け
               </Link>
             </li>
             <li>

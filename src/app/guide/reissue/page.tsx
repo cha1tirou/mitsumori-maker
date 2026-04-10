@@ -3,12 +3,12 @@ import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 
 export const metadata: Metadata = {
-  title: "見積書の再発行の方法・対応マニュアル | 見積書メーカー",
+  title: "見積書の再発行の方法・依頼メール例文付き【そのまま使える】 | 見積書メーカー",
   description:
-    "見積書の再発行が必要になるケースと対応方法を解説。再発行時の書き方ルール、依頼メールの例文、再発行を防ぐ管理のコツをまとめました。",
+    "見積書の再発行が必要になったら？再発行の手順・書き方ルール・依頼メールの例文をそのまま使える形で紹介。有効期限切れの対応方法や再発行を防ぐ管理のコツも解説。",
   openGraph: {
-    title: "見積書の再発行の方法・対応マニュアル",
-    description: "見積書の再発行が必要になるケースと対応方法を解説。",
+    title: "見積書の再発行の方法・依頼メール例文付き | 見積書メーカー",
+    description: "見積書の再発行の手順・依頼メール例文をそのまま使える形で紹介。",
     url: "https://mitsumori-maker.com/guide/reissue",
     siteName: "見積書メーカー",
     locale: "ja_JP",

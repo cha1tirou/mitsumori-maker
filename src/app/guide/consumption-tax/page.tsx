@@ -5,12 +5,12 @@ import ArticleDisclosure from "@/components/ArticleDisclosure";
 import GuideCta from "@/components/GuideCta";
 
 export const metadata: Metadata = {
-  title: "見積書の消費税の書き方|税抜・税込・インボイス対応を具体例で解説 | 見積書メーカー",
+  title: "見積書の消費税の書き方【税込・税抜・別途表記】記載例付き | 見積書メーカー",
   description:
-    "見積書の消費税の書き方を具体例付きで解説。税抜・税込の正しい表記方法、消費税別途の記載例、インボイス制度対応の見積書の書き方、軽減税率8%の扱いまで網羅。",
+    "見積書の消費税の書き方を税込・税抜・消費税別途それぞれの記載例付きで解説。インボイス対応の端数処理、軽減税率の書き方、免税事業者の注意点まで網羅。",
   openGraph: {
-    title: "見積書の消費税の書き方|税抜・税込・インボイス対応を具体例で解説",
-    description: "見積書の消費税の正しい書き方を具体例で解説。税抜・税込表記、消費税別途の記載方法、インボイス対応まで。",
+    title: "見積書の消費税の書き方【税込・税抜・別途表記】記載例付き",
+    description: "見積書の消費税の書き方を税込・税抜・消費税別途それぞれの記載例付きで解説。インボイス対応の端数処理、軽減税率の書き方、免税事業者の注意点まで網羅。",
     url: "https://mitsumori-maker.com/guide/consumption-tax",
     siteName: "見積書メーカー",
     locale: "ja_JP",
@@ -33,8 +33,8 @@ export default function ConsumptionTaxGuidePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <GuideJsonLd
-        title="見積書の消費税の書き方|税抜・税込・インボイス対応を具体例で解説"
-        description="見積書の消費税の正しい書き方を具体例付きで解説。税抜・税込表記、消費税別途の記載方法、インボイス制度対応まで網羅。"
+        title="見積書の消費税の書き方【税込・税抜・別途表記】記載例付き"
+        description="見積書の消費税の書き方を税込・税抜・消費税別途それぞれの記載例付きで解説。インボイス対応の端数処理、軽減税率の書き方、免税事業者の注意点まで網羅。"
         slug="consumption-tax"
       />
       <header className="bg-white border-b border-gray-200">
@@ -49,9 +49,9 @@ export default function ConsumptionTaxGuidePage() {
       <main className="max-w-3xl mx-auto px-4 py-10">
         <article>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            見積書の消費税の書き方｜税抜・税込・インボイス対応を具体例で解説
+            見積書の消費税の書き方｜税込・税抜・別途表記の記載例付きで解説
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
           <ArticleDisclosure />
 
           <p className="text-gray-700 leading-relaxed mb-8">
@@ -88,6 +88,47 @@ export default function ConsumptionTaxGuidePage() {
           </p>
 
           <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            税込表記の見積書の書き方（具体例）
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            BtoC取引（消費者向け）では、総額表示義務により税込価格の表示が必要です。BtoB取引でも、取引先が税込価格を希望する場合は以下のように記載します。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+            <p className="text-gray-700 text-sm mb-3 font-semibold">税込表記の見積書テンプレート</p>
+            <div className="text-gray-700 text-sm font-mono space-y-1">
+              <p>デザイン制作費　　　¥440,000（税込）</p>
+              <p>コーディング費　　　¥330,000（税込）</p>
+              <p className="mt-2">────────────────</p>
+              <p>合計（税込）：¥770,000</p>
+              <p className="text-gray-500">（うち消費税等 ¥70,000）</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            税込表記の場合は、合計金額の下に「うち消費税等」として内税の消費税額を記載しておくと、取引先の経理処理がスムーズになります。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            税抜表記の見積書の書き方（具体例）
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            BtoB取引では税抜表記が主流です。「見積書 税抜」で検索される方が多いように、単価を税抜で表示し、消費税を別に計算して表示する方法が最も広く使われています。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+            <p className="text-gray-700 text-sm mb-3 font-semibold">税抜表記の見積書テンプレート</p>
+            <div className="text-gray-700 text-sm font-mono space-y-1">
+              <p>デザイン制作費　　　¥400,000</p>
+              <p>コーディング費　　　¥300,000</p>
+              <p className="mt-2">────────────────</p>
+              <p>小計（税抜）：¥700,000</p>
+              <p>消費税（10%）：¥70,000</p>
+              <p className="font-bold">合計（税込）：¥770,000</p>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            税抜表記を使用する場合は、必ず備考欄などに「上記金額は全て税抜価格です」と注記しましょう。明細に「（税抜）」と併記する方法も有効です。税抜表示は取引先が原価を把握しやすく、消費税率の変更にも柔軟に対応できるメリットがあります。
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
             2. 小計・消費税額・合計の3段階表示
           </h3>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -107,7 +148,7 @@ export default function ConsumptionTaxGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             飲食料品や定期購読の新聞など、軽減税率（8%）が適用される商品を含む見積書では、税率ごとに金額を分けて記載する必要があります。明細に「※」などの印をつけ、「※は軽減税率8%対象」と注記する方法が一般的です。
           </p>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
             <p className="text-gray-700 text-sm mb-3 font-semibold">軽減税率を含む記載例</p>
             <div className="text-gray-700 text-sm font-mono space-y-1">
               <p>飲料水（500ml x 24本）※  ¥2,400</p>
@@ -119,6 +160,30 @@ export default function ConsumptionTaxGuidePage() {
               <p className="font-bold mt-2">合計（税込）：¥57,592</p>
               <p className="text-gray-500 mt-2">※は軽減税率8%対象商品</p>
             </div>
+          </div>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            8%と10%が混在する見積書の作成ポイント
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            ケータリング・イベント・福利厚生関連など、軽減税率8%と標準税率10%が混在する見積書を作成する機会は意外と多くあります。混在する場合は、以下の点に注意して作成しましょう。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <strong>明細に税率区分を明記する</strong>：各品目の横に「※」や「★」などの記号を付け、凡例で「※は軽減税率8%対象」と説明します。
+            </li>
+            <li>
+              <strong>税率ごとに小計・消費税を分けて計算する</strong>：10%対象の小計と消費税、8%対象の小計と消費税をそれぞれ別の行に表示し、最後に合算した合計金額を記載します。
+            </li>
+            <li>
+              <strong>端数処理は税率ごとに1回ずつ</strong>：インボイス制度では、10%対象の消費税と8%対象の消費税をそれぞれ1回ずつ端数処理します。合算してからまとめて端数処理するのは誤りです。
+            </li>
+          </ul>
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-5 mb-6">
+            <p className="text-gray-800 text-sm font-semibold mb-2">よくある間違い</p>
+            <p className="text-gray-700 text-sm">
+              軽減税率対象の「飲食料品」には、テイクアウト・出前は含まれますが、店内での飲食（外食）は含まれません。ケータリングも原則として標準税率10%が適用されます。判断に迷う場合は、国税庁の「軽減税率制度に関するQ&A」を確認しましょう。
+            </p>
           </div>
 
           {/* --- H2-2 --- */}
@@ -154,6 +219,24 @@ export default function ConsumptionTaxGuidePage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             取引先との信頼関係を保つためには、パターン3のように消費税額を具体的に計算して明示するのが最も丁寧で、トラブルを防ぎやすい方法です。「消費税別途」とだけ書いて具体的な税額を記載しないと、取引先が総額を把握しにくくなるため注意しましょう。
           </p>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            「消費税別途」の正しい表記と注意点
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            「見積書 消費税別途 書き方」で悩む方が多いポイントとして、「消費税別途」の文言をどこにどう書くかがあります。以下の3つの注意点を押さえましょう。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <strong>税率を明記する</strong>：「消費税別途」だけでなく「消費税（10%）別途」と税率を添えることで、将来的に税率が変更された場合のトラブルを防げます。
+            </li>
+            <li>
+              <strong>合計欄に税込金額も併記する</strong>：「消費税別途」と記載しつつも、参考として税込の合計金額を記載しておくと親切です。取引先が予算管理や社内稟議を行う際に役立ちます。
+            </li>
+            <li>
+              <strong>複数税率がある場合は税率ごとに分ける</strong>：軽減税率（8%）対象と標準税率（10%）対象が混在する場合、「消費税別途」とだけ書くと税額が不明確になります。税率ごとの内訳を必ず記載しましょう。
+            </li>
+          </ul>
 
           {/* --- H2-3 --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
@@ -315,6 +398,32 @@ No  品目                数量  単価        金額
             <p className="text-red-600 text-xs mt-3">NG例：商品Aの税=¥123、商品Bの税=¥567で合計¥690とするのは不可</p>
           </div>
 
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            切り捨て・切り上げ・四捨五入の選び方
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            端数処理の方法は「切り捨て」「切り上げ」「四捨五入」のいずれも法的に認められています。ただし、実務では以下の傾向があります。
+          </p>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+            <div className="space-y-3 text-gray-700 text-sm">
+              <div>
+                <p className="font-semibold">切り捨て（最も一般的）</p>
+                <p>消費税額が少なくなるため、買い手にとって有利です。多くの企業・会計ソフトがデフォルトで採用しています。迷ったら切り捨てを選びましょう。</p>
+              </div>
+              <div>
+                <p className="font-semibold">四捨五入</p>
+                <p>数学的に最も公平な方法です。端数が5以上なら切り上げ、4以下なら切り捨てとなります。</p>
+              </div>
+              <div>
+                <p className="font-semibold">切り上げ</p>
+                <p>売り手にとって有利ですが、取引先によっては抵抗感を持たれることがあります。使用頻度は低めです。</p>
+              </div>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            いずれの方法を選んでも、<strong>同一の見積書・請求書の中では統一する</strong>ことが重要です。また、取引先と端数処理方法について事前に合意しておくと、後のトラブルを防げます。
+          </p>
+
           {/* --- H2-6 --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             免税事業者の見積書と消費税の扱い
@@ -333,7 +442,7 @@ No  品目                数量  単価        金額
               <strong>経過措置の活用</strong>：2026年9月末までは仕入税額の80%、2029年9月末までは50%が控除可能という経過措置があります。
             </li>
           </ul>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-5 mb-6">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-5 mb-4">
             <p className="text-gray-800 text-sm font-semibold mb-2">免税事業者の見積書の書き方のポイント</p>
             <ul className="text-gray-700 text-sm space-y-1">
               <li>・登録番号の欄は空欄または記載なしとする</li>
@@ -342,6 +451,38 @@ No  品目                数量  単価        金額
               <li>・「消費税相当額」と表記する方法もある</li>
             </ul>
           </div>
+
+          <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">
+            免税事業者の見積書の具体的な記載例
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            免税事業者が見積書を発行する場合、消費税の表記方法には特に注意が必要です。「消費税」と明記してしまうとインボイスを発行できないにもかかわらず消費税を預かっているように見えるため、以下のような記載方法が推奨されます。
+          </p>
+          <div className="space-y-4 mb-4">
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <p className="font-semibold text-gray-800 text-sm mb-2">方法1：税込総額のみ表示</p>
+              <div className="text-gray-700 text-sm font-mono space-y-1">
+                <p>デザイン制作費　　¥440,000</p>
+                <p>コーディング費　　¥330,000</p>
+                <p className="mt-2 font-bold">合計：¥770,000</p>
+                <p className="text-gray-500">※上記は税込価格です</p>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <p className="font-semibold text-gray-800 text-sm mb-2">方法2：消費税相当額として表示</p>
+              <div className="text-gray-700 text-sm font-mono space-y-1">
+                <p>デザイン制作費　　¥400,000</p>
+                <p>コーディング費　　¥300,000</p>
+                <p className="mt-2">小計：¥700,000</p>
+                <p>消費税相当額：¥70,000</p>
+                <p className="font-bold">合計：¥770,000</p>
+                <p className="text-gray-500">※当社は免税事業者のため、適格請求書（インボイス）の発行はできません</p>
+              </div>
+            </div>
+          </div>
+          <p className="text-gray-700 leading-relaxed mb-6">
+            免税事業者であることを事前に開示しておくことで、取引先は仕入税額控除ができないことを把握した上で取引を進められるため、後から問題になるリスクを大幅に減らせます。なお、2026年9月末までは経過措置により80%の控除が認められているため、免税事業者との取引が即座に敬遠されるわけではありません。
+          </p>
 
           {/* --- H2-7: FAQ --- */}
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
@@ -454,11 +595,26 @@ No  品目                数量  単価        金額
         </div>
 
         <div className="mt-10 border-t border-gray-200 pt-8">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">関連ガイド</h2>
+          <h2 className="text-lg font-bold text-gray-800 mb-4">関連記事</h2>
           <ul className="space-y-2">
             <li>
               <Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">
                 見積書の書き方・必要項目をわかりやすく解説
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/invoice-howto" className="text-blue-600 hover:underline text-sm">
+                請求書の書き方ガイド・必要な記載項目を解説
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide/discount" className="text-blue-600 hover:underline text-sm">
+                見積書の値引きの書き方・記載例
+              </Link>
+            </li>
+            <li>
+              <Link href="/tools/invoice-calc" className="text-blue-600 hover:underline text-sm">
+                インボイス計算ツール｜消費税額を自動計算
               </Link>
             </li>
             <li>
@@ -469,11 +625,6 @@ No  品目                数量  単価        金額
             <li>
               <Link href="/guide/difference" className="text-blue-600 hover:underline text-sm">
                 見積書・請求書・納品書の違いをわかりやすく解説
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/invoice-howto" className="text-blue-600 hover:underline text-sm">
-                請求書の書き方ガイド・必要な記載項目を解説
               </Link>
             </li>
             <li>
