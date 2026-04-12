@@ -85,7 +85,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- ガイド記事（厳選14本） -->
+  <!-- ガイド一覧・記事（厳選14本） -->
+  <url>
+    <loc>https://mitsumori-maker.com/guide</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://mitsumori-maker.com/guide/how-to-write</loc>
     <lastmod>2026-04-10</lastmod>

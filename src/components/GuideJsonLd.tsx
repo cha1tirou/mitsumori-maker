@@ -1,9 +1,15 @@
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 type GuideJsonLdProps = {
   title: string;
   description: string;
   slug: string;
   datePublished?: string;
   dateModified?: string;
+  faqs?: FaqItem[];
 };
 
 export default function GuideJsonLd({
@@ -12,6 +18,7 @@ export default function GuideJsonLd({
   slug,
   datePublished = "2026-03-31",
   dateModified = "2026-03-31",
+  faqs,
 }: GuideJsonLdProps) {
   const url = `https://mitsumori-maker.com/guide/${slug}`;
 
@@ -65,6 +72,21 @@ export default function GuideJsonLd({
     inLanguage: "ja",
   };
 
+  const faqJsonLd = faqs && faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
+
   return (
     <>
       <script
@@ -75,6 +97,12 @@ export default function GuideJsonLd({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
     </>
   );
 }

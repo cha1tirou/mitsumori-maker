@@ -46,12 +46,14 @@
 - [ ] Search Consoleでインデックス状況確認・サイトマップ再送信（手動）
 
 ## アイデアバックログ
+- [x] ガイド記事一覧ページ /guide 作成・sitemapに追加（2026-04-12）
+- [x] GuideJsonLdにFAQ schemaサポート追加・主要3記事（how-to-write/valid-period/consumption-tax）にFAQ JSON-LD追加（2026-04-12）
 - [ ] Search ConsoleでURL検査・インデックスリクエスト（8本のガイド記事）
 - [x] 業種別ガイド記事追加（飲食）→ guide/restaurant 実装済み
 - [x] 関連ツールページ（インボイス計算機）作成 → tools/invoice-calc 実装済み
 - [x] 業種別ガイド記事追加（美容など）→ guide/beauty 実装済み（2026-04-07）
 - [x] 請求書メーカー本実装 → /invoice 実装済み（2026-04-07）
-- [ ] Twitter/X SNS流入施策
+- [x] Twitter/X SNS流入施策 → ShareButtonsコンポーネント作成・主要5記事に組み込み済み（2026-04-10）
 - [ ] A8.net登録・アフィリエイトリンク挿入（印鑑・名刺サービス）※手動作業：実際のA8.net提携URLが必要
 - [x] ガイド記事追加（送付状・内訳・諸経費）→ cover-letter / breakdown / misc-expenses 実装済み（2026-04-07）
 - [x] ガイド記事追加（交通費・前払い・端数処理）→ travel-expense / prepayment / rounding 実装済み（2026-04-08）
