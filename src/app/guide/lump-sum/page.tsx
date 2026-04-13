@@ -39,6 +39,11 @@ export default function LumpSumGuidePage() {
         slug="lump-sum"
         datePublished="2026-04-03"
         dateModified="2026-04-10"
+        faqs={[
+          { question: "見積書で「一式」と書いてもよい場合はどんな時ですか？", answer: "内訳を個別に提示できない・する必要がない場合に使えます。例えば「諸経費一式」「梱包材料費一式」のように、細かく分けても意味がない補助的な費用に使うのが適切です。メインの作業費や商品代は個別に明細を記載するようにしましょう。" },
+          { question: "「一式」の金額の根拠を聞かれた場合、どう説明すればよいですか？", answer: "内訳を事前に用意しておくことが重要です。「一式」として提示していても、実際には個別の費用を積み上げた合計であることが多いため、参考内訳を別紙で提示できるようにしておきましょう。説明できる根拠があれば取引先からの信頼も得やすくなります。" },
+          { question: "請求書でも「一式」の表記は問題ありませんか？", answer: "請求書でも使用できますが、インボイス制度（適格請求書）においては、品名・数量・単価を明確に記載することが求められます。「一式」表記のみでは要件を満たさない場合があるため、請求書では可能な限り内訳を明記することをお勧めします。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -299,10 +304,10 @@ export default function LumpSumGuidePage() {
               <span className="font-semibold">業界の慣習を考慮する:</span>{" "}
               建設業界では「一式」が一般的に受け入れられますが、IT業界では詳細な工数見積もりが求められることが多いです。業界ごとの商慣習に合わせましょう。
               <Link
-                href="/guide/construction"
+                href="/guide/consulting"
                 className="text-blue-600 hover:text-blue-800 underline ml-1"
               >
-                建設業の見積書ガイド
+                コンサルタント見積書の書き方ガイド
               </Link>
               も参考になります。
             </li>
@@ -405,7 +410,7 @@ export default function LumpSumGuidePage() {
             </div>
           </div>
           <p className="text-gray-700 leading-relaxed mb-4">
-            請求書で「一式」を使う場合も、見積書の段階から一式の範囲を明確にしておくことが重要です。見積書と請求書で「一式」に含まれる範囲が異なると、支払い時にトラブルの原因となります。見積書の段階で備考欄に「一式」の内容を明記しておき、請求書にも同じ内容を引き継ぎましょう。請求書の基本的な書き方は<Link href="/guide/invoice-howto" className="text-blue-600 hover:text-blue-800 underline">請求書の書き方ガイド</Link>をご参照ください。
+            請求書で「一式」を使う場合も、見積書の段階から一式の範囲を明確にしておくことが重要です。見積書と請求書で「一式」に含まれる範囲が異なると、支払い時にトラブルの原因となります。見積書の段階で備考欄に「一式」の内容を明記しておき、請求書にも同じ内容を引き継ぎましょう。請求書の基本的な書き方は<Link href="/guide/invoice-bank-info" className="text-blue-600 hover:text-blue-800 underline">請求書の振込先・口座情報の書き方</Link>をご参照ください。
           </p>
 
           <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
@@ -452,10 +457,10 @@ export default function LumpSumGuidePage() {
             </li>
             <li>
               <Link
-                href="/guide/construction"
+                href="/guide/consulting"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                建設業の見積書の書き方・業種別ポイント
+                コンサルタント見積書の書き方ガイド
               </Link>
             </li>
             <li>
@@ -476,26 +481,18 @@ export default function LumpSumGuidePage() {
             </li>
             <li>
               <Link
-                href="/guide/invoice-howto"
+                href="/guide/invoice-bank-info"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                請求書の書き方ガイド・必要な記載項目を解説
+                請求書の振込先・口座情報の書き方
               </Link>
             </li>
             <li>
               <Link
-                href="/guide/breakdown"
+                href="/guide/prerequisites"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                見積書の内訳・明細の書き方ガイド
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/guide/misc-expenses"
-                className="text-blue-600 hover:text-blue-800 underline"
-              >
-                見積書の諸経費の書き方を解説
+                見積書の前提条件の書き方ガイド
               </Link>
             </li>
           </ul>

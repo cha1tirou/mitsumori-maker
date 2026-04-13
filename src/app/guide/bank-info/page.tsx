@@ -39,6 +39,11 @@ export default function GuideBankInfoPage() {
         slug="bank-info"
         datePublished="2026-04-02"
         dateModified="2026-04-10"
+        faqs={[
+          { question: "見積書に振込先口座を記載するのは必須ですか？", answer: "法的な必須事項ではありませんが、取引の流れをスムーズにするために記載しておくと便利です。特にフリーランスや個人事業主の場合、見積書の段階から口座情報を記載しておくと請求時の二度手間を省けます。" },
+          { question: "振込手数料は見積書に記載すべきですか？", answer: "振込手数料の負担について明記しておくことをお勧めします。「振込手数料はご負担ください」または「振込手数料は弊社負担」のように備考欄や前提条件に記載することで、後々のトラブルを防ぐことができます。" },
+          { question: "インボイス制度で振込先の記載に変更はありますか？", answer: "インボイス制度（適格請求書）では、銀行口座情報の記載方法自体に変更はありません。ただし、請求書として使用する場合は適格請求書発行事業者の登録番号を記載する必要があります。見積書と請求書を兼用する場合は登録番号も記載しましょう。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -419,7 +424,7 @@ export default function GuideBankInfoPage() {
             </table>
           </div>
           <p className="text-gray-700 leading-relaxed mb-4">
-            小規模な取引やフリーランスの場合、見積書がそのまま請求書の役割を果たすケースもあるため、見積書の段階から振込先を入れておくと二度手間を省けます。請求書の書き方については<Link href="/guide/invoice-howto" className="text-blue-600 hover:text-blue-800 underline">請求書の書き方ガイド</Link>で詳しく解説しています。
+            小規模な取引やフリーランスの場合、見積書がそのまま請求書の役割を果たすケースもあるため、見積書の段階から振込先を入れておくと二度手間を省けます。請求書の書き方については<Link href="/guide/invoice-bank-info" className="text-blue-600 hover:text-blue-800 underline">請求書の振込先・口座情報の書き方</Link>で詳しく解説しています。
           </p>
 
           {/* --- H2: 7 口座情報のテンプレート --- */}

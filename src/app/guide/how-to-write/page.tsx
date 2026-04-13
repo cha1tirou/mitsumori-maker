@@ -575,7 +575,7 @@ No  品目                    数量    単価      金額
             <div className="bg-white border border-gray-200 rounded-lg p-5">
               <p className="font-semibold text-gray-800 mb-2">Q. 見積書と請求書の違いは何ですか？</p>
               <p className="text-gray-700 text-sm">
-                A. 見積書は「取引前」に金額・条件を提示する書類、請求書は「取引後」に代金の支払いを求める書類です。記載項目は似ていますが、役割が異なります。詳しくは<Link href="/guide/difference" className="text-blue-600 hover:underline">見積書・請求書・納品書の違い</Link>をご覧ください。
+                A. 見積書は「取引前」に金額・条件を提示する書類、請求書は「取引後」に代金の支払いを求める書類です。記載項目は似ていますが、役割が異なります。詳しくは<Link href="/guide/consumption-tax" className="text-blue-600 hover:underline">見積書の消費税の書き方ガイド</Link>をご覧ください。
               </p>
             </div>
             <div className="bg-white border border-gray-200 rounded-lg p-5">
@@ -688,28 +688,13 @@ No  品目                    数量    単価      金額
               </Link>
             </li>
             <li>
-              <Link href="/guide/template-excel" className="text-blue-600 hover:underline text-sm">
-                見積書テンプレート（Excel・PDF）の選び方と活用法
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
-                フリーランス・個人事業主のための見積書ガイド
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
-                見積書のメール送付マナー・例文テンプレート
+              <Link href="/guide/valid-period" className="text-blue-600 hover:underline text-sm">
+                見積書の有効期限の設定方法
               </Link>
             </li>
             <li>
               <Link href="/guide/lump-sum" className="text-blue-600 hover:underline text-sm">
                 見積書の「一式」の書き方・使い方ガイド
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/difference" className="text-blue-600 hover:underline text-sm">
-                見積書・請求書・納品書の違いをわかりやすく解説
               </Link>
             </li>
             <li>

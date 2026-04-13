@@ -37,6 +37,11 @@ export default function RestaurantGuidePage() {
         title="飲食店・レストランの見積書の書き方ガイド"
         description="飲食店・レストランの見積書の書き方を解説。ケータリング・仕出し・宴会プランに必要な項目と注意点をまとめました。"
         slug="restaurant"
+        faqs={[
+          { question: "飲食店の見積書で消費税は何%を適用すればよいですか？", answer: "店内飲食・ケータリングで人が配膳するサービスは10%、テイクアウト・仕出し弁当の配達のみは軽減税率8%が適用されます。一つの見積書に8%と10%の品目が混在する場合は、税率ごとに小計を分けて記載してください。" },
+          { question: "ケータリングの見積書で必ず記載すべき項目は何ですか？", answer: "料理・ドリンク明細（品名・単価・数量）、配送料・スタッフ派遣費、サービス料、会場使用料（該当する場合）、最終人数確定日、キャンセルポリシーが必須です。インボイス対応として登録番号も忘れずに記載しましょう。" },
+          { question: "宴会プランの見積書で人数変更に備えるには？", answer: "見積書の備考や前提条件の欄に「最終人数確定日」「キャンセルポリシー（何日前まで変更可能か）」「最低保証人数」を明記することで、直前の人数変更によるトラブルを防止できます。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -222,13 +227,8 @@ export default function RestaurantGuidePage() {
               </Link>
             </li>
             <li>
-              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
-                フリーランス・個人事業主のための見積書ガイド
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
-                見積書のメール送付マナー・例文テンプレート
+              <Link href="/guide/consulting" className="text-blue-600 hover:underline text-sm">
+                コンサルタント見積書の書き方ガイド
               </Link>
             </li>
           </ul>

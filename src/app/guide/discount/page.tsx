@@ -39,6 +39,11 @@ export default function DiscountGuidePage() {
         slug="discount"
         datePublished="2026-04-02"
         dateModified="2026-04-10"
+        faqs={[
+          { question: "見積書の値引きと割引の違いは何ですか？", answer: "一般的に「値引き」は一定の金額を差し引くこと（例：5,000円引き）、「割引」は一定の割合を差し引くこと（例：10%引き）を指します。見積書では「値引き額」か「割引率」のどちらかをはっきり明示して記載し、計算根拠が分かるようにしましょう。" },
+          { question: "調整値引きとは何ですか？なぜ使うのですか？", answer: "合計金額の端数を調整するために使う値引きです。例えば税込合計が100,234円になった場合、234円を調整値引きとして引いて100,000円に揃えます。請求書や見積書の合計を切りよい数字にしたい場合に使われる実務的な処理方法です。" },
+          { question: "値引きを適用した場合、消費税はどう計算しますか？", answer: "値引きは通常、税抜き金額から差し引いた後に消費税を計算します（税抜き合計から値引きを差し引いた金額に税率をかける）。ただし、消費税ごとに値引き額を適用する方法もあります。インボイス制度の観点からは、税率ごとに値引き後の税抜金額と消費税額を明示することが推奨されます。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -216,14 +221,7 @@ export default function DiscountGuidePage() {
             </p>
           </div>
           <p className="text-gray-700 leading-relaxed mb-4">
-            見積書の送付メールの書き方については、
-            <Link
-              href="/guide/email"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              見積書メールの書き方・例文ガイド
-            </Link>
-            も参考にしてください。
+            見積書の送付時は、値引き内容についても丁寧に説明を添えて送ることをお勧めします。
           </p>
 
           {/* 値引き見積書の完成イメージ */}

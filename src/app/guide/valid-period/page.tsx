@@ -300,18 +300,8 @@ export default function ValidPeriodGuidePage() {
               </Link>
             </li>
             <li>
-              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
-                フリーランス・個人事業主のための見積書ガイド
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/electronic" className="text-blue-600 hover:underline text-sm">
-                見積書を電子化・PDF化するメリットと方法
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/email" className="text-blue-600 hover:underline text-sm">
-                見積書のメール送付マナー・例文テンプレート
+              <Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">
+                見積書の書き方・必須項目ガイド
               </Link>
             </li>
           </ul>

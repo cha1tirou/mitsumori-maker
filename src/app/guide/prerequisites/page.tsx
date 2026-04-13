@@ -39,6 +39,11 @@ export default function GuidePrerequisitesPage() {
         slug="prerequisites"
         datePublished="2026-04-03"
         dateModified="2026-04-03"
+        faqs={[
+          { question: "見積書の「前提条件」と「備考欄」の違いは何ですか？", answer: "前提条件は見積もり金額が成立するための条件（スコープの範囲・含まれないもの・作業環境など）を記載する欄です。備考欄は補足情報や取引条件全般（有効期限・支払条件・納期など）を記載します。前提条件はより厳密な「金額の根拠」を示すもの、備考欄はより広い意味での「取引ルール」を示すものと考えると区別しやすいです。" },
+          { question: "前提条件に「〇〇は別途見積もり」と記載するのは適切ですか？", answer: "適切です。スコープ外の作業について明確にしておくことで、後から「それも含まれるはずだった」というトラブルを防げます。「サーバー費用・ドメイン費用は別途」「追加修正は別途お見積もり」のように、除外事項を具体的に記載することをお勧めします。" },
+          { question: "前提条件が変わった場合、見積書を再発行する必要がありますか？", answer: "はい、前提条件が変わった場合は新しい見積書を発行することをお勧めします。前提条件が変われば金額も変わる可能性があるため、旧見積書の条件のまま作業を進めると後々のトラブルの原因になります。変更内容と変更後の金額を明記した改訂版の見積書を発行し、取引先の了承を得てから作業を開始しましょう。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -335,10 +340,10 @@ export default function GuidePrerequisitesPage() {
             </li>
             <li>
               <Link
-                href="/guide/it-web"
+                href="/guide/consulting"
                 className="text-blue-600 hover:underline text-sm"
               >
-                IT・Web業界の見積書の書き方
+                コンサルタント見積書の書き方ガイド
               </Link>
             </li>
           </ul>

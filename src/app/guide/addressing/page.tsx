@@ -27,7 +27,18 @@ export const metadata: Metadata = {
 export default function GuideAddressingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <GuideJsonLd title="見積書の宛名の書き方・「御中」「様」の使い分け" description="見積書の宛名の正しい書き方と敬称の使い分けを解説。" slug="addressing" datePublished="2026-04-02" dateModified="2026-04-02" />
+      <GuideJsonLd
+        title="見積書の宛名の書き方・「御中」「様」の使い分け"
+        description="見積書の宛名の正しい書き方と敬称の使い分けを解説。"
+        slug="addressing"
+        datePublished="2026-04-02"
+        dateModified="2026-04-02"
+        faqs={[
+          { question: "見積書の宛名に「担当者名」は必ず書く必要がありますか？", answer: "必須ではありませんが、担当者が特定されている場合は「〇〇株式会社 営業部 山田太郎様」のように部署名・担当者名を記載するのがビジネスマナーとして望ましいです。担当者が不明な場合は「〇〇株式会社 御中」のみで問題ありません。" },
+          { question: "法人宛ての見積書に「御中」と「様」はどちらを使いますか？", answer: "会社名や部署名のみの場合は「御中」、個人名がある場合は「様」を使います。「〇〇株式会社 御中」や「〇〇株式会社 山田太郎様」が正しい使い方です。「〇〇株式会社 様」や「〇〇株式会社 御中 山田太郎様」のような二重敬称は誤りなので注意してください。" },
+          { question: "屋号のある個人事業主への宛名はどう書けばよいですか？", answer: "屋号がある場合は「屋号 代表 個人名 様」（例：「デザインスタジオ山田 代表 山田太郎様」）が一般的です。屋号を法人のように扱う場合は「屋号 御中」でも問題ありません。取引先に確認して希望の表記に合わせるのが最も丁寧です。" }
+        ]}
+      />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
@@ -105,7 +116,7 @@ export default function GuideAddressingPage() {
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">関連ガイド</h2>
           <ul className="space-y-2 mb-4">
             <li><Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">見積書の書き方・必要項目を解説</Link></li>
-            <li><Link href="/guide/email" className="text-blue-600 hover:underline text-sm">見積書のメール送付マナー・例文</Link></li>
+            <li><Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">見積書の備考欄の書き方・例文集</Link></li>
             <li><Link href="/guide/reissue" className="text-blue-600 hover:underline text-sm">見積書の再発行の方法・対応マニュアル</Link></li>
           </ul>
         </article>

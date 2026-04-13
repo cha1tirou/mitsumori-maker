@@ -39,6 +39,11 @@ export default function GuideRemarksPage() {
         slug="remarks"
         datePublished="2026-04-03"
         dateModified="2026-04-08"
+        faqs={[
+          { question: "見積書の備考欄は必ず記載しなければなりませんか？", answer: "必須ではありませんが、取引条件や注意事項を明確にするために積極的に活用することをお勧めします。特に有効期限・支払条件・納期・送料の扱いなどを記載しておくと、後々のトラブルを防止できます。" },
+          { question: "備考欄に記載できる文字数に制限はありますか？", answer: "法的な制限はありませんが、見積書は読みやすさが重要です。箇条書きで簡潔に記載し、詳細は別紙（仕様書・契約書）に委ねるのが実務では一般的です。一般的に200〜400文字程度が読みやすい分量の目安です。" },
+          { question: "備考欄に「修正対応〇回まで」と記載してもよいですか？", answer: "問題ありません。特にデザイン・Web制作・動画制作などのクリエイティブ業種では、修正回数の上限を明記することがトラブル防止の観点から推奨されています。「修正は〇回まで含む。それ以降は別途お見積り」のように具体的に記載しましょう。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -441,18 +446,18 @@ export default function GuideRemarksPage() {
               </li>
               <li>
                 <Link
-                  href="/guide/construction"
+                  href="/guide/consulting"
                   className="text-blue-600 hover:text-blue-800 text-sm"
                 >
-                  建設業の見積書の書き方ガイド →
+                  コンサルタント見積書の書き方ガイド →
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/guide/freelance"
+                  href="/guide/how-to-write"
                   className="text-blue-600 hover:text-blue-800 text-sm"
                 >
-                  フリーランス・個人事業主のための見積書ガイド →
+                  見積書の書き方・必須項目ガイド →
                 </Link>
               </li>
               <li>

@@ -39,6 +39,11 @@ export default function ConsultingGuidePage() {
         slug="consulting"
         datePublished="2026-04-03"
         dateModified="2026-04-10"
+        faqs={[
+          { question: "コンサルタントの見積書に時間単価と日額単価、どちらを使えばよいですか？", answer: "プロジェクトの性質によって使い分けます。短時間のスポット相談は時間単価（例：2万円/時）、継続的な支援は日額単価（例：10万円/日）、月額顧問契約は月額固定（例：30万円/月）が一般的です。取引先が慣れている形式に合わせるか、見積もりの段階で確認しましょう。" },
+          { question: "コンサルタント見積書で成果報酬型の場合はどう記載すればよいですか？", answer: "「基本報酬○万円 + 成果報酬（売上増加分の○%）」のように、固定部分と成果連動部分を分けて記載します。成果の定義・計測方法・支払時期についても備考欄または前提条件に明記し、認識のズレを防ぎましょう。" },
+          { question: "コンサルティングの見積書に有効期限は設けた方がよいですか？", answer: "はい、必ず設けてください。コンサルタントのリソース状況や市場環境は変化するため、有効期限なしの見積書は後々トラブルの原因になります。一般的には発行日から30日を目安に設定し、期限切れ後は改めて見積もりを取り直す旨を明記しましょう。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -397,7 +402,7 @@ export default function ConsultingGuidePage() {
             </ul>
           </div>
           <p className="text-gray-700 leading-relaxed mb-4">
-            フリーランスの見積書の基本的な書き方については、<Link href="/guide/freelance" className="text-blue-600 hover:text-blue-800 underline">フリーランス・個人事業主のための見積書ガイド</Link>もあわせてご確認ください。
+            フリーランスの見積書の基本的な書き方については、<Link href="/guide/how-to-write" className="text-blue-600 hover:text-blue-800 underline">見積書の書き方・必須項目ガイド</Link>もあわせてご確認ください。
           </p>
         </div>
 
@@ -420,8 +425,8 @@ export default function ConsultingGuidePage() {
               </Link>
             </li>
             <li>
-              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
-                フリーランス・個人事業主のための見積書ガイド
+              <Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">
+                見積書の書き方・必須項目ガイド
               </Link>
             </li>
             <li>

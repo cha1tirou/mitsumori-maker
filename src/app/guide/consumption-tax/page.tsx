@@ -637,8 +637,8 @@ No  品目                数量  単価        金額
               </Link>
             </li>
             <li>
-              <Link href="/guide/invoice-howto" className="text-blue-600 hover:underline text-sm">
-                請求書の書き方ガイド・必要な記載項目を解説
+              <Link href="/guide/invoice-bank-info" className="text-blue-600 hover:underline text-sm">
+                請求書の振込先・口座情報の書き方
               </Link>
             </li>
             <li>
@@ -652,23 +652,18 @@ No  品目                数量  単価        金額
               </Link>
             </li>
             <li>
-              <Link href="/guide/freelance" className="text-blue-600 hover:underline text-sm">
-                フリーランス・個人事業主のための見積書ガイド
+              <Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">
+                見積書の書き方・必須項目ガイド
               </Link>
             </li>
             <li>
-              <Link href="/guide/difference" className="text-blue-600 hover:underline text-sm">
-                見積書・請求書・納品書の違いをわかりやすく解説
+              <Link href="/guide/prerequisites" className="text-blue-600 hover:underline text-sm">
+                見積書の前提条件の書き方
               </Link>
             </li>
             <li>
-              <Link href="/guide/misc-expenses" className="text-blue-600 hover:underline text-sm">
-                見積書の諸経費の書き方・計算方法
-              </Link>
-            </li>
-            <li>
-              <Link href="/guide/breakdown" className="text-blue-600 hover:underline text-sm">
-                見積書の内訳の書き方・明細の作成ポイント
+              <Link href="/guide/remarks" className="text-blue-600 hover:underline text-sm">
+                見積書の備考欄の書き方
               </Link>
             </li>
           </ul>

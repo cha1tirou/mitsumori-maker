@@ -39,6 +39,11 @@ export default function InvoiceBankInfoPage() {
         slug="invoice-bank-info"
         datePublished="2026-04-03"
         dateModified="2026-04-03"
+        faqs={[
+          { question: "請求書に振込先口座を記載する義務はありますか？", answer: "法的な義務はありませんが、支払いをスムーズに行うために記載することをお勧めします。特にインボイス制度（適格請求書）では、振込先口座の記載そのものは必須ではありませんが、取引先が振込先を確認できるよう明記するのがビジネス慣習です。" },
+          { question: "請求書の口座情報は毎回記載する必要がありますか？", answer: "継続取引の場合でも、毎回記載することをお勧めします。口座情報は変更になることもあるため、都度確認できる状態にしておくことが安全です。また、振込先詐欺（なりすまし）対策として、電話やメールで口座変更の連絡が来た場合は必ず確認を取るよう、取引先に周知しましょう。" },
+          { question: "インボイス制度（適格請求書）で口座情報の記載方法は変わりますか？", answer: "口座情報の記載形式自体は変わりません。ただし、適格請求書として認められるためには、登録番号・税率ごとの消費税額・適用税率などの記載が必要です。これらと合わせて口座情報を記載するレイアウトを整えましょう。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -98,10 +103,10 @@ export default function InvoiceBankInfoPage() {
           <p className="text-gray-700 leading-relaxed mb-4">
             請求書の基本的な書き方については、
             <Link
-              href="/guide/invoice-howto"
+              href="/guide/invoice-bank-info"
               className="text-blue-600 hover:text-blue-800 underline"
             >
-              請求書の書き方ガイド
+              請求書の振込先・口座情報の書き方
             </Link>
             もあわせてご参照ください。
           </p>
@@ -341,14 +346,7 @@ export default function InvoiceBankInfoPage() {
             <li>組戻しが完了した後、正しい口座への再振込を依頼する</li>
           </ul>
           <p className="text-gray-700 leading-relaxed mb-4">
-            このようなトラブルを防ぐためにも、請求書の振込先は送付前に必ずダブルチェックしましょう。請求書送付時のメールの書き方については
-            <Link
-              href="/guide/email"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              見積書・請求書メールの書き方ガイド
-            </Link>
-            もご参照ください。
+            このようなトラブルを防ぐためにも、請求書の振込先は送付前に必ずダブルチェックしましょう。
           </p>
 
           {/* 関連記事リンク */}
@@ -366,18 +364,10 @@ export default function InvoiceBankInfoPage() {
             </li>
             <li>
               <Link
-                href="/guide/invoice-howto"
+                href="/guide/invoice-bank-info"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
-                請求書の書き方・必要な記載項目を解説
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/guide/email"
-                className="text-blue-600 hover:text-blue-800 underline"
-              >
-                見積書・請求書メールの書き方・送付時の例文集
+                請求書の振込先・口座情報の書き方
               </Link>
             </li>
             <li>

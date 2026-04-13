@@ -39,6 +39,11 @@ export default function EnglishQuotationGuidePage() {
         slug="english"
         datePublished="2026-04-02"
         dateModified="2026-04-08"
+        faqs={[
+          { question: "英語の見積書（Quotation）に必ず記載すべき項目は何ですか？", answer: "Quotation Number（見積番号）、Date（発行日）、Valid Until（有効期限）、Bill To（宛先）、Item/Description（品名）、Quantity（数量）、Unit Price（単価）、Total（合計）、Tax（税金）、Grand Total（税込合計）が基本項目です。銀行情報（Bank Details）も海外取引では重要です。" },
+          { question: "QuotationとEstimateの違いは何ですか？", answer: "Quotationは価格が確定した正式な見積書で、取引先がそのまま注文できる形式です。Estimateは概算見積りで、最終価格が変動する可能性があることを示します。ビジネス取引では、正式な取引にはQuotationを使用するのが一般的です。" },
+          { question: "英語の見積書で消費税（Japanese Consumption Tax）はどう記載しますか？", answer: "「Consumption Tax（10%）」または「Japanese Tax（10%）」と記載するのが一般的です。インボイス制度対応が必要な場合は、「Registration Number: T○○○○...」のように適格請求書発行事業者の登録番号を記載し、税率ごとの税額を明示してください。" }
+        ]}
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
@@ -552,18 +557,13 @@ export default function EnglishQuotationGuidePage() {
                 </Link>
               </li>
               <li>
-                <Link href="/guide/pdf" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  見積書をPDFで作成・出力する方法
+                <Link href="/guide/how-to-write" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  見積書の書き方・必須項目ガイド
                 </Link>
               </li>
               <li>
-                <Link href="/guide/email" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  見積書のメール送付マナー・例文テンプレート
-                </Link>
-              </li>
-              <li>
-                <Link href="/guide/freelance" className="text-blue-600 hover:text-blue-800 hover:underline">
-                  フリーランス・個人事業主のための見積書ガイド
+                <Link href="/guide/consulting" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  コンサルタント見積書の書き方ガイド
                 </Link>
               </li>
               <li>

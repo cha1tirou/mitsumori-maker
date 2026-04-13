@@ -26,7 +26,11 @@ export const metadata: Metadata = {
 export default function GuideReissuePage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <GuideJsonLd title="見積書の再発行の方法・対応マニュアル" description="見積書の再発行が必要になるケースと対応方法を解説。" slug="reissue" datePublished="2026-04-02" dateModified="2026-04-02" />
+      <GuideJsonLd title="見積書の再発行の方法・対応マニュアル" description="見積書の再発行が必要になるケースと対応方法を解説。" slug="reissue" datePublished="2026-04-02" dateModified="2026-04-02" faqs={[
+          { question: "見積書の再発行は何度でもできますか？", answer: "再発行の回数に法的な制限はありません。ただし、再発行のたびに番号や日付を更新し、旧版と混在しないよう管理することが重要です。再発行が頻繁になる場合は、見積書番号の管理ルールを整備することをお勧めします。" },
+          { question: "再発行した見積書に「再発行」と明記すべきですか？", answer: "必須ではありませんが、備考欄に「再発行」または「○年○月○日付見積書の再発行」と記載しておくと、取引先との確認がスムーズになります。特に金額や条件が変わっていない場合は、旧見積書との関係を明確にしておきましょう。" },
+          { question: "見積書の再発行を断ることはできますか？", answer: "合理的な理由がない限り、取引先から再発行を依頼された場合は応じるのがビジネス慣習です。ただし、有効期限切れの見積書の再発行依頼には、現在の価格・条件で新たに見積書を作成し直すことを取引先に説明しましょう。" }
+        ]} />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
@@ -112,9 +116,8 @@ export default function GuideReissuePage() {
 
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">関連ガイド</h2>
           <ul className="space-y-2 mb-4">
-            <li><Link href="/guide/numbering" className="text-blue-600 hover:underline text-sm">見積書番号のつけ方・採番ルール</Link></li>
+            <li><Link href="/guide/how-to-write" className="text-blue-600 hover:underline text-sm">見積書の書き方・必須項目ガイド</Link></li>
             <li><Link href="/guide/valid-period" className="text-blue-600 hover:underline text-sm">見積書の有効期限の設定方法</Link></li>
-            <li><Link href="/guide/email" className="text-blue-600 hover:underline text-sm">見積書のメール送付マナー・例文</Link></li>
           </ul>
 
           <ToolCallout steps={[
