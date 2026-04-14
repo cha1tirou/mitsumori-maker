@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
+import ConstructionPromoBanner from "@/components/construction/ConstructionPromoBanner";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
@@ -50,6 +51,7 @@ export default function LaborCostGuidePage() {
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月8日</p>
           <ArticleDisclosure />
+          <ConstructionPromoBanner />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             システム開発・コンサルティング・建設業など、サービスの中核が「人の作業」である業種では、見積書における人件費の記載が非常に重要です。しかし、「人日」「人月」といった工数の単位や、単価の設定方法がわからず困っている方も多いのではないでしょうか。この記事では、人件費の計算方法から業種別の具体的な記載例まで、見積書の人件費の書き方を詳しく解説します。

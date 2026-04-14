@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
+import ConstructionPromoBanner from "@/components/construction/ConstructionPromoBanner";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
@@ -50,6 +51,7 @@ export default function MiscExpensesGuidePage() {
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月7日</p>
           <ArticleDisclosure />
+          <ConstructionPromoBanner />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成するとき、「諸経費」をどう計上すればよいか迷う方は少なくありません。諸経費は業種によって内容も計上方法も異なり、一式でまとめて記載するのか、内訳を明示するのかでも印象が変わります。この記事では、諸経費の定義・相場・業種別の内訳・記載のポイントを詳しく解説します。

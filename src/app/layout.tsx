@@ -81,7 +81,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
-        {/* Google Analytics — afterInteractive で遅延読み込み */}
+        {/* Google Analytics ＋ Google Ads — afterInteractive で遅延読み込み */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-13VR2YEZKB"
           strategy="afterInteractive"
@@ -92,8 +92,23 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-13VR2YEZKB');
+            ${
+              process.env.NEXT_PUBLIC_GOOGLE_ADS_ID
+                ? `gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}');`
+                : ""
+            }
           `}
         </Script>
+        {/* Meta Pixel — NEXT_PUBLIC_META_PIXEL_ID が設定されていれば有効 */}
+        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+          <Script id="meta-pixel-init" strategy="afterInteractive">
+            {`
+              !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
+              fbq('track', 'PageView');
+            `}
+          </Script>
+        )}
         {/* Google AdSense — lazyOnload で最も遅延 */}
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875835900503056"
@@ -110,6 +125,7 @@ export default function RootLayout({
               <Link href="/tools/invoice" className="hover:text-gray-800 transition-colors">請求書メーカー</Link>
               <Link href="/tools/delivery" className="hover:text-gray-800 transition-colors">納品書メーカー</Link>
               <Link href="/tools/purchase-order" className="hover:text-gray-800 transition-colors">発注書メーカー</Link>
+              <Link href="/construction" className="hover:text-gray-800 transition-colors font-medium text-green-700">建設業向け</Link>
               <Link href="/about" className="hover:text-gray-800 transition-colors">運営者情報</Link>
               <Link href="/terms" className="hover:text-gray-800 transition-colors">利用規約</Link>
               <Link href="/privacy" className="hover:text-gray-800 transition-colors">プライバシーポリシー</Link>

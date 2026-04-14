@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import ConstructionPromoBanner from "@/components/construction/ConstructionPromoBanner";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
@@ -52,6 +53,8 @@ export default function ConstructionGuidePage() {
             建設業の見積書の書き方【工事見積書の記載例・テンプレート付き】
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月10日</p>
+
+          <ConstructionPromoBanner />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             建設業の見積書は、一般的なビジネス見積書と比べて記載項目が多く、工事の規模や内容によって構成が大きく異なります。正確で分かりやすい工事見積書を作成することは、発注者からの信頼獲得や適正な利益確保に直結します。この記事では、建設業に特化した見積書の書き方、材料費・労務費・経費の内訳の書き方、リフォーム工事の具体的な記載例、建設業法における見積書のルール、追加工事への対応方法まで詳しく解説します。

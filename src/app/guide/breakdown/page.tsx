@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideJsonLd from "@/components/GuideJsonLd";
 import ArticleDisclosure from "@/components/ArticleDisclosure";
+import ConstructionPromoBanner from "@/components/construction/ConstructionPromoBanner";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
@@ -46,6 +47,7 @@ export default function BreakdownGuidePage() {
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月7日</p>
           <ArticleDisclosure />
+          <ConstructionPromoBanner />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書の内訳（明細）は、取引先に対して費用の根拠を示す重要な部分です。「何にいくらかかるのか」が明確な見積書は、取引先の意思決定を後押しし、受注率の向上にもつながります。この記事では、見積書の内訳の書き方を業種別の記載例とともに詳しく解説します。

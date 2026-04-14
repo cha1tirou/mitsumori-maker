@@ -48,6 +48,7 @@
 ## アイデアバックログ
 - [x] ガイド記事一覧ページ /guide 作成・sitemapに追加（2026-04-12）
 - [x] GuideJsonLdにFAQ schemaサポート追加・主要3記事（how-to-write/valid-period/consumption-tax）にFAQ JSON-LD追加（2026-04-12）
+- [x] インデックス14記事のnoindexリンク修正・FAQ JSON-LD残11記事に追加（2026-04-13）
 - [ ] Search ConsoleでURL検査・インデックスリクエスト（8本のガイド記事）
 - [x] 業種別ガイド記事追加（飲食）→ guide/restaurant 実装済み
 - [x] 関連ツールページ（インボイス計算機）作成 → tools/invoice-calc 実装済み
@@ -61,3 +62,7 @@
 - [x] ガイド記事追加（値上げ・価格改定）→ guide/price-increase 実装済み（2026-04-10）
 - [x] ガイド記事追加（スプレッドシートテンプレート）→ guide/spreadsheet 実装済み（2026-04-10）
 - [x] ガイド記事追加（Wordテンプレート）→ guide/word-template 実装済み（2026-04-10）
+- [x] 建設業専用見積書ツール実装 → /construction LP・見積フォーム・法令チェック・PDF出力 実装済み（2026-04-14）
+- [x] 建設業関連ガイド記事にConstructionPromoBannerを追加（construction/breakdown/labor-cost/misc-expenses）（2026-04-14）
+- [x] analytics.ts更新（建設業コンバージョン計測追加）（2026-04-14）
+- [x] ガイド記事追加（Numbersテンプレート）→ guide/numbers-template 実装済み（2026-04-14）
