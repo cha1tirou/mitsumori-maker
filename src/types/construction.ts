@@ -36,13 +36,31 @@ export interface ConstructionItem {
   quantity: number;
   unit: string;
   unitPrice: number;
+  /** 原価単価（社内用・PDFには出力しない） */
+  costUnitPrice?: number;
   category: CostCategory;
+  /** 備考（明細行の補足） */
+  note?: string;
+}
+
+export interface ConstructionSubsection {
+  id: string;
+  name: string;
+  items: ConstructionItem[];
 }
 
 export interface ConstructionSection {
   id: string;
   name: string;
   items: ConstructionItem[];
+  /** 中項目。section 直下の items と並列で表示される */
+  subsections?: ConstructionSubsection[];
+}
+
+export interface SitePhoto {
+  id: string;
+  dataUrl: string;
+  caption: string;
 }
 
 export interface ConstructionQuoteData {
@@ -60,6 +78,8 @@ export interface ConstructionQuoteData {
   companyContact: string;
   companyRegistrationNumber: string;
   constructionLicenseNumber: string;
+  logoDataUrl: string;
+  sealDataUrl: string;
 
   // 見積情報
   quoteNumber: string;
@@ -95,6 +115,9 @@ export interface ConstructionQuoteData {
   // 追加工事の取扱い
   additionalWorkPolicy: string;
 
+  // 工事写真
+  sitePhotos?: SitePhoto[];
+
   // その他
   notes: string;
   taxRate: number;
@@ -116,6 +139,8 @@ export const defaultConstructionQuoteData: ConstructionQuoteData = {
   companyContact: "",
   companyRegistrationNumber: "",
   constructionLicenseNumber: "",
+  logoDataUrl: "",
+  sealDataUrl: "",
   quoteNumber: "",
   quoteDate: new Date().toISOString().split("T")[0],
   validityDays: 30,
@@ -144,6 +169,7 @@ export const defaultConstructionQuoteData: ConstructionQuoteData = {
     "構造耐力上主要な部分および雨水の浸入を防止する部分は引渡日より10年間。\n設備機器は各メーカー保証に準じます。",
   additionalWorkPolicy:
     "記載のない工事・仕様変更が発生した場合は、別途お見積りの上、発注者の承認を得てから着手します。天候・現場状況の悪化による工期延長の場合も同様とします。",
+  sitePhotos: [],
   notes: "",
   taxRate: 10,
 };

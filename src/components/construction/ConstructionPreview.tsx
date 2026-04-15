@@ -10,6 +10,7 @@ import { calcConstructionTotals, itemAmount } from "@/lib/constructionCalc";
 
 interface Props {
   data: ConstructionQuoteData;
+  watermark?: boolean;
 }
 
 const categoryBadge: Record<CostCategory, string> = {
@@ -38,12 +39,34 @@ function calcExpiryDate(quoteDate: string, days: number): string {
   return formatDate(d.toISOString().split("T")[0]);
 }
 
-export default function ConstructionPreview({ data }: Props) {
+export default function ConstructionPreview({ data, watermark = true }: Props) {
   const totals = calcConstructionTotals(data);
 
   return (
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-      <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans">
+      <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans relative">
+        {watermark && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-10">
+            <span
+              className="text-green-800 opacity-[0.08] font-bold tracking-widest"
+              style={{
+                transform: "rotate(-30deg)",
+                fontSize: "60px",
+                letterSpacing: "0.5em",
+              }}
+            >
+              無料版 SAMPLE
+            </span>
+          </div>
+        )}
+        {data.logoDataUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={data.logoDataUrl}
+            alt="ロゴ"
+            className="absolute top-[10mm] left-[10mm] max-w-[40mm] max-h-[18mm] object-contain"
+          />
+        )}
         {/* ヘッダー */}
         <div className="text-center mb-5">
           <h1 className="text-2xl font-bold tracking-widest text-green-800">
@@ -82,7 +105,16 @@ export default function ConstructionPreview({ data }: Props) {
             </div>
           </div>
 
-          <div className="w-[40%] text-right text-[10px] text-gray-600 space-y-0.5">
+          <div className="w-[40%] text-right text-[10px] text-gray-600 space-y-0.5 relative">
+            {data.sealDataUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={data.sealDataUrl}
+                alt="印"
+                className="absolute -left-2 top-0 w-[14mm] h-[14mm] object-contain opacity-90"
+                style={{ mixBlendMode: "multiply" }}
+              />
+            )}
             <p className="text-sm font-semibold text-green-800">
               {data.companyName || "（施工者）"}
             </p>
@@ -175,6 +207,58 @@ export default function ConstructionPreview({ data }: Props) {
                         </td>
                       </tr>
                     ))}
+
+                    {(section.subsections ?? []).map((sub, subIndex) => {
+                      let subAmount = 0;
+                      sub.items.forEach((i) => (subAmount += itemAmount(i)));
+                      return (
+                        <Fragment key={sub.id}>
+                          <tr className="bg-green-50/80 text-green-900">
+                            <td
+                              colSpan={6}
+                              className="py-1 px-4 text-[10px] font-bold"
+                            >
+                              ◇ {sectionIndex + 1}-{subIndex + 1} {sub.name || "（無題）"}
+                            </td>
+                            <td className="py-1 px-1.5 text-right text-[10px] font-bold">
+                              {formatCurrency(subAmount)}
+                            </td>
+                          </tr>
+                          {sub.items.map((item, itemIndex) => (
+                            <tr
+                              key={item.id}
+                              className={itemIndex % 2 === 0 ? "bg-white" : "bg-green-50/30"}
+                            >
+                              <td className="py-1 pl-6 pr-1.5 text-gray-400 border-b border-gray-100 text-[9.5px]">
+                                {sectionIndex + 1}-{subIndex + 1}-{itemIndex + 1}
+                              </td>
+                              <td className="py-1 px-1.5 border-b border-gray-100">
+                                <span
+                                  className={`text-[8.5px] font-bold px-1 py-0.5 rounded ${categoryBadge[item.category]}`}
+                                >
+                                  {costCategoryLabels[item.category]}
+                                </span>
+                              </td>
+                              <td className="py-1 px-1.5 border-b border-gray-100 text-[10px]">
+                                {item.name || "—"}
+                              </td>
+                              <td className="py-1 px-1.5 text-right border-b border-gray-100 text-[10px]">
+                                {item.quantity}
+                              </td>
+                              <td className="py-1 px-1.5 text-center border-b border-gray-100 text-[10px]">
+                                {item.unit}
+                              </td>
+                              <td className="py-1 px-1.5 text-right border-b border-gray-100 text-[10px]">
+                                {formatCurrency(item.unitPrice)}
+                              </td>
+                              <td className="py-1 px-1.5 text-right border-b border-gray-100 font-medium text-[10px]">
+                                {formatCurrency(itemAmount(item))}
+                              </td>
+                            </tr>
+                          ))}
+                        </Fragment>
+                      );
+                    })}
                   </Fragment>
                 );
               })}
@@ -294,6 +378,33 @@ export default function ConstructionPreview({ data }: Props) {
           </div>
         )}
       </div>
+
+      {/* 工事写真シート（プレビュー上は見やすく別ページ風に表示） */}
+      {(data.sitePhotos ?? []).length > 0 && (
+        <div className="border-t-4 border-green-700 bg-white w-full p-[12mm] text-[11px] text-gray-800 font-sans">
+          <div className="text-center mb-4">
+            <h2 className="text-base font-bold text-green-800 tracking-wider">
+              工事写真・現場状況
+            </h2>
+            <div className="w-16 h-0.5 bg-green-700 mx-auto mt-1" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {(data.sitePhotos ?? []).map((photo, i) => (
+              <div key={photo.id} className="border border-gray-200 rounded overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo.dataUrl}
+                  alt={photo.caption || `工事写真${i + 1}`}
+                  className="w-full h-40 object-cover"
+                />
+                <p className="text-[9px] text-gray-700 px-2 py-1 bg-gray-50 border-t border-gray-200">
+                  図{i + 1}. {photo.caption || "（キャプション未設定）"}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

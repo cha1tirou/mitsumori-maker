@@ -3,6 +3,7 @@ import {
   Page,
   Text,
   View,
+  Image,
   StyleSheet,
   Font,
   pdf,
@@ -317,12 +318,139 @@ const s = StyleSheet.create({
   },
 });
 
-function ConstructionPdf({ data }: { data: ConstructionQuoteData }) {
+function renderItemRow(
+  item: import("@/types/construction").ConstructionItem,
+  indexLabel: string,
+  alt: boolean,
+  indentPaddingLeft: number
+) {
+  const cat = categoryStyle[item.category];
+  return (
+    <View
+      key={item.id}
+      style={[
+        s.tableRow,
+        ...(alt ? [s.tableRowAlt] : []),
+        { paddingLeft: 4 + indentPaddingLeft },
+      ]}
+    >
+      <Text style={[s.td, { width: 26 - indentPaddingLeft / 2, color: colors.gray500 }]}>
+        {indexLabel}
+      </Text>
+      <View style={{ width: 50 }}>
+        <Text
+          style={[
+            s.categoryBadge,
+            { backgroundColor: cat.bg, color: cat.fg },
+          ]}
+        >
+          {costCategoryLabels[item.category]}
+        </Text>
+      </View>
+      <Text style={[s.td, { flex: 1 }]}>{item.name || "—"}</Text>
+      <Text style={[s.td, { width: 34, textAlign: "right" }]}>
+        {item.quantity}
+      </Text>
+      <Text style={[s.td, { width: 28, textAlign: "center" }]}>
+        {item.unit}
+      </Text>
+      <Text style={[s.td, { width: 60, textAlign: "right" }]}>
+        {formatCurrency(item.unitPrice)}
+      </Text>
+      <Text
+        style={[
+          s.td,
+          { width: 74, textAlign: "right", fontWeight: 700 },
+        ]}
+      >
+        {formatCurrency(itemAmount(item))}
+      </Text>
+    </View>
+  );
+}
+
+function WatermarkOverlay() {
+  return (
+    <View
+      fixed
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 60,
+          color: "#166534",
+          opacity: 0.08,
+          transform: "rotate(-30deg)",
+          fontWeight: 700,
+          letterSpacing: 8,
+        }}
+      >
+        無料版 SAMPLE
+      </Text>
+    </View>
+  );
+}
+
+function FooterWatermark() {
+  return (
+    <View
+      fixed
+      style={{
+        position: "absolute",
+        bottom: "6mm",
+        left: "12mm",
+        right: "12mm",
+        borderTopWidth: 0.5,
+        borderTopColor: "#d1d5db",
+        paddingTop: 4,
+      }}
+    >
+      <Text style={{ fontSize: 7, color: "#9ca3af", textAlign: "center" }}>
+        見積書メーカー 無料版で作成 ｜ 透かしなしの正式版は月¥980（Solo）から / mitsumori-maker.com/construction
+      </Text>
+    </View>
+  );
+}
+
+function ConstructionPdf({
+  data,
+  watermark,
+}: {
+  data: ConstructionQuoteData;
+  watermark: boolean;
+}) {
   const totals = calcConstructionTotals(data);
+  const photos = data.sitePhotos ?? [];
 
   return (
     <Document>
       <Page size="A4" style={s.page}>
+        {watermark ? <WatermarkOverlay /> : null}
+        {watermark ? <FooterWatermark /> : null}
+        {data.logoDataUrl ? (
+          <View
+            style={{
+              position: "absolute",
+              top: "10mm",
+              left: "10mm",
+              width: 100,
+              height: 40,
+            }}
+          >
+            <Image
+              src={data.logoDataUrl}
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          </View>
+        ) : null}
         {/* タイトル */}
         <Text style={s.title}>工事見積書</Text>
         <View style={s.divider} />
@@ -379,6 +507,23 @@ function ConstructionPdf({ data }: { data: ConstructionQuoteData }) {
           </View>
 
           <View style={s.rightCol}>
+            {data.sealDataUrl ? (
+              <View
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  top: -5,
+                  width: 45,
+                  height: 45,
+                  opacity: 0.9,
+                }}
+              >
+                <Image
+                  src={data.sealDataUrl}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
+              </View>
+            ) : null}
             <Text style={s.companyName}>
               {data.companyName || "（施工者）"}
             </Text>
@@ -445,47 +590,54 @@ function ConstructionPdf({ data }: { data: ConstructionQuoteData }) {
                   {formatCurrency(sectionTotal?.subtotal ?? 0)}
                 </Text>
               </View>
-              {section.items.map((item, itemIndex) => {
-                const cat = categoryStyle[item.category];
+              {section.items.map((item, itemIndex) =>
+                renderItemRow(item, `${sectionIndex + 1}-${itemIndex + 1}`, itemIndex % 2 === 1, 0)
+              )}
+              {(section.subsections ?? []).map((sub, subIndex) => {
+                let subAmount = 0;
+                sub.items.forEach((i) => (subAmount += itemAmount(i)));
                 return (
-                  <View
-                    key={item.id}
-                    style={[
-                      s.tableRow,
-                      ...(itemIndex % 2 === 1 ? [s.tableRowAlt] : []),
-                    ]}
-                  >
-                    <Text style={[s.td, { width: 26, color: colors.gray500 }]}>
-                      {sectionIndex + 1}-{itemIndex + 1}
-                    </Text>
-                    <View style={{ width: 50 }}>
+                  <View key={sub.id}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        backgroundColor: "#ecfccb",
+                        paddingVertical: 3,
+                        paddingHorizontal: 16,
+                        borderBottomWidth: 0.5,
+                        borderBottomColor: "#a3e635",
+                      }}
+                    >
                       <Text
-                        style={[
-                          s.categoryBadge,
-                          { backgroundColor: cat.bg, color: cat.fg },
-                        ]}
+                        style={{
+                          fontSize: 8.5,
+                          fontWeight: 700,
+                          color: colors.primaryDark,
+                          flex: 1,
+                        }}
                       >
-                        {costCategoryLabels[item.category]}
+                        ◇ {sectionIndex + 1}-{subIndex + 1} {sub.name || "（無題）"}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 8.5,
+                          fontWeight: 700,
+                          color: colors.primaryDark,
+                          width: 74,
+                          textAlign: "right",
+                        }}
+                      >
+                        {formatCurrency(subAmount)}
                       </Text>
                     </View>
-                    <Text style={[s.td, { flex: 1 }]}>{item.name || "—"}</Text>
-                    <Text style={[s.td, { width: 34, textAlign: "right" }]}>
-                      {item.quantity}
-                    </Text>
-                    <Text style={[s.td, { width: 28, textAlign: "center" }]}>
-                      {item.unit}
-                    </Text>
-                    <Text style={[s.td, { width: 60, textAlign: "right" }]}>
-                      {formatCurrency(item.unitPrice)}
-                    </Text>
-                    <Text
-                      style={[
-                        s.td,
-                        { width: 74, textAlign: "right", fontWeight: 700 },
-                      ]}
-                    >
-                      {formatCurrency(itemAmount(item))}
-                    </Text>
+                    {sub.items.map((item, itemIndex) =>
+                      renderItemRow(
+                        item,
+                        `${sectionIndex + 1}-${subIndex + 1}-${itemIndex + 1}`,
+                        itemIndex % 2 === 1,
+                        10
+                      )
+                    )}
                   </View>
                 );
               })}
@@ -602,13 +754,68 @@ function ConstructionPdf({ data }: { data: ConstructionQuoteData }) {
           </View>
         ) : null}
       </Page>
+
+      {/* 工事写真シート */}
+      {photos.length > 0 ? (
+        <Page size="A4" style={s.page}>
+          {watermark ? <WatermarkOverlay /> : null}
+          {watermark ? <FooterWatermark /> : null}
+          <Text style={[s.title, { fontSize: 16, letterSpacing: 4 }]}>
+            工事写真・現場状況
+          </Text>
+          <View style={[s.divider, { marginBottom: 16 }]} />
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: 8,
+            }}
+          >
+            {photos.map((photo, i) => (
+              <View
+                key={photo.id}
+                style={{
+                  width: "48%",
+                  marginBottom: 8,
+                  borderWidth: 0.5,
+                  borderColor: colors.gray200,
+                  borderRadius: 3,
+                  overflow: "hidden",
+                }}
+              >
+                <Image
+                  src={photo.dataUrl}
+                  style={{
+                    width: "100%",
+                    height: 160,
+                    objectFit: "cover",
+                  }}
+                />
+                <Text
+                  style={{
+                    fontSize: 8,
+                    color: colors.gray700,
+                    padding: 4,
+                    backgroundColor: colors.gray50,
+                  }}
+                >
+                  図{i + 1}. {photo.caption || "（キャプション未設定）"}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </Page>
+      ) : null}
     </Document>
   );
 }
 
 export async function generateConstructionPdf(
-  data: ConstructionQuoteData
+  data: ConstructionQuoteData,
+  options?: { watermark?: boolean }
 ): Promise<Blob> {
-  const blob = await pdf(<ConstructionPdf data={data} />).toBlob();
+  const blob = await pdf(
+    <ConstructionPdf data={data} watermark={options?.watermark ?? true} />
+  ).toBlob();
   return blob;
 }

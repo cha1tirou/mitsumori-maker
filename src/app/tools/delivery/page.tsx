@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DeliveryData, defaultDeliveryData } from "@/types/delivery";
 import { useDraftSave } from "@/hooks/useDraftSave";
 import DraftBanner from "@/components/DraftBanner";
@@ -19,6 +19,20 @@ export default function DeliveryPage() {
   });
   const { data, setData } = draft;
   const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+    try {
+      const copied = localStorage.getItem("quote_to_delivery");
+      if (copied) {
+        const parsed = JSON.parse(copied);
+        setData({ ...defaultDeliveryData, ...parsed });
+        localStorage.removeItem("quote_to_delivery");
+      }
+    } catch {
+      /* ignore */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen">

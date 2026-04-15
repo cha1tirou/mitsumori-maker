@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PurchaseOrderData, defaultPurchaseOrderData } from "@/types/purchaseOrder";
 import { useDraftSave } from "@/hooks/useDraftSave";
 import DraftBanner from "@/components/DraftBanner";
@@ -19,6 +19,20 @@ export default function PurchaseOrderPage() {
   });
   const { data, setData } = draft;
   const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+    try {
+      const copied = localStorage.getItem("quote_to_purchase_order");
+      if (copied) {
+        const parsed = JSON.parse(copied);
+        setData({ ...defaultPurchaseOrderData, ...parsed });
+        localStorage.removeItem("quote_to_purchase_order");
+      }
+    } catch {
+      /* ignore */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen">
