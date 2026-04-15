@@ -69,3 +69,6 @@
 - [x] 建設業法対応ガイド記事追加（kaisei-kensetsu-2025・legal-welfare・freelance-law-construction）→ 実装・push済み（2026-04-15）
 - [x] 建設業チェックリストページ + リードマグネット機能 → /construction/checklist・LeadMagnetButton・/api/lead-magnet 実装済み（2026-04-15）
 - [x] 建設業プレミアムプラン実装 → Supabase認証・Stripe決済・見積書保存・マイページ・リファラル実装済み（2026-04-15）
+- [x] 業種別ガイド記事追加（運送業・物流）→ guide/transportation 実装済み（2026-04-15）
+- [x] 業種別ガイド記事追加（介護・福祉）→ guide/welfare 実装済み（2026-04-15）
+- [x] 業種別ガイド記事追加（塾・教育）→ guide/education 実装済み（2026-04-15）
