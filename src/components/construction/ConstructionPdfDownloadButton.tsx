@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ConstructionQuoteData } from "@/types/construction";
@@ -11,6 +11,26 @@ import {
   hasBlockingIssues,
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
+
+// フォントを事前キャッシュ（PDF生成時のブロッキングを軽減）
+const FONT_URLS = [
+  "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-400-normal.woff",
+  "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-700-normal.woff",
+];
+
+function preloadFonts() {
+  FONT_URLS.forEach((url) => {
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = url;
+    link.as = "font";
+    link.crossOrigin = "anonymous";
+    document.head.appendChild(link);
+  });
+}
+
+// メインスレッドを一瞬解放してUIを更新させる
+const yieldToMain = () => new Promise<void>((r) => setTimeout(r, 0));
 
 interface Props {
   data: ConstructionQuoteData;
@@ -51,6 +71,9 @@ export default function ConstructionPdfDownloadButton({
   const [loading, setLoading] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
 
+  // マウント時にフォントをプリフェッチ
+  useEffect(() => { preloadFonts(); }, []);
+
   // 有料プラン以外は透かし付き
   const withWatermark = plan !== "solo" && plan !== "team";
 
@@ -65,9 +88,11 @@ export default function ConstructionPdfDownloadButton({
     // warning（推奨項目）はブロックせずそのまま出力する
     setLoading(true);
     try {
+      // モジュール読み込み後、UIを更新させてからPDF生成に入る
       const { generateConstructionPdf } = await import(
         "@/lib/constructionPdfGenerator"
       );
+      await yieldToMain();
       const blob = await generateConstructionPdf(data, {
         watermark: withWatermark,
       });
