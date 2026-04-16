@@ -14,14 +14,14 @@ import {
 
 // フォントを事前キャッシュ（PDF生成時のブロッキングを軽減）
 const FONT_URLS = [
-  "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-400-normal.woff",
-  "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-700-normal.woff",
+  "/fonts/noto-sans-jp-400.woff",
+  "/fonts/noto-sans-jp-700.woff",
 ];
 
 function preloadFonts() {
   FONT_URLS.forEach((url) => {
     const link = document.createElement("link");
-    link.rel = "prefetch";
+    link.rel = "preload";
     link.href = url;
     link.as = "font";
     link.crossOrigin = "anonymous";

@@ -19,11 +19,11 @@ Font.register({
   family: "NotoSansJP",
   fonts: [
     {
-      src: "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-400-normal.woff",
+      src: "/fonts/noto-sans-jp-400.woff",
       fontWeight: 400,
     },
     {
-      src: "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-jp@5.0.1/files/noto-sans-jp-japanese-700-normal.woff",
+      src: "/fonts/noto-sans-jp-700.woff",
       fontWeight: 700,
     },
   ],
