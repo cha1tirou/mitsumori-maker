@@ -387,7 +387,7 @@ function WatermarkOverlay() {
         style={{
           fontSize: 60,
           color: "#166534",
-          opacity: 0.13,
+          opacity: 0.2,
           transform: "rotate(-30deg)",
           fontWeight: 700,
           letterSpacing: 8,
