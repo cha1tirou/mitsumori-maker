@@ -62,12 +62,7 @@ export default function ConstructionPdfDownloadButton({
       );
       return;
     }
-    if (issues.length > 0) {
-      const cont = confirm(
-        `以下の推奨項目が未入力です。このまま出力しますか？\n\n${formatIssuesForConfirm(issues)}`
-      );
-      if (!cont) return;
-    }
+    // warning（推奨項目）はブロックせずそのまま出力する
     setLoading(true);
     try {
       const { generateConstructionPdf } = await import(
