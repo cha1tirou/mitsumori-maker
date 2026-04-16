@@ -14,7 +14,7 @@ import { getRecentTopicIds, recordVideoPost } from "@/lib/video/history";
 import { notifyVideoPipeline } from "@/lib/video/notify";
 
 // HeyGen 生成を待つため最大許容実行時間を拡張（Vercel Pro 以上必須）
-export const maxDuration = 800;
+export const maxDuration = 300;
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
