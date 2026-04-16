@@ -62,7 +62,7 @@ export default async function AdminPage() {
       <header className="bg-gray-900 text-white sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
-            href="/construction"
+            href="/construction/mypage"
             className="flex items-center gap-2 text-sm font-bold"
           >
             <HardHat className="w-5 h-5 text-green-400" strokeWidth={2.25} />

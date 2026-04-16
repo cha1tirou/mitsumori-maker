@@ -15,9 +15,10 @@ import {
 } from "lucide-react";
 import PortalButton from "@/components/construction/PortalButton";
 import SignOutButton from "@/components/construction/SignOutButton";
-import QuoteListItem from "@/components/construction/QuoteListItem";
+import QuoteList from "@/components/construction/QuoteList";
 import ReferralCard from "@/components/construction/ReferralCard";
 import FeedbackCard from "@/components/construction/FeedbackCard";
+import AccountSettings from "@/components/construction/AccountSettings";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const dynamic = "force-dynamic";
@@ -51,7 +52,7 @@ export default async function MyPage() {
   }
 
   const [quotes, usedThisMonth] = await Promise.all([
-    getRecentQuotes(user.id, 20),
+    getRecentQuotes(user.id, 100),
     getCurrentMonthQuoteCount(user.id),
   ]);
 
@@ -65,7 +66,7 @@ export default async function MyPage() {
       <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
-            href="/construction"
+            href="/construction/mypage"
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
@@ -80,6 +81,34 @@ export default async function MyPage() {
 
       <main className="max-w-5xl mx-auto px-4 py-8 space-y-6">
         <h1 className="text-xl font-bold text-gray-900">マイページ</h1>
+
+        {/* 初回ウェルカム */}
+        {quotes.length === 0 && usedThisMonth === 0 && (
+          <section className="bg-gradient-to-r from-green-700 to-green-800 rounded-2xl p-6 text-white">
+            <h2 className="text-lg font-bold mb-2">
+              ようこそ、ケンミツへ！
+            </h2>
+            <p className="text-sm text-green-100 mb-4 leading-relaxed">
+              アカウント登録が完了しました。まずは見積書を1通作成してみましょう。
+              <br />
+              工種プリセットを使えば、数分で見積書が完成します。
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/construction/new"
+                className="inline-flex items-center gap-2 bg-white text-green-800 font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-green-50 transition-colors"
+              >
+                最初の見積書を作成する →
+              </Link>
+              <Link
+                href="/construction/how-to"
+                className="inline-flex items-center gap-2 border border-white/30 text-white font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                使い方を見る
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* プラン状況 */}
         <section className="bg-white rounded-2xl border border-gray-100 p-6">
@@ -152,45 +181,18 @@ export default async function MyPage() {
           </div>
         </section>
 
-        {/* 見積履歴 */}
-        <section className="bg-white rounded-2xl border border-gray-100 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-bold text-gray-900">見積履歴</h2>
-            <span className="text-xs text-gray-500">
-              {`${quotes.length} 件表示中`}
-            </span>
-          </div>
-
-          {plan === "free" && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-gray-700 mb-4 flex items-start gap-2">
-              <Crown className="w-4 h-4 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
-              <span>
-                Freeプランでは月{FREE_PLAN_MONTHLY_LIMIT}通まで保存できます。Soloプランにアップグレードすると、無制限に保存・再編集・複製が可能です。
-              </span>
-            </div>
-          )}
-
-          {quotes.length === 0 ? (
-            <div className="text-center py-8 text-sm text-gray-500">
-              まだ見積書がありません。
-              <Link
-                href="/construction/new"
-                className="text-green-700 hover:underline ml-1"
-              >
-                最初の見積書を作成する →
-              </Link>
-            </div>
-          ) : (
-            <ul className="divide-y divide-gray-100">
-              {quotes.map((q) => (
-                <QuoteListItem key={q.id} quote={q} />
-              ))}
-            </ul>
-          )}
-        </section>
+        {/* 見積履歴（検索付き） */}
+        <QuoteList
+          quotes={quotes as import("@/lib/supabase/types").ConstructionQuoteRow[]}
+          plan={plan}
+          freeLimit={FREE_PLAN_MONTHLY_LIMIT}
+        />
 
         {/* 紹介プログラム */}
         <ReferralCard />
+
+        {/* アカウント設定 */}
+        <AccountSettings email={user.email ?? ""} />
 
         {/* βフィードバック */}
         <FeedbackCard />

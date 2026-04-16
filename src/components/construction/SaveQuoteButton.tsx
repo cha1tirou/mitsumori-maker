@@ -35,11 +35,18 @@ export default function SaveQuoteButton({
       });
 
       if (res.status === 401) {
-        router.push(
-          `/construction/login?redirect=${encodeURIComponent(
-            quoteId ? `/construction/quotes/${quoteId}` : "/construction/new"
-          )}`
+        // 下書きはlocalStorageに自動保存されているので、ログイン後に復元可能
+        setStatus("error");
+        setErrorMessage(
+          "ログインの有効期限が切れました。入力内容は自動保存されています。再ログインしてください。"
         );
+        setTimeout(() => {
+          router.push(
+            `/construction/login?redirect=${encodeURIComponent(
+              quoteId ? `/construction/quotes/${quoteId}` : "/construction/new"
+            )}`
+          );
+        }, 2000);
         return;
       }
 

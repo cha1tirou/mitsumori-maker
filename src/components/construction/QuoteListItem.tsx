@@ -12,6 +12,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { ConstructionQuoteRow } from "@/lib/supabase/types";
+import { useToast } from "@/components/construction/Toast";
 
 interface Props {
   quote: ConstructionQuoteRow;
@@ -19,23 +20,32 @@ interface Props {
 
 export default function QuoteListItem({ quote }: Props) {
   const router = useRouter();
+  const toast = useToast();
   const [busy, setBusy] = useState<"delete" | "duplicate" | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirm("この見積書を削除しますか？この操作は元に戻せません。")) return;
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      // 5秒後にリセット
+      setTimeout(() => setConfirmDelete(false), 5000);
+      return;
+    }
+    setConfirmDelete(false);
     setBusy("delete");
     try {
       const res = await fetch(`/api/quotes?id=${quote.id}`, {
         method: "DELETE",
       });
       if (res.ok) {
+        toast.success("見積書を削除しました。");
         router.refresh();
       } else {
-        alert("削除に失敗しました。");
+        toast.error("削除に失敗しました。");
         setBusy(null);
       }
     } catch {
-      alert("通信エラーが発生しました。");
+      toast.error("通信エラーが発生しました。");
       setBusy(null);
     }
   };
@@ -48,7 +58,7 @@ export default function QuoteListItem({ quote }: Props) {
       });
       const json = await res.json();
       if (res.status === 402) {
-        alert(
+        toast.error(
           json.message ||
             "無料プランの月間上限に達しました。Soloプランで解除できます。"
         );
@@ -56,10 +66,11 @@ export default function QuoteListItem({ quote }: Props) {
         return;
       }
       if (!res.ok) {
-        alert(json.error || "複製に失敗しました。");
+        toast.error(json.error || "複製に失敗しました。");
         setBusy(null);
         return;
       }
+      toast.success("見積書を複製しました。");
       const newId = json.quote?.id;
       if (newId) {
         router.push(`/construction/quotes/${newId}`);
@@ -67,7 +78,7 @@ export default function QuoteListItem({ quote }: Props) {
         router.refresh();
       }
     } catch {
-      alert("通信エラーが発生しました。");
+      toast.error("通信エラーが発生しました。");
       setBusy(null);
     }
   };
@@ -118,8 +129,12 @@ export default function QuoteListItem({ quote }: Props) {
         <button
           onClick={handleDelete}
           disabled={busy !== null}
-          className="w-7 h-7 flex items-center justify-center rounded-md text-gray-400 hover:text-red-700 hover:bg-red-50 disabled:opacity-50"
-          title="削除"
+          className={`w-7 h-7 flex items-center justify-center rounded-md disabled:opacity-50 ${
+            confirmDelete
+              ? "text-red-700 bg-red-50 ring-1 ring-red-200"
+              : "text-gray-400 hover:text-red-700 hover:bg-red-50"
+          }`}
+          title={confirmDelete ? "もう一度押して削除" : "削除"}
         >
           {busy === "delete" ? (
             <Loader2 className="w-3.5 h-3.5 animate-spin" strokeWidth={2.25} />

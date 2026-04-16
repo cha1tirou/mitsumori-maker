@@ -129,7 +129,7 @@ export default function ConstructionEditor({
       <header className="bg-white border-b border-gray-100 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
-            href="/construction"
+            href={userEmail ? "/construction/mypage" : "/construction"}
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />

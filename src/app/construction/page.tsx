@@ -112,7 +112,7 @@ const problems = [
   {
     Icon: FolderSearch,
     title: "大手ソフトは月9,800円〜で重すぎる",
-    body: "サクミル・AnyONEは機能が多くて高額。一人親方や数名の工務店に、そこまでのスペックは要らない。",
+    body: "大手の建設業向けソフトは機能が多くて高額。一人親方や数名の工務店に、そこまでのスペックは要らない。",
   },
 ];
 
@@ -280,7 +280,7 @@ export default async function ConstructionLandingPage() {
       {/* ヘッダー */}
       <header className="border-b border-gray-100 bg-white/80 backdrop-blur sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="text-sm font-bold text-gray-900 flex items-center gap-2">
+          <Link href={isLoggedIn ? "/construction/mypage" : "/construction"} className="text-sm font-bold text-gray-900 flex items-center gap-2">
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
             <span>
               ケンミツ <span className="text-green-700">| 建設業の見積書</span>
