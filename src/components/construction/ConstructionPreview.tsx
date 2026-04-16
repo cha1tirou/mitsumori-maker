@@ -48,7 +48,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         {watermark && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-10">
             <span
-              className="text-green-800 opacity-[0.08] font-bold tracking-widest"
+              className="text-green-800 opacity-[0.13] font-bold tracking-widest"
               style={{
                 transform: "rotate(-30deg)",
                 fontSize: "60px",
