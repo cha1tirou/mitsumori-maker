@@ -42,6 +42,10 @@ const ConvertButtons = dynamic(
   () => import("@/components/construction/ConvertButtons"),
   { ssr: false }
 );
+const AccountingCsvButton = dynamic(
+  () => import("@/components/construction/AccountingCsvButton"),
+  { ssr: false }
+);
 
 interface Props {
   initialData?: ConstructionQuoteData;
@@ -130,7 +134,7 @@ export default function ConstructionEditor({
           >
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
             <span className="hidden sm:inline">
-              見積書メーカー <span className="text-green-700">for 建設業</span>
+              ケンミツ <span className="text-green-700">| 建設業の見積書</span>
             </span>
             <span className="sm:hidden">建設業見積</span>
           </Link>
@@ -255,6 +259,7 @@ export default function ConstructionEditor({
                   onSaved={handleSaved}
                 />
                 <ConvertButtons data={data} />
+                <AccountingCsvButton data={data} />
                 <button
                   onClick={() => setEmailDialogOpen(true)}
                   className="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"

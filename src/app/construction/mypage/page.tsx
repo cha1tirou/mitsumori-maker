@@ -69,7 +69,7 @@ export default async function MyPage() {
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
-            見積書メーカー <span className="text-green-700">for 建設業</span>
+            ケンミツ <span className="text-green-700">| 建設業の見積書</span>
           </Link>
           <div className="flex items-center gap-3 text-xs text-gray-600">
             <span>{user.email}</span>

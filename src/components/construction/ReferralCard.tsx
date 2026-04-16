@@ -38,7 +38,7 @@ export default function ReferralCard() {
   );
   const mailSubject = encodeURIComponent("建設業向けの見積書ツールのご紹介");
   const mailBody = encodeURIComponent(
-    `改正建設業法2025に対応した見積書メーカーをご紹介します。\n一人親方・小規模工務店向けで、登録不要・月¥980から使えます。\n\n${referralUrl}`
+    `改正建設業法2025に対応した建設業向け見積書ツール「ケンミツ」をご紹介します。\n一人親方・小規模工務店向けで、登録不要・月¥980から使えます。\n\n${referralUrl}`
   );
 
   const rewards = [

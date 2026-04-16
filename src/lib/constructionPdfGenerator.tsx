@@ -414,7 +414,7 @@ function FooterWatermark() {
       }}
     >
       <Text style={{ fontSize: 7, color: "#9ca3af", textAlign: "center" }}>
-        見積書メーカー 無料版で作成 ｜ 透かしなしの正式版は月¥980（Solo）から / mitsumori-maker.com/construction
+        ケンミツ 無料版で作成 ｜ 透かしなしの正式版は月¥980（Solo）から / mitsumori-maker.com/construction
       </Text>
     </View>
   );

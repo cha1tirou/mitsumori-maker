@@ -4,7 +4,7 @@ import { HardHat, CheckSquare, Download } from "lucide-react";
 import LeadMagnetButton from "@/components/construction/LeadMagnetButton";
 
 export const metadata: Metadata = {
-  title: "改正建設業法2025対応チェックリスト【無料DL】見積書の実務対応 | 見積書メーカー",
+  title: "改正建設業法2025対応チェックリスト【無料DL】見積書の実務対応 | ケンミツ",
   description:
     "改正建設業法2025（2025年12月全面施行）への対応状況を自社でチェックできる無料チェックリスト。見積書の労務費内訳・法定福利費・見積条件書・瑕疵担保など30項目を網羅。一人親方・工務店向け。",
   keywords: "改正建設業法 チェックリスト, 建設業法 2025, 見積書, 対応, 無料, ダウンロード",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       "改正建設業法2025への対応を自社でチェックできるリスト。見積書の実務対応項目を網羅。",
     url: "https://mitsumori-maker.com/construction/checklist",
-    siteName: "見積書メーカー",
+    siteName: "ケンミツ",
     locale: "ja_JP",
     type: "article",
   },
@@ -107,7 +107,7 @@ export default function ChecklistPage() {
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
             <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
-            見積書メーカー <span className="text-green-700">for 建設業</span>
+            ケンミツ <span className="text-green-700">| 建設業の見積書</span>
           </Link>
           <button
             onClick={undefined}
@@ -177,7 +177,7 @@ export default function ChecklistPage() {
 
           <div className="mt-10 pt-6 border-t border-gray-200 text-center">
             <p className="text-xs text-gray-500 mb-2">
-              © 2026 見積書メーカー 建設業版 編集部 / mitsumori-maker.com
+              © 2026 ケンミツ 編集部 / mitsumori-maker.com
             </p>
             <p className="text-[11px] text-gray-400">
               本チェックリストは情報提供を目的としています。法令の最終的な解釈は所属団体・専門家にご確認ください。
@@ -197,7 +197,7 @@ export default function ChecklistPage() {
             href="/construction"
             className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            建設業向け見積書メーカーを見る →
+            ケンミツを見る →
           </Link>
         </div>
       </main>

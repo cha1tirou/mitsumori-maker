@@ -3,9 +3,9 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー（建設業向け有料プラン）| 見積書メーカー for 建設業",
+  title: "プライバシーポリシー（建設業向け有料プラン）| ケンミツ",
   description:
-    "見積書メーカー 建設業向け有料プランのプライバシーポリシー。個人情報・見積データ・決済情報の取扱い、Supabase・Stripe等の外部サービス利用について記載しています。",
+    "ケンミツ（建設業向け有料プラン）のプライバシーポリシー。個人情報・見積データ・決済情報の取扱い、Supabase・Stripe等の外部サービス利用について記載しています。",
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/privacy",
   },
@@ -19,7 +19,7 @@ export default function ConstructionPrivacyPage() {
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
             <Link href="/construction" className="hover:text-gray-700">
-              見積書メーカー for 建設業
+              ケンミツ
             </Link>
             <span className="mx-1">/</span>
             <span className="text-gray-700">プライバシーポリシー</span>
@@ -42,7 +42,7 @@ export default function ConstructionPrivacyPage() {
           <p className="text-xs text-gray-500 mb-8">最終改定日: 2026年4月14日</p>
 
           <p className="text-sm text-gray-700 leading-relaxed mb-8">
-            本ポリシーは、見積書メーカー 建設業向け有料サービス（以下「本サービス」）における、利用者の個人情報および関連情報の取扱いについて定めるものです。
+            本ポリシーは、ケンミツ（以下「本サービス」）における、利用者の個人情報および関連情報の取扱いについて定めるものです。
           </p>
 
           <Section title="1. 取得する情報">

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "利用規約（建設業向け有料プラン）| 見積書メーカー for 建設業",
+  title: "利用規約（建設業向け有料プラン）| ケンミツ",
   description:
-    "見積書メーカー 建設業向け有料プランの利用規約。Soloプラン・Teamプランの契約・料金・解約・返金・責任範囲について定めています。",
+    "ケンミツ（建設業向け有料プラン）の利用規約。Soloプラン・Teamプランの契約・料金・解約・返金・責任範囲について定めています。",
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/terms",
   },
@@ -19,7 +19,7 @@ export default function ConstructionTermsPage() {
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
             <Link href="/construction" className="hover:text-gray-700">
-              見積書メーカー for 建設業
+              ケンミツ
             </Link>
             <span className="mx-1">/</span>
             <span className="text-gray-700">利用規約</span>
@@ -42,9 +42,9 @@ export default function ConstructionTermsPage() {
           <p className="text-xs text-gray-500 mb-8">最終改定日: 2026年4月14日</p>
 
           <p className="text-sm text-gray-700 leading-relaxed mb-8">
-            本規約（以下「本規約」）は、見積書メーカー 建設業向け有料サービス（以下「本サービス」）の利用条件を定めるものです。本サービスをご利用いただくにあたり、本規約のほか、別途定める
+            本規約（以下「本規約」）は、ケンミツ（以下「本サービス」）の利用条件を定めるものです。本サービスをご利用いただくにあたり、本規約のほか、別途定める
             <Link href="/terms" className="text-green-700 hover:underline">
-              見積書メーカー全体の利用規約
+              共通利用規約
             </Link>
             および
             <Link href="/construction/privacy" className="text-green-700 hover:underline">

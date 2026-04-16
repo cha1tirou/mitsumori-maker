@@ -3,9 +3,9 @@ import Link from "next/link";
 import { HardHat, AlertTriangle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "特定商取引法に基づく表記 | 見積書メーカー for 建設業",
+  title: "特定商取引法に基づく表記 | ケンミツ",
   description:
-    "見積書メーカー 建設業向け有料プランの特定商取引法に基づく表記です。販売事業者・料金・支払方法・解約条件などを記載しています。",
+    "ケンミツ（建設業向け有料プラン）の特定商取引法に基づく表記です。販売事業者・料金・支払方法・解約条件などを記載しています。",
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/tokushoho",
   },
@@ -30,7 +30,7 @@ export default function ConstructionTokushohoPage() {
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
             <Link href="/construction" className="hover:text-gray-700">
-              見積書メーカー for 建設業
+              ケンミツ
             </Link>
             <span className="mx-1">/</span>
             <span className="text-gray-700">特定商取引法に基づく表記</span>

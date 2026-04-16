@@ -33,7 +33,7 @@ function daysSinceLawEnforcement(): number {
 }
 
 export const metadata: Metadata = {
-  title: "建設業の見積書作成｜改正建設業法2025対応・月980円｜見積書メーカー",
+  title: "建設業の見積書作成｜改正建設業法2025対応・月980円｜ケンミツ",
   description:
     "一人親方・小規模建設業向けの見積書作成ツール。改正建設業法2025に対応した労務費内訳・一式チェッカー・工種別テンプレを搭載。登録不要で今すぐ試せる。月980円から。",
   keywords: "建設業 見積書, 一人親方 見積書, 建設業法 2025, 工事見積書 アプリ, 労務費 内訳, 見積書 ソフト 建設",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "建設業の見積書作成｜改正建設業法2025対応・月980円",
     description: "一人親方向け・登録不要で試せる建設業専用の見積書作成ツール。労務費内訳・一式チェッカー・工種テンプレ搭載。",
     url: "https://mitsumori-maker.com/construction",
-    siteName: "見積書メーカー",
+    siteName: "ケンミツ",
     locale: "ja_JP",
     type: "website",
   },
@@ -177,16 +177,17 @@ const planFeatures = {
     "見積書作成・PDF出力（無制限）",
     "建設業法チェッカー",
     "工種プリセット・諸経費自動計算",
+    "AI積算 月1回お試し",
     "※ PDFに「無料版」透かしが入ります",
     "※ 見積履歴の保存は月3通まで（要登録）",
   ],
   solo: [
     "🎯 PDF透かしなし（正式版）",
+    "🤖 AI積算（図面/PDF→明細自動抽出）月10回",
     "見積書の無制限保存・再編集・複製",
-    "顧客（取引先）マスタ",
     "発注者へメール直接送信",
-    "単価マスタ・原価粗利分析",
-    "工事写真をPDFに埋込",
+    "会計ソフトCSV連携（freee/MF/弥生）",
+    "顧客・単価マスタ・原価粗利分析・工事写真",
   ],
   team: [
     "Solo全機能",
@@ -215,8 +216,66 @@ export default async function ConstructionLandingPage() {
   const planLabel = plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
   const lawDays = daysSinceLawEnforcement();
 
+  // 構造化データ：SoftwareApplication + FAQPage
+  const softwareLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "ケンミツ",
+    url: "https://mitsumori-maker.com/construction",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "一人親方・小規模工務店向けの建設業特化・見積書作成クラウドツール。改正建設業法2025対応、月¥980、登録不要で試せる。",
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Free プラン",
+        price: "0",
+        priceCurrency: "JPY",
+      },
+      {
+        "@type": "Offer",
+        name: "Solo プラン",
+        price: "980",
+        priceCurrency: "JPY",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "980",
+          priceCurrency: "JPY",
+          referenceQuantity: {
+            "@type": "QuantitativeValue",
+            value: "1",
+            unitCode: "MON",
+          },
+        },
+      },
+    ],
+    inLanguage: "ja",
+  };
+
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
       <TrackPageView name="construction_lp_view" />
       {/* ヘッダー */}
       <header className="border-b border-gray-100 bg-white/80 backdrop-blur sticky top-0 z-10">
@@ -224,7 +283,7 @@ export default async function ConstructionLandingPage() {
           <Link href="/" className="text-sm font-bold text-gray-900 flex items-center gap-2">
             <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
             <span>
-              見積書メーカー <span className="text-green-700">for 建設業</span>
+              ケンミツ <span className="text-green-700">| 建設業の見積書</span>
             </span>
           </Link>
           <div className="flex items-center gap-2">
@@ -518,7 +577,7 @@ export default async function ConstructionLandingPage() {
               <thead>
                 <tr className="bg-gray-900 text-white">
                   <th className="py-3 px-4 text-left font-bold">比較項目</th>
-                  <th className="py-3 px-4 text-left font-bold bg-green-700">見積書メーカー for 建設業</th>
+                  <th className="py-3 px-4 text-left font-bold bg-green-700">ケンミツ</th>
                   <th className="py-3 px-4 text-left font-bold">大手ソフト</th>
                 </tr>
               </thead>
@@ -572,7 +631,7 @@ export default async function ConstructionLandingPage() {
                 <HardHat className="w-5 h-5 text-gray-600" strokeWidth={2} />
               </div>
               <div className="text-xs text-gray-600">
-                <strong className="text-gray-900">見積書メーカー 開発チーム</strong>
+                <strong className="text-gray-900">ケンミツ 開発チーム</strong>
                 <br />
                 ご質問・ご要望は <Link href="/contact" className="text-green-700 hover:underline">お問い合わせフォーム</Link> よりお気軽に。
               </div>
@@ -740,21 +799,24 @@ export default async function ConstructionLandingPage() {
               料金プランを見る
             </a>
           </div>
-          <div className="mt-10 text-xs text-green-200">
+          <div className="mt-10 text-xs text-green-200 flex flex-wrap gap-x-4 gap-y-2 justify-center">
+            <Link href="/construction/how-to" className="hover:underline">
+              使い方
+            </Link>
+            <Link href="/construction/faq" className="hover:underline">
+              FAQ
+            </Link>
+            <Link href="/construction/checklist" className="hover:underline">
+              チェックリスト
+            </Link>
             <Link href="/construction/terms" className="hover:underline">
               利用規約
             </Link>
-            <span className="mx-2">・</span>
             <Link href="/construction/privacy" className="hover:underline">
-              プライバシーポリシー
+              プライバシー
             </Link>
-            <span className="mx-2">・</span>
             <Link href="/construction/tokushoho" className="hover:underline">
-              特定商取引法に基づく表記
-            </Link>
-            <span className="mx-2">・</span>
-            <Link href="/" className="hover:underline">
-              汎用版を使う
+              特商法表記
             </Link>
           </div>
         </div>
