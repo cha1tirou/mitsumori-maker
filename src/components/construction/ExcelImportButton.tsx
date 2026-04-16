@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import * as XLSX from "xlsx";
+import type * as XLSXType from "xlsx";
 import { FileUp, Loader2, AlertCircle } from "lucide-react";
 import {
   ConstructionItem,
@@ -44,7 +44,10 @@ function newId(prefix: string) {
  * Excel シートから明細行を推測して取り込む。
  * 列の自動検出：品名 / 数量 / 単位 / 単価 / 金額（or 備考）
  */
-function parseSheet(sheet: XLSX.WorkSheet): ConstructionItem[] {
+function parseSheet(
+  XLSX: typeof XLSXType,
+  sheet: XLSXType.WorkSheet
+): ConstructionItem[] {
   const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(sheet, {
     defval: "",
   });
@@ -103,12 +106,14 @@ export default function ExcelImportButton({ data, onChange }: Props) {
     setStatus("loading");
     setMessage("");
     try {
+      // xlsx はバンドルが重いので動的import
+      const XLSX = await import("xlsx");
       const buffer = await file.arrayBuffer();
       const workbook = XLSX.read(buffer, { type: "array" });
       const allItems: { sheetName: string; items: ConstructionItem[] }[] = [];
       for (const sheetName of workbook.SheetNames) {
         const sheet = workbook.Sheets[sheetName];
-        const items = parseSheet(sheet);
+        const items = parseSheet(XLSX, sheet);
         if (items.length > 0) {
           allItems.push({ sheetName, items });
         }

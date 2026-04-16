@@ -41,9 +41,12 @@
 - [x] トップページに「使い方3ステップ」セクション追加
 
 ## 進行中（収益化・改善）
-- [ ] AdSense承認確認・広告ユニット設置
+- [ ] AdSense承認確認・広告ユニット設置（4/24以降に再審査申請）
 - [x] アフィリエイトリンク挿入（会計ソフト） → how-to-write・template-excel・beauty に追加済み
 - [ ] Search Consoleでインデックス状況確認・サイトマップ再送信（手動）
+- [x] guide/page.tsx: construction（noindex）削除・transportation/welfare/education追加・記事数を20本に修正（2026-04-16）
+- [x] sitemap.xml: /guideの重複エントリ削除・lastmod更新（2026-04-16）
+- [x] ConstructionForm: AIで積算（β）ボタン追加・ExcelImportButton動的import最適化（2026-04-16）
 
 ## アイデアバックログ
 - [x] ガイド記事一覧ページ /guide 作成・sitemapに追加（2026-04-12）

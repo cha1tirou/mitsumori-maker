@@ -42,6 +42,7 @@ import { itemAmount, itemCost, itemProfit, itemMarginRate } from "@/lib/construc
 import PriceMasterPicker from "./PriceMasterPicker";
 import CustomerPicker from "./CustomerPicker";
 import ExcelImportButton from "./ExcelImportButton";
+import AiTakeoffDialog from "./AiTakeoffDialog";
 
 interface Props {
   data: ConstructionQuoteData;
@@ -352,6 +353,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
     | null
   >(null);
   const [customerPickerOpen, setCustomerPickerOpen] = useState(false);
+  const [aiDialogOpen, setAiDialogOpen] = useState(false);
 
   useEffect(() => {
     setHasSavedCompany(hasSavedConstructionCompanyInfo());
@@ -1015,7 +1017,15 @@ export default function ConstructionForm({ data, onChange }: Props) {
           )}
         </p>
 
-        <div className="mb-4">
+        <div className="mb-4 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => setAiDialogOpen(true)}
+            className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold py-2.5 rounded-lg shadow-sm transition-all"
+          >
+            <Sparkles className="w-4 h-4" strokeWidth={2.25} />
+            AIで積算（β）
+          </button>
           <ExcelImportButton data={data} onChange={onChange} />
         </div>
 
@@ -1461,6 +1471,12 @@ export default function ConstructionForm({ data, onChange }: Props) {
           title: data.clientTitle,
           contact: data.clientContact,
         }}
+      />
+      <AiTakeoffDialog
+        open={aiDialogOpen}
+        onClose={() => setAiDialogOpen(false)}
+        currentData={data}
+        onApply={(next) => onChange(next)}
       />
     </div>
   );
