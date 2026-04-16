@@ -39,7 +39,7 @@ export default async function MyPage() {
             href="/construction"
             className="inline-block bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
           >
-            建設業向けトップに戻る
+            ケンミツトップに戻る
           </Link>
         </div>
       </div>

@@ -191,7 +191,7 @@ export default function FaqPage() {
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
             <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
-            ← 建設業向けトップに戻る
+            ← ケンミツトップに戻る
           </Link>
         </div>
       </header>
