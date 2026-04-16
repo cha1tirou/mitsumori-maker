@@ -281,6 +281,16 @@ export default function ConstructionEditor({
                   <User className="w-3.5 h-3.5" strokeWidth={2.25} />
                   マイページを開く
                 </Link>
+                <Link
+                  href="/construction/checklist"
+                  className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg p-3 hover:bg-green-100 transition-colors"
+                >
+                  <AlertCircle className="w-4 h-4 text-green-700 shrink-0" strokeWidth={2.25} />
+                  <div className="text-xs">
+                    <p className="font-bold text-green-900">改正建設業法2025 対応チェックリスト</p>
+                    <p className="text-green-700 mt-0.5">30項目で自己診断（無料）→</p>
+                  </div>
+                </Link>
                 {!isEdit && data.sections.some((s) => s.items.some((i) => i.name)) && (
                   <button
                     type="button"
