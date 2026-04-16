@@ -370,6 +370,14 @@ function renderItemRow(
 }
 
 function WatermarkOverlay() {
+  const textStyle = {
+    fontSize: 80,
+    color: "#166534",
+    opacity: 0.25,
+    transform: "rotate(-30deg)",
+    fontWeight: 700,
+    letterSpacing: 10,
+  };
   return (
     <View
       fixed
@@ -379,22 +387,15 @@ function WatermarkOverlay() {
         left: 0,
         right: 0,
         bottom: 0,
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
+        paddingTop: "25%",
+        paddingBottom: "20%",
       }}
     >
-      <Text
-        style={{
-          fontSize: 60,
-          color: "#166534",
-          opacity: 0.2,
-          transform: "rotate(-30deg)",
-          fontWeight: 700,
-          letterSpacing: 8,
-        }}
-      >
-        無料版 SAMPLE
-      </Text>
+      <Text style={textStyle}>SAMPLE</Text>
+      <Text style={textStyle}>SAMPLE</Text>
+      <Text style={textStyle}>SAMPLE</Text>
     </View>
   );
 }
@@ -413,7 +414,7 @@ function FooterWatermark() {
         paddingTop: 4,
       }}
     >
-      <Text style={{ fontSize: 7, color: "#9ca3af", textAlign: "center" }}>
+      <Text style={{ fontSize: 8, color: "#6b7280", textAlign: "center" }}>
         ケンミツ 無料版で作成 ｜ 透かしなしの正式版は月¥980（Solo）から / mitsumori-maker.com/construction
       </Text>
     </View>

@@ -46,17 +46,20 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
       <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans relative">
         {watermark && (
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-10">
-            <span
-              className="text-green-800 opacity-[0.2] font-bold tracking-widest"
-              style={{
-                transform: "rotate(-30deg)",
-                fontSize: "60px",
-                letterSpacing: "0.5em",
-              }}
-            >
-              無料版 SAMPLE
-            </span>
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10" style={{ paddingTop: "25%", paddingBottom: "20%" }}>
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="text-green-800 opacity-[0.25] font-bold tracking-widest"
+                style={{
+                  transform: "rotate(-30deg)",
+                  fontSize: "80px",
+                  letterSpacing: "0.5em",
+                }}
+              >
+                SAMPLE
+              </span>
+            ))}
           </div>
         )}
         {data.logoDataUrl && (
