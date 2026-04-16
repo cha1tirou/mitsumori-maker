@@ -17,6 +17,7 @@ import PortalButton from "@/components/construction/PortalButton";
 import SignOutButton from "@/components/construction/SignOutButton";
 import QuoteListItem from "@/components/construction/QuoteListItem";
 import ReferralCard from "@/components/construction/ReferralCard";
+import FeedbackCard from "@/components/construction/FeedbackCard";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const dynamic = "force-dynamic";
@@ -156,9 +157,7 @@ export default async function MyPage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-bold text-gray-900">見積履歴</h2>
             <span className="text-xs text-gray-500">
-              {plan === "free"
-                ? "履歴保存はSoloプラン以上で利用可能"
-                : `${quotes.length} 件表示中`}
+              {`${quotes.length} 件表示中`}
             </span>
           </div>
 
@@ -166,7 +165,7 @@ export default async function MyPage() {
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-gray-700 mb-4 flex items-start gap-2">
               <Crown className="w-4 h-4 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
               <span>
-                Soloプランにアップグレードすると、作成した見積書をすべてクラウドに保存し、いつでも再編集・複製できます。
+                Freeプランでは月{FREE_PLAN_MONTHLY_LIMIT}通まで保存できます。Soloプランにアップグレードすると、無制限に保存・再編集・複製が可能です。
               </span>
             </div>
           )}
@@ -192,6 +191,9 @@ export default async function MyPage() {
 
         {/* 紹介プログラム */}
         <ReferralCard />
+
+        {/* βフィードバック */}
+        <FeedbackCard />
 
         <section className="bg-white rounded-2xl border border-gray-100 p-6 flex items-center gap-3">
           <CheckCircle2 className="w-5 h-5 text-green-700" strokeWidth={2.25} />

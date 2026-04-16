@@ -22,7 +22,7 @@ export function canAccess(
     case "save_quote":
       return true; // 月3通制限は別途カウントで判定
     case "quote_history":
-      return plan === "solo" || plan === "team";
+      return true; // Free でも保存した見積書の履歴は閲覧可能
     case "unlimited_quotes":
       return plan === "solo" || plan === "team";
     case "team_seat":
