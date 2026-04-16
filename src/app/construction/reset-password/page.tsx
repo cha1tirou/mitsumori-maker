@@ -155,7 +155,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-8"
         >
           <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
-          ← 建設業向けトップへ
+          ← ケンミツトップへ
         </Link>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
