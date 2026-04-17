@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     payment_method_types: ["card"],
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: `${origin}/construction/mypage?checkout=success`,
-    cancel_url: `${origin}/construction?checkout=canceled`,
+    cancel_url: `${origin}/construction/mypage?checkout=canceled`,
     customer: profile?.stripe_customer_id || undefined,
     customer_email: profile?.stripe_customer_id ? undefined : user.email,
     client_reference_id: user.id,

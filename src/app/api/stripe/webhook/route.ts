@@ -81,6 +81,17 @@ export async function POST(request: NextRequest) {
         const planInfo = priceId ? findPlanByPriceId(priceId) : null;
 
         if (userId) {
+          if (
+            (sub.status === "active" || sub.status === "trialing") &&
+            !planInfo
+          ) {
+            console.error(
+              `Stripe Webhook: Price ID ${priceId} がどのプランにも一致しません。環境変数 STRIPE_PRICE_SOLO_MONTHLY 等を確認してください。`
+            );
+            await notifySlack(
+              `🚨 課金されたがプラン特定不能: user=${userId}, priceId=${priceId}. 環境変数を確認してください。`
+            );
+          }
           await supabase
             .from("profiles")
             .update({
@@ -93,6 +104,10 @@ export async function POST(request: NextRequest) {
               current_period_end: currentPeriodEnd(sub),
             })
             .eq("id", userId);
+        } else {
+          console.warn(
+            `Stripe Webhook: subscription ${sub.id} に user_id metadata がありません。`
+          );
         }
         break;
       }
@@ -106,6 +121,8 @@ export async function POST(request: NextRequest) {
             .update({
               subscription_status: "canceled",
               plan: "free",
+              current_period_end: null,
+              stripe_subscription_id: null,
             })
             .eq("id", userId);
         }

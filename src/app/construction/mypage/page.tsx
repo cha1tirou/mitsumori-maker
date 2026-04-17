@@ -23,7 +23,13 @@ import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const dynamic = "force-dynamic";
 
-export default async function MyPage() {
+export default async function MyPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
+  const checkoutResult = params.checkout as string | undefined;
   if (!isSupabaseConfigured()) {
     return (
       <div className="min-h-screen bg-gray-50 p-8">
@@ -81,6 +87,27 @@ export default async function MyPage() {
 
       <main className="max-w-5xl mx-auto px-4 py-8 space-y-6">
         <h1 className="text-xl font-bold text-gray-900">マイページ</h1>
+
+        {/* チェックアウト結果 */}
+        {checkoutResult === "success" && (
+          <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
+            <div>
+              <p className="text-sm font-bold text-gray-900">プランのアップグレードが完了しました</p>
+              <p className="text-xs text-gray-600 mt-0.5">
+                Soloプランの全機能をご利用いただけます。反映まで数秒かかる場合があります。
+              </p>
+            </div>
+          </div>
+        )}
+        {checkoutResult === "canceled" && (
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" strokeWidth={2.25} />
+            <p className="text-sm text-gray-700">
+              チェックアウトがキャンセルされました。いつでも再度お申し込みいただけます。
+            </p>
+          </div>
+        )}
 
         {/* 初回ウェルカム */}
         {quotes.length === 0 && usedThisMonth === 0 && (
