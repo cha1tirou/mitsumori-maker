@@ -386,10 +386,10 @@ export default async function ConstructionLandingPage() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold text-amber-900">
-                β先行ユーザー募集中 — 先着20名は初月無料
+                登録後7日間、Solo全機能を無料体験
               </p>
               <p className="text-xs text-amber-800 mt-0.5">
-                FBに応じて機能追加を優先対応。登録不要で触れます。
+                透かしなしPDF・無制限保存・メール送信。カード登録不要。
               </p>
             </div>
             <Link
@@ -431,7 +431,7 @@ export default async function ConstructionLandingPage() {
             こんな経験、ありませんか？
           </h2>
           <p className="text-center text-sm text-gray-500 mb-10">
-            建設業の一人親方・小規模工務店 100名へのヒアリングで上位に挙がった悩みです
+            建設業の一人親方・小規模工務店が抱える、よくある悩みです
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             {problems.map(({ Icon, title, body }, i) => (

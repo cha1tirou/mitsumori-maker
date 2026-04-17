@@ -17,6 +17,7 @@ import ConstructionForm from "@/components/construction/ConstructionForm";
 import ConstructionPreview from "@/components/construction/ConstructionPreview";
 import LawCheckPanel from "@/components/construction/LawCheckPanel";
 import DraftBanner from "@/components/DraftBanner";
+import OnboardingModal from "@/components/construction/OnboardingModal";
 import {
   HardHat,
   Eye,
@@ -53,6 +54,7 @@ interface Props {
   userEmail?: string | null;
   plan?: "free" | "solo" | "team";
   remainingFree?: number | null;
+  trialDaysRemaining?: number | null;
 }
 
 const DRAFT_KEY_NEW = "mitsumori-construction-draft-v1";
@@ -62,6 +64,7 @@ export default function ConstructionEditor({
   quoteId,
   userEmail,
   plan = "free",
+  trialDaysRemaining: trialDays,
   remainingFree,
 }: Props) {
   const router = useRouter();
@@ -125,6 +128,8 @@ export default function ConstructionEditor({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* 初回オンボーディング */}
+      {!isEdit && <OnboardingModal />}
       {/* ヘッダー */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -193,6 +198,23 @@ export default function ConstructionEditor({
           </div>
         </div>
       </header>
+
+      {/* トライアルバナー */}
+      {typeof trialDays === "number" && trialDays > 0 && (
+        <div className="bg-green-600 text-white">
+          <div className="max-w-7xl mx-auto px-4 py-2 text-xs font-medium flex items-center justify-between">
+            <span>
+              Solo全機能を無料体験中 — 残り{trialDays}日（透かしなしPDF・無制限保存・メール送信）
+            </span>
+            <Link
+              href="/construction#pricing"
+              className="shrink-0 bg-white text-green-700 font-bold px-3 py-1 rounded text-xs hover:bg-green-50 transition-colors"
+            >
+              Soloプランに切り替え
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* 使用量アラート（無料・残少ない時のみ） */}
       {userEmail && plan === "free" && typeof remainingFree === "number" && (

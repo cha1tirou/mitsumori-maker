@@ -19,7 +19,7 @@ import QuoteList from "@/components/construction/QuoteList";
 import ReferralCard from "@/components/construction/ReferralCard";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
+import { FREE_PLAN_MONTHLY_LIMIT, isInTrial, trialDaysRemaining } from "@/lib/paywall";
 
 export const dynamic = "force-dynamic";
 
@@ -63,9 +63,19 @@ export default async function MyPage({
   ]);
 
   const plan = profile?.plan ?? "free";
-  const planLabel = plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
+  const inTrial = isInTrial(profile);
+  const trialDays = inTrial ? trialDaysRemaining(profile) : 0;
+  const planLabel = inTrial
+    ? `トライアル（残${trialDays}日）`
+    : plan === "solo"
+    ? "Solo"
+    : plan === "team"
+    ? "Team"
+    : "Free";
   const remaining =
-    plan === "free" ? Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth) : "無制限";
+    plan === "free" && !inTrial
+      ? Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth)
+      : "無制限";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -196,7 +206,10 @@ export default async function MyPage({
                 Soloプランにアップグレード
               </Link>
             ) : (
-              <PortalButton />
+              <PortalButton
+                quotesCount={quotes.length}
+                emailsSent={0}
+              />
             )}
             <Link
               href="/construction/new"

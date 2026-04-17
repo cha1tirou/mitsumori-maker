@@ -3,7 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { ConstructionQuoteData } from "@/types/construction";
 import { calcConstructionTotals } from "@/lib/constructionCalc";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
+import { FREE_PLAN_MONTHLY_LIMIT, isInTrial } from "@/lib/paywall";
+import type { Profile } from "@/lib/supabase/types";
 
 // 金額上限（1兆円）とフィールド検証
 const MAX_AMOUNT = 1_000_000_000_000;
@@ -66,11 +67,12 @@ export async function POST(request: NextRequest) {
   // プラン取得
   const { data: profile } = await supabase
     .from("profiles")
-    .select("plan")
+    .select("*")
     .eq("id", user.id)
-    .maybeSingle<{ plan: "free" | "solo" | "team" }>();
+    .maybeSingle<Profile>();
 
   const plan = profile?.plan ?? "free";
+  const inTrial = isInTrial(profile);
 
   const sanitized = sanitizeData(body.data);
   const total = Math.min(MAX_AMOUNT, calcConstructionTotals(sanitized).total);
@@ -97,8 +99,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ quote: data });
   }
 
-  // 新規作成時はフリープラン制限をチェック
-  if (plan === "free") {
+  // 新規作成時はフリープラン制限をチェック（トライアル中は制限なし）
+  if (plan === "free" && !inTrial) {
     const { data: countRow } = await supabase
       .from("current_month_quote_counts")
       .select("count")
