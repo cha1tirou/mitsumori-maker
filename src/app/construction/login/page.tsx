@@ -15,6 +15,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { trackConversion } from "@/lib/analytics";
 
 type Mode = "login" | "signup" | "forgot" | "sent" | "signup-sent";
 
@@ -107,6 +108,7 @@ function LoginForm() {
         }
         return;
       }
+      trackConversion("construction_signup");
       setMode("signup-sent");
     } catch {
       setError("登録に失敗しました。もう一度お試しください。");

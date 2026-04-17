@@ -14,6 +14,16 @@ function getAdminClient() {
   });
 }
 
+export interface RevenueKpi {
+  mrr: number;
+  soloCount: number;
+  teamCount: number;
+  cvr: number; // paid / total (%)
+  churnCount30d: number;
+  churnRate30d: number; // churn / (paid + churn) (%)
+  avgQuotesPerUser: number;
+}
+
 export interface AdminStats {
   users: {
     total: number;
@@ -23,6 +33,7 @@ export interface AdminStats {
     thisWeek: number;
     thisMonth: number;
   };
+  revenue: RevenueKpi;
   quotes: {
     total: number;
     today: number;
@@ -109,6 +120,39 @@ export async function fetchAdminStats(): Promise<AdminStats> {
         .gte("created_at", startOfMonth.toISOString()),
     ]);
 
+  // Revenue KPI
+  const { count: soloCount } = await supabase
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .eq("plan", "solo")
+    .in("subscription_status", ["active", "trialing"]);
+  const { count: teamCount } = await supabase
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .eq("plan", "team")
+    .in("subscription_status", ["active", "trialing"]);
+  const { count: churnCount30d } = await supabase
+    .from("profiles")
+    .select("id", { count: "exact", head: true })
+    .eq("subscription_status", "canceled")
+    .gte("updated_at", startOfMonth.toISOString());
+
+  const soloN = soloCount ?? 0;
+  const teamN = teamCount ?? 0;
+  const paidN = paidUsers ?? 0;
+  const totalN = totalUsers ?? 0;
+  const churnN = churnCount30d ?? 0;
+  const mrr = soloN * 980 + teamN * 2980;
+  const cvr = totalN > 0 ? Math.round((paidN / totalN) * 1000) / 10 : 0;
+  const churnBase = paidN + churnN;
+  const churnRate30d = churnBase > 0 ? Math.round((churnN / churnBase) * 1000) / 10 : 0;
+
+  // Avg quotes per user
+  const avgQuotesPerUser =
+    totalN > 0
+      ? Math.round(((totalQuotes ?? 0) / totalN) * 10) / 10
+      : 0;
+
   // Newsletter subscribers
   const [{ count: totalSubs }, { count: weekSubs }] = await Promise.all([
     supabase.from("newsletter_subscribers").select("id", { count: "exact", head: true }),
@@ -172,6 +216,15 @@ export async function fetchAdminStats(): Promise<AdminStats> {
       today: todayUsers ?? 0,
       thisWeek: weekUsers ?? 0,
       thisMonth: monthUsers ?? 0,
+    },
+    revenue: {
+      mrr,
+      soloCount: soloN,
+      teamCount: teamN,
+      cvr,
+      churnCount30d: churnN,
+      churnRate30d,
+      avgQuotesPerUser,
     },
     quotes: {
       total: totalQuotes ?? 0,

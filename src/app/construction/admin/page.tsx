@@ -13,6 +13,9 @@ import {
   Crown,
   TrendingUp,
   ExternalLink,
+  DollarSign,
+  BarChart3,
+  UserMinus,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -103,6 +106,38 @@ export default async function AdminPage() {
             label="メルマガ登録"
             value={stats.subscribers.total}
             sub={`今週 +${stats.subscribers.thisWeek}`}
+            color="purple"
+          />
+        </section>
+
+        {/* 収益 KPI */}
+        <section className="grid md:grid-cols-4 gap-4">
+          <KpiCard
+            icon={<DollarSign className="w-5 h-5" strokeWidth={2} />}
+            label="MRR（月間売上）"
+            value={`¥${stats.revenue.mrr.toLocaleString()}`}
+            sub={`Solo ${stats.revenue.soloCount}名 / Team ${stats.revenue.teamCount}名`}
+            color="green"
+          />
+          <KpiCard
+            icon={<BarChart3 className="w-5 h-5" strokeWidth={2} />}
+            label="CVR（Free→有料）"
+            value={`${stats.revenue.cvr}%`}
+            sub={`有料 ${stats.users.paid} / 全体 ${stats.users.total}`}
+            color="blue"
+          />
+          <KpiCard
+            icon={<UserMinus className="w-5 h-5" strokeWidth={2} />}
+            label="Churn Rate（30日）"
+            value={`${stats.revenue.churnRate30d}%`}
+            sub={`解約 ${stats.revenue.churnCount30d}名（直近30日）`}
+            color="amber"
+          />
+          <KpiCard
+            icon={<FileText className="w-5 h-5" strokeWidth={2} />}
+            label="平均見積数/ユーザー"
+            value={stats.revenue.avgQuotesPerUser}
+            sub="アクティブ度の指標"
             color="purple"
           />
         </section>
