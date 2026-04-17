@@ -76,6 +76,11 @@ export default function LawCheckPanel({ results }: Props) {
                     <p className="text-[11px] leading-relaxed opacity-90">
                       {r.detail}
                     </p>
+                    {r.fix && (
+                      <p className="text-[11px] leading-relaxed mt-1.5 font-medium opacity-100">
+                        → {r.fix}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

@@ -49,6 +49,17 @@ interface Props {
   onChange: (data: ConstructionQuoteData) => void;
 }
 
+const WORK_TYPE_DESCRIPTIONS: Record<string, string> = {
+  electrical: "配線・コンセント・照明・分電盤",
+  plumbing: "給排水管・給湯器・水栓金具",
+  interior: "クロス・床・天井・建具",
+  civil: "掘削・コンクリート・砕石",
+  exterior: "フェンス・カーポート・駐車場",
+  carpentry: "木工造作・構造材・階段",
+  plastering: "左官仕上げ・モルタル・漆喰",
+  scaffolding: "足場架設・解体・養生シート",
+};
+
 const inputClass =
   "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm transition-colors hover:border-gray-300 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600/20";
 
@@ -63,10 +74,12 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 function Field({
   label,
+  help,
   children,
   className = "",
 }: {
   label: string;
+  help?: string;
   children: React.ReactNode;
   className?: string;
 }) {
@@ -74,6 +87,11 @@ function Field({
     <label className={`block ${className}`}>
       <span className="text-xs text-gray-500 mb-1 block">{label}</span>
       {children}
+      {help && (
+        <span className="text-[10px] text-gray-400 mt-1 block leading-relaxed">
+          {help}
+        </span>
+      )}
     </label>
   );
 }
@@ -652,33 +670,62 @@ export default function ConstructionForm({ data, onChange }: Props) {
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>工種プリセット</SectionTitle>
         <p className="text-[11px] text-gray-500 mb-3 leading-relaxed">
-          工種を選んでプリセットを読み込むと、セクションとして追加されます。複数工種にまたがる見積書も作成できます。
+          工種を選ぶと代表的な明細5項目が自動で入ります。複数工種を追加して1つの見積書にまとめることもできます。
         </p>
-        <div className="grid grid-cols-3 gap-2 mb-3">
-          {(Object.keys(workTypeLabels) as WorkType[]).map((type) => (
-            <button
-              key={type}
-              type="button"
-              onClick={() => update("workType", type)}
-              className={`text-xs font-medium py-2 px-2 rounded-lg border transition-colors ${
-                data.workType === type
-                  ? "bg-green-700 text-white border-green-700"
-                  : "bg-white text-gray-700 border-gray-200 hover:border-green-600 hover:text-green-700"
-              }`}
-            >
-              {workTypeLabels[type]}
-            </button>
-          ))}
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          {(Object.keys(workTypeLabels) as WorkType[]).map((type) => {
+            const desc = WORK_TYPE_DESCRIPTIONS[type as keyof typeof WORK_TYPE_DESCRIPTIONS];
+            return (
+              <button
+                key={type}
+                type="button"
+                onClick={() => update("workType", type)}
+                className={`text-left py-2.5 px-3 rounded-lg border transition-colors ${
+                  data.workType === type
+                    ? "bg-green-700 text-white border-green-700"
+                    : "bg-white text-gray-700 border-gray-200 hover:border-green-600"
+                }`}
+              >
+                <span className="text-xs font-bold block">{workTypeLabels[type]}</span>
+                {desc && (
+                  <span className={`text-[10px] block mt-0.5 leading-snug ${
+                    data.workType === type ? "text-green-100" : "text-gray-400"
+                  }`}>
+                    {desc}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
+
+        {/* 選択中のプリセット内容プレビュー */}
         {data.workType !== "other" && workTypePresets[data.workType].length > 0 && (
-          <button
-            type="button"
-            onClick={() => applyPreset(data.workType)}
-            className="w-full flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-800 text-xs font-bold py-2.5 rounded-lg border border-green-200 transition-colors"
-          >
-            <Wand2 className="w-4 h-4" strokeWidth={2.25} />
-            「{workTypeLabels[data.workType]}」をセクションとして追加
-          </button>
+          <>
+            <div className="bg-gray-50 rounded-lg p-3 mb-3">
+              <p className="text-[10px] font-bold text-gray-500 mb-2">
+                「{workTypeLabels[data.workType]}」に含まれる項目:
+              </p>
+              <ul className="space-y-1">
+                {workTypePresets[data.workType].map((item, i) => (
+                  <li key={i} className="text-[11px] text-gray-600 flex items-center justify-between">
+                    <span>{item.name}</span>
+                    <span className="text-gray-400">
+                      {costCategoryLabels[item.category]} / {item.unit}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <button
+              type="button"
+              onClick={() => applyPreset(data.workType)}
+              className="w-full flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-800 text-xs font-bold py-2.5 rounded-lg border border-green-200 transition-colors"
+            >
+              <Wand2 className="w-4 h-4" strokeWidth={2.25} />
+              「{workTypeLabels[data.workType]}」をセクションとして追加
+            </button>
+          </>
         )}
       </section>
 
@@ -686,7 +733,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>見積情報</SectionTitle>
         <div className="grid grid-cols-2 gap-3">
-          <Field label="見積番号">
+          <Field label="見積番号" help="自社の管理番号。「自動」ボタンで前回+1の連番を振れます">
             <div className="flex gap-1.5">
               <input
                 type="text"
@@ -730,7 +777,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
               onChange={(e) => update("quoteDate", e.target.value)}
             />
           </Field>
-          <Field label="有効期限（日数）">
+          <Field label="有効期限（日数）" help="見積日から何日間有効か。一般的に14〜30日。建設業法では十分な検討期間の確保が求められます">
             <input
               type="number"
               className={inputClass}
@@ -748,7 +795,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
               onChange={(e) => update("siteAddress", e.target.value)}
             />
           </Field>
-          <Field label="工事期間" className="col-span-2">
+          <Field label="工事期間" className="col-span-2" help="日付指定・日数指定どちらでもOK。入力した内容がそのままPDFに印刷されます">
             <input
               type="text"
               className={inputClass}
@@ -757,7 +804,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
               onChange={(e) => update("constructionPeriod", e.target.value)}
             />
           </Field>
-          <Field label="設計図書・仕様" className="col-span-2">
+          <Field label="設計図書・仕様" className="col-span-2" help="参照した図面や仕様書の名称。改正建設業法で記載が推奨されています">
             <input
               type="text"
               className={inputClass}
@@ -905,7 +952,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
             />
           </Field>
           <div className="grid grid-cols-2 gap-3">
-            <Field label="建設業許可番号">
+            <Field label="建設業許可番号" help="例: 東京都知事許可(般-5)第123456号。500万円未満の工事のみなら不要">
               <input
                 type="text"
                 className={inputClass}
@@ -916,7 +963,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                 }
               />
             </Field>
-            <Field label="インボイス登録番号">
+            <Field label="インボイス登録番号" help="T+13桁の番号。適格請求書発行事業者の場合に記載">
               <input
                 type="text"
                 className={inputClass}
@@ -1009,7 +1056,9 @@ export default function ConstructionForm({ data, onChange }: Props) {
           </div>
         </div>
         <p className="text-[11px] text-gray-500 mb-3 leading-relaxed">
-          工種ごとにセクションを分け、費目別（労務費・材料費・外注費・その他経費）で明細を入力してください。階層明示は改正建設業法の求める内訳明示に対応します。
+          工種ごとにセクションを分け、費目別に明細を入力してください。
+          <strong>労務費</strong>=職人の手間賃　<strong>材料費</strong>=部材・資材　<strong>外注費</strong>=協力業者への支払い　<strong>その他</strong>=仮設・運搬・処分等。
+          改正建設業法では費目ごとの内訳明示が求められています。
           {showCost && (
             <span className="block mt-1 text-green-700 font-medium">
               原価・粗利モード ON：原価単価を入力すると、行ごと・全体の利益率が表示されます。PDF・プレビューには出力されません。
@@ -1208,7 +1257,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
         </div>
 
         <div className="mt-4 pt-4 border-t border-gray-100">
-          <Field label="消費税率（%）">
+          <Field label="消費税率（%）" help="通常10%。軽減税率対象がある場合は明細側で個別調整してください">
             <select
               className={inputClass + " w-32"}
               value={data.taxRate}
@@ -1242,7 +1291,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           </span>
         </label>
         {data.enableLegalWelfare && (
-          <Field label="法定福利費率（労務費に対する%）">
+          <Field label="法定福利費率（労務費に対する%）" help="社会保険料の事業主負担分。建設業の標準は約20%（健保+厚生年金+雇用保険+労災）">
             <input
               type="number"
               className={inputClass + " w-40"}
@@ -1277,7 +1326,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
         </label>
         {data.enableOverhead && (
           <div className="grid grid-cols-2 gap-3">
-            <Field label="現場管理費率（%）">
+            <Field label="現場管理費率（%）" help="現場運営にかかる間接費。業界標準は5〜8%程度">
               <input
                 type="number"
                 className={inputClass}
@@ -1290,7 +1339,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                 }
               />
             </Field>
-            <Field label="一般管理費率（%）">
+            <Field label="一般管理費率（%）" help="会社全体の管理費・利益を含む。業界標準は8〜15%程度">
               <input
                 type="number"
                 className={inputClass}
@@ -1332,7 +1381,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
             瑕疵担保責任・アフターサービス
           </span>
         </SectionTitle>
-        <Field label="保証期間" className="mb-3">
+        <Field label="保証期間" className="mb-3" help="工事完了後の瑕疵担保期間。一般的に1〜2年。民法上は引渡から5年">
           <input
             type="text"
             className={inputClass}

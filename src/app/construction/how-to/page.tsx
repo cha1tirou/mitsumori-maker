@@ -30,6 +30,10 @@ const steps = [
     description:
       "8工種（電気・水道・内装・土木・外構・大工・左官・鳶足場）から今回の工事に近いものをタップ。「プリセットを読み込む」で代表5項目が自動投入されます。複数工種を扱う場合はセクションを追加して重ねられます。",
     icon: Wand2,
+    hint: {
+      label: "8工種の例",
+      items: ["電気 → 配線・分電盤・照明", "水道 → 給排水管・給湯器", "内装 → クロス・床・天井", "土木 → 掘削・コンクリート", "外構 → フェンス・カーポート", "大工 → 木工造作・構造材", "左官 → モルタル・漆喰", "鳶足場 → 架設・解体・養生"],
+    },
   },
   {
     num: 2,
@@ -37,6 +41,7 @@ const steps = [
     description:
       "発注者名と敬称を入れ、「取引先マスタ」ボタンから過去の取引先を呼び出せます。施工者情報は一度「自社情報を保存」を押せば、次回から自動で入力されます。建設業許可番号・インボイス登録番号も入れられます。",
     icon: Users,
+    hint: null,
   },
   {
     num: 3,
@@ -44,6 +49,10 @@ const steps = [
     description:
       "見積番号は「自動」ボタンで前回+1を提案。工事名・工事場所・工事期間・設計図書・有効期限（日数）を埋めます。改正建設業法で求められる記載事項を網羅しています。",
     icon: CheckCircle2,
+    hint: {
+      label: "入力のコツ",
+      items: ["有効期限は14〜30日が一般的", "工事期間は「着工後 約14日間」のように自由記述OK", "設計図書は参照した図面の番号を記載"],
+    },
   },
   {
     num: 4,
@@ -51,6 +60,10 @@ const steps = [
     description:
       "各明細行で費目をプルダウンから選び、品名・数量・単位・単価を入力。「マスタ」ボタンから単価マスタを呼び出せば即入力。中項目（サブセクション）を追加すれば3階層見積になります。",
     icon: Layers,
+    hint: {
+      label: "費目の使い分け",
+      items: ["労務費 = 職人の手間賃・人工", "材料費 = 部材・資材・設備機器", "外注費 = 協力業者への支払い", "その他 = 仮設・運搬・養生・処分"],
+    },
   },
   {
     num: 5,
@@ -58,6 +71,10 @@ const steps = [
     description:
       "労務費を入れると、法定福利費（デフォルト20%）が自動計上。現場管理費（6%）・一般管理費（10%）も業界標準料率で自動計算。料率は工事や規模で編集可能。",
     icon: CheckCircle2,
+    hint: {
+      label: "料率の目安",
+      items: ["法定福利費: 労務費の約20%（健保+厚年+雇用+労災）", "現場管理費: 直接工事費の5〜8%", "一般管理費: 直接工事費の8〜15%"],
+    },
   },
   {
     num: 6,
@@ -65,6 +82,10 @@ const steps = [
     description:
       "右ペインの「建設業法2025チェッカー」が、「一式」の検知・労務費未入力・工事期間/場所未記入・瑕疵担保未記載などをリアルタイム警告。全てクリアすると OK バッジが出ます。",
     icon: CheckCircle2,
+    hint: {
+      label: "チェック項目",
+      items: ["「一式」表記 → 内訳展開を推奨", "労務費の内訳 → 費目「労務費」の項目が必要", "法定福利費 → ON推奨", "工事場所・期間・有効期限 → 空欄は警告", "瑕疵担保・追加工事方針 → 記載推奨"],
+    },
   },
   {
     num: 7,
@@ -72,6 +93,7 @@ const steps = [
     description:
       "「PDFダウンロード」をクリックして保存。無料版は「SAMPLE」透かし付き、Soloプラン以上は透かしなしの正式版が出力されます。印刷機能からもPDF化可能。",
     icon: Download,
+    hint: null,
   },
   {
     num: 8,
@@ -79,6 +101,7 @@ const steps = [
     description:
       "「見積書を保存」でクラウドに保存、マイページから再編集・複製できます。「メールで送信」で発注者に直接PDF添付メール。「他の書類に変換」で請求書・納品書・発注書に変換可能。",
     icon: Save,
+    hint: null,
   },
 ];
 
@@ -145,7 +168,7 @@ export default function HowToPage() {
         </div>
 
         <ol className="space-y-5">
-          {steps.map(({ num, title, description, icon: Icon }) => (
+          {steps.map(({ num, title, description, icon: Icon, hint }) => (
             <li
               key={num}
               className="bg-white rounded-xl border border-gray-200 p-5 flex gap-4"
@@ -164,6 +187,18 @@ export default function HowToPage() {
                   <h2 className="text-base font-bold text-gray-900">{title}</h2>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{description}</p>
+                {hint && (
+                  <div className="mt-3 bg-green-50 rounded-lg p-3 border border-green-100">
+                    <p className="text-[10px] font-bold text-green-800 mb-1.5">{hint.label}</p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                      {hint.items.map((item, i) => (
+                        <li key={i} className="text-[11px] text-green-900 leading-snug">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </li>
           ))}
