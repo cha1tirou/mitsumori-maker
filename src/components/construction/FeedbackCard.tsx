@@ -72,7 +72,7 @@ export default function FeedbackCard() {
         <div className="flex items-center justify-between">
           <p className="text-[10px] text-gray-400">
             {status === "sent" && (
-              <span className="text-green-700 inline-flex items-center gap-1">
+              <span className="text-kenmitsu-ok inline-flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2.5} />
                 送信しました。ありがとうございます！
               </span>

@@ -204,7 +204,7 @@ export default function AiTakeoffDialog({
                       <p className="text-xs mb-2">{errorMessage}</p>
                       <Link
                         href="/construction#pricing"
-                        className="inline-block bg-green-700 hover:bg-green-800 text-white text-xs font-bold px-4 py-2 rounded-md"
+                        className="inline-block bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-md"
                       >
                         Soloプランを見る →
                       </Link>
@@ -234,18 +234,18 @@ export default function AiTakeoffDialog({
                   onClick={() => inputRef.current?.click()}
                   className={`w-full border-2 border-dashed rounded-xl py-8 px-4 flex flex-col items-center justify-center gap-2 transition-colors ${
                     file
-                      ? "border-green-400 bg-green-50/50"
+                      ? "border-kenmitsu-ok bg-kenmitsu-okBg/50"
                       : "border-gray-300 hover:border-purple-500 hover:bg-purple-50/40"
                   }`}
                 >
                   {file ? (
                     <>
-                      <FileText className="w-8 h-8 text-green-600" strokeWidth={2} />
+                      <FileText className="w-8 h-8 text-kenmitsu-ok" strokeWidth={2} />
                       <p className="text-sm font-bold text-gray-900">{file.name}</p>
                       <p className="text-[11px] text-gray-500">
                         {(file.size / 1024 / 1024).toFixed(2)} MB
                       </p>
-                      <p className="text-[11px] text-green-700 underline">
+                      <p className="text-[11px] text-kenmitsu-navy underline">
                         別のファイルを選ぶ
                       </p>
                     </>
@@ -299,9 +299,9 @@ export default function AiTakeoffDialog({
 
           {status === "success" && extracted && (
             <div className="p-5 space-y-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-start gap-2">
-                <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
-                <div className="text-sm text-green-900">
+              <div className="bg-kenmitsu-okBg border border-kenmitsu-ok/30 rounded-lg p-3 flex items-start gap-2">
+                <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok shrink-0 mt-0.5" strokeWidth={2.25} />
+                <div className="text-sm text-kenmitsu-ok">
                   <p className="font-bold mb-1">抽出完了</p>
                   {extracted.confidence && (
                     <p className="text-xs">
@@ -344,7 +344,7 @@ export default function AiTakeoffDialog({
                         <p className="text-sm font-bold text-gray-900">
                           ■ {s.name}
                         </p>
-                        <p className="text-xs font-bold text-green-700">
+                        <p className="text-xs font-bold text-kenmitsu-navy">
                           ¥{subtotal.toLocaleString()}
                         </p>
                       </div>
@@ -438,7 +438,7 @@ export default function AiTakeoffDialog({
           ) : (
             <button
               onClick={apply}
-              className="flex-1 flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-bold py-2.5 rounded-lg"
+              className="flex-1 flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-2.5 rounded-lg"
             >
               <CheckCircle2 className="w-4 h-4" strokeWidth={2.5} />
               この内容で明細を反映

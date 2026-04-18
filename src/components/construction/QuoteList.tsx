@@ -45,14 +45,14 @@ export default function QuoteList({ quotes, plan, freeLimit }: Props) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="件名・取引先・見積番号で検索"
-            className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
           />
         </div>
       )}
 
       {plan === "free" && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-gray-700 mb-4 flex items-start gap-2">
-          <Crown className="w-4 h-4 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
+        <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-4 text-sm text-gray-700 mb-4 flex items-start gap-2">
+          <Crown className="w-4 h-4 text-kenmitsu-orange shrink-0 mt-0.5" strokeWidth={2.25} />
           <span>
             Freeプランでは月{freeLimit}通まで保存できます。Soloプランにアップグレードすると、無制限に保存・再編集・複製が可能です。
           </span>
@@ -64,7 +64,7 @@ export default function QuoteList({ quotes, plan, freeLimit }: Props) {
           まだ見積書がありません。
           <Link
             href="/construction/new"
-            className="text-green-700 hover:underline ml-1"
+            className="text-kenmitsu-navy hover:underline ml-1"
           >
             最初の見積書を作成する →
           </Link>

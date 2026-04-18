@@ -116,11 +116,11 @@ export default function ReferralCard() {
       </div>
 
       {/* 招待数 */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+      <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 mb-4">
         <div className="flex items-center gap-2">
-          <Users className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+          <Users className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
           <p className="text-sm text-gray-900">
-            現在の招待登録数：<strong className="text-green-800">{invitedCount}名</strong>
+            現在の招待登録数：<strong className="text-kenmitsu-navy">{invitedCount}名</strong>
           </p>
         </div>
       </div>
@@ -135,14 +135,14 @@ export default function ReferralCard() {
             key={i}
             className={`flex items-center gap-3 px-3 py-2 rounded-lg border ${
               r.achieved
-                ? "bg-green-50 border-green-200"
+                ? "bg-kenmitsu-okBg border-kenmitsu-ok/30"
                 : "bg-white border-gray-200"
             }`}
           >
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                 r.achieved
-                  ? "bg-green-700 text-white"
+                  ? "bg-kenmitsu-ok text-white"
                   : "bg-gray-100 text-gray-500"
               }`}
             >
@@ -155,7 +155,7 @@ export default function ReferralCard() {
             <div className="flex-1">
               <p
                 className={`text-sm font-bold ${
-                  r.achieved ? "text-green-800" : "text-gray-700"
+                  r.achieved ? "text-kenmitsu-ok" : "text-gray-700"
                 }`}
               >
                 {r.reward}

@@ -163,7 +163,7 @@ export default function ExcelImportButton({ data, onChange }: Props) {
         type="button"
         onClick={() => inputRef.current?.click()}
         disabled={status === "loading"}
-        className="w-full flex items-center justify-center gap-2 bg-white border-2 border-dashed border-gray-300 hover:border-green-600 hover:bg-green-50 disabled:opacity-60 text-gray-700 hover:text-green-700 text-xs font-bold py-2.5 rounded-lg transition-colors"
+        className="w-full flex items-center justify-center gap-2 bg-white border-2 border-dashed border-gray-300 hover:border-kenmitsu-navy hover:bg-kenmitsu-navy50 disabled:opacity-60 text-gray-700 hover:text-kenmitsu-navy text-xs font-bold py-2.5 rounded-lg transition-colors"
       >
         {status === "loading" ? (
           <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2.5} />

@@ -3,10 +3,10 @@ import { HardHat, ArrowRight, AlertTriangle } from "lucide-react";
 
 export default function ConstructionPromoBanner() {
   return (
-    <aside className="my-8 rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-white overflow-hidden">
+    <aside className="my-8 rounded-2xl border-2 border-kenmitsu-navy100 bg-gradient-to-br from-kenmitsu-navy50 to-white overflow-hidden">
       <div className="px-5 py-5">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-lg bg-green-700 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-kenmitsu-navy flex items-center justify-center flex-shrink-0">
             <HardHat className="w-5 h-5 text-white" strokeWidth={2.25} />
           </div>
           <div className="flex-1 min-w-0">
@@ -22,7 +22,7 @@ export default function ConstructionPromoBanner() {
             </p>
             <Link
               href="/construction"
-              className="inline-flex items-center gap-1.5 bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
             >
               建設業向けツールを見る
               <ArrowRight className="w-4 h-4" strokeWidth={2.5} />

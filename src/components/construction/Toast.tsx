@@ -41,13 +41,13 @@ const DURATION: Record<ToastType, number> = {
 };
 
 const ICON: Record<ToastType, ReactNode> = {
-  success: <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0" />,
+  success: <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok shrink-0" />,
   error: <AlertTriangle className="w-5 h-5 text-red-600 shrink-0" />,
   info: <Info className="w-5 h-5 text-gray-600 shrink-0" />,
 };
 
 const BORDER_COLOR: Record<ToastType, string> = {
-  success: "border-l-green-700",
+  success: "border-l-kenmitsu-ok",
   error: "border-l-red-600",
   info: "border-l-gray-600",
 };

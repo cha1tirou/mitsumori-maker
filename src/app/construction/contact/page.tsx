@@ -28,7 +28,7 @@ export default function ContactPage() {
             href="/construction"
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             ← ケンミツトップに戻る
           </Link>
         </div>
@@ -48,7 +48,7 @@ export default function ContactPage() {
           href="https://forms.gle/hQqmcrtfFCTtrqrRA"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white font-bold text-sm px-6 py-3 rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white font-bold text-sm px-6 py-3 rounded-lg transition-colors"
         >
           お問い合わせフォームを開く
           <ExternalLink className="w-4 h-4" strokeWidth={2.25} />
@@ -62,7 +62,7 @@ export default function ContactPage() {
             <li>
               <Link
                 href="/construction/faq"
-                className="text-green-700 hover:underline"
+                className="text-kenmitsu-navy hover:underline"
               >
                 FAQ（よくある質問）→
               </Link>
@@ -70,7 +70,7 @@ export default function ContactPage() {
             <li>
               <Link
                 href="/construction/how-to"
-                className="text-green-700 hover:underline"
+                className="text-kenmitsu-navy hover:underline"
               >
                 使い方ガイド →
               </Link>

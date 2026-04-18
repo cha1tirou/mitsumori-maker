@@ -98,7 +98,7 @@ function ChangePassword() {
             minLength={6}
             required
             disabled={loading}
-            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 pr-10"
+            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20 pr-10"
           />
           <button
             type="button"
@@ -116,7 +116,7 @@ function ChangePassword() {
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 text-sm font-bold text-white bg-green-700 hover:bg-green-800 disabled:opacity-60 rounded-lg transition-colors whitespace-nowrap"
+          className="px-4 py-2 text-sm font-bold text-white bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 rounded-lg transition-colors whitespace-nowrap"
         >
           {loading ? (
             <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2.5} />
@@ -180,12 +180,12 @@ function ChangeEmail({ currentEmail }: { currentEmail: string }) {
           placeholder="新しいメールアドレス"
           required
           disabled={loading}
-          className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+          className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 text-sm font-bold text-white bg-green-700 hover:bg-green-800 disabled:opacity-60 rounded-lg transition-colors whitespace-nowrap"
+          className="px-4 py-2 text-sm font-bold text-white bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 rounded-lg transition-colors whitespace-nowrap"
         >
           {loading ? (
             <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2.5} />

@@ -65,6 +65,7 @@ export default function PlanCheckoutButton({
 
   const className =
     variant === "primary"
+      // @deprecated - legacy green, LP以外のケンミツでは variant="kenmitsu" を使う
       ? "w-full flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white text-sm font-bold py-3 rounded-lg transition-colors"
       : variant === "kenmitsu"
         ? "w-full flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 text-white text-sm font-bold py-3 rounded-lg transition-colors"

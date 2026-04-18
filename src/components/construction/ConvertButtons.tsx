@@ -159,9 +159,9 @@ export default function ConvertButtons({ data }: Props) {
           <Link
             href="/tools/delivery"
             onClick={() => handleConvert("delivery")}
-            className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-green-50 border-t border-gray-100"
+            className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-kenmitsu-navy50 border-t border-gray-100"
           >
-            <Truck className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <Truck className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             納品書を作成
           </Link>
           <Link

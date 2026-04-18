@@ -43,9 +43,9 @@ export default function AccountingCsvButton({ data, className = "" }: Props) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:border-green-400 hover:bg-green-50 text-gray-700 text-sm font-medium py-2.5 rounded-lg transition-colors"
+        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:border-kenmitsu-navy hover:bg-kenmitsu-navy50 text-gray-700 text-sm font-medium py-2.5 rounded-lg transition-colors"
       >
-        <FileSpreadsheet className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+        <FileSpreadsheet className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
         会計ソフトにCSV出力
         <ChevronDown
           className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
@@ -59,10 +59,10 @@ export default function AccountingCsvButton({ data, className = "" }: Props) {
               key={f}
               type="button"
               onClick={() => download(f)}
-              className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-green-50 border-b border-gray-100 last:border-b-0 text-left"
+              className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-kenmitsu-navy50 border-b border-gray-100 last:border-b-0 text-left"
             >
               {recentDownload === f ? (
-                <Check className="w-4 h-4 text-green-700 shrink-0" strokeWidth={2.5} />
+                <Check className="w-4 h-4 text-kenmitsu-navy shrink-0" strokeWidth={2.5} />
               ) : (
                 <FileSpreadsheet className="w-4 h-4 text-gray-400 shrink-0" strokeWidth={2.25} />
               )}

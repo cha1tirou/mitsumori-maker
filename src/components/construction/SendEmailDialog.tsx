@@ -111,7 +111,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-            <Mail className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <Mail className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             見積書をメールで送信
           </h3>
           <button
@@ -125,7 +125,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
         {status === "sent" ? (
           <div className="p-8 text-center">
             <CheckCircle2
-              className="w-12 h-12 text-green-600 mx-auto mb-3"
+              className="w-12 h-12 text-kenmitsu-ok mx-auto mb-3"
               strokeWidth={1.75}
             />
             <p className="text-sm font-bold text-gray-900 mb-1">
@@ -136,7 +136,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
             </p>
             <button
               onClick={onClose}
-              className="mt-5 bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
+              className="mt-5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
             >
               閉じる
             </button>
@@ -147,7 +147,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
               <Field label="宛先メールアドレス">
                 <input
                   type="email"
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
                   placeholder="client@example.com"
                   value={to}
                   onChange={(e) => setTo(e.target.value)}
@@ -156,7 +156,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
               <Field label="返信先（任意）">
                 <input
                   type="email"
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
                   placeholder="your@example.com"
                   value={replyTo}
                   onChange={(e) => setReplyTo(e.target.value)}
@@ -165,14 +165,14 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
               <Field label="件名">
                 <input
                   type="text"
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                 />
               </Field>
               <Field label="本文">
                 <textarea
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20 min-h-[180px]"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20 min-h-[180px]"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />
@@ -218,7 +218,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
               <button
                 onClick={handleSend}
                 disabled={!to || status === "sending"}
-                className="flex-1 flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 rounded-lg"
+                className="flex-1 flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 rounded-lg"
               >
                 {status === "sending" ? (
                   <>

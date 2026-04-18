@@ -40,7 +40,7 @@ export default function LeadMagnetButton({ source }: Props) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 bg-green-700 hover:bg-green-800 text-white text-xs font-bold px-5 py-3 rounded-lg whitespace-nowrap"
+        className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-5 py-3 rounded-lg whitespace-nowrap"
       >
         <Mail className="w-3.5 h-3.5" strokeWidth={2.5} />
         メールで受け取る
@@ -58,7 +58,7 @@ export default function LeadMagnetButton({ source }: Props) {
             {status === "sent" ? (
               <div className="p-8 text-center">
                 <CheckCircle2
-                  className="w-12 h-12 text-green-600 mx-auto mb-3"
+                  className="w-12 h-12 text-kenmitsu-ok mx-auto mb-3"
                   strokeWidth={1.75}
                 />
                 <p className="text-base font-bold text-gray-900 mb-2">
@@ -71,7 +71,7 @@ export default function LeadMagnetButton({ source }: Props) {
                 </p>
                 <button
                   onClick={() => setOpen(false)}
-                  className="bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
+                  className="bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
                 >
                   閉じる
                 </button>
@@ -99,7 +99,7 @@ export default function LeadMagnetButton({ source }: Props) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+                      className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
                     />
                   </label>
                   {status === "error" && (
@@ -115,7 +115,7 @@ export default function LeadMagnetButton({ source }: Props) {
                     <button
                       onClick={submit}
                       disabled={!email || status === "sending"}
-                      className="flex-1 flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white text-sm font-bold py-2.5 rounded-lg"
+                      className="flex-1 flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 text-white text-sm font-bold py-2.5 rounded-lg"
                     >
                       {status === "sending" ? (
                         <>

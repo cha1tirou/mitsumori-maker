@@ -127,7 +127,7 @@ export default function ConstructionPdfDownloadButton({
       <button
         onClick={handleDownload}
         disabled={loading}
-        className={`flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
+        className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
       >
         {loading ? (
           <>
@@ -154,7 +154,7 @@ export default function ConstructionPdfDownloadButton({
             className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative px-6 py-5 bg-gradient-to-br from-green-700 to-green-800 text-white">
+            <div className="relative px-6 py-5 bg-gradient-to-br from-kenmitsu-navy to-kenmitsu-navy700 text-white">
               <button
                 onClick={() => setShowNudge(false)}
                 className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-white/70 hover:text-white rounded-lg hover:bg-white/10"
@@ -165,7 +165,7 @@ export default function ConstructionPdfDownloadButton({
               <h3 className="text-base font-bold mb-1">
                 3通目の見積書ありがとうございます！
               </h3>
-              <p className="text-xs text-green-100 leading-relaxed">
+              <p className="text-xs text-kenmitsu-navy100 leading-relaxed">
                 本格的にご利用いただくなら、<strong>透かしなしの正式版</strong>＋
                 <strong>見積履歴の保存</strong>＋<strong>自動メール送信</strong>が使える
                 Soloプラン（月¥980）がおすすめです。
@@ -174,19 +174,19 @@ export default function ConstructionPdfDownloadButton({
             <div className="p-5 space-y-3">
               <div className="text-xs text-gray-600 space-y-1.5">
                 <p className="flex items-center gap-2">
-                  <span className="text-green-700 font-bold">✓</span>
+                  <span className="text-kenmitsu-ok font-bold">✓</span>
                   PDF透かし 完全消去
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className="text-green-700 font-bold">✓</span>
+                  <span className="text-kenmitsu-ok font-bold">✓</span>
                   見積書の無制限保存・再編集・複製
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className="text-green-700 font-bold">✓</span>
+                  <span className="text-kenmitsu-ok font-bold">✓</span>
                   発注者へメール直接送信
                 </p>
                 <p className="flex items-center gap-2">
-                  <span className="text-green-700 font-bold">✓</span>
+                  <span className="text-kenmitsu-ok font-bold">✓</span>
                   いつでもワンクリック解約
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function ConstructionPdfDownloadButton({
                 <Link
                   href="/construction#pricing"
                   onClick={() => setShowNudge(false)}
-                  className="flex items-center justify-center gap-1.5 bg-green-700 hover:bg-green-800 text-white text-sm font-bold py-3 rounded-lg"
+                  className="flex items-center justify-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg"
                 >
                   <Crown className="w-4 h-4" strokeWidth={2.25} />
                   Soloプラン（月¥980）を見る

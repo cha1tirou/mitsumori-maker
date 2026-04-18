@@ -30,10 +30,11 @@ Font.register({
 });
 
 const colors = {
-  primary: "#166534",
-  primaryDark: "#14532d",
-  primaryLight: "#dcfce7",
-  accent: "#15803d",
+  primary: "#1E40AF",
+  primaryDark: "#17308A",
+  primaryLight: "#EEF3FF",
+  accent: "#1E40AF",
+  primaryBorder: "#DCE6FF",
   gray50: "#f9fafb",
   gray100: "#f3f4f6",
   gray200: "#e5e7eb",
@@ -118,7 +119,7 @@ const s = StyleSheet.create({
   infoBox: {
     backgroundColor: colors.primaryLight,
     borderWidth: 1,
-    borderColor: "#86efac",
+    borderColor: colors.primaryBorder,
     borderRadius: 3,
     padding: 8,
     marginTop: 8,
@@ -141,7 +142,7 @@ const s = StyleSheet.create({
     padding: 8,
     marginTop: 8,
   },
-  totalLabel: { fontSize: 8, color: "#86efac", marginBottom: 2 },
+  totalLabel: { fontSize: 8, color: colors.primaryBorder, marginBottom: 2 },
   totalAmount: { fontSize: 17, fontWeight: 700, color: colors.white },
   companyName: {
     fontSize: 11,
@@ -178,7 +179,7 @@ const s = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 6,
     borderTopWidth: 0.5,
-    borderTopColor: "#86efac",
+    borderTopColor: colors.primaryBorder,
   },
   sectionTitle: {
     fontSize: 9,
@@ -372,7 +373,7 @@ function renderItemRow(
 function WatermarkOverlay() {
   const textStyle = {
     fontSize: 80,
-    color: "#166534",
+    color: "#1E40AF",
     opacity: 0.25,
     transform: "rotate(-30deg)",
     fontWeight: 700,
@@ -602,11 +603,11 @@ function ConstructionPdf({
                     <View
                       style={{
                         flexDirection: "row",
-                        backgroundColor: "#ecfccb",
+                        backgroundColor: "#EEF3FF",
                         paddingVertical: 3,
                         paddingHorizontal: 16,
                         borderBottomWidth: 0.5,
-                        borderBottomColor: "#a3e635",
+                        borderBottomColor: "#DCE6FF",
                       }}
                     >
                       <Text

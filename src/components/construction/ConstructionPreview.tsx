@@ -50,7 +50,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="text-green-800 opacity-[0.25] font-bold tracking-widest"
+                className="text-kenmitsu-navy opacity-[0.25] font-bold tracking-widest"
                 style={{
                   transform: "rotate(-30deg)",
                   fontSize: "80px",
@@ -72,15 +72,15 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         )}
         {/* ヘッダー */}
         <div className="text-center mb-5">
-          <h1 className="text-2xl font-bold tracking-widest text-green-800">
+          <h1 className="text-2xl font-bold tracking-widest text-kenmitsu-navy">
             工事見積書
           </h1>
-          <div className="w-20 h-1 bg-green-700 mx-auto mt-2" />
+          <div className="w-20 h-1 bg-kenmitsu-navy mx-auto mt-2" />
         </div>
 
         <div className="flex justify-between mb-5">
           <div className="w-[55%]">
-            <div className="border-b-2 border-green-700 pb-1 mb-1">
+            <div className="border-b-2 border-kenmitsu-navy pb-1 mb-1">
               <span className="text-base font-semibold">
                 {data.clientName || "（発注者）"}
               </span>
@@ -90,7 +90,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
               <p className="text-[10px] text-gray-600">{data.clientContact}</p>
             )}
 
-            <div className="bg-green-50 border border-green-200 rounded p-2.5 mt-3 space-y-0.5 text-[10px]">
+            <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded p-2.5 mt-3 space-y-0.5 text-[10px]">
               <Row label="工事名" value={data.subject} />
               <Row label="工事場所" value={data.siteAddress} />
               <Row label="工事期間" value={data.constructionPeriod} />
@@ -100,8 +100,8 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
 
             <p className="mt-3 text-[11px]">下記の通りお見積り申し上げます。</p>
 
-            <div className="mt-2 bg-green-800 text-white rounded px-4 py-2.5">
-              <div className="text-[10px] text-green-200 mb-0.5">
+            <div className="mt-2 bg-kenmitsu-navy700 text-white rounded px-4 py-2.5">
+              <div className="text-[10px] text-kenmitsu-navy100 mb-0.5">
                 お見積り金額（税込）
               </div>
               <div className="text-xl font-bold">{formatCurrency(totals.total)}</div>
@@ -118,7 +118,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                 style={{ mixBlendMode: "multiply" }}
               />
             )}
-            <p className="text-sm font-semibold text-green-800">
+            <p className="text-sm font-semibold text-kenmitsu-navy">
               {data.companyName || "（施工者）"}
             </p>
             {data.companyContact && <p>担当: {data.companyContact}</p>}
@@ -150,7 +150,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         <div className="mb-4">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="bg-green-800 text-white text-[9.5px]">
+              <tr className="bg-kenmitsu-navy text-white text-[9.5px]">
                 <th className="py-1.5 px-1.5 text-left font-medium w-7">#</th>
                 <th className="py-1.5 px-1.5 text-left font-medium w-14">費目</th>
                 <th className="py-1.5 px-1.5 text-left font-medium">工事項目</th>
@@ -167,7 +167,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                 );
                 return (
                   <Fragment key={section.id}>
-                    <tr className="bg-green-100 text-green-900">
+                    <tr className="bg-kenmitsu-navy50 text-kenmitsu-navy">
                       <td
                         colSpan={6}
                         className="py-1.5 px-2 font-bold text-[10.5px]"
@@ -181,7 +181,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                     {section.items.map((item, itemIndex) => (
                       <tr
                         key={item.id}
-                        className={itemIndex % 2 === 0 ? "bg-white" : "bg-green-50/40"}
+                        className={itemIndex % 2 === 0 ? "bg-white" : "bg-kenmitsu-navy50/40"}
                       >
                         <td className="py-1 px-1.5 text-gray-400 border-b border-gray-100 text-[9.5px]">
                           {sectionIndex + 1}-{itemIndex + 1}
@@ -216,7 +216,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                       sub.items.forEach((i) => (subAmount += itemAmount(i)));
                       return (
                         <Fragment key={sub.id}>
-                          <tr className="bg-green-50/80 text-green-900">
+                          <tr className="bg-kenmitsu-navy50/80 text-kenmitsu-navy">
                             <td
                               colSpan={6}
                               className="py-1 px-4 text-[10px] font-bold"
@@ -230,7 +230,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                           {sub.items.map((item, itemIndex) => (
                             <tr
                               key={item.id}
-                              className={itemIndex % 2 === 0 ? "bg-white" : "bg-green-50/30"}
+                              className={itemIndex % 2 === 0 ? "bg-white" : "bg-kenmitsu-navy50/30"}
                             >
                               <td className="py-1 pl-6 pr-1.5 text-gray-400 border-b border-gray-100 text-[9.5px]">
                                 {sectionIndex + 1}-{subIndex + 1}-{itemIndex + 1}
@@ -298,7 +298,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
             </div>
 
             {data.enableLegalWelfare && totals.legalWelfare > 0 && (
-              <div className="flex justify-between py-1 text-green-900">
+              <div className="flex justify-between py-1 text-kenmitsu-navy">
                 <span>
                   法定福利費（労務費×{data.legalWelfareRate}%）
                 </span>
@@ -331,7 +331,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
               <span className="text-gray-600">消費税（{data.taxRate}%）</span>
               <span>{formatCurrency(totals.tax)}</span>
             </div>
-            <div className="flex justify-between py-2 border-t-2 border-green-700 mt-1 text-sm font-bold text-green-800">
+            <div className="flex justify-between py-2 border-t-2 border-kenmitsu-navy mt-1 text-sm font-bold text-kenmitsu-navy">
               <span>合計（税込）</span>
               <span>{formatCurrency(totals.total)}</span>
             </div>
@@ -384,12 +384,12 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
 
       {/* 工事写真シート（プレビュー上は見やすく別ページ風に表示） */}
       {(data.sitePhotos ?? []).length > 0 && (
-        <div className="border-t-4 border-green-700 bg-white w-full p-[12mm] text-[11px] text-gray-800 font-sans">
+        <div className="border-t-4 border-kenmitsu-navy bg-white w-full p-[12mm] text-[11px] text-gray-800 font-sans">
           <div className="text-center mb-4">
-            <h2 className="text-base font-bold text-green-800 tracking-wider">
+            <h2 className="text-base font-bold text-kenmitsu-navy tracking-wider">
               工事写真・現場状況
             </h2>
-            <div className="w-16 h-0.5 bg-green-700 mx-auto mt-1" />
+            <div className="w-16 h-0.5 bg-kenmitsu-navy mx-auto mt-1" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             {(data.sitePhotos ?? []).map((photo, i) => (
@@ -415,7 +415,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex">
-      <span className="text-green-700 font-semibold w-14 shrink-0">{label}</span>
+      <span className="text-kenmitsu-navy font-semibold w-14 shrink-0">{label}</span>
       <span className="flex-1 break-all">{value || "—"}</span>
     </div>
   );

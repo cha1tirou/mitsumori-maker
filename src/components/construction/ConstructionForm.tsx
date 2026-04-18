@@ -61,12 +61,12 @@ const WORK_TYPE_DESCRIPTIONS: Record<string, string> = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm transition-colors hover:border-gray-300 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600/20";
+  "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm transition-colors hover:border-gray-300 focus:border-kenmitsu-navy focus:outline-none focus:ring-1 focus:ring-kenmitsu-navy/20";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-      <span className="w-1 h-4 bg-green-700 rounded-full" />
+      <span className="w-1 h-4 bg-kenmitsu-navy rounded-full" />
       {children}
     </h3>
   );
@@ -122,7 +122,7 @@ function ItemRow({
       ? "text-red-700 bg-red-50 border-red-200"
       : margin < 15
       ? "text-amber-800 bg-amber-50 border-amber-200"
-      : "text-green-700 bg-green-50 border-green-200";
+      : "text-kenmitsu-navy bg-kenmitsu-navy50 border-kenmitsu-navy100";
 
   return (
     <div className="rounded-lg border border-gray-100 bg-gray-50/40 p-2.5">
@@ -266,7 +266,7 @@ function ImageUploader({
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="w-full h-24 bg-gray-50 hover:bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-green-700 transition-colors"
+          className="w-full h-24 bg-gray-50 hover:bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-kenmitsu-navy transition-colors"
         >
           <Upload className="w-5 h-5" strokeWidth={2} />
           <span className="text-[10px] font-medium">画像を選択</span>
@@ -682,14 +682,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
                 onClick={() => update("workType", type)}
                 className={`text-left py-2.5 px-3 rounded-lg border transition-colors ${
                   data.workType === type
-                    ? "bg-green-700 text-white border-green-700"
-                    : "bg-white text-gray-700 border-gray-200 hover:border-green-600"
+                    ? "bg-kenmitsu-navy text-white border-kenmitsu-navy"
+                    : "bg-white text-gray-700 border-gray-200 hover:border-kenmitsu-navy"
                 }`}
               >
                 <span className="text-xs font-bold block">{workTypeLabels[type]}</span>
                 {desc && (
                   <span className={`text-[10px] block mt-0.5 leading-snug ${
-                    data.workType === type ? "text-green-100" : "text-gray-400"
+                    data.workType === type ? "text-kenmitsu-navy100" : "text-gray-400"
                   }`}>
                     {desc}
                   </span>
@@ -720,7 +720,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
             <button
               type="button"
               onClick={() => applyPreset(data.workType)}
-              className="w-full flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-800 text-xs font-bold py-2.5 rounded-lg border border-green-200 transition-colors"
+              className="w-full flex items-center justify-center gap-2 bg-kenmitsu-navy50 hover:bg-kenmitsu-navy100 text-kenmitsu-navy text-xs font-bold py-2.5 rounded-lg border border-kenmitsu-navy100 transition-colors"
             >
               <Wand2 className="w-4 h-4" strokeWidth={2.25} />
               「{workTypeLabels[data.workType]}」をセクションとして追加
@@ -752,7 +752,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                   update("quoteNumber", next);
                   rememberQuoteNumber(next);
                 }}
-                className="inline-flex items-center gap-1 text-[10px] font-bold text-green-700 hover:bg-green-50 border border-green-200 px-2 rounded-lg shrink-0"
+                className="inline-flex items-center gap-1 text-[10px] font-bold text-kenmitsu-navy hover:bg-kenmitsu-navy50 border border-kenmitsu-navy100 px-2 rounded-lg shrink-0"
                 title="自動採番（前回の番号＋1）"
               >
                 <Sparkles className="w-3 h-3" strokeWidth={2.5} />
@@ -823,7 +823,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           <button
             type="button"
             onClick={() => setCustomerPickerOpen(true)}
-            className="text-[10px] font-bold px-2 py-1 rounded-md transition-colors flex items-center gap-1 bg-green-50 text-green-700 border border-green-200 hover:bg-green-100"
+            className="text-[10px] font-bold px-2 py-1 rounded-md transition-colors flex items-center gap-1 bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100"
           >
             <Users className="w-3 h-3" strokeWidth={2.5} />
             取引先マスタ
@@ -877,10 +877,10 @@ export default function ConstructionForm({ data, onChange }: Props) {
             }}
             className={`text-[10px] font-bold px-2 py-1 rounded-md transition-colors flex items-center gap-1 ${
               companySaveStatus === "saved"
-                ? "bg-green-100 text-green-700 border border-green-200"
+                ? "bg-kenmitsu-navy100 text-kenmitsu-navy border border-kenmitsu-navy"
                 : isCompanySaved()
                 ? "bg-gray-50 text-gray-400 border border-gray-200"
-                : "bg-green-50 text-green-700 border border-green-200 hover:bg-green-100"
+                : "bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100"
             }`}
           >
             <Save className="w-3 h-3" strokeWidth={2.5} />
@@ -890,7 +890,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           </button>
         </div>
         {hasSavedCompany && !data.companyName && (
-          <p className="text-[11px] text-green-700 mb-3 bg-green-50 border border-green-200 rounded-md px-2 py-1.5">
+          <p className="text-[11px] text-kenmitsu-navy mb-3 bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-md px-2 py-1.5">
             保存済みの自社情報が自動で入力されます
           </p>
         )}
@@ -1031,7 +1031,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
         <div className="flex items-center justify-between mb-3">
           <SectionTitle>
             <span className="inline-flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+              <Layers className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
               階層見積（工種別セクション）
             </span>
           </SectionTitle>
@@ -1041,8 +1041,8 @@ export default function ConstructionForm({ data, onChange }: Props) {
               onClick={() => setShowCost((v) => !v)}
               className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 border ${
                 showCost
-                  ? "bg-green-700 text-white border-green-700"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-green-600 hover:text-green-700"
+                  ? "bg-kenmitsu-navy text-white border-kenmitsu-navy"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-kenmitsu-navy hover:text-kenmitsu-navy"
               }`}
               title="原価・粗利を表示（社内用）"
             >
@@ -1060,7 +1060,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           <strong>労務費</strong>=職人の手間賃　<strong>材料費</strong>=部材・資材　<strong>外注費</strong>=協力業者への支払い　<strong>その他</strong>=仮設・運搬・処分等。
           改正建設業法では費目ごとの内訳明示が求められています。
           {showCost && (
-            <span className="block mt-1 text-green-700 font-medium">
+            <span className="block mt-1 text-kenmitsu-navy font-medium">
               原価・粗利モード ON：原価単価を入力すると、行ごと・全体の利益率が表示されます。PDF・プレビューには出力されません。
             </span>
           )}
@@ -1084,10 +1084,10 @@ export default function ConstructionForm({ data, onChange }: Props) {
             return (
               <div
                 key={section.id}
-                className="border-2 border-green-100 rounded-xl overflow-hidden"
+                className="border-2 border-kenmitsu-navy100 rounded-xl overflow-hidden"
               >
-                <div className="bg-green-50 px-3 py-2 flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-green-900 px-1.5 py-0.5 bg-white border border-green-200 rounded">
+                <div className="bg-kenmitsu-navy50 px-3 py-2 flex items-center gap-2">
+                  <span className="text-[10px] font-bold text-kenmitsu-navy px-1.5 py-0.5 bg-white border border-kenmitsu-navy100 rounded">
                     {sectionIndex + 1}
                   </span>
                   <input
@@ -1153,10 +1153,10 @@ export default function ConstructionForm({ data, onChange }: Props) {
                     {(section.subsections ?? []).map((sub, subIndex) => (
                       <div
                         key={sub.id}
-                        className="ml-3 border-l-2 border-green-200 pl-3 space-y-2"
+                        className="ml-3 border-l-2 border-kenmitsu-navy100 pl-3 space-y-2"
                       >
-                        <div className="flex items-center gap-2 bg-green-50/60 rounded px-2 py-1.5">
-                          <span className="text-[10px] font-bold text-green-800 px-1.5 bg-white border border-green-200 rounded">
+                        <div className="flex items-center gap-2 bg-kenmitsu-navy50/60 rounded px-2 py-1.5">
+                          <span className="text-[10px] font-bold text-kenmitsu-navy px-1.5 bg-white border border-kenmitsu-navy100 rounded">
                             {sectionIndex + 1}-{subIndex + 1}
                           </span>
                           <input
@@ -1214,7 +1214,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                         <button
                           type="button"
                           onClick={() => addSubItem(sectionIndex, subIndex)}
-                          className="w-full rounded-lg border border-dashed border-gray-200 py-1.5 text-[10.5px] text-gray-500 hover:border-green-600 hover:text-green-700 transition-colors flex items-center justify-center gap-1"
+                          className="w-full rounded-lg border border-dashed border-gray-200 py-1.5 text-[10.5px] text-gray-500 hover:border-kenmitsu-navy hover:text-kenmitsu-navy transition-colors flex items-center justify-center gap-1"
                         >
                           <Plus className="w-3 h-3" strokeWidth={2.25} />
                           中項目内の明細を追加
@@ -1226,7 +1226,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                       <button
                         type="button"
                         onClick={() => addItem(sectionIndex)}
-                        className="rounded-lg border-2 border-dashed border-gray-200 py-2 text-xs text-gray-500 hover:border-green-600 hover:text-green-700 transition-colors flex items-center justify-center gap-1"
+                        className="rounded-lg border-2 border-dashed border-gray-200 py-2 text-xs text-gray-500 hover:border-kenmitsu-navy hover:text-kenmitsu-navy transition-colors flex items-center justify-center gap-1"
                       >
                         <Plus className="w-3.5 h-3.5" strokeWidth={2.25} />
                         明細を追加
@@ -1234,7 +1234,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                       <button
                         type="button"
                         onClick={() => addSubsection(sectionIndex)}
-                        className="rounded-lg border-2 border-dashed border-green-200 py-2 text-xs text-green-700 hover:bg-green-50 transition-colors flex items-center justify-center gap-1"
+                        className="rounded-lg border-2 border-dashed border-kenmitsu-navy100 py-2 text-xs text-kenmitsu-navy hover:bg-kenmitsu-navy50 transition-colors flex items-center justify-center gap-1"
                       >
                         <Layers className="w-3.5 h-3.5" strokeWidth={2.25} />
                         中項目を追加
@@ -1249,7 +1249,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           <button
             type="button"
             onClick={() => addSection()}
-            className="w-full rounded-xl border-2 border-dashed border-green-200 py-3 text-sm text-green-700 hover:bg-green-50 hover:border-green-300 transition-colors flex items-center justify-center gap-2 font-bold"
+            className="w-full rounded-xl border-2 border-dashed border-kenmitsu-navy100 py-3 text-sm text-kenmitsu-navy hover:bg-kenmitsu-navy50 hover:border-kenmitsu-navy transition-colors flex items-center justify-center gap-2 font-bold"
           >
             <Plus className="w-4 h-4" strokeWidth={2.25} />
             新しいセクションを追加
@@ -1275,14 +1275,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>
           <span className="inline-flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <ShieldCheck className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             法定福利費（自動計算）
           </span>
         </SectionTitle>
         <label className="flex items-center gap-2 mb-3 cursor-pointer">
           <input
             type="checkbox"
-            className="accent-green-700"
+            className="accent-kenmitsu-navy"
             checked={data.enableLegalWelfare}
             onChange={(e) => update("enableLegalWelfare", e.target.checked)}
           />
@@ -1316,7 +1316,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
         <label className="flex items-center gap-2 mb-3 cursor-pointer">
           <input
             type="checkbox"
-            className="accent-green-700"
+            className="accent-kenmitsu-navy"
             checked={data.enableOverhead}
             onChange={(e) => update("enableOverhead", e.target.checked)}
           />
@@ -1377,7 +1377,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>
           <span className="inline-flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <ShieldCheck className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             瑕疵担保責任・アフターサービス
           </span>
         </SectionTitle>
@@ -1404,7 +1404,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>
           <span className="inline-flex items-center gap-1.5">
-            <FileWarning className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <FileWarning className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             追加工事・設計変更の取扱い
           </span>
         </SectionTitle>
@@ -1424,14 +1424,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
         <div className="flex items-center justify-between mb-3">
           <SectionTitle>
             <span className="inline-flex items-center gap-1.5">
-              <Camera className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+              <Camera className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
               工事写真（PDF末尾に追加）
             </span>
           </SectionTitle>
           <button
             type="button"
             onClick={() => photoInputRef.current?.click()}
-            className="text-[10px] font-bold px-2 py-1 rounded-md bg-green-50 text-green-700 border border-green-200 hover:bg-green-100 flex items-center gap-1"
+            className="text-[10px] font-bold px-2 py-1 rounded-md bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100 flex items-center gap-1"
           >
             <Upload className="w-3 h-3" strokeWidth={2.5} />
             写真を追加

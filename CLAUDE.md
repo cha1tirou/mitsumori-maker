@@ -188,38 +188,51 @@ export default function GuidePage() {
 ## ケンミツ(/construction)運用ガイド
 
 ### 概要
-- `/construction` は **ケンミツ** という独立ブランド。見積書メーカーとインフラ（Next.js アプリ / Vercel / ルート `src/app/layout.tsx`）は共有するが、ターゲット（建設業一人親方〜小規模工務店）・訴求軸（改正建設業法2025対応）・ビジュアルアイデンティティが別物
-- ランディングページ: `src/app/construction/page.tsx` は薄いオーケストレーター。セクション本体は `src/components/construction/lp/` 配下にセクション単位で分割されている（Hero / Problems / Features / LawCompliance / Comparison / OurStory / Pricing / Faq / FinalCta など）
+- ケンミツは `/construction` 配下で提供する建設業一人親方向けの独立ブランド。見積書メーカーとインフラ共有、訴求軸（改正建設業法2025対応）とビジュアルアイデンティティは別
+- **LP**: `src/app/construction/page.tsx` は薄いオーケストレーター、セクション本体は `src/components/construction/lp/`
+- **サービス画面**: `/construction/new`（見積書作成）・`/construction/mypage`（マイページ）・`/construction/checklist`（法令対応チェックリスト）・`/construction/login`・`/construction/faq`・`/construction/how-to`・`/construction/quotes/[id]` など
 
-### ブランドカラー（`tailwind.config.ts` で定義済）
-- `kenmitsu.navy` (#1E40AF) — メインブランドカラー
-- `kenmitsu.orange` (#F59E0B) — アクセント（ヘルメット色）
-- `kenmitsu.blueprint` (#CBD5E1) — 方眼紙背景色
-- その他 `ink` / `muted` / `paper` / `warn` / `ok` など系統立てたパレットあり
-- ルート `/` で使っている既存の `primary`（紺）/ `accent`（赤）等とは名前空間を分けており競合なし
+### ブランドカラー（`tailwind.config.ts` の `kenmitsu.*`）
+- `kenmitsu.navy` (#1E40AF) — メイン、構造・ヘッダー・ナビ
+- `kenmitsu.orange` (#F59E0B) — ヘルメット色、プライマリCTA
+- `kenmitsu.blueprint` (#CBD5E1) — 方眼紙背景（LPのみ）
+- `kenmitsu.ok` (#0E7A52) — 成功状態専用
+- `kenmitsu.warn` (#B45309) — 警告専用
+- `ink` / `muted` / `paper` 系 — 標準テキスト/背景
 
-### 特徴的なビジュアル要素
-- **工事テープ装飾**（黄×黒斜めストライプ）→ `src/components/construction/lp/ConstructionTape.tsx`
-- **ブループリント方眼紙背景** → `src/components/construction/lp/BlueprintBg.tsx`
-- **職人ヘルメットなどのフラットSVGイラスト** → `src/components/construction/lp/illustrations.tsx`（`IluCard` の scene variants = `rejected` / `confused` / `excel` / `offsite` / `calc` / `expensive` / `lawCheck` / `presets` / `autocalc` / `phone` / `rocket` / `cloud`、および `IluHeroKeyArt`）
+### 色の使い分けルール
+- **プライマリCTA**（見積書作成・PDFダウンロード・保存・ログイン送信・Soloアップグレード等の前進アクション）: `bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white`
+- **構造・ナビ・リンク・強調**（ヘッダー帯・ロゴ・フォーカスring・セクション見出し・選択中状態）: `kenmitsu-navy` 系（`navy50` / `navy100` / `navy` / `navy700` / `navy900`）
+- **成功**（チェックマーク・「自動チェック済」・「対応済」・「ACTIVE」バッジ・成功トースト・PDFのOKスタンプ）: `kenmitsu-ok` / `kenmitsu-okBg`
+- **警告**（要注意バッジなど）: `kenmitsu-warn` / `kenmitsu-warnBg`（実装済みは少ない。`amber-*` で既に書かれている箇所は触らない）
+- 🚫 **旧 `green-*` / `emerald-*` / 緑のhex（`#15803d` `#166534` `#14532d` など）は `/construction` 配下で使用禁止**。PR のレビュー時に grep で検出されれば修正対象
+
+### 特徴的ビジュアル（LPのみ）
+- 工事テープ装飾（`lp/ConstructionTape.tsx`） / ブループリント方眼紙背景（`lp/BlueprintBg.tsx`） / 職人ヘルメットSVG（`lp/illustrations.tsx` の `IluCard` / `IluHeroKeyArt`）
+- **サービス画面ではUIの邪魔にならないよう使わない**（編集性・可読性優先）
 
 ### 動的要素
-- 「改正建設業法 施行から **N** 日経過」は施行日 `2025-12-01` からの経過日数を `daysSinceLawEnforcement()`（`src/app/construction/page.tsx`）で Server Component 側で計算する。**ハードコードしないこと**
-- `Hero` / `LawCompliance` / `FinalCta` に `lawDays` を props で渡す
+- 「改正建設業法 施行から **N** 日経過」は施行日 `2025-12-01` からの経過日数を `daysSinceLawEnforcement()`（`src/app/construction/page.tsx`）で Server Component が動的計算。**ハードコード禁止**
+- LP の `Hero` / `LawCompliance` / `FinalCta` に `lawDays` を props で渡す
 
-### Pricing
-- Solo 推奨プランの `PlanCheckoutButton` は **`variant="kenmitsu"`** を指定してオレンジボタン化
-- `variant="primary"`（緑）は既存の mypage 等で使われているため、ケンミツ LP 以外では変更しない
-- `variant="outline"` も他で使っている可能性があるため触らない
+### PlanCheckoutButton（`src/components/construction/PlanCheckoutButton.tsx`）
+- `variant="kenmitsu"`（オレンジ）: ケンミツブランドのCTA用。**LP の Pricing、及びケンミツ配下のアップグレード誘導 CTA で使う**
+- `variant="primary"`（緑）: **レガシー**。`@deprecated` コメント付き。将来の参照性のため定義は残すが新規使用禁止
+- `variant="outline"`: セカンダリ（白地 + 枠）
 
-### 絶対に触ってはいけないもの（ケンミツLP改修時の保護対象）
-- `src/app/layout.tsx` のルート設定（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
-- `/construction/` 配下のサブルート13本（`new` / `checklist` / `how-to` / `faq` / `privacy` / `contact` / `terms` / `tokushoho` / `login` / `mypage` / `admin` / `quotes/[id]` / `reset-password`）
-- `src/components/construction/` 直下の既存コンポーネント群（`TrackPageView` / `PlanCheckoutButton` / `Toast` など）
-- `lib/supabase/` 配下のロジック、`getCurrentUserProfile` / `isSupabaseConfigured`
-- `src/app/construction/page.tsx` 内のデータ構造（`faqsForLd`）と SoftwareApplication / FAQPage JSON-LD、`metadata`、`TrackPageView name="construction_lp_view"`
+### PDF テンプレート（`src/lib/constructionPdfGenerator.tsx`）
+- `@react-pdf/renderer` で描画。色定数は `colors` オブジェクトで集約管理
+- `primary` / `primaryDark` / `primaryLight` / `primaryBorder` は全て navy 系 hex
+- PDF とプレビュー（`ConstructionPreview.tsx`）は**同じ見た目になるよう両方とも navy で統一**する
 
-### モバイルブレークポイント注意点
+### 絶対に触らない（ケンミツ改修時の保護対象）
+- `src/app/layout.tsx` のルート設定全て（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
+- `lib/supabase/` のロジック（`getCurrentUserProfile` / `isSupabaseConfigured` を含む）
+- Stripe 決済フロー本体（`PlanCheckoutButton` の `/api/stripe/checkout` 呼び出し部分、`PortalButton`、Stripe webhook）
+- `src/app/construction/page.tsx` 内の SoftwareApplication + FAQPage JSON-LD、`metadata`、`TrackPageView name="construction_lp_view"`
+- `/construction/` 配下のサブルート13本のレイアウト構造・情報項目・ラベル・ガイダンス文言・デフォ値（色だけは統一OK）
+
+### モバイルブレークポイント注意点（LP）
 - `Comparison.tsx`: **sm 以下ではカード積層に切替**（テーブルではない）。3列squeezeを避けるための専用レイアウト
 - `Pricing.tsx`: 単列 → 2列 → 3列。Solo の浮き上がり（`translate-y`）は **lg 以上限定**でモバイル時のクリッピングを回避
 - `Hero`: アラートリボンのテキストは **sm 以下で短縮表示**（フル文言「施行から N 日経過 — 未対応は法令リスク」は sm 以上のみ）

@@ -28,7 +28,7 @@ export default function ConstructionTermsPage() {
             href="/construction"
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             ← ケンミツトップに戻る
           </Link>
         </div>
@@ -43,11 +43,11 @@ export default function ConstructionTermsPage() {
 
           <p className="text-sm text-gray-700 leading-relaxed mb-8">
             本規約（以下「本規約」）は、ケンミツ（以下「本サービス」）の利用条件を定めるものです。本サービスをご利用いただくにあたり、本規約のほか、別途定める
-            <Link href="/terms" className="text-green-700 hover:underline">
+            <Link href="/terms" className="text-kenmitsu-navy hover:underline">
               共通利用規約
             </Link>
             および
-            <Link href="/construction/privacy" className="text-green-700 hover:underline">
+            <Link href="/construction/privacy" className="text-kenmitsu-navy hover:underline">
               プライバシーポリシー
             </Link>
             も適用されます。
@@ -185,7 +185,7 @@ export default function ConstructionTermsPage() {
           <Section title="第11条（個人情報の取扱い）">
             <p>
               個人情報の取扱いは
-              <Link href="/construction/privacy" className="text-green-700 hover:underline">
+              <Link href="/construction/privacy" className="text-kenmitsu-navy hover:underline">
                 プライバシーポリシー
               </Link>
               に定めるとおりとします。
@@ -236,7 +236,7 @@ export default function ConstructionTermsPage() {
             最終改定日: 2026年4月14日
             <br />
             事業者情報は
-            <Link href="/construction/tokushoho" className="text-green-700 hover:underline">
+            <Link href="/construction/tokushoho" className="text-kenmitsu-navy hover:underline">
               特定商取引法に基づく表記
             </Link>
             をご参照ください。

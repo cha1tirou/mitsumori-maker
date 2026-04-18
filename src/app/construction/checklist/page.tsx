@@ -106,8 +106,8 @@ export default function ChecklistPage() {
             href="/construction"
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
-            ケンミツ <span className="text-green-700">| 建設業の見積書</span>
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
+            ケンミツ <span className="text-kenmitsu-navy">| 建設業の見積書</span>
           </Link>
           <button
             onClick={undefined}
@@ -134,8 +134,8 @@ export default function ChecklistPage() {
         </div>
 
         {/* CTA */}
-        <div className="bg-white border-2 border-green-200 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-center gap-4 no-print">
-          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-700 flex items-center justify-center">
+        <div className="bg-white border-2 border-kenmitsu-navy100 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-center gap-4 no-print">
+          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-kenmitsu-orange flex items-center justify-center">
             <Download className="w-6 h-6 text-white" strokeWidth={2.25} />
           </div>
           <div className="flex-1 text-center sm:text-left">
@@ -156,7 +156,7 @@ export default function ChecklistPage() {
           </h2>
           {sections.map((section, i) => (
             <section key={i} className="mb-8 last:mb-0">
-              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4 pb-2 border-b-2 border-green-700">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4 pb-2 border-b-2 border-kenmitsu-navy">
                 {section.title}
               </h3>
               <div className="space-y-3">
@@ -165,7 +165,7 @@ export default function ChecklistPage() {
                     key={j}
                     className="flex items-start gap-3 cursor-pointer group"
                   >
-                    <span className="flex-shrink-0 w-5 h-5 mt-0.5 border-2 border-gray-300 rounded group-hover:border-green-600 transition-colors"></span>
+                    <span className="flex-shrink-0 w-5 h-5 mt-0.5 border-2 border-gray-300 rounded group-hover:border-kenmitsu-navy transition-colors"></span>
                     <span className="text-sm text-gray-700 leading-relaxed">
                       {item}
                     </span>

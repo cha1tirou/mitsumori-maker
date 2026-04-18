@@ -198,7 +198,7 @@ export default function FaqPage() {
             href="/construction"
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             ← ケンミツトップに戻る
           </Link>
         </div>
@@ -216,7 +216,7 @@ export default function FaqPage() {
         <div className="space-y-10">
           {faqCategories.map((cat, i) => (
             <section key={i}>
-              <h2 className="text-base font-bold text-gray-900 mb-4 pb-2 border-b-2 border-green-700">
+              <h2 className="text-base font-bold text-gray-900 mb-4 pb-2 border-b-2 border-kenmitsu-navy">
                 {cat.title}
               </h2>
               <div className="space-y-3">
@@ -252,12 +252,12 @@ export default function FaqPage() {
           <div className="grid md:grid-cols-2 gap-3">
             <Link
               href="/construction/contact"
-              className="block bg-green-50 border border-green-200 rounded-lg p-4 hover:bg-green-100 transition-colors"
+              className="block bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-4 hover:bg-kenmitsu-navy100 transition-colors"
             >
-              <p className="text-sm font-bold text-green-900 mb-1">
+              <p className="text-sm font-bold text-kenmitsu-navy900 mb-1">
                 お問い合わせフォーム
               </p>
-              <p className="text-xs text-green-800">通常1営業日以内に返信します</p>
+              <p className="text-xs text-kenmitsu-navy">通常1営業日以内に返信します</p>
             </Link>
             <Link
               href="/construction/mypage"

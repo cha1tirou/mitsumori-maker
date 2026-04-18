@@ -85,13 +85,13 @@ export default function QuoteListItem({ quote }: Props) {
 
   return (
     <li className="py-3 flex items-center gap-3">
-      <div className="w-9 h-9 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
-        <FileText className="w-4 h-4 text-green-700" strokeWidth={2} />
+      <div className="w-9 h-9 rounded-lg bg-kenmitsu-navy50 flex items-center justify-center shrink-0">
+        <FileText className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
         <Link
           href={`/construction/quotes/${quote.id}`}
-          className="text-sm font-medium text-gray-900 truncate block hover:text-green-700"
+          className="text-sm font-medium text-gray-900 truncate block hover:text-kenmitsu-navy"
         >
           {quote.subject || quote.quote_number || "（無題の見積書）"}
         </Link>
@@ -109,7 +109,7 @@ export default function QuoteListItem({ quote }: Props) {
       <div className="flex gap-1">
         <Link
           href={`/construction/quotes/${quote.id}`}
-          className="w-7 h-7 flex items-center justify-center rounded-md text-gray-400 hover:text-green-700 hover:bg-green-50"
+          className="w-7 h-7 flex items-center justify-center rounded-md text-gray-400 hover:text-kenmitsu-navy hover:bg-kenmitsu-navy50"
           title="開く"
         >
           <ExternalLink className="w-3.5 h-3.5" strokeWidth={2.25} />
