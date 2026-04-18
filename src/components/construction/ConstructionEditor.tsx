@@ -268,34 +268,83 @@ export default function ConstructionEditor({
               <ConstructionForm data={data} onChange={handleDataChange} />
 
               <div className="mt-5 space-y-2">
+                {/* PDF出力: 全ユーザー */}
                 <ConstructionPdfDownloadButton
                   data={data}
                   plan={plan}
                   isAuthenticated={Boolean(userEmail)}
                   className="w-full"
                 />
-                <SaveQuoteButton
-                  data={data}
-                  quoteId={quoteId}
-                  className="w-full"
-                  onSaved={handleSaved}
-                />
-                <ConvertButtons data={data} />
-                <AccountingCsvButton data={data} />
-                <button
-                  onClick={() => setEmailDialogOpen(true)}
-                  className="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"
-                >
-                  <Mail className="w-4 h-4" strokeWidth={2.5} />
-                  メールで送信（Solo以上）
-                </button>
-                <Link
-                  href="/construction/mypage"
-                  className="flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 py-1"
-                >
-                  <User className="w-3.5 h-3.5" strokeWidth={2.25} />
-                  マイページを開く
-                </Link>
+
+                {/* 見積書を保存: ログイン済みのみ（Free は月3通制限、Solo/Team は無制限） */}
+                {userEmail && (
+                  <SaveQuoteButton
+                    data={data}
+                    quoteId={quoteId}
+                    className="w-full"
+                    onSaved={handleSaved}
+                  />
+                )}
+
+                {/* 以下は Solo / Team のみ。Free・未ログインでは非表示にして UI をシンプルに */}
+                {(plan === "solo" || plan === "team") && (
+                  <>
+                    <ConvertButtons data={data} />
+                    <AccountingCsvButton data={data} />
+                    <button
+                      onClick={() => setEmailDialogOpen(true)}
+                      className="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"
+                    >
+                      <Mail className="w-4 h-4" strokeWidth={2.5} />
+                      メールで送信
+                    </button>
+                  </>
+                )}
+
+                {/* 未ログイン: 登録誘導（Free プランへの小さな入口） */}
+                {!userEmail && (
+                  <Link
+                    href={`/construction/login?redirect=${encodeURIComponent(
+                      isEdit
+                        ? `/construction/quotes/${quoteId}`
+                        : "/construction/new",
+                    )}`}
+                    className="block w-full rounded-lg border-2 border-dashed border-kenmitsu-navy100 bg-white hover:bg-kenmitsu-navy50 p-3 text-center transition-colors"
+                  >
+                    <p className="text-xs font-bold text-kenmitsu-navy mb-0.5">
+                      無料登録で見積書を保存できます
+                    </p>
+                    <p className="text-[10px] text-kenmitsu-muted">
+                      月3通までクラウド保存・履歴から再編集OK
+                    </p>
+                  </Link>
+                )}
+
+                {/* Free プラン: Solo アップグレード誘導 */}
+                {userEmail && plan === "free" && (
+                  <Link
+                    href="/construction#pricing"
+                    className="block w-full rounded-lg border-2 border-dashed border-kenmitsu-orange/60 bg-white hover:bg-kenmitsu-orange50 p-3 text-center transition-colors"
+                  >
+                    <p className="text-xs font-bold text-kenmitsu-orange600 mb-0.5">
+                      Soloプラン（月¥980）で全機能を解放
+                    </p>
+                    <p className="text-[10px] text-kenmitsu-muted leading-relaxed">
+                      透かしなしPDF・書類変換・CSV出力・メール送信・無制限保存
+                    </p>
+                  </Link>
+                )}
+
+                {/* マイページ: ログイン済みのみ */}
+                {userEmail && (
+                  <Link
+                    href="/construction/mypage"
+                    className="flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 py-1"
+                  >
+                    <User className="w-3.5 h-3.5" strokeWidth={2.25} />
+                    マイページを開く
+                  </Link>
+                )}
                 <Link
                   href="/construction/checklist"
                   className="flex items-center gap-2 bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 hover:bg-kenmitsu-navy100 transition-colors"
