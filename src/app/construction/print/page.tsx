@@ -83,16 +83,17 @@ export default function PrintPage() {
           .no-print {
             display: none !important;
           }
-          .print-sheet {
-            box-shadow: none !important;
-            border: none !important;
-            border-radius: 0 !important;
-            margin: 0 !important;
-          }
+          .print-sheet,
           .print-sheet > div {
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
+            margin: 0 !important;
+            overflow: visible !important;
+          }
+          /* 明細テーブルの行途中で改ページさせない */
+          table tr {
+            break-inside: avoid;
           }
         }
         @media screen {
