@@ -18,6 +18,21 @@ const FONT_URLS = [
   "/fonts/noto-sans-jp-700.woff",
 ];
 
+// <link rel=preload> だけだとブラウザ実装によっては PDF 生成エンジンに届かないので、
+// fetch で HTTP キャッシュに乗せ、さらに ArrayBuffer まで展開してメモリにも載せる。
+async function warmFontCache() {
+  try {
+    await Promise.all(
+      FONT_URLS.map(async (url) => {
+        const res = await fetch(url, { credentials: "same-origin" });
+        if (res.ok) await res.arrayBuffer();
+      }),
+    );
+  } catch {
+    // ignore: 失敗しても PDF 生成自体は試みる
+  }
+}
+
 function preloadFonts() {
   FONT_URLS.forEach((url) => {
     const link = document.createElement("link");
@@ -27,6 +42,8 @@ function preloadFonts() {
     link.crossOrigin = "anonymous";
     document.head.appendChild(link);
   });
+  // HTTP キャッシュにも載せる（fire-and-forget）
+  void warmFontCache();
 }
 
 // メインスレッドを一瞬解放してUIを更新させる
@@ -87,15 +104,34 @@ export default function ConstructionPdfDownloadButton({
     }
     // warning（推奨項目）はブロックせずそのまま出力する
     setLoading(true);
+    const t0 = performance.now();
+    console.log("[pdf] start");
     try {
       // モジュール読み込み後、UIを更新させてからPDF生成に入る
+      const tImport = performance.now();
       const { generateConstructionPdf } = await import(
         "@/lib/constructionPdfGenerator"
       );
+      console.log(
+        `[pdf] module import: ${(performance.now() - tImport).toFixed(0)}ms`,
+      );
+
+      // フォント fetch を先に完了させておく（初回クリック時の大半のブロッキング要因）
+      const tWarm = performance.now();
+      await warmFontCache();
+      console.log(
+        `[pdf] warm font cache: ${(performance.now() - tWarm).toFixed(0)}ms`,
+      );
+
       await yieldToMain();
+      const tGen = performance.now();
       const blob = await generateConstructionPdf(data, {
         watermark: withWatermark,
       });
+      const genMs = performance.now() - tGen;
+      console.log(
+        `[pdf] generate blob: ${genMs.toFixed(0)}ms (size=${(blob.size / 1024).toFixed(1)}KB)`,
+      );
       trackConversion("construction_pdf_download");
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -118,6 +154,9 @@ export default function ConstructionPdfDownloadButton({
       console.error("PDF generation failed:", e);
       alert("PDFの生成に失敗しました。もう一度お試しください。");
     } finally {
+      console.log(
+        `[pdf] total: ${(performance.now() - t0).toFixed(0)}ms`,
+      );
       setLoading(false);
     }
   };
@@ -144,6 +183,32 @@ export default function ConstructionPdfDownloadButton({
           </>
         )}
       </button>
+
+      {/* PDF生成中の全画面オーバーレイ: 日本語フォント埋め込みでブラウザが一時的に応答停止するため事前に説明 */}
+      {loading && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          role="dialog"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
+            <Loader2
+              className="w-10 h-10 text-kenmitsu-orange mx-auto mb-3 animate-spin"
+              strokeWidth={2}
+            />
+            <p className="text-base font-bold text-gray-900 mb-1">
+              PDFを生成しています
+            </p>
+            <p className="text-xs text-gray-600 leading-relaxed">
+              日本語フォントの埋め込みで <strong>10〜30秒</strong> ほどかかります。
+              <br />
+              ブラウザが「応答しません」と表示した場合は <strong>「待機」</strong>
+              を選択してそのままお待ちください。
+            </p>
+          </div>
+        </div>
+      )}
 
       {showNudge && (
         <div
