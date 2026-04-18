@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ConstructionQuoteData } from "@/types/construction";
-import { Download, Loader2, Crown, X, Lock } from "lucide-react";
+import { Download, Loader2, Crown, X, Lock, Printer } from "lucide-react";
 import { trackConversion } from "@/lib/analytics";
 import {
   validateQuote,
@@ -12,42 +12,16 @@ import {
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
 
-// フォントを事前キャッシュ（PDF生成時のブロッキングを軽減）
-const FONT_URLS = [
-  "/fonts/noto-sans-jp-400.woff",
-  "/fonts/noto-sans-jp-700.woff",
-];
+// PDF 生成方式はブラウザ印刷（高速）を既定とし、@react-pdf/renderer は重いので
+// 上級者向けのフォールバックとして残す。
+//
+// 実装メモ:
+// - ブラウザ印刷方式: sessionStorage に見積データを退避 → /construction/print を新タブで開く →
+//   そのページが自動で window.print() → ユーザーが「PDFとして保存」を選ぶ
+// - レガシー方式: @react-pdf/renderer を import して blob 生成。日本語フォント 3MB を
+//   メインスレッドで解析するため 10〜30秒ブロックする
 
-// <link rel=preload> だけだとブラウザ実装によっては PDF 生成エンジンに届かないので、
-// fetch で HTTP キャッシュに乗せ、さらに ArrayBuffer まで展開してメモリにも載せる。
-async function warmFontCache() {
-  try {
-    await Promise.all(
-      FONT_URLS.map(async (url) => {
-        const res = await fetch(url, { credentials: "same-origin" });
-        if (res.ok) await res.arrayBuffer();
-      }),
-    );
-  } catch {
-    // ignore: 失敗しても PDF 生成自体は試みる
-  }
-}
-
-function preloadFonts() {
-  FONT_URLS.forEach((url) => {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.href = url;
-    link.as = "font";
-    link.crossOrigin = "anonymous";
-    document.head.appendChild(link);
-  });
-  // HTTP キャッシュにも載せる（fire-and-forget）
-  void warmFontCache();
-}
-
-// メインスレッドを一瞬解放してUIを更新させる
-const yieldToMain = () => new Promise<void>((r) => setTimeout(r, 0));
+const PRINT_STORAGE_KEY = "kenmitsu-print-data-v1";
 
 interface Props {
   data: ConstructionQuoteData;
@@ -85,107 +59,128 @@ export default function ConstructionPdfDownloadButton({
   className = "",
 }: Props) {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [legacyLoading, setLegacyLoading] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
-
-  // マウント時にフォントをプリフェッチ
-  useEffect(() => { preloadFonts(); }, []);
 
   // 有料プラン以外は透かし付き
   const withWatermark = plan !== "solo" && plan !== "team";
 
-  const handleDownload = async () => {
+  // 共通: 出力前のバリデーション + ダウンロード数カウント
+  const preflightCheck = (): boolean => {
     const issues = validateQuote(data);
     if (hasBlockingIssues(issues)) {
       alert(
-        `PDF出力前に以下をご確認ください:\n\n${formatIssuesForConfirm(issues)}`
+        `PDF出力前に以下をご確認ください:\n\n${formatIssuesForConfirm(issues)}`,
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const afterDownloadHook = () => {
+    trackConversion("construction_pdf_download");
+    if (!isAuthenticated) {
+      const count = incrementAnonCount();
+      if (count >= ANON_NUDGE_THRESHOLD) {
+        setShowNudge(true);
+      }
+    }
+  };
+
+  // === ブラウザ印刷方式（既定・高速） ===
+  const handlePrintPdf = () => {
+    if (!preflightCheck()) return;
+    try {
+      sessionStorage.setItem(
+        PRINT_STORAGE_KEY,
+        JSON.stringify({ data, watermark: withWatermark }),
+      );
+    } catch (e) {
+      console.error("sessionStorage write failed:", e);
+      alert(
+        "ブラウザのストレージに一時保存できませんでした。シークレットモードの場合は通常モードでお試しください。",
       );
       return;
     }
-    // warning（推奨項目）はブロックせずそのまま出力する
-    setLoading(true);
-    const t0 = performance.now();
-    console.log("[pdf] start");
+    const win = window.open("/construction/print", "_blank");
+    if (!win) {
+      alert(
+        "ポップアップブロッカーで新しいタブを開けませんでした。ブラウザ設定から本サイトのポップアップを許可してください。",
+      );
+      return;
+    }
+    afterDownloadHook();
+  };
+
+  // === レガシー: @react-pdf/renderer 方式（重い・保険） ===
+  const handleLegacyDownload = async () => {
+    if (!preflightCheck()) return;
+    setLegacyLoading(true);
     try {
-      // モジュール読み込み後、UIを更新させてからPDF生成に入る
-      const tImport = performance.now();
       const { generateConstructionPdf } = await import(
         "@/lib/constructionPdfGenerator"
       );
-      console.log(
-        `[pdf] module import: ${(performance.now() - tImport).toFixed(0)}ms`,
-      );
-
-      // フォント fetch を先に完了させておく（初回クリック時の大半のブロッキング要因）
-      const tWarm = performance.now();
-      await warmFontCache();
-      console.log(
-        `[pdf] warm font cache: ${(performance.now() - tWarm).toFixed(0)}ms`,
-      );
-
-      await yieldToMain();
-      const tGen = performance.now();
       const blob = await generateConstructionPdf(data, {
         watermark: withWatermark,
       });
-      const genMs = performance.now() - tGen;
-      console.log(
-        `[pdf] generate blob: ${genMs.toFixed(0)}ms (size=${(blob.size / 1024).toFixed(1)}KB)`,
-      );
-      trackConversion("construction_pdf_download");
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      const safeClient = (data.clientName || "未設定").replace(/[/\\?%*:|"<>]/g, "_");
+      const safeClient = (data.clientName || "未設定").replace(
+        /[/\\?%*:|"<>]/g,
+        "_",
+      );
       a.download = `工事見積書_${safeClient}_${data.quoteDate}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-
-      // 匿名ユーザーのダウンロード数をカウント → 閾値で登録促し
-      if (!isAuthenticated) {
-        const count = incrementAnonCount();
-        if (count >= ANON_NUDGE_THRESHOLD) {
-          setShowNudge(true);
-        }
-      }
+      afterDownloadHook();
     } catch (e) {
       console.error("PDF generation failed:", e);
       alert("PDFの生成に失敗しました。もう一度お試しください。");
     } finally {
-      console.log(
-        `[pdf] total: ${(performance.now() - t0).toFixed(0)}ms`,
-      );
-      setLoading(false);
+      setLegacyLoading(false);
     }
   };
 
   return (
     <>
       <button
-        onClick={handleDownload}
-        disabled={loading}
-        className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
+        onClick={handlePrintPdf}
+        className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
       >
-        {loading ? (
+        <Download className="w-4 h-4" strokeWidth={2.5} />
+        PDFダウンロード
+        {withWatermark && (
+          <span className="text-[10px] font-normal opacity-75">
+            （透かしあり）
+          </span>
+        )}
+      </button>
+
+      {/* 予備: 旧 @react-pdf レイアウト。ブラウザ印刷で困った時のみ使う */}
+      <button
+        onClick={handleLegacyDownload}
+        disabled={legacyLoading}
+        className="mt-1 w-full text-[10px] text-gray-400 hover:text-gray-700 disabled:opacity-60 flex items-center justify-center gap-1.5"
+        title="ブラウザ印刷が使えない場合の代替（10〜30秒ブラウザが応答停止する場合があります）"
+      >
+        {legacyLoading ? (
           <>
-            <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2.5} />
-            PDF生成中...
+            <Loader2 className="w-3 h-3 animate-spin" strokeWidth={2.5} />
+            生成中…
           </>
         ) : (
           <>
-            <Download className="w-4 h-4" strokeWidth={2.5} />
-            PDFダウンロード
-            {withWatermark && (
-              <span className="text-[10px] font-normal opacity-75">（透かしあり）</span>
-            )}
+            <Printer className="w-3 h-3" strokeWidth={2.25} />
+            旧PDFレイアウト（直接ダウンロード・重い）
           </>
         )}
       </button>
 
-      {/* PDF生成中の全画面オーバーレイ: 日本語フォント埋め込みでブラウザが一時的に応答停止するため事前に説明 */}
-      {loading && (
+      {/* レガシー方式は @react-pdf が重いため、実行中はメインスレッドがブロックされる */}
+      {legacyLoading && (
         <div
           className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           role="dialog"
@@ -201,10 +196,10 @@ export default function ConstructionPdfDownloadButton({
               PDFを生成しています
             </p>
             <p className="text-xs text-gray-600 leading-relaxed">
-              日本語フォントの埋め込みで <strong>10〜30秒</strong> ほどかかります。
+              旧方式のため <strong>10〜30秒</strong> かかります。
               <br />
-              ブラウザが「応答しません」と表示した場合は <strong>「待機」</strong>
-              を選択してそのままお待ちください。
+              ブラウザが「応答しません」と出た場合は{" "}
+              <strong>「待機」</strong> を選んでお待ちください。
             </p>
           </div>
         </div>
@@ -232,8 +227,8 @@ export default function ConstructionPdfDownloadButton({
               </h3>
               <p className="text-xs text-kenmitsu-navy100 leading-relaxed">
                 本格的にご利用いただくなら、<strong>透かしなしの正式版</strong>＋
-                <strong>見積履歴の保存</strong>＋<strong>自動メール送信</strong>が使える
-                Soloプラン（月¥980）がおすすめです。
+                <strong>見積履歴の保存</strong>＋<strong>自動メール送信</strong>
+                が使える Soloプラン（月¥980）がおすすめです。
               </p>
             </div>
             <div className="p-5 space-y-3">
@@ -267,7 +262,7 @@ export default function ConstructionPdfDownloadButton({
                 <button
                   onClick={() => {
                     router.push(
-                      "/construction/login?redirect=/construction/new"
+                      "/construction/login?redirect=/construction/new",
                     );
                     setShowNudge(false);
                   }}
