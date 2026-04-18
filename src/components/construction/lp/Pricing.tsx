@@ -194,7 +194,7 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                       plan="solo"
                       billing="monthly"
                       label={isPaid ? "Soloプランに変更" : "Soloで始める"}
-                      variant="primary"
+                      variant="kenmitsu"
                     />
                   ))}
                 {p.id === "team" && (
