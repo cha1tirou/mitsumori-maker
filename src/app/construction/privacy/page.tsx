@@ -125,7 +125,7 @@ export default function ConstructionPrivacyPage() {
                 見積データ・アカウント情報は、有料プラン継続中および解約後 180 日間保管します。
               </li>
               <li>
-                利用者からの削除請求を受けた場合、法令上の保管義務がある情報を除き、速やかに削除します。
+                利用者からの削除請求を受けた場合、またはマイページからアカウント削除を行った場合、法令上の保管義務がある情報を除き、速やかに削除します。
               </li>
               <li>
                 課金履歴は税法・会計帳簿保存義務に基づき、7年間保管します。
@@ -133,7 +133,23 @@ export default function ConstructionPrivacyPage() {
             </ol>
           </Section>
 
-          <Section title="7. 利用者の権利">
+          <Section title="7. メール配信">
+            <ol>
+              <li>
+                本サービスは、登録されたメールアドレスに対し、以下の種類のメールを配信します。
+                <ul>
+                  <li>アカウント確認・ログイン・パスワードリセットなどの認証メール</li>
+                  <li>サービスの利用方法・機能紹介に関するガイドメール（登録後7日間に段階的に配信）</li>
+                  <li>プラン更新・変更に関する通知メール</li>
+                </ul>
+              </li>
+              <li>
+                ガイドメールの配信停止を希望する場合は、お問い合わせフォームよりご連絡ください。認証メール・プラン通知メールは配信停止できません。
+              </li>
+            </ol>
+          </Section>
+
+          <Section title="8. 利用者の権利">
             <p>利用者は、以下の権利を有します。</p>
             <ol>
               <li>
@@ -153,7 +169,7 @@ export default function ConstructionPrivacyPage() {
             </p>
           </Section>
 
-          <Section title="8. セキュリティ">
+          <Section title="9. セキュリティ">
             <ol>
               <li>通信はすべて TLS（HTTPS）で暗号化します。</li>
               <li>保管データは各外部サービスの暗号化機能を用いて保護します。</li>
@@ -166,13 +182,13 @@ export default function ConstructionPrivacyPage() {
             </ol>
           </Section>
 
-          <Section title="9. ポリシーの改定">
+          <Section title="10. ポリシーの改定">
             <p>
               本ポリシーは、必要に応じて改定されます。重要な変更の場合は、本サービス内の通知または登録メールアドレスへの通知により周知します。
             </p>
           </Section>
 
-          <Section title="10. お問い合わせ先">
+          <Section title="11. お問い合わせ先">
             <p>
               本ポリシーに関するお問い合わせは、
               <Link href="/contact" className="text-green-700 hover:underline">

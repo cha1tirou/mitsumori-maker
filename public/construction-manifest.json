@@ -1,0 +1,25 @@
+{
+  "name": "ケンミツ — 建設業の見積書",
+  "short_name": "ケンミツ",
+  "description": "建設業向け見積書作成ツール。改正建設業法2025対応、月980円、登録不要。",
+  "start_url": "/construction",
+  "scope": "/construction",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#15803d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/construction-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/construction-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

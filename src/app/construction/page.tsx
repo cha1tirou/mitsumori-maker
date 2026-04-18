@@ -44,6 +44,20 @@ export const metadata: Metadata = {
     siteName: "ケンミツ",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "https://mitsumori-maker.com/construction/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "ケンミツ — 建設業の見積書を月980円で、スマホで、3分で。",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "建設業の見積書作成｜改正建設業法2025対応・月980円｜ケンミツ",
+    description: "一人親方向け・登録不要で試せる建設業専用の見積書作成ツール。",
+    images: ["https://mitsumori-maker.com/construction/opengraph-image"],
   },
   alternates: {
     canonical: "https://mitsumori-maker.com/construction",
