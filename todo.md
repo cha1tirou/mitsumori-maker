@@ -84,3 +84,7 @@
 - [x] ガイド記事追加（印鑑・社印）→ guide/seal 実装済み（2026-04-18）
 - [x] ガイド記事追加（支払い条件・支払期限）→ guide/payment-terms 実装済み（2026-04-18）
 - [x] guide/page.tsx に seal・payment-terms を追加・記事数27本に更新（2026-04-18）
+- [x] sitemap.xml に discount エントリ追加（抜け漏れ修正）（2026-04-18）
+- [x] 業種別ガイド記事追加（イベント・ウェディング業）→ guide/event 実装済み（2026-04-18）
+- [x] 業種別ガイド記事追加（建築設計・設計事務所）→ guide/architecture 実装済み（2026-04-18）
+- [x] guide/page.tsx に event・architecture を追加・記事数29本に更新（2026-04-18）
