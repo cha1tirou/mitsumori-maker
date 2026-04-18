@@ -182,3 +182,44 @@ export default function GuidePage() {
 - https://mitsumori-maker.com/privacy (priority: 0.3)
 - https://mitsumori-maker.com/contact (priority: 0.3)
 ※ガイド記事追加時: priority 0.7 で追加
+
+---
+
+## ケンミツ(/construction)運用ガイド
+
+### 概要
+- `/construction` は **ケンミツ** という独立ブランド。見積書メーカーとインフラ（Next.js アプリ / Vercel / ルート `src/app/layout.tsx`）は共有するが、ターゲット（建設業一人親方〜小規模工務店）・訴求軸（改正建設業法2025対応）・ビジュアルアイデンティティが別物
+- ランディングページ: `src/app/construction/page.tsx` は薄いオーケストレーター。セクション本体は `src/components/construction/lp/` 配下にセクション単位で分割されている（Hero / Problems / Features / LawCompliance / Comparison / OurStory / Pricing / Faq / FinalCta など）
+
+### ブランドカラー（`tailwind.config.ts` で定義済）
+- `kenmitsu.navy` (#1E40AF) — メインブランドカラー
+- `kenmitsu.orange` (#F59E0B) — アクセント（ヘルメット色）
+- `kenmitsu.blueprint` (#CBD5E1) — 方眼紙背景色
+- その他 `ink` / `muted` / `paper` / `warn` / `ok` など系統立てたパレットあり
+- ルート `/` で使っている既存の `primary`（紺）/ `accent`（赤）等とは名前空間を分けており競合なし
+
+### 特徴的なビジュアル要素
+- **工事テープ装飾**（黄×黒斜めストライプ）→ `src/components/construction/lp/ConstructionTape.tsx`
+- **ブループリント方眼紙背景** → `src/components/construction/lp/BlueprintBg.tsx`
+- **職人ヘルメットなどのフラットSVGイラスト** → `src/components/construction/lp/illustrations.tsx`（`IluCard` の scene variants = `rejected` / `confused` / `excel` / `offsite` / `calc` / `expensive` / `lawCheck` / `presets` / `autocalc` / `phone` / `rocket` / `cloud`、および `IluHeroKeyArt`）
+
+### 動的要素
+- 「改正建設業法 施行から **N** 日経過」は施行日 `2025-12-01` からの経過日数を `daysSinceLawEnforcement()`（`src/app/construction/page.tsx`）で Server Component 側で計算する。**ハードコードしないこと**
+- `Hero` / `LawCompliance` / `FinalCta` に `lawDays` を props で渡す
+
+### Pricing
+- Solo 推奨プランの `PlanCheckoutButton` は **`variant="kenmitsu"`** を指定してオレンジボタン化
+- `variant="primary"`（緑）は既存の mypage 等で使われているため、ケンミツ LP 以外では変更しない
+- `variant="outline"` も他で使っている可能性があるため触らない
+
+### 絶対に触ってはいけないもの（ケンミツLP改修時の保護対象）
+- `src/app/layout.tsx` のルート設定（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
+- `/construction/` 配下のサブルート13本（`new` / `checklist` / `how-to` / `faq` / `privacy` / `contact` / `terms` / `tokushoho` / `login` / `mypage` / `admin` / `quotes/[id]` / `reset-password`）
+- `src/components/construction/` 直下の既存コンポーネント群（`TrackPageView` / `PlanCheckoutButton` / `Toast` など）
+- `lib/supabase/` 配下のロジック、`getCurrentUserProfile` / `isSupabaseConfigured`
+- `src/app/construction/page.tsx` 内のデータ構造（`faqsForLd`）と SoftwareApplication / FAQPage JSON-LD、`metadata`、`TrackPageView name="construction_lp_view"`
+
+### モバイルブレークポイント注意点
+- `Comparison.tsx`: **sm 以下ではカード積層に切替**（テーブルではない）。3列squeezeを避けるための専用レイアウト
+- `Pricing.tsx`: 単列 → 2列 → 3列。Solo の浮き上がり（`translate-y`）は **lg 以上限定**でモバイル時のクリッピングを回避
+- `Hero`: アラートリボンのテキストは **sm 以下で短縮表示**（フル文言「施行から N 日経過 — 未対応は法令リスク」は sm 以上のみ）
