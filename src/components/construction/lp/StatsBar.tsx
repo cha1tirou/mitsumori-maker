@@ -22,7 +22,7 @@ const items = [
   {
     label: "月額",
     value: "¥980〜",
-    note: "業界最安値帯",
+    note: "登録不要で試せる",
     Icon: <BoltIcon />,
   },
 ];

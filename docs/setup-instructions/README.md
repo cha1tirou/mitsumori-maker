@@ -11,6 +11,9 @@
 | 03 | [03-meta-pixel.md](./03-meta-pixel.md) | Meta Business Suite + Facebook Pixel 作成 | 30分 | 🟢 中 |
 | 04 | [04-google-ads.md](./04-google-ads.md) | Google Ads アカウント作成＋コンバージョン設定 | 45分 | 🟢 中 |
 | 05 | [05-supabase-email-templates.md](./05-supabase-email-templates.md) | Supabase メールテンプレート日本語化＋サイトURL設定 | 10〜15分 | 🔴 最優先 |
+| 06 | [06-stripe-production.md](./06-stripe-production.md) | Stripe 本番切替（商品・Webhook・Portal・環境変数） | 60〜90分 | 🔴 広告配信前必須 |
+
+総合チェックリスト: [`../PRE_LAUNCH_CHECKLIST.md`](../PRE_LAUNCH_CHECKLIST.md)
 
 ## 実行順序
 

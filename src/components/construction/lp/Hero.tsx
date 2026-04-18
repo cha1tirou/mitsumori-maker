@@ -55,7 +55,7 @@ export default function Hero({ lawDays }: Props) {
               <strong className="text-kenmitsu-ink">登録不要</strong>で作れます。
             </p>
             <p className="mb-7 text-[13px] text-kenmitsu-muted md:mb-8">
-              一人親方・小規模工務店のための、建設業特化・業界最安値帯の見積書ツール
+              一人親方・小規模工務店のための、建設業特化・月¥980〜の見積書ツール
             </p>
 
             <div
