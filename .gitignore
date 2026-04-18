@@ -45,3 +45,7 @@ auto-run.sh
 auto-run.log
 morning.sh
 morning.log
+
+# design handoff bundles (local-only reference)
+/design-source/
+/design-source.zip
