@@ -162,7 +162,7 @@ export default function ConstructionPrivacyPage() {
             </ol>
             <p>
               行使をご希望の場合は、
-              <Link href="/contact" className="text-green-700 hover:underline">
+              <Link href="/construction/contact" className="text-green-700 hover:underline">
                 お問い合わせフォーム
               </Link>
               よりご連絡ください。
@@ -191,7 +191,7 @@ export default function ConstructionPrivacyPage() {
           <Section title="11. お問い合わせ先">
             <p>
               本ポリシーに関するお問い合わせは、
-              <Link href="/contact" className="text-green-700 hover:underline">
+              <Link href="/construction/contact" className="text-green-700 hover:underline">
                 お問い合わせフォーム
               </Link>
               よりご連絡ください。

@@ -657,7 +657,7 @@ export default async function ConstructionLandingPage() {
               <div className="text-xs text-gray-600">
                 <strong className="text-gray-900">ケンミツ 開発チーム</strong>
                 <br />
-                ご質問・ご要望は <Link href="/contact" className="text-green-700 hover:underline">お問い合わせフォーム</Link> よりお気軽に。
+                ご質問・ご要望は <Link href="/construction/contact" className="text-green-700 hover:underline">お問い合わせフォーム</Link> よりお気軽に。
               </div>
             </div>
           </div>
@@ -841,6 +841,9 @@ export default async function ConstructionLandingPage() {
             </Link>
             <Link href="/construction/tokushoho" className="hover:underline">
               特商法表記
+            </Link>
+            <Link href="/construction/contact" className="hover:underline">
+              お問い合わせ
             </Link>
           </div>
         </div>

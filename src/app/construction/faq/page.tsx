@@ -251,7 +251,7 @@ export default function FaqPage() {
           </p>
           <div className="grid md:grid-cols-2 gap-3">
             <Link
-              href="/contact"
+              href="/construction/contact"
               className="block bg-green-50 border border-green-200 rounded-lg p-4 hover:bg-green-100 transition-colors"
             >
               <p className="text-sm font-bold text-green-900 mb-1">
