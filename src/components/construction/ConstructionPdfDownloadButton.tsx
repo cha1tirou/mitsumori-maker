@@ -4,7 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ConstructionQuoteData } from "@/types/construction";
-import { Download, Crown, X, Lock } from "lucide-react";
+import {
+  Download,
+  Loader2,
+  CheckCircle2,
+  Crown,
+  X,
+  Lock,
+} from "lucide-react";
 import { trackConversion } from "@/lib/analytics";
 import {
   validateQuote,
@@ -12,14 +19,9 @@ import {
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
 
-// PDF 出力はブラウザの印刷機能で一本化。
-// 1. ユーザーが「PDFダウンロード」を押す
-// 2. 事前案内モーダルで「印刷ダイアログが開いたら『PDFとして保存』を選んでください」と説明
-// 3. window.print() を呼び、印刷CSS (ConstructionEditor.tsx の <style jsx global>) が
-//    編集UIを隠しプレビューのみ A4 に印刷する
-//
-// @react-pdf/renderer を使わないため、日本語フォント 3MB をメインスレッドで解析する
-// ことによるブラウザ応答停止が発生しない。
+// PDF 生成: ConstructionPreview（.printable-root）を html2canvas でラスタライズし
+// jsPDF に埋め込んで Blob を受け取り、<a download> で通常ダウンロードする。
+// メインスレッドのブロックは 1〜2秒程度、ブラウザ応答停止は起きない。
 
 interface Props {
   data: ConstructionQuoteData;
@@ -28,8 +30,11 @@ interface Props {
   className?: string;
 }
 
+type Status = "idle" | "generating" | "done";
+
 const ANON_DOWNLOAD_KEY = "mitsumori-construction-anon-pdf-count-v1";
 const ANON_NUDGE_THRESHOLD = 3;
+const AUTO_DISMISS_MS = 3000;
 
 function getAnonCount(): number {
   if (typeof window === "undefined") return 0;
@@ -57,13 +62,15 @@ export default function ConstructionPdfDownloadButton({
   className = "",
 }: Props) {
   const router = useRouter();
-  const [showHowTo, setShowHowTo] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [filename, setFilename] = useState("");
   const [showNudge, setShowNudge] = useState(false);
 
-  // 有料プラン以外は透かし付き
+  // 有料プラン以外は透かし付き（プレビューで既に視覚反映されているので、
+  // html2canvas はそのキャプチャを取るだけで OK）
   const withWatermark = plan !== "solo" && plan !== "team";
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const issues = validateQuote(data);
     if (hasBlockingIssues(issues)) {
       alert(
@@ -71,29 +78,72 @@ export default function ConstructionPdfDownloadButton({
       );
       return;
     }
-    setShowHowTo(true);
-  };
 
-  const startPrint = () => {
-    setShowHowTo(false);
-    // モーダル閉じて DOM が落ち着いてから印刷ダイアログを開く
-    setTimeout(() => {
-      window.print();
+    const element = document.querySelector(
+      ".printable-root",
+    ) as HTMLElement | null;
+    if (!element) {
+      alert(
+        "プレビューが見つかりませんでした。ページを再読み込みしてお試しください。",
+      );
+      return;
+    }
+
+    setStatus("generating");
+
+    try {
+      // モーダルが描画される間を 1フレーム待つ
+      await new Promise((r) => setTimeout(r, 50));
+
+      const { generatePdfBlobFromElement } = await import(
+        "@/lib/constructionPdfFromPreview"
+      );
+      const blob = await generatePdfBlobFromElement(element);
+
+      const safeClient = (data.clientName || "未設定").replace(
+        /[/\\?%*:|"<>]/g,
+        "_",
+      );
+      const safeDate = data.quoteDate || "未設定";
+      const name = `工事見積書_${safeClient}_${safeDate}.pdf`;
+      setFilename(name);
+
+      // ブラウザ通常のダウンロードを発火
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
       trackConversion("construction_pdf_download");
-      if (!isAuthenticated) {
-        const count = incrementAnonCount();
-        if (count >= ANON_NUDGE_THRESHOLD) {
-          setShowNudge(true);
+      setStatus("done");
+
+      // 3秒後に自動で閉じ、登録促しがあれば表示
+      setTimeout(() => {
+        setStatus("idle");
+        if (!isAuthenticated) {
+          const count = incrementAnonCount();
+          if (count >= ANON_NUDGE_THRESHOLD) {
+            setShowNudge(true);
+          }
         }
-      }
-    }, 100);
+      }, AUTO_DISMISS_MS);
+    } catch (e) {
+      console.error("PDF generation failed:", e);
+      setStatus("idle");
+      alert("PDFの生成に失敗しました。もう一度お試しください。");
+    }
   };
 
   return (
     <>
       <button
         onClick={handleClick}
-        className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
+        disabled={status === "generating"}
+        className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
       >
         <Download className="w-4 h-4" strokeWidth={2.5} />
         PDFダウンロード
@@ -104,47 +154,63 @@ export default function ConstructionPdfDownloadButton({
         )}
       </button>
 
-      {/* 事前案内: 印刷ダイアログでの保存方法 */}
-      {showHowTo && (
+      {/* 生成中モーダル */}
+      {status === "generating" && (
         <div
-          className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setShowHowTo(false)}
+          className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          role="dialog"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 text-center">
+            <Loader2
+              className="w-12 h-12 text-kenmitsu-orange mx-auto mb-4 animate-spin"
+              strokeWidth={2}
+            />
+            <p className="text-base font-bold text-gray-900 mb-1">
+              PDFを生成しています
+            </p>
+            <p className="text-xs text-gray-500">
+              数秒でダウンロードが始まります
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* 完了モーダル */}
+      {status === "done" && (
+        <div
+          className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setStatus("idle")}
+          role="dialog"
+          aria-live="polite"
         >
           <div
-            className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
+            className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 text-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="px-6 pt-6 pb-4">
-              <h3 className="text-base font-bold text-gray-900 mb-2">
-                PDF として保存する方法
-              </h3>
-              <ol className="text-sm text-gray-700 leading-relaxed space-y-2 list-decimal pl-5 mb-4">
-                <li>次の画面で「印刷」ダイアログが開きます</li>
-                <li>
-                  送信先（プリンタ）欄で <strong>「PDFとして保存」</strong> または
-                  <strong>「PDFに保存」</strong> を選択
-                </li>
-                <li>右下の「保存」をクリックして PDF ファイルを保存</li>
-              </ol>
-              <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 text-xs text-kenmitsu-navy leading-relaxed">
-                💡 「プリンタに印刷」ではなく必ず{" "}
-                <strong>「PDFとして保存」</strong> を選んでください。
-              </div>
-            </div>
-            <div className="px-6 pb-6 flex gap-2">
-              <button
-                onClick={() => setShowHowTo(false)}
-                className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-600 text-sm font-medium py-2.5 rounded-lg"
-              >
-                キャンセル
-              </button>
-              <button
-                onClick={startPrint}
-                className="flex-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-2.5 rounded-lg"
-              >
-                印刷ダイアログを開く
-              </button>
-            </div>
+            <CheckCircle2
+              className="w-14 h-14 text-kenmitsu-ok mx-auto mb-4"
+              strokeWidth={2}
+            />
+            <p className="text-base font-bold text-gray-900 mb-1">
+              PDFを保存しました
+            </p>
+            <p
+              className="text-[11px] text-gray-500 mb-5 break-all"
+              title={filename}
+            >
+              {filename}
+            </p>
+            <p className="text-xs text-gray-600 mb-5 leading-relaxed">
+              ダウンロードフォルダをご確認ください。
+            </p>
+            <button
+              onClick={() => setStatus("idle")}
+              className="w-full bg-kenmitsu-navy50 hover:bg-kenmitsu-navy100 text-kenmitsu-navy text-sm font-bold py-2.5 rounded-lg transition-colors"
+            >
+              閉じる
+            </button>
           </div>
         </div>
       )}
