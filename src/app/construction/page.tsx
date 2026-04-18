@@ -133,14 +133,24 @@ const comparisons = [
     others: "お問い合わせ→営業→デモ→契約",
   },
   {
-    label: "デバイス",
-    ours: "スマホで完結",
-    others: "PC前提が多い",
+    label: "学習コスト",
+    ours: "3分で最初の見積が完成。研修不要",
+    others: "導入研修が必要。定着まで数週間",
   },
   {
-    label: "機能の範囲",
-    ours: "見積書作成に特化（軽い）",
-    others: "工程・顧客・写真・勤怠まで全部入り（重い）",
+    label: "デバイス",
+    ours: "スマホで完結",
+    others: "PC前提・Windows専用のツールも",
+  },
+  {
+    label: "見積書の位置づけ",
+    ours: "見積書のためだけに作られた専用ツール",
+    others: "施工管理がメイン、見積は付属機能",
+  },
+  {
+    label: "Excelからの移行",
+    ours: "Excelインポート対応。今の感覚で使える",
+    others: "業務フロー全体の変更が必要",
   },
 ];
 
@@ -611,12 +621,12 @@ export default async function ConstructionLandingPage() {
             <p className="text-sm text-gray-700 leading-relaxed mb-4">
               しかし既存のソフトウェアは大きく2択しかない状態でした。
             </p>
-            <ul className="text-sm text-gray-700 leading-relaxed mb-4 list-disc pl-5 space-y-1">
+            <ul className="text-sm text-gray-700 leading-relaxed mb-4 list-disc pl-5 space-y-2">
               <li>
-                <strong>大手SaaS（月9,800円〜）</strong>：機能過多で、工程管理や勤怠管理までついてきて一人親方には重すぎる
+                <strong>大手SaaS（月9,800円〜数万円）</strong>：施工管理がメインで見積機能は「おまけ」扱い。導入研修が必要で定着まで数週間。Windows専用のツールも多い
               </li>
               <li>
-                <strong>無料のExcelテンプレート</strong>：法改正に未対応。法定福利費・階層見積・瑕疵担保など専門項目が抜けている
+                <strong>無料のExcelテンプレート</strong>：法改正に未対応。ファイルが分散し、入力ミスや属人化の温床になる。スマホで編集できない
               </li>
             </ul>
             <p className="text-sm text-gray-700 leading-relaxed mb-4">
