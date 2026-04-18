@@ -101,7 +101,7 @@ export default function SaveQuoteButton({
           </>
         ) : status === "saved" ? (
           <>
-            <CheckCircle2 className="w-4 h-4 text-green-600" strokeWidth={2.5} />
+            <CheckCircle2 className="w-4 h-4 text-kenmitsu-ok" strokeWidth={2.5} />
             保存しました
           </>
         ) : (

@@ -49,7 +49,7 @@ export default async function AdminPage() {
           </p>
           <Link
             href="/construction/mypage"
-            className="inline-block mt-4 text-xs text-green-700 hover:underline"
+            className="inline-block mt-4 text-xs text-kenmitsu-navy hover:underline"
           >
             マイページへ戻る
           </Link>
@@ -68,9 +68,9 @@ export default async function AdminPage() {
             href="/construction/mypage"
             className="flex items-center gap-2 text-sm font-bold"
           >
-            <HardHat className="w-5 h-5 text-green-400" strokeWidth={2.25} />
+            <HardHat className="w-5 h-5 text-kenmitsu-orange" strokeWidth={2.25} />
             <span>
-              管理ダッシュボード <span className="text-green-400">(Admin)</span>
+              管理ダッシュボード <span className="text-kenmitsu-orange">(Admin)</span>
             </span>
           </Link>
           <div className="text-xs text-gray-400">{user.email}</div>
@@ -181,7 +181,7 @@ export default async function AdminPage() {
                       </span>
                       <span className="truncate">{r.email}</span>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-kenmitsu-ok">
                       <TrendingUp className="w-3 h-3" strokeWidth={2.5} />
                       {r.invited_count}名
                     </span>
@@ -218,7 +218,7 @@ export default async function AdminPage() {
                     href={stats.videos.latest.youtube_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-green-700 hover:underline inline-flex items-center gap-1"
+                    className="text-xs text-kenmitsu-navy hover:underline inline-flex items-center gap-1"
                   >
                     見る
                     <ExternalLink className="w-3 h-3" strokeWidth={2.25} />
@@ -252,7 +252,7 @@ function KpiCard({
 }) {
   const bgMap = {
     blue: "bg-blue-50 text-blue-700 border-blue-200",
-    green: "bg-green-50 text-green-700 border-green-200",
+    green: "bg-kenmitsu-okBg text-kenmitsu-ok border-kenmitsu-ok/30",
     amber: "bg-amber-50 text-amber-700 border-amber-200",
     purple: "bg-purple-50 text-purple-700 border-purple-200",
   };

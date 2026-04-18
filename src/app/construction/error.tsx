@@ -12,8 +12,8 @@ export default function ConstructionError({
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white rounded-2xl border border-gray-100 p-8 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 mb-6">
-          <HardHat className="w-8 h-8 text-green-700" />
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-kenmitsu-navy50 mb-6">
+          <HardHat className="w-8 h-8 text-kenmitsu-navy" />
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-2">
           エラーが発生しました
@@ -26,7 +26,7 @@ export default function ConstructionError({
         <div className="flex flex-col gap-3">
           <button
             onClick={reset}
-            className="w-full bg-green-700 text-white font-bold py-3 rounded-lg hover:bg-green-800 transition-colors"
+            className="w-full bg-kenmitsu-orange text-white font-bold py-3 rounded-lg hover:bg-kenmitsu-orange600 transition-colors"
           >
             もう一度試す
           </button>

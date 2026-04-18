@@ -39,7 +39,7 @@ export default function ConstructionTokushohoPage() {
             href="/construction"
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             ← ケンミツトップに戻る
           </Link>
         </div>
@@ -130,7 +130,7 @@ export default function ConstructionTokushohoPage() {
                 value={
                   <Link
                     href="/construction/terms"
-                    className="text-green-700 hover:underline"
+                    className="text-kenmitsu-navy hover:underline"
                   >
                     利用規約（建設業向け有料プラン）
                   </Link>
@@ -141,7 +141,7 @@ export default function ConstructionTokushohoPage() {
                 value={
                   <Link
                     href="/construction/privacy"
-                    className="text-green-700 hover:underline"
+                    className="text-kenmitsu-navy hover:underline"
                   >
                     プライバシーポリシー
                   </Link>

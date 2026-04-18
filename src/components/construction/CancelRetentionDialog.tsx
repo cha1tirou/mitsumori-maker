@@ -105,8 +105,8 @@ export default function CancelRetentionDialog({
                 あなたのこれまでの利用実績
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
-                  <FileText className="w-4 h-4 text-green-700" strokeWidth={2} />
+                <div className="w-8 h-8 rounded-lg bg-kenmitsu-navy50 flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2} />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-900">
@@ -137,7 +137,7 @@ export default function CancelRetentionDialog({
             <div className="flex gap-3">
               <button
                 onClick={handleClose}
-                className="flex-1 bg-green-700 hover:bg-green-800 text-white text-sm font-bold py-3 rounded-lg transition-colors"
+                className="flex-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors"
               >
                 利用を続ける
               </button>
@@ -167,7 +167,7 @@ export default function CancelRetentionDialog({
                   key={r.id}
                   className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                     reason === r.id
-                      ? "border-green-700 bg-green-50"
+                      ? "border-kenmitsu-navy bg-kenmitsu-navy50"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                 >
@@ -177,7 +177,7 @@ export default function CancelRetentionDialog({
                     value={r.id}
                     checked={reason === r.id}
                     onChange={() => setReason(r.id)}
-                    className="accent-green-700"
+                    className="accent-kenmitsu-navy"
                   />
                   <span className="text-sm text-gray-900">{r.label}</span>
                 </label>
@@ -226,15 +226,15 @@ export default function CancelRetentionDialog({
               もしよろしければ、次の3ヶ月間を特別価格でご利用いただけます。
             </p>
 
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5 mb-5 text-center">
-              <p className="text-xs text-green-700 font-bold mb-1">
+            <div className="bg-kenmitsu-navy50 border-2 border-kenmitsu-navy100 rounded-xl p-5 mb-5 text-center">
+              <p className="text-xs text-kenmitsu-navy font-bold mb-1">
                 3ヶ月間限定
               </p>
               <p className="text-3xl font-bold text-gray-900 mb-1">
                 ¥490<span className="text-sm font-normal text-gray-500">/月</span>
               </p>
               <p className="text-xs text-gray-500">
-                通常¥980 → <span className="text-green-700 font-bold">50%OFF</span>
+                通常¥980 → <span className="text-kenmitsu-orange font-bold">50%OFF</span>
               </p>
             </div>
 
@@ -247,7 +247,7 @@ export default function CancelRetentionDialog({
                   handleClose();
                   router.refresh();
                 }}
-                className="flex-1 bg-green-700 hover:bg-green-800 text-white text-sm font-bold py-3 rounded-lg transition-colors"
+                className="flex-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors"
               >
                 50%OFFで続ける
               </button>

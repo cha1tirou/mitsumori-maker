@@ -50,7 +50,7 @@ export default function CustomerPicker({
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <div>
             <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+              <Users className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
               取引先マスタから選択
             </h3>
             <p className="text-[11px] text-gray-500 mt-0.5">
@@ -73,7 +73,7 @@ export default function CustomerPicker({
             />
             <input
               type="text"
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
               placeholder="取引先名で検索"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -92,7 +92,7 @@ export default function CustomerPicker({
           ) : (
             <ul className="divide-y divide-gray-100">
               {filtered.map((c) => (
-                <li key={c.id} className="px-5 py-3 hover:bg-green-50/50">
+                <li key={c.id} className="px-5 py-3 hover:bg-kenmitsu-navy50/50">
                   <div className="flex items-center justify-between gap-3">
                     <button
                       onClick={() => {
@@ -128,7 +128,7 @@ export default function CustomerPicker({
         </div>
 
         {canRegisterCurrent && (
-          <div className="px-5 py-3 border-t border-gray-100 bg-green-50/50">
+          <div className="px-5 py-3 border-t border-gray-100 bg-kenmitsu-navy50/50">
             <button
               onClick={() => {
                 if (!currentCustomerDraft) return;
@@ -138,7 +138,7 @@ export default function CustomerPicker({
                   contact: currentCustomerDraft.contact,
                 });
               }}
-              className="w-full flex items-center justify-center gap-1.5 bg-green-100 hover:bg-green-200 text-green-900 text-xs font-bold py-2 rounded-lg"
+              className="w-full flex items-center justify-center gap-1.5 bg-kenmitsu-navy50 hover:bg-kenmitsu-navy100 text-kenmitsu-navy text-xs font-bold py-2 rounded-lg"
             >
               <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
               現在の発注者「{currentCustomerDraft!.name}」をマスタに登録

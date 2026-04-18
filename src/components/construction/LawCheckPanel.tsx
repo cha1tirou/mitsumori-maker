@@ -19,7 +19,7 @@ export default function LawCheckPanel({ results }: Props) {
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-      <div className="px-5 py-3 bg-gradient-to-r from-green-700 to-green-800 text-white">
+      <div className="px-5 py-3 bg-gradient-to-r from-kenmitsu-navy700 to-kenmitsu-navy text-white">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-bold opacity-90">建設業法2025 チェッカー</p>
@@ -45,7 +45,7 @@ export default function LawCheckPanel({ results }: Props) {
       <div className="p-4">
         {allClear ? (
           <div className="text-center py-4">
-            <CheckCircle2 className="w-10 h-10 text-green-600 mx-auto mb-2" strokeWidth={1.5} />
+            <CheckCircle2 className="w-10 h-10 text-kenmitsu-ok mx-auto mb-2" strokeWidth={1.5} />
             <p className="text-sm font-bold text-gray-800">
               改正建設業法の観点で問題は見つかりませんでした
             </p>

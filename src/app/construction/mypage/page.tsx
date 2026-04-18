@@ -34,7 +34,7 @@ export default async function MyPage({
     return (
       <div className="min-h-screen bg-gray-50 p-8">
         <div className="max-w-2xl mx-auto bg-white rounded-2xl border border-gray-100 p-8 text-center">
-          <HardHat className="w-10 h-10 text-green-700 mx-auto mb-4" strokeWidth={2} />
+          <HardHat className="w-10 h-10 text-kenmitsu-navy mx-auto mb-4" strokeWidth={2} />
           <h1 className="text-xl font-bold text-gray-900 mb-2">
             マイページは準備中です
           </h1>
@@ -43,7 +43,7 @@ export default async function MyPage({
           </p>
           <Link
             href="/construction"
-            className="inline-block bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
+            className="inline-block bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-6 py-2.5 rounded-lg"
           >
             ケンミツトップに戻る
           </Link>
@@ -85,8 +85,8 @@ export default async function MyPage({
             href="/construction/mypage"
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
-            <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
-            ケンミツ <span className="text-green-700">| 建設業の見積書</span>
+            <HardHat className="w-5 h-5 text-kenmitsu-navy" strokeWidth={2.25} />
+            ケンミツ <span className="text-kenmitsu-navy">| 建設業の見積書</span>
           </Link>
           <div className="flex items-center gap-3 text-xs text-gray-600">
             <span>{user.email}</span>
@@ -100,8 +100,8 @@ export default async function MyPage({
 
         {/* チェックアウト結果 */}
         {checkoutResult === "success" && (
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-green-700 shrink-0 mt-0.5" strokeWidth={2.25} />
+          <div className="bg-kenmitsu-okBg border border-kenmitsu-ok/30 rounded-xl p-4 flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok shrink-0 mt-0.5" strokeWidth={2.25} />
             <div>
               <p className="text-sm font-bold text-gray-900">プランのアップグレードが完了しました</p>
               <p className="text-xs text-gray-600 mt-0.5">
@@ -121,11 +121,11 @@ export default async function MyPage({
 
         {/* 初回ウェルカム */}
         {quotes.length === 0 && usedThisMonth === 0 && (
-          <section className="bg-gradient-to-r from-green-700 to-green-800 rounded-2xl p-6 text-white">
+          <section className="bg-gradient-to-r from-kenmitsu-navy to-kenmitsu-navy700 rounded-2xl p-6 text-white">
             <h2 className="text-lg font-bold mb-2">
               ようこそ、ケンミツへ！
             </h2>
-            <p className="text-sm text-green-100 mb-4 leading-relaxed">
+            <p className="text-sm text-kenmitsu-navy100 mb-4 leading-relaxed">
               アカウント登録が完了しました。まずは見積書を1通作成してみましょう。
               <br />
               工種プリセットを使えば、数分で見積書が完成します。
@@ -133,7 +133,7 @@ export default async function MyPage({
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/construction/new"
-                className="inline-flex items-center gap-2 bg-white text-green-800 font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-green-50 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-kenmitsu-navy font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-kenmitsu-navy50 transition-colors"
               >
                 最初の見積書を作成する →
               </Link>
@@ -156,7 +156,7 @@ export default async function MyPage({
                   <FileText className="w-5 h-5 text-gray-500" strokeWidth={2} />
                 </div>
               ) : (
-                <div className="w-10 h-10 rounded-lg bg-green-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-kenmitsu-navy flex items-center justify-center">
                   <Crown className="w-5 h-5 text-white" strokeWidth={2.25} />
                 </div>
               )}
@@ -170,7 +170,7 @@ export default async function MyPage({
                 className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                   profile.subscription_status === "active" ||
                   profile.subscription_status === "trialing"
-                    ? "bg-green-50 text-green-800 border border-green-200"
+                    ? "bg-kenmitsu-okBg text-kenmitsu-ok border border-kenmitsu-ok/30"
                     : "bg-amber-50 text-amber-800 border border-amber-200"
                 }`}
               >
@@ -200,7 +200,7 @@ export default async function MyPage({
             {plan === "free" ? (
               <Link
                 href="/construction#pricing"
-                className="inline-flex items-center gap-1.5 bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
+                className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
               >
                 <Crown className="w-4 h-4" strokeWidth={2.25} />
                 Soloプランにアップグレード
@@ -238,7 +238,7 @@ export default async function MyPage({
         <FeedbackCard />
 
         <section className="bg-white rounded-2xl border border-gray-100 p-6 flex items-center gap-3">
-          <CheckCircle2 className="w-5 h-5 text-green-700" strokeWidth={2.25} />
+          <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok" strokeWidth={2.25} />
           <p className="text-xs text-gray-600 leading-relaxed">
             ご請求・ご解約の履歴は
             {plan === "free" ? "ご契約後に" : " Stripe カスタマーポータルにて"}

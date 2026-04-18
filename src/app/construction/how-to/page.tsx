@@ -144,7 +144,7 @@ export default function HowToPage() {
             href="/construction"
             className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
           >
-            <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
             ← ケンミツトップに戻る
           </Link>
         </div>
@@ -158,9 +158,9 @@ export default function HowToPage() {
           ケンミツの使い方を全8ステップで解説。改正建設業法2025対応の見積書を、<strong>最短3分</strong>で作成できます。
         </p>
 
-        <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8 text-sm">
-          <p className="font-bold text-green-900 mb-1">💡 最初にやっておくと快適</p>
-          <ul className="list-disc pl-5 text-green-900 space-y-0.5">
+        <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-xl p-4 mb-8 text-sm">
+          <p className="font-bold text-kenmitsu-navy900 mb-1">💡 最初にやっておくと快適</p>
+          <ul className="list-disc pl-5 text-kenmitsu-navy900 space-y-0.5">
             <li>施工者情報を一度入力して「自社情報を保存」を押す → 次回から自動入力</li>
             <li>よく使う品目は「単価マスタ」に登録 → 2通目から一瞬</li>
             <li>アカウント登録すると見積履歴が保存され、ブラウザ跨いでもマスタが同期されます</li>
@@ -174,25 +174,25 @@ export default function HowToPage() {
               className="bg-white rounded-xl border border-gray-200 p-5 flex gap-4"
             >
               <div className="shrink-0 flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-green-700 text-white font-bold flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-kenmitsu-navy text-white font-bold flex items-center justify-center">
                   {num}
                 </div>
                 {num < steps.length && (
-                  <div className="w-0.5 h-full bg-green-100 mt-2" />
+                  <div className="w-0.5 h-full bg-kenmitsu-navy100 mt-2" />
                 )}
               </div>
               <div className="flex-1 min-w-0 pb-2">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+                  <Icon className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
                   <h2 className="text-base font-bold text-gray-900">{title}</h2>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{description}</p>
                 {hint && (
-                  <div className="mt-3 bg-green-50 rounded-lg p-3 border border-green-100">
-                    <p className="text-[10px] font-bold text-green-800 mb-1.5">{hint.label}</p>
+                  <div className="mt-3 bg-kenmitsu-navy50 rounded-lg p-3 border border-kenmitsu-navy100">
+                    <p className="text-[10px] font-bold text-kenmitsu-navy mb-1.5">{hint.label}</p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1">
                       {hint.items.map((item, i) => (
-                        <li key={i} className="text-[11px] text-green-900 leading-snug">
+                        <li key={i} className="text-[11px] text-kenmitsu-navy900 leading-snug">
                           {item}
                         </li>
                       ))}
@@ -214,8 +214,8 @@ export default function HowToPage() {
                   key={i}
                   className="bg-white rounded-xl border border-gray-200 p-4"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-green-50 border border-green-200 flex items-center justify-center mb-3">
-                    <Icon className="w-4 h-4 text-green-700" strokeWidth={2} />
+                  <div className="w-9 h-9 rounded-lg bg-kenmitsu-navy50 border border-kenmitsu-navy100 flex items-center justify-center mb-3">
+                    <Icon className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2} />
                   </div>
                   <h3 className="text-sm font-bold text-gray-900 mb-1">
                     {f.title}
@@ -233,13 +233,13 @@ export default function HowToPage() {
           </h2>
           <ol className="list-decimal pl-5 text-sm text-gray-700 space-y-2">
             <li>
-              <Link href="/construction/login" className="text-green-700 hover:underline">
+              <Link href="/construction/login" className="text-kenmitsu-navy hover:underline">
                 ログインページ
               </Link>
               でメールアドレスを登録（マジックリンク）
             </li>
             <li>
-              <Link href="/construction#pricing" className="text-green-700 hover:underline">
+              <Link href="/construction#pricing" className="text-kenmitsu-navy hover:underline">
                 料金プラン
               </Link>
               の「Soloで始める」をクリック
@@ -250,7 +250,7 @@ export default function HowToPage() {
               解約は
               <Link
                 href="/construction/mypage"
-                className="text-green-700 hover:underline mx-1"
+                className="text-kenmitsu-navy hover:underline mx-1"
               >
                 マイページ
               </Link>
@@ -273,7 +273,7 @@ export default function HowToPage() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 hover:border-green-400 hover:text-green-700 transition-colors text-sm"
+                className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 hover:border-kenmitsu-navy hover:text-kenmitsu-navy transition-colors text-sm"
               >
                 <span>{l.label}</span>
                 <ArrowRight className="w-4 h-4" strokeWidth={2.25} />

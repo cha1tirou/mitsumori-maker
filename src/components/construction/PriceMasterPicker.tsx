@@ -78,7 +78,7 @@ export default function PriceMasterPicker({
             />
             <input
               type="text"
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
               placeholder="品目名・工種で検索"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -97,7 +97,7 @@ export default function PriceMasterPicker({
           ) : (
             <ul className="divide-y divide-gray-100">
               {filtered.map((it) => (
-                <li key={it.id} className="px-5 py-3 hover:bg-green-50/50">
+                <li key={it.id} className="px-5 py-3 hover:bg-kenmitsu-navy50/50">
                   <div className="flex items-center justify-between gap-3">
                     <button
                       onClick={() => {

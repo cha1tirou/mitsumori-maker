@@ -13,7 +13,7 @@ export async function GET() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #15803d 0%, #166534 100%)",
+          background: "linear-gradient(135deg, #1E40AF 0%, #17308A 100%)",
           fontFamily: "sans-serif",
         }}
       >

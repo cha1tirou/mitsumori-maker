@@ -51,9 +51,9 @@ export default function ResetPasswordPage() {
   if (done) {
     return (
       <Shell>
-        <div className="bg-green-50 border border-green-200 rounded-lg p-5 text-center">
+        <div className="bg-kenmitsu-okBg border border-kenmitsu-ok/30 rounded-lg p-5 text-center">
           <CheckCircle2
-            className="w-10 h-10 text-green-600 mx-auto mb-3"
+            className="w-10 h-10 text-kenmitsu-ok mx-auto mb-3"
             strokeWidth={1.75}
           />
           <p className="text-sm font-bold text-gray-900 mb-1">
@@ -64,7 +64,7 @@ export default function ResetPasswordPage() {
           </p>
           <Link
             href="/construction/mypage"
-            className="inline-block bg-green-700 hover:bg-green-800 text-white text-sm font-bold px-6 py-2.5 rounded-lg transition-colors"
+            className="inline-block bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-6 py-2.5 rounded-lg transition-colors"
           >
             マイページへ →
           </Link>
@@ -100,7 +100,7 @@ export default function ResetPasswordPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               disabled={loading}
-              className="w-full pl-9 pr-10 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/20"
+              className="w-full pl-9 pr-10 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
             />
             <button
               type="button"
@@ -130,7 +130,7 @@ export default function ResetPasswordPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-3 rounded-lg transition-colors"
         >
           {loading ? (
             <>
@@ -148,19 +148,19 @@ export default function ResetPasswordPage() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-kenmitsu-navy50 to-white">
       <div className="max-w-md mx-auto px-4 py-12">
         <Link
           href="/construction"
           className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-8"
         >
-          <HardHat className="w-4 h-4 text-green-700" strokeWidth={2.25} />
+          <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
           ← ケンミツトップへ
         </Link>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <div className="flex items-center gap-2 mb-6">
-            <HardHat className="w-6 h-6 text-green-700" strokeWidth={2} />
+            <HardHat className="w-6 h-6 text-kenmitsu-navy" strokeWidth={2} />
             <span className="text-lg font-bold text-gray-900">ケンミツ</span>
           </div>
           {children}

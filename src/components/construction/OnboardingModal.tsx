@@ -58,7 +58,7 @@ export default function OnboardingModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="bg-white rounded-2xl max-w-sm w-full shadow-xl relative overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-green-700 to-green-800 p-5 text-white text-center">
+        <div className="bg-gradient-to-r from-kenmitsu-navy to-kenmitsu-navy700 p-5 text-white text-center">
           <button
             onClick={dismiss}
             className="absolute top-3 right-3 text-white/60 hover:text-white"
@@ -67,7 +67,7 @@ export default function OnboardingModal() {
           </button>
           <HardHat className="w-8 h-8 mx-auto mb-2" strokeWidth={2} />
           <h2 className="text-lg font-bold">ケンミツの使い方</h2>
-          <p className="text-xs text-green-100 mt-1">3ステップで見積書が完成</p>
+          <p className="text-xs text-kenmitsu-navy100 mt-1">3ステップで見積書が完成</p>
         </div>
 
         {/* Step indicator */}
@@ -76,7 +76,7 @@ export default function OnboardingModal() {
             <div
               key={i}
               className={`h-1 flex-1 rounded-full transition-colors ${
-                i <= step ? "bg-green-700" : "bg-gray-200"
+                i <= step ? "bg-kenmitsu-navy" : "bg-gray-200"
               }`}
             />
           ))}
@@ -85,8 +85,8 @@ export default function OnboardingModal() {
         {/* Content */}
         <div className="p-6">
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-              <current.icon className="w-5 h-5 text-green-700" strokeWidth={2} />
+            <div className="w-10 h-10 rounded-lg bg-kenmitsu-navy50 border border-kenmitsu-navy100 flex items-center justify-center shrink-0">
+              <current.icon className="w-5 h-5 text-kenmitsu-navy" strokeWidth={2} />
             </div>
             <div>
               <h3 className="text-base font-bold text-gray-900 mb-1">
@@ -115,7 +115,7 @@ export default function OnboardingModal() {
                   setStep(step + 1);
                 }
               }}
-              className="flex-1 flex items-center justify-center gap-1 bg-green-700 hover:bg-green-800 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"
+              className="flex-1 flex items-center justify-center gap-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"
             >
               {isLast ? (
                 "見積書を作成する"

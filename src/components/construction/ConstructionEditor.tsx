@@ -137,9 +137,9 @@ export default function ConstructionEditor({
             href={userEmail ? "/construction/mypage" : "/construction"}
             className="flex items-center gap-2 text-sm font-bold text-gray-900"
           >
-            <HardHat className="w-5 h-5 text-green-700" strokeWidth={2.25} />
+            <HardHat className="w-5 h-5 text-kenmitsu-navy" strokeWidth={2.25} />
             <span className="hidden sm:inline">
-              ケンミツ <span className="text-green-700">| 建設業の見積書</span>
+              ケンミツ <span className="text-kenmitsu-navy">| 建設業の見積書</span>
             </span>
             <span className="sm:hidden">建設業見積</span>
           </Link>
@@ -174,7 +174,7 @@ export default function ConstructionEditor({
                 className="hidden sm:inline-flex items-center gap-1.5 text-xs text-gray-700 hover:text-gray-900 px-2.5 py-1.5 rounded-lg hover:bg-gray-100"
                 title={userEmail}
               >
-                <CircleUser className="w-4 h-4 text-green-700" strokeWidth={2} />
+                <CircleUser className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2} />
                 <span className="font-bold">{planLabel}</span>
                 <span className="text-gray-400">プラン</span>
               </Link>
@@ -183,7 +183,7 @@ export default function ConstructionEditor({
                 href={`/construction/login?redirect=${encodeURIComponent(
                   isEdit ? `/construction/quotes/${quoteId}` : "/construction/new"
                 )}`}
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 hover:text-green-700 px-2.5 py-1.5 rounded-lg hover:bg-gray-100"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 hover:text-kenmitsu-navy px-2.5 py-1.5 rounded-lg hover:bg-gray-100"
               >
                 <LogIn className="w-4 h-4" strokeWidth={2.25} />
                 ログイン
@@ -201,14 +201,14 @@ export default function ConstructionEditor({
 
       {/* トライアルバナー */}
       {typeof trialDays === "number" && trialDays > 0 && (
-        <div className="bg-green-600 text-white">
+        <div className="bg-kenmitsu-navy text-white">
           <div className="max-w-7xl mx-auto px-4 py-2 text-xs font-medium flex items-center justify-between">
             <span>
               Solo全機能を無料体験中 — 残り{trialDays}日（透かしなしPDF・無制限保存・メール送信）
             </span>
             <Link
               href="/construction#pricing"
-              className="shrink-0 bg-white text-green-700 font-bold px-3 py-1 rounded text-xs hover:bg-green-50 transition-colors"
+              className="shrink-0 bg-white text-kenmitsu-navy font-bold px-3 py-1 rounded text-xs hover:bg-kenmitsu-navy50 transition-colors"
             >
               Soloプランに切り替え
             </Link>
@@ -305,12 +305,12 @@ export default function ConstructionEditor({
                 </Link>
                 <Link
                   href="/construction/checklist"
-                  className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg p-3 hover:bg-green-100 transition-colors"
+                  className="flex items-center gap-2 bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 hover:bg-kenmitsu-navy100 transition-colors"
                 >
-                  <AlertCircle className="w-4 h-4 text-green-700 shrink-0" strokeWidth={2.25} />
+                  <AlertCircle className="w-4 h-4 text-kenmitsu-navy shrink-0" strokeWidth={2.25} />
                   <div className="text-xs">
-                    <p className="font-bold text-green-900">改正建設業法2025 対応チェックリスト</p>
-                    <p className="text-green-700 mt-0.5">30項目で自己診断（無料）→</p>
+                    <p className="font-bold text-kenmitsu-navy">改正建設業法2025 対応チェックリスト</p>
+                    <p className="text-kenmitsu-navy mt-0.5">30項目で自己診断（無料）→</p>
                   </div>
                 </Link>
                 {!isEdit && data.sections.some((s) => s.items.some((i) => i.name)) && (
