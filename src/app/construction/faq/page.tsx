@@ -242,7 +242,22 @@ export default function FaqPage() {
           ))}
         </div>
 
-        <section className="mt-12 bg-white rounded-xl border border-gray-200 p-6">
+        <section className="mt-12 bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+          <h2 className="text-base font-bold text-gray-900 mb-2">
+            改正建設業法 対応チェックリスト（無料DL）
+          </h2>
+          <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+            自社が改正建設業法2025に対応できているかを、8セクション・30項目で自己診断できるチェックリストを無料配布しています。PDFダウンロードもOK。
+          </p>
+          <Link
+            href="/construction/checklist"
+            className="inline-flex items-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
+          >
+            チェックリストを見る →
+          </Link>
+        </section>
+
+        <section className="mt-8 bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-base font-bold text-gray-900 mb-3">
             解決しなかった場合
           </h2>

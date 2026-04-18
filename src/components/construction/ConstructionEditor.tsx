@@ -345,17 +345,7 @@ export default function ConstructionEditor({
                     マイページを開く
                   </Link>
                 )}
-                <Link
-                  href="/construction/checklist"
-                  className="flex items-center gap-2 bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 hover:bg-kenmitsu-navy100 transition-colors"
-                >
-                  <AlertCircle className="w-4 h-4 text-kenmitsu-navy shrink-0" strokeWidth={2.25} />
-                  <div className="text-xs">
-                    <p className="font-bold text-kenmitsu-navy">改正建設業法2025 対応チェックリスト</p>
-                    <p className="text-kenmitsu-navy mt-0.5">30項目で自己診断（無料）→</p>
-                  </div>
-                </Link>
-                {!isEdit && data.sections.some((s) => s.items.some((i) => i.name)) && (
+{!isEdit && data.sections.some((s) => s.items.some((i) => i.name)) && (
                   <button
                     type="button"
                     onClick={() => {

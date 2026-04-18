@@ -187,6 +187,26 @@ export default function KaiseiKensetsuPage() {
             <li>発注者ごとに見積履歴を保存し、類似案件では流用する</li>
           </ul>
 
+          <div className="my-8 rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-white overflow-hidden">
+            <div className="p-6">
+              <p className="text-xs font-bold text-amber-700 mb-1 tracking-wider uppercase">
+                無料ダウンロード可
+              </p>
+              <h3 className="text-base font-bold text-gray-900 mb-2">
+                対応状況を30項目でセルフチェック
+              </h3>
+              <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                この記事で解説した対応事項を、自社が満たせているか8セクション・30項目のチェックリストで自己診断できます。PDF配布あり、社内会議・協力業者への共有にもどうぞ。
+              </p>
+              <Link
+                href="/construction/checklist"
+                className="inline-flex items-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
+              >
+                改正建設業法2025 対応チェックリストを開く →
+              </Link>
+            </div>
+          </div>
+
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
             改正法対応は、ツールで自動化できる
           </h2>
@@ -224,6 +244,7 @@ export default function KaiseiKensetsuPage() {
           <div className="mt-10 text-sm text-gray-600 border-t border-gray-200 pt-6">
             <p className="font-bold mb-2">関連ガイド</p>
             <ul className="space-y-1">
+              <li><Link href="/construction/checklist" className="text-green-700 hover:underline font-bold">改正建設業法2025 対応チェックリスト（30項目・無料DL）</Link></li>
               <li><Link href="/guide/legal-welfare" className="text-green-700 hover:underline">法定福利費の計算方法と業界標準料率</Link></li>
               <li><Link href="/guide/construction" className="text-green-700 hover:underline">建設業の見積書の書き方【完全ガイド】</Link></li>
               <li><Link href="/guide/lump-sum" className="text-green-700 hover:underline">見積書の「一式」の書き方・使い方</Link></li>
