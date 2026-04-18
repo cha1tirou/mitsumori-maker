@@ -22,7 +22,6 @@ import {
   HardHat,
   Eye,
   FileEdit,
-  Printer,
   Lock,
   User,
   LogIn,
@@ -128,6 +127,57 @@ export default function ConstructionEditor({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/*
+        印刷用スタイル。
+        PDFダウンロード = window.print() で呼ばれる印刷ダイアログで、
+        編集UIをすべて隠し、プレビュー (.printable-root) だけを A4 に印刷する。
+        @react-pdf/renderer を使わないため日本語フォント埋め込みのハングが発生しない。
+      */}
+      <style jsx global>{`
+        @media print {
+          @page {
+            size: A4;
+            margin: 0;
+          }
+          html, body {
+            background: #ffffff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          /* 画面上の要素を全部いったん非表示 */
+          body * {
+            visibility: hidden;
+          }
+          /* プレビュー本体だけ可視化 */
+          .printable-root,
+          .printable-root * {
+            visibility: visible;
+          }
+          /* プレビューを A4 左上に固定配置 */
+          .printable-root {
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #ffffff !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+          }
+          .printable-root > div {
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+            overflow: visible !important;
+          }
+          /* 明細テーブル行の途中改ページを防止 */
+          .printable-root table tr {
+            break-inside: avoid;
+          }
+        }
+      `}</style>
       {/* 初回オンボーディング */}
       {!isEdit && <OnboardingModal />}
       {/* ヘッダー */}
@@ -289,13 +339,6 @@ export default function ConstructionEditor({
                   <Mail className="w-4 h-4" strokeWidth={2.5} />
                   メールで送信（Solo以上）
                 </button>
-                <button
-                  onClick={() => window.print()}
-                  className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 text-sm font-medium py-2.5 rounded-lg transition-colors"
-                >
-                  <Printer className="w-4 h-4" strokeWidth={2.25} />
-                  印刷 / PDF保存
-                </button>
                 <Link
                   href="/construction/mypage"
                   className="flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 py-1"
@@ -347,10 +390,12 @@ export default function ConstructionEditor({
                   A4サイズ
                 </span>
               </div>
-              <ConstructionPreview
-                data={data}
-                watermark={plan !== "solo" && plan !== "team"}
-              />
+              <div className="printable-root">
+                <ConstructionPreview
+                  data={data}
+                  watermark={plan !== "solo" && plan !== "team"}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -12,15 +12,14 @@ import {
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
 
-// PDF 出力はブラウザ印刷方式で一本化。
-// sessionStorage に見積データを退避 → /construction/print を新タブで開く →
-// そのページが自動で window.print() → ユーザーが「PDFとして保存」を選ぶ。
+// PDF 出力はブラウザの印刷機能で一本化。
+// 1. ユーザーが「PDFダウンロード」を押す
+// 2. 事前案内モーダルで「印刷ダイアログが開いたら『PDFとして保存』を選んでください」と説明
+// 3. window.print() を呼び、印刷CSS (ConstructionEditor.tsx の <style jsx global>) が
+//    編集UIを隠しプレビューのみ A4 に印刷する
 //
-// @react-pdf/renderer を使う旧方式は重くブラウザが応答停止するため外した。
-// UI から呼び出す経路はないが、API や将来の再利用のため
-// src/lib/constructionPdfGenerator.tsx は保持している。
-
-const PRINT_STORAGE_KEY = "kenmitsu-print-data-v1";
+// @react-pdf/renderer を使わないため、日本語フォント 3MB をメインスレッドで解析する
+// ことによるブラウザ応答停止が発生しない。
 
 interface Props {
   data: ConstructionQuoteData;
@@ -58,12 +57,13 @@ export default function ConstructionPdfDownloadButton({
   className = "",
 }: Props) {
   const router = useRouter();
+  const [showHowTo, setShowHowTo] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
 
   // 有料プラン以外は透かし付き
   const withWatermark = plan !== "solo" && plan !== "team";
 
-  const handlePrintPdf = () => {
+  const handleClick = () => {
     const issues = validateQuote(data);
     if (hasBlockingIssues(issues)) {
       alert(
@@ -71,38 +71,28 @@ export default function ConstructionPdfDownloadButton({
       );
       return;
     }
-    try {
-      sessionStorage.setItem(
-        PRINT_STORAGE_KEY,
-        JSON.stringify({ data, watermark: withWatermark }),
-      );
-    } catch (e) {
-      console.error("sessionStorage write failed:", e);
-      alert(
-        "ブラウザのストレージに一時保存できませんでした。シークレットモードの場合は通常モードでお試しください。",
-      );
-      return;
-    }
-    const win = window.open("/construction/print", "_blank");
-    if (!win) {
-      alert(
-        "ポップアップブロッカーで新しいタブを開けませんでした。ブラウザ設定から本サイトのポップアップを許可してください。",
-      );
-      return;
-    }
-    trackConversion("construction_pdf_download");
-    if (!isAuthenticated) {
-      const count = incrementAnonCount();
-      if (count >= ANON_NUDGE_THRESHOLD) {
-        setShowNudge(true);
+    setShowHowTo(true);
+  };
+
+  const startPrint = () => {
+    setShowHowTo(false);
+    // モーダル閉じて DOM が落ち着いてから印刷ダイアログを開く
+    setTimeout(() => {
+      window.print();
+      trackConversion("construction_pdf_download");
+      if (!isAuthenticated) {
+        const count = incrementAnonCount();
+        if (count >= ANON_NUDGE_THRESHOLD) {
+          setShowNudge(true);
+        }
       }
-    }
+    }, 100);
   };
 
   return (
     <>
       <button
-        onClick={handlePrintPdf}
+        onClick={handleClick}
         className={`flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors ${className}`}
       >
         <Download className="w-4 h-4" strokeWidth={2.5} />
@@ -113,6 +103,51 @@ export default function ConstructionPdfDownloadButton({
           </span>
         )}
       </button>
+
+      {/* 事前案内: 印刷ダイアログでの保存方法 */}
+      {showHowTo && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setShowHowTo(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-6 pt-6 pb-4">
+              <h3 className="text-base font-bold text-gray-900 mb-2">
+                PDF として保存する方法
+              </h3>
+              <ol className="text-sm text-gray-700 leading-relaxed space-y-2 list-decimal pl-5 mb-4">
+                <li>次の画面で「印刷」ダイアログが開きます</li>
+                <li>
+                  送信先（プリンタ）欄で <strong>「PDFとして保存」</strong> または
+                  <strong>「PDFに保存」</strong> を選択
+                </li>
+                <li>右下の「保存」をクリックして PDF ファイルを保存</li>
+              </ol>
+              <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-3 text-xs text-kenmitsu-navy leading-relaxed">
+                💡 「プリンタに印刷」ではなく必ず{" "}
+                <strong>「PDFとして保存」</strong> を選んでください。
+              </div>
+            </div>
+            <div className="px-6 pb-6 flex gap-2">
+              <button
+                onClick={() => setShowHowTo(false)}
+                className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-600 text-sm font-medium py-2.5 rounded-lg"
+              >
+                キャンセル
+              </button>
+              <button
+                onClick={startPrint}
+                className="flex-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-2.5 rounded-lg"
+              >
+                印刷ダイアログを開く
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showNudge && (
         <div
