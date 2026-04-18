@@ -43,6 +43,7 @@ import PriceMasterPicker from "./PriceMasterPicker";
 import CustomerPicker from "./CustomerPicker";
 import ExcelImportButton from "./ExcelImportButton";
 import AiTakeoffDialog from "./AiTakeoffDialog";
+import { compressImageToJpegDataUrl } from "@/lib/imageCompression";
 
 interface Props {
   data: ConstructionQuoteData;
@@ -603,13 +604,19 @@ export default function ConstructionForm({ data, onChange }: Props) {
 
   // ========== 工事写真 ==========
   const addSitePhoto = async (file: File) => {
-    if (file.size > 1024 * 1024) {
-      alert("写真は 1MB 以下にしてください。");
+    if (!ALLOWED_IMAGE_MIME.test(file.type)) {
+      alert(
+        `画像形式が対応していません（${file.type || "不明"}）。PNG / JPEG / GIF / WebP のみ対応。`,
+      );
       return;
     }
     let dataUrl: string;
     try {
-      dataUrl = await fileToDataUrl(file);
+      // PDF 埋め込み時の負荷を下げるため長辺 1600px / JPEG 82% に圧縮
+      dataUrl = await compressImageToJpegDataUrl(file, {
+        maxDimension: 1600,
+        quality: 0.82,
+      });
     } catch (err) {
       alert(err instanceof Error ? err.message : "画像を読み込めませんでした。");
       return;
@@ -1453,7 +1460,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           />
         </div>
         <p className="text-[11px] text-gray-500 mb-3 leading-relaxed">
-          現場写真を添付すると、見積書PDFの末尾に「工事写真」シートとして追加されます。根拠資料として有効です。1枚1MB以下。
+          現場写真を添付すると、見積書PDFの末尾に「工事写真」シートとして追加されます。根拠資料として有効です。撮ったままの写真をそのままアップロードしてOK（自動で長辺1600px・JPEGに最適化されます）。
         </p>
         {(data.sitePhotos ?? []).length === 0 ? (
           <div className="text-center py-6 text-xs text-gray-400 bg-gray-50 rounded-lg border border-dashed border-gray-200">
