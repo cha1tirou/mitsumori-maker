@@ -197,7 +197,7 @@ export default function ConstructionPdfDownloadButton({
               PDFを保存しました
             </p>
             <p
-              className="text-[11px] text-gray-500 mb-5 break-all"
+              className="text-[11px] text-gray-500 mb-4 break-all"
               title={filename}
             >
               {filename}
@@ -205,6 +205,15 @@ export default function ConstructionPdfDownloadButton({
             <p className="text-xs text-gray-600 mb-5 leading-relaxed">
               ダウンロードフォルダをご確認ください。
             </p>
+            {!isAuthenticated && (
+              <Link
+                href="/construction/login?redirect=/construction/new"
+                onClick={() => setStatus("idle")}
+                className="block w-full bg-kenmitsu-navy hover:bg-kenmitsu-navy700 text-white text-sm font-bold py-2.5 rounded-lg transition-colors mb-2"
+              >
+                無料登録で見積書を保存する →
+              </Link>
+            )}
             <button
               onClick={() => setStatus("idle")}
               className="w-full bg-kenmitsu-navy50 hover:bg-kenmitsu-navy100 text-kenmitsu-navy text-sm font-bold py-2.5 rounded-lg transition-colors"

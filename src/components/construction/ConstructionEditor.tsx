@@ -265,10 +265,23 @@ export default function ConstructionEditor({
                   </span>
                 </div>
               )}
-              <ConstructionForm data={data} onChange={handleDataChange} />
+              <ConstructionForm
+                data={data}
+                onChange={handleDataChange}
+                plan={plan}
+              />
 
               <div className="mt-5 space-y-2">
-                {/* PDF出力: 全ユーザー */}
+                {/*
+                  ボタン配列の順序ポリシー:
+                  1. PDF ダウンロード（Primary CTA・全員）
+                  2. 課金/登録誘導カード（Free/未ログインのみ。PDFを撮った直後の熱量を逃さない）
+                  3. 見積書を保存（ログイン済み）
+                  4. Solo 以上機能（書類変換・CSV・メール）
+                  5. マイページ
+                */}
+
+                {/* 1. PDF出力: 全ユーザー */}
                 <ConstructionPdfDownloadButton
                   data={data}
                   plan={plan}
@@ -276,7 +289,90 @@ export default function ConstructionEditor({
                   className="w-full"
                 />
 
-                {/* 見積書を保存: ログイン済みのみ（Free は月3通制限、Solo/Team は無制限） */}
+                {/* 2a. 未ログイン: 登録誘導カード（PDFダウンロード直後に露出） */}
+                {!userEmail && (
+                  <Link
+                    href={`/construction/login?redirect=${encodeURIComponent(
+                      isEdit
+                        ? `/construction/quotes/${quoteId}`
+                        : "/construction/new",
+                    )}`}
+                    className="relative block w-full rounded-xl border-2 border-kenmitsu-navy bg-gradient-to-br from-kenmitsu-navy50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
+                  >
+                    <div className="relative">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-kenmitsu-navy text-white text-[10px] font-bold px-2 py-0.5">
+                          無料登録
+                        </span>
+                        <span className="text-[10px] text-kenmitsu-navy font-bold">
+                          所要30秒・カード不要
+                        </span>
+                      </div>
+                      <p className="text-sm font-black text-kenmitsu-navy mb-1 leading-tight">
+                        見積書を保存して、いつでも編集・再出力
+                      </p>
+                      <p className="text-[11px] text-kenmitsu-muted leading-relaxed">
+                        月3通まで無料でクラウド保存。顧客別の履歴管理・Excelインポート・7日間のSolo全機能体験もセット。
+                      </p>
+                    </div>
+                  </Link>
+                )}
+
+                {/* 2b. Free プラン: Solo アップグレード誘導カード（PDFダウンロード直後に露出） */}
+                {userEmail && plan === "free" && (
+                  <Link
+                    href="/construction#pricing"
+                    className="relative block w-full rounded-xl border-2 border-kenmitsu-orange bg-gradient-to-br from-kenmitsu-orange50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
+                  >
+                    <div className="relative">
+                      <div className="flex items-baseline gap-2 mb-1.5">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-kenmitsu-orange text-white text-[10px] font-bold px-2 py-0.5">
+                          Solo
+                        </span>
+                        <span className="font-mono text-lg font-black text-kenmitsu-orange600 leading-none">
+                          ¥980
+                        </span>
+                        <span className="text-[11px] text-kenmitsu-muted">
+                          /月
+                        </span>
+                        <span className="text-[10px] text-kenmitsu-muted ml-auto">
+                          年払いで2ヶ月分お得
+                        </span>
+                      </div>
+                      <p className="text-sm font-black text-gray-900 mb-1.5 leading-tight">
+                        透かしを消して、取引先に出せる正式版にする
+                      </p>
+                      <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-gray-700 leading-relaxed">
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          透かしなし PDF
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          書類変換・CSV連携
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          顧客・単価マスタ
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          メール直接送信
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          原価・粗利分析
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          見積書の無制限保存
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+
+                {/* 3. 見積書を保存: ログイン済みのみ（Free は月3通制限、Solo/Team は無制限） */}
                 {userEmail && (
                   <SaveQuoteButton
                     data={data}
@@ -286,7 +382,7 @@ export default function ConstructionEditor({
                   />
                 )}
 
-                {/* 以下は Solo / Team のみ。Free・未ログインでは非表示にして UI をシンプルに */}
+                {/* 4. Solo / Team 専用: 書類変換・CSV出力・メール送信 */}
                 {(plan === "solo" || plan === "team") && (
                   <>
                     <ConvertButtons data={data} />
@@ -299,40 +395,6 @@ export default function ConstructionEditor({
                       メールで送信
                     </button>
                   </>
-                )}
-
-                {/* 未ログイン: 登録誘導（Free プランへの小さな入口） */}
-                {!userEmail && (
-                  <Link
-                    href={`/construction/login?redirect=${encodeURIComponent(
-                      isEdit
-                        ? `/construction/quotes/${quoteId}`
-                        : "/construction/new",
-                    )}`}
-                    className="block w-full rounded-lg border-2 border-dashed border-kenmitsu-navy100 bg-white hover:bg-kenmitsu-navy50 p-3 text-center transition-colors"
-                  >
-                    <p className="text-xs font-bold text-kenmitsu-navy mb-0.5">
-                      無料登録で見積書を保存できます
-                    </p>
-                    <p className="text-[10px] text-kenmitsu-muted">
-                      月3通までクラウド保存・履歴から再編集OK
-                    </p>
-                  </Link>
-                )}
-
-                {/* Free プラン: Solo アップグレード誘導 */}
-                {userEmail && plan === "free" && (
-                  <Link
-                    href="/construction#pricing"
-                    className="block w-full rounded-lg border-2 border-dashed border-kenmitsu-orange/60 bg-white hover:bg-kenmitsu-orange50 p-3 text-center transition-colors"
-                  >
-                    <p className="text-xs font-bold text-kenmitsu-orange600 mb-0.5">
-                      Soloプラン（月¥980）で全機能を解放
-                    </p>
-                    <p className="text-[10px] text-kenmitsu-muted leading-relaxed">
-                      透かしなしPDF・書類変換・CSV出力・メール送信・無制限保存
-                    </p>
-                  </Link>
                 )}
 
                 {/* マイページ: ログイン済みのみ */}

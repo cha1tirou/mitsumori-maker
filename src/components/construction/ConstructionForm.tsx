@@ -43,10 +43,12 @@ import PriceMasterPicker from "./PriceMasterPicker";
 import CustomerPicker from "./CustomerPicker";
 import ExcelImportButton from "./ExcelImportButton";
 import AiTakeoffDialog from "./AiTakeoffDialog";
+import { useSoloFeatureLock, SoloLockBadge } from "./SoloFeatureLock";
 
 interface Props {
   data: ConstructionQuoteData;
   onChange: (data: ConstructionQuoteData) => void;
+  plan?: "free" | "solo" | "team";
 }
 
 const WORK_TYPE_DESCRIPTIONS: Record<string, string> = {
@@ -347,7 +349,11 @@ async function fileToDataUrl(file: File): Promise<string> {
   });
 }
 
-export default function ConstructionForm({ data, onChange }: Props) {
+export default function ConstructionForm({ data, onChange, plan = "free" }: Props) {
+  // Solo 以上の機能は Free/未ログインでもボタンは表示して、クリック時にアップグレード誘導
+  const isPaid = plan === "solo" || plan === "team";
+  const lock = useSoloFeatureLock();
+
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
   const { save: saveCompany, isSaved: isCompanySaved } =
     useConstructionCompanyInfo(data, onChange);
@@ -356,6 +362,8 @@ export default function ConstructionForm({ data, onChange }: Props) {
   );
   const [hasSavedCompany, setHasSavedCompany] = useState(false);
   const [showCost, setShowCost] = useState(false);
+  // プラン変更時や永続化された showCost の残存に備えて、実効的な表示フラグは isPaid と AND 。
+  const effectiveShowCost = showCost && isPaid;
   const [priceMasterTarget, setPriceMasterTarget] = useState<
     | {
         kind: "section";
@@ -822,11 +830,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
           <SectionTitle>発注者</SectionTitle>
           <button
             type="button"
-            onClick={() => setCustomerPickerOpen(true)}
+            onClick={() =>
+              isPaid ? setCustomerPickerOpen(true) : lock.open("取引先マスタ")
+            }
             className="text-[10px] font-bold px-2 py-1 rounded-md transition-colors flex items-center gap-1 bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100"
           >
             <Users className="w-3 h-3" strokeWidth={2.5} />
             取引先マスタ
+            {!isPaid && <SoloLockBadge className="ml-0.5" />}
           </button>
         </div>
         <div className="space-y-3">
@@ -1038,16 +1049,23 @@ export default function ConstructionForm({ data, onChange }: Props) {
           <div className="flex items-center gap-1.5">
             <button
               type="button"
-              onClick={() => setShowCost((v) => !v)}
+              onClick={() =>
+                isPaid ? setShowCost((v) => !v) : lock.open("原価・粗利分析")
+              }
               className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors flex items-center gap-1 border ${
-                showCost
+                effectiveShowCost
                   ? "bg-kenmitsu-navy text-white border-kenmitsu-navy"
                   : "bg-white text-gray-600 border-gray-200 hover:border-kenmitsu-navy hover:text-kenmitsu-navy"
               }`}
-              title="原価・粗利を表示（社内用）"
+              title={
+                isPaid
+                  ? "原価・粗利を表示（社内用）"
+                  : "Soloプラン限定機能"
+              }
             >
               <TrendingUp className="w-3 h-3" strokeWidth={2.5} />
               原価・粗利
+              {!isPaid && <SoloLockBadge className="ml-0.5" />}
             </button>
             <span className="inline-flex items-center gap-1 text-[10px] text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full font-bold">
               <HardHat className="w-3 h-3" strokeWidth={2.5} />
@@ -1059,7 +1077,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
           工種ごとにセクションを分け、費目別に明細を入力してください。
           <strong>労務費</strong>=職人の手間賃　<strong>材料費</strong>=部材・資材　<strong>外注費</strong>=協力業者への支払い　<strong>その他</strong>=仮設・運搬・処分等。
           改正建設業法では費目ごとの内訳明示が求められています。
-          {showCost && (
+          {effectiveShowCost && (
             <span className="block mt-1 text-kenmitsu-navy font-medium">
               原価・粗利モード ON：原価単価を入力すると、行ごと・全体の利益率が表示されます。PDF・プレビューには出力されません。
             </span>
@@ -1130,7 +1148,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                         key={item.id}
                         index={itemIndex}
                         item={item}
-                        showCost={showCost}
+                        showCost={effectiveShowCost}
                         canRemove={
                           section.items.length > 1 ||
                           (section.subsections?.length ?? 0) > 0
@@ -1140,11 +1158,13 @@ export default function ConstructionForm({ data, onChange }: Props) {
                         }
                         onRemove={() => removeItem(sectionIndex, itemIndex)}
                         onOpenPriceMaster={() =>
-                          setPriceMasterTarget({
-                            kind: "section",
-                            sectionIndex,
-                            itemIndex,
-                          })
+                          isPaid
+                            ? setPriceMasterTarget({
+                                kind: "section",
+                                sectionIndex,
+                                itemIndex,
+                              })
+                            : lock.open("単価マスタ")
                         }
                       />
                     ))}
@@ -1187,7 +1207,7 @@ export default function ConstructionForm({ data, onChange }: Props) {
                             key={item.id}
                             index={itemIndex}
                             item={item}
-                            showCost={showCost}
+                            showCost={effectiveShowCost}
                             canRemove={sub.items.length > 1}
                             onChange={(field, value) =>
                               updateSubItem(
@@ -1202,12 +1222,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
                               removeSubItem(sectionIndex, subIndex, itemIndex)
                             }
                             onOpenPriceMaster={() =>
-                              setPriceMasterTarget({
-                                kind: "subsection",
-                                sectionIndex,
-                                subIndex,
-                                itemIndex,
-                              })
+                              isPaid
+                                ? setPriceMasterTarget({
+                                    kind: "subsection",
+                                    sectionIndex,
+                                    subIndex,
+                                    itemIndex,
+                                  })
+                                : lock.open("単価マスタ")
                             }
                           />
                         ))}
@@ -1430,11 +1452,14 @@ export default function ConstructionForm({ data, onChange }: Props) {
           </SectionTitle>
           <button
             type="button"
-            onClick={() => photoInputRef.current?.click()}
+            onClick={() =>
+              isPaid ? photoInputRef.current?.click() : lock.open("工事写真")
+            }
             className="text-[10px] font-bold px-2 py-1 rounded-md bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100 flex items-center gap-1"
           >
             <Upload className="w-3 h-3" strokeWidth={2.5} />
             写真を追加
+            {!isPaid && <SoloLockBadge className="ml-0.5" />}
           </button>
           <input
             ref={photoInputRef}
@@ -1527,6 +1552,8 @@ export default function ConstructionForm({ data, onChange }: Props) {
         currentData={data}
         onApply={(next) => onChange(next)}
       />
+      {/* Solo 機能ロック時の案内ダイアログ */}
+      {lock.dialog}
     </div>
   );
 }
