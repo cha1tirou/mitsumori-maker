@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ConstructionQuoteData } from "@/types/construction";
-import { Download, Loader2, Crown, X, Lock, Printer } from "lucide-react";
+import { Download, Crown, X, Lock } from "lucide-react";
 import { trackConversion } from "@/lib/analytics";
 import {
   validateQuote,
@@ -12,14 +12,13 @@ import {
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
 
-// PDF 生成方式はブラウザ印刷（高速）を既定とし、@react-pdf/renderer は重いので
-// 上級者向けのフォールバックとして残す。
+// PDF 出力はブラウザ印刷方式で一本化。
+// sessionStorage に見積データを退避 → /construction/print を新タブで開く →
+// そのページが自動で window.print() → ユーザーが「PDFとして保存」を選ぶ。
 //
-// 実装メモ:
-// - ブラウザ印刷方式: sessionStorage に見積データを退避 → /construction/print を新タブで開く →
-//   そのページが自動で window.print() → ユーザーが「PDFとして保存」を選ぶ
-// - レガシー方式: @react-pdf/renderer を import して blob 生成。日本語フォント 3MB を
-//   メインスレッドで解析するため 10〜30秒ブロックする
+// @react-pdf/renderer を使う旧方式は重くブラウザが応答停止するため外した。
+// UI から呼び出す経路はないが、API や将来の再利用のため
+// src/lib/constructionPdfGenerator.tsx は保持している。
 
 const PRINT_STORAGE_KEY = "kenmitsu-print-data-v1";
 
@@ -59,37 +58,19 @@ export default function ConstructionPdfDownloadButton({
   className = "",
 }: Props) {
   const router = useRouter();
-  const [legacyLoading, setLegacyLoading] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
 
   // 有料プラン以外は透かし付き
   const withWatermark = plan !== "solo" && plan !== "team";
 
-  // 共通: 出力前のバリデーション + ダウンロード数カウント
-  const preflightCheck = (): boolean => {
+  const handlePrintPdf = () => {
     const issues = validateQuote(data);
     if (hasBlockingIssues(issues)) {
       alert(
         `PDF出力前に以下をご確認ください:\n\n${formatIssuesForConfirm(issues)}`,
       );
-      return false;
+      return;
     }
-    return true;
-  };
-
-  const afterDownloadHook = () => {
-    trackConversion("construction_pdf_download");
-    if (!isAuthenticated) {
-      const count = incrementAnonCount();
-      if (count >= ANON_NUDGE_THRESHOLD) {
-        setShowNudge(true);
-      }
-    }
-  };
-
-  // === ブラウザ印刷方式（既定・高速） ===
-  const handlePrintPdf = () => {
-    if (!preflightCheck()) return;
     try {
       sessionStorage.setItem(
         PRINT_STORAGE_KEY,
@@ -109,38 +90,12 @@ export default function ConstructionPdfDownloadButton({
       );
       return;
     }
-    afterDownloadHook();
-  };
-
-  // === レガシー: @react-pdf/renderer 方式（重い・保険） ===
-  const handleLegacyDownload = async () => {
-    if (!preflightCheck()) return;
-    setLegacyLoading(true);
-    try {
-      const { generateConstructionPdf } = await import(
-        "@/lib/constructionPdfGenerator"
-      );
-      const blob = await generateConstructionPdf(data, {
-        watermark: withWatermark,
-      });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      const safeClient = (data.clientName || "未設定").replace(
-        /[/\\?%*:|"<>]/g,
-        "_",
-      );
-      a.download = `工事見積書_${safeClient}_${data.quoteDate}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      afterDownloadHook();
-    } catch (e) {
-      console.error("PDF generation failed:", e);
-      alert("PDFの生成に失敗しました。もう一度お試しください。");
-    } finally {
-      setLegacyLoading(false);
+    trackConversion("construction_pdf_download");
+    if (!isAuthenticated) {
+      const count = incrementAnonCount();
+      if (count >= ANON_NUDGE_THRESHOLD) {
+        setShowNudge(true);
+      }
     }
   };
 
@@ -158,52 +113,6 @@ export default function ConstructionPdfDownloadButton({
           </span>
         )}
       </button>
-
-      {/* 予備: 旧 @react-pdf レイアウト。ブラウザ印刷で困った時のみ使う */}
-      <button
-        onClick={handleLegacyDownload}
-        disabled={legacyLoading}
-        className="mt-1 w-full text-[10px] text-gray-400 hover:text-gray-700 disabled:opacity-60 flex items-center justify-center gap-1.5"
-        title="ブラウザ印刷が使えない場合の代替（10〜30秒ブラウザが応答停止する場合があります）"
-      >
-        {legacyLoading ? (
-          <>
-            <Loader2 className="w-3 h-3 animate-spin" strokeWidth={2.5} />
-            生成中…
-          </>
-        ) : (
-          <>
-            <Printer className="w-3 h-3" strokeWidth={2.25} />
-            旧PDFレイアウト（直接ダウンロード・重い）
-          </>
-        )}
-      </button>
-
-      {/* レガシー方式は @react-pdf が重いため、実行中はメインスレッドがブロックされる */}
-      {legacyLoading && (
-        <div
-          className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
-          role="dialog"
-          aria-live="polite"
-          aria-busy="true"
-        >
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
-            <Loader2
-              className="w-10 h-10 text-kenmitsu-orange mx-auto mb-3 animate-spin"
-              strokeWidth={2}
-            />
-            <p className="text-base font-bold text-gray-900 mb-1">
-              PDFを生成しています
-            </p>
-            <p className="text-xs text-gray-600 leading-relaxed">
-              旧方式のため <strong>10〜30秒</strong> かかります。
-              <br />
-              ブラウザが「応答しません」と出た場合は{" "}
-              <strong>「待機」</strong> を選んでお待ちください。
-            </p>
-          </div>
-        </div>
-      )}
 
       {showNudge && (
         <div
