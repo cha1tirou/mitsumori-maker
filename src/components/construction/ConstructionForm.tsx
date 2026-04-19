@@ -1303,15 +1303,14 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
         </div>
 
         <div className="mt-4 pt-4 border-t border-gray-100">
-          <Field label="消費税率（%）" help="通常10%。軽減税率対象がある場合は明細側で個別調整してください">
+          <Field label="消費税率（%）" help="建設工事は通常10%です。免税事業者の場合のみ「なし」を選んでください">
             <select
               className={inputClass + " w-32"}
               value={data.taxRate}
               onChange={(e) => update("taxRate", Number(e.target.value))}
             >
               <option value={10}>10%</option>
-              <option value={8}>8%（軽減）</option>
-              <option value={0}>なし</option>
+              <option value={0}>なし（免税）</option>
             </select>
           </Field>
         </div>
