@@ -98,3 +98,7 @@
 - [x] ガイド記事追加（見積書の修正・訂正方法）→ guide/revision 実装済み（2026-04-19）
 - [x] guide/page.tsx に electrical・auto-repair・revision を追加・記事数35本に更新（2026-04-19）
 - [x] sitemap.xml に electrical・revision・auto-repair エントリ追加（2026-04-19）
+- [x] guide/page.tsx に未掲載28記事を追加・カテゴリ整理・記事数35→63本に更新（2026-04-19）
+- [x] sitemap.xml に28記事の未掲載エントリを一括追加（2026-04-19）
+- [x] 新規ガイド記事追加（相見積もり・印刷方法・管理方法）→ guide/competitive-quote・printing・quote-management 実装済み（2026-04-19）
+- [x] sitemap.xml に competitive-quote・printing・quote-management エントリ追加（2026-04-19）
