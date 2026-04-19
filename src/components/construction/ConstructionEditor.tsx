@@ -65,6 +65,9 @@ export default function ConstructionEditor({
   const hasStartedRef = useRef(false);
   const [mobileView, setMobileView] = useState<"form" | "preview">("form");
   const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  // 未保存変更フラグ。保存成功 / 下書きクリア時に false に戻す。
+  // beforeunload 警告のために使う（QAバグ #11）
+  const [isDirty, setIsDirty] = useState(false);
 
   // 新規作成時のみ下書き保存を有効化。編集モードではサーバーのデータを正とする
   const draft = useDraftSave<ConstructionQuoteData>({
@@ -100,7 +103,21 @@ export default function ConstructionEditor({
       }
     }
     setData(next);
+    setIsDirty(true);
   };
+
+  // beforeunload: 未保存変更がある時はブラウザの離脱確認ダイアログを出す（QAバグ #11）
+  useEffect(() => {
+    if (!isDirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      // Chrome は returnValue が truthy なら確認ダイアログを出す（文言は現代ブラウザ固定）
+      e.returnValue = "";
+      return "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isDirty]);
 
   useEffect(() => {
     // 編集モードでは initialData を state に反映
@@ -114,6 +131,7 @@ export default function ConstructionEditor({
       // 新規作成後は下書きクリア
       draft.clearDraft();
     }
+    setIsDirty(false);
   };
 
   const planLabel =
