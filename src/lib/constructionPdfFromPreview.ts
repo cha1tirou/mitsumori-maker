@@ -39,9 +39,20 @@ export async function generatePdfBlobFromElement(
     await document.fonts.ready;
   }
 
+  // no-break ブロックの矩形をキャプチャ前（DOM 計測可能なタイミング）に取得する。
+  // CAPTURE_SCALE 倍した canvas 座標系に換算しておく（#21）。
+  const elementRect = element.getBoundingClientRect();
+  const noBreakBlocks = Array.from(
+    element.querySelectorAll<HTMLElement>("[data-pdf-no-break]"),
+  ).map((el) => {
+    const rect = el.getBoundingClientRect();
+    return {
+      topPx: (rect.top - elementRect.top) * CAPTURE_SCALE,
+      bottomPx: (rect.bottom - elementRect.top) * CAPTURE_SCALE,
+    };
+  });
+
   // 透かしは jsPDF レイヤーで描画するので、プレビュー DOM の装飾は一時的に隠す。
-  // キャプチャ画像に preview 側の SAMPLE が焼き込まれたままだと、jsPDF の
-  // 追加透かしと二重になって汚く見える。
   const previewWatermarks = Array.from(
     element.querySelectorAll<HTMLElement>("[data-preview-watermark]"),
   );
@@ -77,11 +88,21 @@ export async function generatePdfBlobFromElement(
   const imgHeightMm = (canvas.height * imgWidthMm) / canvas.width;
   const imgData = canvas.toDataURL("image/jpeg", JPEG_QUALITY);
 
-  const totalPages = Math.max(1, Math.ceil(imgHeightMm / A4_HEIGHT_MM));
+  // canvas px ↔ PDF mm の変換係数
+  const pxToMm = imgWidthMm / canvas.width;
+  const canvasPxPerPage = A4_HEIGHT_MM / pxToMm;
+
+  // no-break を考慮した各ページの開始 Y (canvas px)
+  const pageStartsPx = computePageStarts(
+    canvas.height,
+    canvasPxPerPage,
+    noBreakBlocks,
+  );
+  const totalPages = pageStartsPx.length;
 
   for (let i = 0; i < totalPages; i++) {
     if (i > 0) pdf.addPage();
-    const offsetMm = -i * A4_HEIGHT_MM;
+    const offsetMm = -pageStartsPx[i] * pxToMm;
     pdf.addImage(imgData, "JPEG", 0, offsetMm, imgWidthMm, imgHeightMm);
 
     if (watermark) {
@@ -91,6 +112,44 @@ export async function generatePdfBlobFromElement(
   }
 
   return pdf.output("blob");
+}
+
+/**
+ * no-break ブロック（見出し+本文を分離したくない領域）を避けるように
+ * 各ページの開始 Y 座標（canvas px）を決定する。
+ *
+ * 自然な改ページ位置 (currentStart + canvasPxPerPage) が no-break ブロック内
+ * に落ちる場合、そのブロックの先頭まで改ページを前倒す。ブロック自体が
+ * 1ページより大きい場合はフォールバックで通常カット（救済不能）。
+ */
+function computePageStarts(
+  canvasHeight: number,
+  canvasPxPerPage: number,
+  noBreakBlocks: { topPx: number; bottomPx: number }[],
+): number[] {
+  const starts: number[] = [0];
+  // 無限ループ防止上限（1000ページは明らかに非現実的）
+  for (let guard = 0; guard < 1000; guard++) {
+    const currentStart = starts[starts.length - 1];
+    const naturalEnd = currentStart + canvasPxPerPage;
+    if (naturalEnd >= canvasHeight) break;
+
+    let breakAt = naturalEnd;
+    for (const block of noBreakBlocks) {
+      const blockHeight = block.bottomPx - block.topPx;
+      const crossesBoundary =
+        block.topPx < breakAt && block.bottomPx > breakAt;
+      const startsAfterCurrentPage = block.topPx > currentStart;
+      const fitsInOnePage = blockHeight <= canvasPxPerPage;
+      if (crossesBoundary && startsAfterCurrentPage && fitsInOnePage) {
+        if (block.topPx < breakAt) breakAt = block.topPx;
+      }
+    }
+    // 進まなくなったら自然カットに退避（保険）
+    if (breakAt <= currentStart) breakAt = naturalEnd;
+    starts.push(breakAt);
+  }
+  return starts;
 }
 
 /**

@@ -346,7 +346,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         {(data.warrantyPeriod || data.warrantyScope || data.additionalWorkPolicy) && (
           <div className="border border-gray-200 rounded p-3 mb-3 bg-gray-50/50 text-[10px] space-y-2">
             {(data.warrantyPeriod || data.warrantyScope) && (
-              <div>
+              <div data-pdf-no-break>
                 <p className="font-bold text-gray-700 mb-0.5">
                   ◆ 瑕疵担保責任・アフターサービス
                 </p>
@@ -364,7 +364,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
               </div>
             )}
             {data.additionalWorkPolicy && (
-              <div>
+              <div data-pdf-no-break>
                 <p className="font-bold text-gray-700 mb-0.5">
                   ◆ 追加工事・設計変更の取扱い
                 </p>
