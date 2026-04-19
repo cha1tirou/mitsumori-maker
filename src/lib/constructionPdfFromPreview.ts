@@ -174,7 +174,7 @@ function drawPageFooter(
   pdf.setFontSize(8);
 
   const label = quoteNumber
-    ? `Ref.: ${quoteNumber}    ${page} / ${total}`
+    ? `No. ${quoteNumber}   ${page} / ${total}`
     : `${page} / ${total}`;
 
   pdf.text(label, A4_WIDTH_MM - 12, A4_HEIGHT_MM - 8, { align: "right" });
