@@ -338,6 +338,9 @@ export default function ConstructionEditor({
                       <p className="text-sm font-black text-gray-900 mb-1.5 leading-tight">
                         透かしを消して、取引先に出せる正式版にする
                       </p>
+                      <p className="text-[10px] text-kenmitsu-muted mb-2 leading-relaxed">
+                        以下の機能は Solo プランで解放されます（現在は無効化中）
+                      </p>
                       <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-gray-700 leading-relaxed">
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
