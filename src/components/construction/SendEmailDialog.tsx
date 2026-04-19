@@ -24,6 +24,19 @@ function blobToBase64(blob: Blob): Promise<string> {
   });
 }
 
+/**
+ * メール HTML 本文に埋め込む前に HTML 特殊文字をエスケープする。
+ * ユーザーが本文に <script> 等を書いた場合に受信側で実行されるリスクを潰す（QAバグ #15）
+ */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 export default function SendEmailDialog({ open, onClose, data }: Props) {
   const [to, setTo] = useState("");
   const [replyTo, setReplyTo] = useState("");
@@ -63,7 +76,7 @@ export default function SendEmailDialog({ open, onClose, data }: Props) {
           to,
           subject,
           text: message,
-          html: message.replace(/\n/g, "<br />"),
+          html: escapeHtml(message).replace(/\n/g, "<br />"),
           replyTo: replyTo || undefined,
           pdfBase64,
           fileName: `見積書_${data.clientName || "未設定"}_${data.quoteDate}.pdf`,

@@ -79,16 +79,27 @@ export default async function MyPage({
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
           <Link
             href="/construction/mypage"
-            className="flex items-center gap-2 text-sm font-bold text-gray-900"
+            className="flex items-center gap-2 text-sm font-bold text-gray-900 whitespace-nowrap min-w-0"
           >
-            <HardHat className="w-5 h-5 text-kenmitsu-navy" strokeWidth={2.25} />
-            ケンミツ <span className="text-kenmitsu-navy">| 建設業の見積書</span>
+            <HardHat
+              className="w-5 h-5 text-kenmitsu-navy shrink-0"
+              strokeWidth={2.25}
+            />
+            <span>
+              ケンミツ
+              <span className="text-kenmitsu-navy hidden sm:inline">
+                {" "}
+                | 建設業の見積書
+              </span>
+            </span>
           </Link>
-          <div className="flex items-center gap-3 text-xs text-gray-600">
-            <span>{user.email}</span>
+          <div className="flex items-center gap-3 text-xs text-gray-600 min-w-0">
+            <span className="hidden sm:inline truncate max-w-[180px]" title={user.email}>
+              {user.email}
+            </span>
             <SignOutButton />
           </div>
         </div>

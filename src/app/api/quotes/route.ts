@@ -9,6 +9,32 @@ import type { Profile } from "@/lib/supabase/types";
 // 金額上限（1兆円）とフィールド検証
 const MAX_AMOUNT = 1_000_000_000_000;
 
+/**
+ * 空の見積書（顧客名・工事名・明細金額すべて未入力）なら false。
+ * 「新しい見積書を作成」を押しただけで何も入力せずに保存ボタンを連打された時に
+ * 無題の¥0見積書が溜まらないようにする（QAバグ #2）
+ */
+function hasMeaningfulContent(data: ConstructionQuoteData): boolean {
+  const hasClient = Boolean(data.clientName?.trim());
+  const hasSubject = Boolean(data.subject?.trim());
+  const hasAnyAmount = data.sections.some((s) => {
+    const itemsTotal = s.items.some(
+      (i) =>
+        (i.name && i.name.trim() !== "") ||
+        (i.quantity > 0 && i.unitPrice > 0),
+    );
+    const subItemsTotal = (s.subsections ?? []).some((sub) =>
+      sub.items.some(
+        (i) =>
+          (i.name && i.name.trim() !== "") ||
+          (i.quantity > 0 && i.unitPrice > 0),
+      ),
+    );
+    return itemsTotal || subItemsTotal;
+  });
+  return hasClient || hasSubject || hasAnyAmount;
+}
+
 function sanitizeData(data: ConstructionQuoteData): ConstructionQuoteData {
   return {
     ...data,
@@ -54,6 +80,18 @@ export async function POST(request: NextRequest) {
 
   if (!body?.data) {
     return NextResponse.json({ error: "Invalid body" }, { status: 400 });
+  }
+
+  // 空の見積書の保存を拒否（Free プランの月3通枠をムダに消費しないように）
+  if (!hasMeaningfulContent(body.data)) {
+    return NextResponse.json(
+      {
+        error: "empty_quote",
+        message:
+          "見積書が空です。顧客名・工事名・明細のいずれかを入力してから保存してください。",
+      },
+      { status: 400 },
+    );
   }
 
   const supabase = await createClient();

@@ -65,6 +65,17 @@ const WORK_TYPE_DESCRIPTIONS: Record<string, string> = {
 const inputClass =
   "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm transition-colors hover:border-gray-300 focus:border-kenmitsu-navy focus:outline-none focus:ring-1 focus:ring-kenmitsu-navy/20";
 
+/**
+ * 数量・単価・料率などの数値入力を非負・有限数に強制する。
+ * 「-」やゼロ先頭文字・非数値は 0 にフォールバック。
+ * QAバグ #7 対応。
+ */
+function clampNonNegative(raw: string): number {
+  const n = Number(raw);
+  if (!isFinite(n) || n < 0) return 0;
+  return n;
+}
+
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
@@ -180,8 +191,10 @@ function ItemRow({
           className={inputClass + " text-xs"}
           placeholder="数量"
           min="0"
+          step="any"
+          inputMode="decimal"
           value={item.quantity}
-          onChange={(e) => onChange("quantity", Number(e.target.value))}
+          onChange={(e) => onChange("quantity", clampNonNegative(e.target.value))}
         />
         <input
           type="text"
@@ -195,8 +208,10 @@ function ItemRow({
           className={inputClass + " text-xs"}
           placeholder="単価"
           min="0"
+          step="1"
+          inputMode="numeric"
           value={item.unitPrice}
-          onChange={(e) => onChange("unitPrice", Number(e.target.value))}
+          onChange={(e) => onChange("unitPrice", clampNonNegative(e.target.value))}
         />
       </div>
 
@@ -209,9 +224,11 @@ function ItemRow({
               className={inputClass + " text-xs flex-1"}
               placeholder="原価（社内用）"
               min="0"
+              step="1"
+              inputMode="numeric"
               value={item.costUnitPrice ?? 0}
               onChange={(e) =>
-                onChange("costUnitPrice", Number(e.target.value))
+                onChange("costUnitPrice", clampNonNegative(e.target.value))
               }
             />
           </div>
@@ -790,8 +807,15 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
               type="number"
               className={inputClass}
               min="1"
+              step="1"
+              inputMode="numeric"
               value={data.validityDays}
-              onChange={(e) => update("validityDays", Number(e.target.value))}
+              onChange={(e) =>
+                update(
+                  "validityDays",
+                  Math.max(1, Math.floor(clampNonNegative(e.target.value))),
+                )
+              }
             />
           </Field>
           <Field label="工事場所" className="col-span-2">
@@ -1279,15 +1303,14 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
         </div>
 
         <div className="mt-4 pt-4 border-t border-gray-100">
-          <Field label="消費税率（%）" help="通常10%。軽減税率対象がある場合は明細側で個別調整してください">
+          <Field label="消費税率（%）" help="建設工事は通常10%です。免税事業者の場合のみ「なし」を選んでください">
             <select
               className={inputClass + " w-32"}
               value={data.taxRate}
               onChange={(e) => update("taxRate", Number(e.target.value))}
             >
               <option value={10}>10%</option>
-              <option value={8}>8%（軽減）</option>
-              <option value={0}>なし</option>
+              <option value={0}>なし（免税）</option>
             </select>
           </Field>
         </div>
@@ -1320,9 +1343,13 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
               min="0"
               max="100"
               step="0.5"
+              inputMode="decimal"
               value={data.legalWelfareRate}
               onChange={(e) =>
-                update("legalWelfareRate", Number(e.target.value))
+                update(
+                  "legalWelfareRate",
+                  Math.min(100, clampNonNegative(e.target.value)),
+                )
               }
             />
           </Field>
@@ -1355,9 +1382,13 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
                 min="0"
                 max="100"
                 step="0.5"
+                inputMode="decimal"
                 value={data.siteManagementFeeRate}
                 onChange={(e) =>
-                  update("siteManagementFeeRate", Number(e.target.value))
+                  update(
+                    "siteManagementFeeRate",
+                    Math.min(100, clampNonNegative(e.target.value)),
+                  )
                 }
               />
             </Field>
@@ -1368,9 +1399,13 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
                 min="0"
                 max="100"
                 step="0.5"
+                inputMode="decimal"
                 value={data.generalManagementFeeRate}
                 onChange={(e) =>
-                  update("generalManagementFeeRate", Number(e.target.value))
+                  update(
+                    "generalManagementFeeRate",
+                    Math.min(100, clampNonNegative(e.target.value)),
+                  )
                 }
               />
             </Field>
