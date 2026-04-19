@@ -20,7 +20,7 @@ import QuoteList from "@/components/construction/QuoteList";
 import ReferralCard from "@/components/construction/ReferralCard";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
-import { FREE_PLAN_MONTHLY_LIMIT, isInTrial, trialDaysRemaining } from "@/lib/paywall";
+import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const metadata: Metadata = {
   title: "マイページ | ケンミツ",
@@ -69,17 +69,10 @@ export default async function MyPage({
   ]);
 
   const plan = profile?.plan ?? "free";
-  const inTrial = isInTrial(profile);
-  const trialDays = inTrial ? trialDaysRemaining(profile) : 0;
-  const planLabel = inTrial
-    ? `トライアル（残${trialDays}日）`
-    : plan === "solo"
-    ? "Solo"
-    : plan === "team"
-    ? "Team"
-    : "Free";
+  const planLabel =
+    plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
   const remaining =
-    plan === "free" && !inTrial
+    plan === "free"
       ? Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth)
       : "無制限";
 

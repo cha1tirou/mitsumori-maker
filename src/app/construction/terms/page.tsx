@@ -60,25 +60,10 @@ export default function ConstructionTermsPage() {
               <li>「利用者」とは、本サービスに登録し、利用する個人または法人をいいます。</li>
               <li>「有料プラン」とは、Soloプラン・Teamプラン等、月額または年額の対価を伴う利用形態をいいます。</li>
               <li>「無料プラン」とは、登録なしで利用できる、機能制限付きの利用形態をいいます。</li>
-              <li>「無料トライアル」とは、新規登録後7日間、有料プラン相当の機能を無償で利用できる期間をいいます。</li>
             </ol>
           </Section>
 
-          <Section title="第2条（無料トライアル）">
-            <ol>
-              <li>
-                新規登録した利用者には、登録日から7日間の無料トライアル期間が適用されます。トライアル期間中はSoloプラン相当の機能を利用できます。
-              </li>
-              <li>
-                トライアル期間中に課金は発生しません。クレジットカードの登録も不要です。
-              </li>
-              <li>
-                トライアル期間の終了後、自動的に無料プランへ移行します。有料プランへの自動移行は行いません。
-              </li>
-            </ol>
-          </Section>
-
-          <Section title="第3条（契約の成立）">
+          <Section title="第2条（契約の成立）">
             <ol>
               <li>
                 有料プランの契約は、利用者が決済情報を入力しStripe Checkoutを通じて支払いを完了した時点で成立します。
@@ -89,7 +74,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第4条（料金および支払方法）">
+          <Section title="第3条（料金および支払方法）">
             <ol>
               <li>
                 本サービスの料金は以下のとおりとします（すべて税込）。
@@ -107,7 +92,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第5条（解約・自動更新停止）">
+          <Section title="第4条（解約・自動更新停止）">
             <ol>
               <li>
                 利用者は、マイページの解約導線より、いつでも自動更新を停止することができます。電話・メールによる解約手続きは必要ありません。
@@ -121,7 +106,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第6条（返金）">
+          <Section title="第5条（返金）">
             <ol>
               <li>
                 特定商取引法に定める書面到達前のキャンセルなど、法令により認められる場合を除き、原則として返金は行いません。
@@ -132,7 +117,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第7条（利用者の責任）">
+          <Section title="第6条（利用者の責任）">
             <ol>
               <li>
                 本サービスで作成される見積書の内容・金額・法令適合性については、最終的に利用者の責任において確認するものとします。
@@ -146,7 +131,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第8条（禁止事項）">
+          <Section title="第7条（禁止事項）">
             <p>利用者は、本サービスの利用にあたり以下の行為を行ってはなりません。</p>
             <ol>
               <li>法令または公序良俗に違反する行為</li>
@@ -157,7 +142,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第9条（免責）">
+          <Section title="第8条（免責）">
             <ol>
               <li>
                 本サービスは現状有姿で提供され、運営者は特定の目的への適合性を保証しません。
@@ -171,7 +156,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第10条（サービスの変更・終了）">
+          <Section title="第9条（サービスの変更・終了）">
             <ol>
               <li>
                 運営者は、本サービスの内容を利用者への事前通知なく変更・追加・終了できるものとします。ただし、料金および重要な機能の変更については、前条に定める方法で事前通知します。
@@ -182,7 +167,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第11条（個人情報の取扱い）">
+          <Section title="第10条（個人情報の取扱い）">
             <p>
               個人情報の取扱いは
               <Link href="/construction/privacy" className="text-kenmitsu-navy hover:underline">
@@ -192,7 +177,7 @@ export default function ConstructionTermsPage() {
             </p>
           </Section>
 
-          <Section title="第12条（アカウント削除）">
+          <Section title="第11条（アカウント削除）">
             <ol>
               <li>
                 利用者は、マイページのアカウント設定からアカウントを削除することができます。
@@ -206,7 +191,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第13条（メール配信）">
+          <Section title="第12条（メール配信）">
             <ol>
               <li>
                 本サービスは、利用者への重要な通知（アカウント確認・パスワードリセット等）および利用促進に関するメールを配信します。
@@ -217,7 +202,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第14条（準拠法・管轄）">
+          <Section title="第13条（準拠法・管轄）">
             <ol>
               <li>本規約は日本法に準拠します。</li>
               <li>
@@ -226,7 +211,7 @@ export default function ConstructionTermsPage() {
             </ol>
           </Section>
 
-          <Section title="第15条（改定）">
+          <Section title="第14条（改定）">
             <p>
               運営者は、必要に応じて本規約を改定できます。重要な改定の場合、次回課金日の30日前までに本サービス内の通知または登録メールアドレスへの通知により周知します。改定後の規約は、通知された効力発生日から適用されます。
             </p>

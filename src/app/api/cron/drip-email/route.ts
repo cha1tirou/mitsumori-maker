@@ -7,7 +7,7 @@ import { isSupabaseConfigured, getSupabaseEnv } from "@/lib/supabase/env";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// ドリップメール定義（Day 0, 3, 5, 7）
+// ドリップメール定義（Day 0, 3, 5）
 const DRIP_STEPS = [
   {
     day: 0,
@@ -24,14 +24,8 @@ const DRIP_STEPS = [
   {
     day: 5,
     key: "upgrade",
-    subject: "【ケンミツ】トライアル残り2日 — Solo全機能をそのまま使い続けませんか？",
+    subject: "【ケンミツ】取引先に出せるPDFが欲しければ Solo プラン",
     html: buildUpgradeEmail,
-  },
-  {
-    day: 7,
-    key: "trial_end",
-    subject: "【ケンミツ】トライアルが終了しました",
-    html: buildTrialEndEmail,
   },
 ] as const;
 
@@ -144,13 +138,13 @@ function buildWelcomeEmail(): string {
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">ご登録ありがとうございます</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       ケンミツへようこそ！<br>
-      7日間、Soloプランの全機能を無料でお試しいただけます。
+      無料プランでは月3通までクラウド保存できます（PDFは透かし付き）。
     </p>
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
-      <li>透かしなしのPDF出力</li>
-      <li>見積書の無制限保存</li>
-      <li>発注者へのメール直接送信</li>
+      <li>見積書の作成・PDF出力（無制限・透かし付き）</li>
+      <li>月3通までクラウド保存・再編集</li>
       <li>改正建設業法2025の自動チェック</li>
+      <li>8工種のプリセット・諸経費自動計算</li>
     </ul>
     <p style="font-size: 14px; line-height: 1.8;">
       まずは1通、見積書を作成してみてください。
@@ -189,36 +183,21 @@ function buildTipsEmail(): string {
 
 function buildUpgradeEmail(): string {
   return emailWrapper(`
-    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">トライアル残り2日</h1>
+    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">取引先提出用の見積書、透かしで困っていませんか？</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
-      Soloプランの無料体験が残り2日となりました。<br>
-      トライアル期間が終了すると、以下の機能が制限されます：
+      無料プランの PDF には「無料版 SAMPLE」の透かしが入ります。<br>
+      取引先に正式な見積書として提出するには <strong>Soloプラン（月¥980）</strong> をご検討ください。
     </p>
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
-      <li>PDFに「SAMPLE」透かしが入ります</li>
-      <li>見積書の保存が月3通に制限されます</li>
-      <li>メール送信機能が使えなくなります</li>
+      <li><strong>透かしなし</strong>の正式版PDFが出力できる</li>
+      <li>見積書の<strong>無制限</strong>クラウド保存・履歴管理</li>
+      <li>発注者へ<strong>メールで直接送信</strong>・請求書/納品書へワンクリック変換</li>
+      <li>顧客マスタ・単価マスタで2通目以降の作成時間を大幅短縮</li>
+      <li>AI積算・工事写真・原価粗利分析も利用可</li>
     </ul>
-    <p style="font-size: 14px; line-height: 1.8; margin-bottom: 8px;">
-      <strong>月¥980</strong>でそのまま全機能を使い続けられます。
-    </p>
-    ${ctaButton("Soloプランに切り替える →", "https://mitsumori-maker.com/construction#pricing")}
+    ${ctaButton("Soloプランを見る →", "https://mitsumori-maker.com/construction#pricing")}
     <p style="font-size: 12px; color: #6b7280; text-align: center;">
       いつでもワンクリックで解約できます。
     </p>
-  `);
-}
-
-function buildTrialEndEmail(): string {
-  return emailWrapper(`
-    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">トライアルが終了しました</h1>
-    <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
-      7日間のトライアルが終了し、Freeプランに切り替わりました。<br>
-      引き続き見積書の作成は可能ですが、一部機能が制限されています。
-    </p>
-    <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
-      Soloプラン（月¥980）にアップグレードすると、透かしなしPDF・無制限保存・メール送信が再び使えるようになります。
-    </p>
-    ${ctaButton("Soloプランにアップグレード →", "https://mitsumori-maker.com/construction#pricing")}
   `);
 }

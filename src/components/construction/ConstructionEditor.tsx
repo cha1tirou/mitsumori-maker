@@ -53,7 +53,6 @@ interface Props {
   userEmail?: string | null;
   plan?: "free" | "solo" | "team";
   remainingFree?: number | null;
-  trialDaysRemaining?: number | null;
 }
 
 const DRAFT_KEY_NEW = "mitsumori-construction-draft-v1";
@@ -63,7 +62,6 @@ export default function ConstructionEditor({
   quoteId,
   userEmail,
   plan = "free",
-  trialDaysRemaining: trialDays,
   remainingFree,
 }: Props) {
   const router = useRouter();
@@ -199,22 +197,6 @@ export default function ConstructionEditor({
         </div>
       </header>
 
-      {/* トライアルバナー */}
-      {typeof trialDays === "number" && trialDays > 0 && (
-        <div className="bg-kenmitsu-navy text-white">
-          <div className="max-w-7xl mx-auto px-4 py-2 text-xs font-medium flex items-center justify-between">
-            <span>
-              Solo全機能を無料体験中 — 残り{trialDays}日（透かしなしPDF・無制限保存・メール送信）
-            </span>
-            <Link
-              href="/construction#pricing"
-              className="shrink-0 bg-white text-kenmitsu-navy font-bold px-3 py-1 rounded text-xs hover:bg-kenmitsu-navy50 transition-colors"
-            >
-              Soloプランに切り替え
-            </Link>
-          </div>
-        </div>
-      )}
 
       {/* 使用量アラート（無料・残少ない時のみ） */}
       {userEmail && plan === "free" && typeof remainingFree === "number" && (
@@ -312,7 +294,7 @@ export default function ConstructionEditor({
                         見積書を保存して、いつでも編集・再出力
                       </p>
                       <p className="text-[11px] text-kenmitsu-muted leading-relaxed">
-                        月3通まで無料でクラウド保存。顧客別の履歴管理・Excelインポート・7日間のSolo全機能体験もセット。
+                        月3通まで無料でクラウド保存。顧客別の履歴管理・Excelインポート・過去見積の複製も利用可。
                       </p>
                     </div>
                   </Link>
