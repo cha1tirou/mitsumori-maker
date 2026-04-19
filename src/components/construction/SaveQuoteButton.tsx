@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ConstructionQuoteData } from "@/types/construction";
 import { Save, Loader2, CheckCircle2 } from "lucide-react";
@@ -23,8 +23,15 @@ export default function SaveQuoteButton({
     "idle"
   );
   const [errorMessage, setErrorMessage] = useState("");
+  // 多重送信ロック（QAバグ #18）
+  // setState 経由の disabled は次レンダリングを待つため、3連打のような早押しでは
+  // 同期的に handleSave が複数回起動して /api/quotes に複数 POST されてしまう。
+  // ref ベースのロックなら同期的にチェックでき、確実に1回しか走らない。
+  const submittingRef = useRef(false);
 
   const handleSave = async () => {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setStatus("saving");
     setErrorMessage("");
     try {
@@ -92,6 +99,8 @@ export default function SaveQuoteButton({
     } catch {
       setStatus("error");
       setErrorMessage("通信エラーが発生しました。");
+    } finally {
+      submittingRef.current = false;
     }
   };
 
@@ -100,6 +109,7 @@ export default function SaveQuoteButton({
       <button
         onClick={handleSave}
         disabled={status === "saving"}
+        aria-busy={status === "saving"}
         className={`flex items-center justify-center gap-2 border border-gray-200 hover:bg-gray-50 disabled:opacity-60 text-gray-700 text-sm font-medium py-2.5 rounded-lg transition-colors ${className}`}
       >
         {status === "saving" ? (
