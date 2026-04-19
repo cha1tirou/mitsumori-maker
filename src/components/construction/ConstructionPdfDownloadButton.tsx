@@ -99,7 +99,9 @@ export default function ConstructionPdfDownloadButton({
       const { generatePdfBlobFromElement } = await import(
         "@/lib/constructionPdfFromPreview"
       );
-      const blob = await generatePdfBlobFromElement(element);
+      const blob = await generatePdfBlobFromElement(element, {
+        watermark: withWatermark,
+      });
 
       const safeClient = (data.clientName || "未設定").replace(
         /[/\\?%*:|"<>]/g,

@@ -46,7 +46,11 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
       <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans relative">
         {watermark && (
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10" style={{ paddingTop: "25%", paddingBottom: "20%" }}>
+          <div
+            data-preview-watermark
+            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10"
+            style={{ paddingTop: "25%", paddingBottom: "20%" }}
+          >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
