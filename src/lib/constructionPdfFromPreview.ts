@@ -25,13 +25,15 @@ const JPEG_QUALITY = 0.92;
 export interface PdfGenOptions {
   /** 未課金プランの透かしを全ページに入れるか。既定: false */
   watermark?: boolean;
+  /** 見積番号。各ページのフッターに印字する（ASCII想定）。 */
+  quoteNumber?: string;
 }
 
 export async function generatePdfBlobFromElement(
   element: HTMLElement,
   options: PdfGenOptions = {},
 ): Promise<Blob> {
-  const { watermark = false } = options;
+  const { watermark = false, quoteNumber = "" } = options;
 
   if (typeof document !== "undefined" && document.fonts?.ready) {
     await document.fonts.ready;
@@ -85,9 +87,39 @@ export async function generatePdfBlobFromElement(
     if (watermark) {
       drawSampleWatermark(pdf);
     }
+    drawPageFooter(pdf, quoteNumber, i + 1, totalPages);
   }
 
   return pdf.output("blob");
+}
+
+/**
+ * 各ページ右下に "Ref.: {quoteNumber}   {page}/{total}" を印字。
+ * 印刷時にページがバラけた際の出所・ページ順の担保（#23）。
+ * jsPDF の既定フォント（Helvetica）で描画するため ASCII に限定。
+ */
+function drawPageFooter(
+  pdf: jsPDF,
+  quoteNumber: string,
+  page: number,
+  total: number,
+) {
+  pdf.saveGraphicsState();
+  try {
+    pdf.setGState(pdf.GState({ opacity: 1 }));
+  } catch {
+    // ignore
+  }
+  pdf.setFont("helvetica", "normal");
+  pdf.setTextColor(110, 110, 110);
+  pdf.setFontSize(8);
+
+  const label = quoteNumber
+    ? `Ref.: ${quoteNumber}    ${page} / ${total}`
+    : `${page} / ${total}`;
+
+  pdf.text(label, A4_WIDTH_MM - 12, A4_HEIGHT_MM - 8, { align: "right" });
+  pdf.restoreGraphicsState();
 }
 
 /**

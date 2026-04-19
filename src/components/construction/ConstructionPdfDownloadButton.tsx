@@ -101,6 +101,7 @@ export default function ConstructionPdfDownloadButton({
       );
       const blob = await generatePdfBlobFromElement(element, {
         watermark: withWatermark,
+        quoteNumber: data.quoteNumber,
       });
 
       const safeClient = (data.clientName || "未設定").replace(
