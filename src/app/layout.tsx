@@ -56,6 +56,16 @@ export default function RootLayout({
   return (
     <html lang="ja" className={notoSansJP.variable}>
       <head>
+        {/*
+          3rd party の接続予熱（handshake 時間の短縮）。
+          Script 本体は afterInteractive / lazyOnload で遅延ロードするが、
+          preconnect で TCP + TLS を先に確立しておく。
+        */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+
         {/* JSON-LD */}
         <script
           type="application/ld+json"

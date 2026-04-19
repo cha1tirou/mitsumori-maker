@@ -12,8 +12,12 @@
 | 04 | [04-google-ads.md](./04-google-ads.md) | Google Ads アカウント作成＋コンバージョン設定 | 45分 | 🟢 中 |
 | 05 | [05-supabase-email-templates.md](./05-supabase-email-templates.md) | Supabase メールテンプレート日本語化＋サイトURL設定 | 10〜15分 | 🔴 最優先 |
 | 06 | [06-stripe-production.md](./06-stripe-production.md) | Stripe 本番切替（商品・Webhook・Portal・環境変数） | 60〜90分 | 🔴 広告配信前必須 |
+| 07 | [07-sentry.md](./07-sentry.md) | Sentry エラー監視導入 | 30〜45分 | 🟢 推奨（配信後でも可） |
 
-総合チェックリスト: [`../PRE_LAUNCH_CHECKLIST.md`](../PRE_LAUNCH_CHECKLIST.md)
+関連ドキュメント:
+- 総合チェックリスト: [`../PRE_LAUNCH_CHECKLIST.md`](../PRE_LAUNCH_CHECKLIST.md)
+- E2E テスト手順: [`../E2E_TEST_SCENARIOS.md`](../E2E_TEST_SCENARIOS.md)
+- 環境変数リスト: [`../../.env.example`](../../.env.example)
 
 ## 実行順序
 
