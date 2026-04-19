@@ -88,3 +88,8 @@
 - [x] 業種別ガイド記事追加（イベント・ウェディング業）→ guide/event 実装済み（2026-04-18）
 - [x] 業種別ガイド記事追加（建築設計・設計事務所）→ guide/architecture 実装済み（2026-04-18）
 - [x] guide/page.tsx に event・architecture を追加・記事数29本に更新（2026-04-18）
+- [x] 業種別ガイド記事追加（塗装業・外壁塗装）→ guide/painting 実装済み（2026-04-19）
+- [x] 業種別ガイド記事追加（士業：税理士・社労士・行政書士）→ guide/professional-service 実装済み（2026-04-19）
+- [x] ガイド記事追加（ライター・コピーライター）→ guide/writer 実装済み（2026-04-19）
+- [x] guide/page.tsx に painting・professional-service・writer を追加・記事数32本に更新（2026-04-19）
+- [x] sitemap.xml に painting・professional-service・writer エントリ追加（2026-04-19）
