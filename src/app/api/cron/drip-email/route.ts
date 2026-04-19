@@ -191,7 +191,7 @@ function buildUpgradeEmail(): string {
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
       <li><strong>透かしなし</strong>の正式版PDFが出力できる</li>
       <li>見積書の<strong>無制限</strong>クラウド保存・履歴管理</li>
-      <li>発注者へ<strong>メールで直接送信</strong>・請求書/納品書へワンクリック変換</li>
+      <li>発注者へ<strong>メールで直接送信</strong>・freee/MF/弥生向けCSV出力</li>
       <li>顧客マスタ・単価マスタで2通目以降の作成時間を大幅短縮</li>
       <li>AI積算・工事写真・原価粗利分析も利用可</li>
     </ul>

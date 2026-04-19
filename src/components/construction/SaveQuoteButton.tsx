@@ -107,7 +107,7 @@ export default function SaveQuoteButton({
         ) : (
           <>
             <Save className="w-4 h-4" strokeWidth={2.25} />
-            {quoteId ? "上書き保存" : "見積書を保存"}
+            {quoteId ? "下書きを更新" : "下書き保存"}
           </>
         )}
       </button>

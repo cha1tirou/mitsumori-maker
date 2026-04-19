@@ -38,10 +38,6 @@ const SaveQuoteButton = dynamic(
   () => import("@/components/construction/SaveQuoteButton"),
   { ssr: false }
 );
-const ConvertButtons = dynamic(
-  () => import("@/components/construction/ConvertButtons"),
-  { ssr: false }
-);
 const AccountingCsvButton = dynamic(
   () => import("@/components/construction/AccountingCsvButton"),
   { ssr: false }
@@ -259,7 +255,7 @@ export default function ConstructionEditor({
                   1. PDF ダウンロード（Primary CTA・全員）
                   2. 課金/登録誘導カード（Free/未ログインのみ。PDFを撮った直後の熱量を逃さない）
                   3. 見積書を保存（ログイン済み）
-                  4. Solo 以上機能（書類変換・CSV・メール）
+                  4. Solo 以上機能（CSV・メール）
                   5. マイページ
                 */}
 
@@ -331,7 +327,7 @@ export default function ConstructionEditor({
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          書類変換・CSV連携
+                          会計ソフトCSV連携
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
@@ -364,10 +360,9 @@ export default function ConstructionEditor({
                   />
                 )}
 
-                {/* 4. Solo / Team 専用: 書類変換・CSV出力・メール送信 */}
+                {/* 4. Solo / Team 専用: CSV出力・メール送信 */}
                 {(plan === "solo" || plan === "team") && (
                   <>
-                    <ConvertButtons data={data} />
                     <AccountingCsvButton data={data} />
                     <button
                       onClick={() => setEmailDialogOpen(true)}
