@@ -93,3 +93,8 @@
 - [x] ガイド記事追加（ライター・コピーライター）→ guide/writer 実装済み（2026-04-19）
 - [x] guide/page.tsx に painting・professional-service・writer を追加・記事数32本に更新（2026-04-19）
 - [x] sitemap.xml に painting・professional-service・writer エントリ追加（2026-04-19）
+- [x] 業種別ガイド記事追加（電気工事業）→ guide/electrical 実装済み（2026-04-19）
+- [x] 業種別ガイド記事追加（自動車整備業）→ guide/auto-repair 実装済み（2026-04-19）
+- [x] ガイド記事追加（見積書の修正・訂正方法）→ guide/revision 実装済み（2026-04-19）
+- [x] guide/page.tsx に electrical・auto-repair・revision を追加・記事数35本に更新（2026-04-19）
+- [x] sitemap.xml に electrical・revision・auto-repair エントリ追加（2026-04-19）
