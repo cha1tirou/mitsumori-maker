@@ -18,6 +18,7 @@ import {
   hasBlockingIssues,
   formatIssuesForConfirm,
 } from "@/lib/constructionValidation";
+import { Portal } from "./Portal";
 
 // PDF 生成: ConstructionPreview（.printable-root）を html2canvas でラスタライズし
 // jsPDF に埋め込んで Blob を受け取り、<a download> で通常ダウンロードする。
@@ -156,6 +157,7 @@ export default function ConstructionPdfDownloadButton({
 
       {/* 生成中モーダル */}
       {status === "generating" && (
+        <Portal>
         <div
           className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           role="dialog"
@@ -175,10 +177,12 @@ export default function ConstructionPdfDownloadButton({
             </p>
           </div>
         </div>
+        </Portal>
       )}
 
       {/* 完了モーダル */}
       {status === "done" && (
+        <Portal>
         <div
           className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setStatus("idle")}
@@ -222,11 +226,13 @@ export default function ConstructionPdfDownloadButton({
             </button>
           </div>
         </div>
+        </Portal>
       )}
 
       {showNudge && (
+        <Portal>
         <div
-          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setShowNudge(false)}
         >
           <div
@@ -300,6 +306,7 @@ export default function ConstructionPdfDownloadButton({
             </div>
           </div>
         </div>
+        </Portal>
       )}
     </>
   );

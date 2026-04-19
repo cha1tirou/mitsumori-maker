@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Crown, Lock, X } from "lucide-react";
+import { Portal } from "./Portal";
 
 /**
  * Solo 以上の機能を Free ユーザーがタップした時に出す案内モーダル。
@@ -25,6 +26,7 @@ export function useSoloFeatureLock() {
 
   const dialog =
     featureName === null ? null : (
+      <Portal>
       <div
         className="fixed inset-0 z-[65] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
         onClick={close}
@@ -102,6 +104,7 @@ export function useSoloFeatureLock() {
           </div>
         </div>
       </div>
+      </Portal>
     );
 
   return { open, close, dialog };
