@@ -60,6 +60,14 @@ export default function SaveQuoteButton({
         );
         return;
       }
+      if (res.status === 400 && json?.error === "empty_quote") {
+        setStatus("error");
+        setErrorMessage(
+          json.message ||
+            "見積書が空です。顧客名・工事名・明細のいずれかを入力してから保存してください。",
+        );
+        return;
+      }
       if (res.status === 503) {
         setStatus("error");
         setErrorMessage("保存機能は現在準備中です。");
