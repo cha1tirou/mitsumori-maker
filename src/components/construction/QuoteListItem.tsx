@@ -22,16 +22,14 @@ export default function QuoteListItem({ quote }: Props) {
   const router = useRouter();
   const toast = useToast();
   const [busy, setBusy] = useState<"delete" | "duplicate" | null>(null);
-  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirmDelete) {
-      setConfirmDelete(true);
-      // 5秒後にリセット
-      setTimeout(() => setConfirmDelete(false), 5000);
-      return;
-    }
-    setConfirmDelete(false);
+    const label = quote.subject || quote.quote_number || "（無題の見積書）";
+    const ok = window.confirm(
+      `「${label}」を削除しますか？\n\nこの操作は取り消せません。`,
+    );
+    if (!ok) return;
+
     setBusy("delete");
     try {
       const res = await fetch(`/api/quotes?id=${quote.id}`, {
@@ -129,12 +127,8 @@ export default function QuoteListItem({ quote }: Props) {
         <button
           onClick={handleDelete}
           disabled={busy !== null}
-          className={`w-7 h-7 flex items-center justify-center rounded-md disabled:opacity-50 ${
-            confirmDelete
-              ? "text-red-700 bg-red-50 ring-1 ring-red-200"
-              : "text-gray-400 hover:text-red-700 hover:bg-red-50"
-          }`}
-          title={confirmDelete ? "もう一度押して削除" : "削除"}
+          className="w-7 h-7 flex items-center justify-center rounded-md text-gray-400 hover:text-red-700 hover:bg-red-50 disabled:opacity-50"
+          title="削除"
         >
           {busy === "delete" ? (
             <Loader2 className="w-3.5 h-3.5 animate-spin" strokeWidth={2.25} />
