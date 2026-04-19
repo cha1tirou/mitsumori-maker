@@ -13,6 +13,7 @@
 | 05 | [05-supabase-email-templates.md](./05-supabase-email-templates.md) | Supabase メールテンプレート日本語化＋サイトURL設定 | 10〜15分 | 🔴 最優先 |
 | 06 | [06-stripe-production.md](./06-stripe-production.md) | Stripe 本番切替（商品・Webhook・Portal・環境変数） | 60〜90分 | 🔴 広告配信前必須 |
 | 07 | [07-sentry.md](./07-sentry.md) | Sentry エラー監視導入 | 30〜45分 | 🟢 推奨（配信後でも可） |
+| 08 | [08-fix-auth-email.md](./08-fix-auth-email.md) | 新規登録の確認メールが届かない問題の診断と修正（Resend SMTP 連携） | 10〜60分 | 🔴 届いていない場合のみ必須 |
 
 関連ドキュメント:
 - 総合チェックリスト: [`../PRE_LAUNCH_CHECKLIST.md`](../PRE_LAUNCH_CHECKLIST.md)
