@@ -87,12 +87,13 @@ function LoginForm() {
     try {
       const supabase = createClient();
       const origin = window.location.origin;
-      const { error: authError } = await supabase.auth.signUp({
+      const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(
-            redirectTo
+          // token_hash フロー。クロスデバイス確認（PC登録→スマホでメール開く）に対応
+          emailRedirectTo: `${origin}/auth/confirm?next=${encodeURIComponent(
+            redirectTo,
           )}`,
           data: refCode ? { referral_code: refCode } : undefined,
         },
@@ -100,12 +101,22 @@ function LoginForm() {
       if (authError) {
         if (authError.message.includes("already registered")) {
           setError(
-            "このメールアドレスは既に登録済みです。ログインしてください。"
+            "このメールアドレスは既に登録済みです。ログインしてください。",
           );
           setMode("login");
         } else {
           setError(authError.message);
         }
+        return;
+      }
+      // Supabase は既登録メアドの再登録でも成功ステータスを返すが、
+      // identities が空配列なら既存ユーザー（セキュリティ上の仕様）。
+      // 参照: https://supabase.com/docs/reference/javascript/auth-signup
+      if (data.user && (data.user.identities?.length ?? 0) === 0) {
+        setError(
+          "このメールアドレスは既に登録されています。ログインまたはパスワードリセットをお試しください。",
+        );
+        setMode("login");
         return;
       }
       trackConversion("construction_signup");
