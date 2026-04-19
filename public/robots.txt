@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# 認証・管理用のプライベート画面はクロール不要
+Disallow: /construction/admin
+Disallow: /construction/mypage
+Disallow: /construction/login
+Disallow: /construction/reset-password
+Disallow: /construction/quotes/
+Disallow: /api/
+
 Sitemap: https://mitsumori-maker.com/sitemap.xml

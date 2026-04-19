@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -17,6 +18,11 @@ import {
   BarChart3,
   UserMinus,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "管理ダッシュボード | ケンミツ",
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

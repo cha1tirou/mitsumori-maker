@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect, notFound } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -9,6 +10,11 @@ import type {
   ConstructionSection,
 } from "@/types/construction";
 import { defaultConstructionQuoteData } from "@/types/construction";
+
+export const metadata: Metadata = {
+  title: "見積書の編集 | ケンミツ",
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -20,6 +21,11 @@ import ReferralCard from "@/components/construction/ReferralCard";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
 import { FREE_PLAN_MONTHLY_LIMIT, isInTrial, trialDaysRemaining } from "@/lib/paywall";
+
+export const metadata: Metadata = {
+  title: "マイページ | ケンミツ",
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

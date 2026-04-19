@@ -39,7 +39,7 @@ export default function ConstructionPrivacyPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             プライバシーポリシー（建設業向け有料プラン）
           </h1>
-          <p className="text-xs text-gray-500 mb-8">最終改定日: 2026年4月14日</p>
+          <p className="text-xs text-gray-500 mb-8">最終改定日: 2026年4月19日</p>
 
           <p className="text-sm text-gray-700 leading-relaxed mb-8">
             本ポリシーは、ケンミツ（以下「本サービス」）における、利用者の個人情報および関連情報の取扱いについて定めるものです。
@@ -106,6 +106,9 @@ export default function ConstructionPrivacyPage() {
               </li>
               <li>
                 <strong>Google Fonts (Noto Sans JP)</strong> — フォント配信
+              </li>
+              <li>
+                <strong>Resend</strong> — トランザクションメール配信（確認メール・見積書メール送信・チェックリストPDF配布・解約通知等）。送信先メールアドレスが一時的に Resend のサーバーを経由します
               </li>
             </ul>
             <p>
@@ -199,7 +202,7 @@ export default function ConstructionPrivacyPage() {
           </Section>
 
           <p className="text-xs text-gray-500 mt-10 pt-6 border-t border-gray-200">
-            最終改定日: 2026年4月14日
+            最終改定日: 2026年4月19日
           </p>
         </article>
       </main>
