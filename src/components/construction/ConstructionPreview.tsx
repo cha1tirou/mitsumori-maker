@@ -39,6 +39,23 @@ function calcExpiryDate(quoteDate: string, days: number): string {
   return formatDate(d.toISOString().split("T")[0]);
 }
 
+/**
+ * 備考テキストを空行（2連続以上の改行）で段落に分割する。
+ * 各段落を個別の data-pdf-no-break ブロックにすることで、
+ * 【現場環境】【連絡体制】等ユーザーが分節している見出しと本文が
+ * ページ跨ぎで分離しないようにする (#21 フォローアップ)。
+ *
+ * 空行で区切らず書かれた場合は単一段落として1ブロック扱い。
+ * 段落がページサイズを超える場合は computePageStarts 側が自然カットに
+ * フォールバックする。
+ */
+function splitNotesParagraphs(notes: string): string[] {
+  return notes
+    .split(/\n{2,}/)
+    .map((p) => p.replace(/^\n+|\n+$/g, ""))
+    .filter((p) => p.length > 0);
+}
+
 export default function ConstructionPreview({ data, watermark = true }: Props) {
   const totals = calcConstructionTotals(data);
 
@@ -46,7 +63,11 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
       <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans relative">
         {watermark && (
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10" style={{ paddingTop: "25%", paddingBottom: "20%" }}>
+          <div
+            data-preview-watermark
+            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10"
+            style={{ paddingTop: "25%", paddingBottom: "20%" }}
+          >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
@@ -271,7 +292,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
 
         {/* 集計 */}
         <div className="flex justify-end mb-4">
-          <div className="w-72 text-[10.5px]">
+          <div className="w-72 text-[10.5px]" data-pdf-no-break>
             <div className="bg-gray-50 border border-gray-200 rounded p-2.5 mb-2">
               <p className="text-[9px] font-bold text-gray-600 mb-1.5 tracking-wide">
                 費目内訳（直接工事費）
@@ -342,7 +363,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         {(data.warrantyPeriod || data.warrantyScope || data.additionalWorkPolicy) && (
           <div className="border border-gray-200 rounded p-3 mb-3 bg-gray-50/50 text-[10px] space-y-2">
             {(data.warrantyPeriod || data.warrantyScope) && (
-              <div>
+              <div data-pdf-no-break>
                 <p className="font-bold text-gray-700 mb-0.5">
                   ◆ 瑕疵担保責任・アフターサービス
                 </p>
@@ -360,7 +381,7 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
               </div>
             )}
             {data.additionalWorkPolicy && (
-              <div>
+              <div data-pdf-no-break>
                 <p className="font-bold text-gray-700 mb-0.5">
                   ◆ 追加工事・設計変更の取扱い
                 </p>
@@ -375,9 +396,15 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
         {data.notes && (
           <div className="border-t border-gray-200 pt-2">
             <p className="text-[9px] font-bold text-gray-500 mb-1">備考</p>
-            <p className="text-[10px] text-gray-700 whitespace-pre-wrap">
-              {data.notes}
-            </p>
+            {splitNotesParagraphs(data.notes).map((paragraph, i) => (
+              <p
+                key={i}
+                data-pdf-no-break
+                className="text-[10px] text-gray-700 whitespace-pre-wrap mb-2 last:mb-0"
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
         )}
       </div>
@@ -393,7 +420,11 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
           </div>
           <div className="grid grid-cols-2 gap-3">
             {(data.sitePhotos ?? []).map((photo, i) => (
-              <div key={photo.id} className="border border-gray-200 rounded overflow-hidden">
+              <div
+                key={photo.id}
+                data-pdf-no-break
+                className="border border-gray-200 rounded overflow-hidden"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={photo.dataUrl}
