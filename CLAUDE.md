@@ -220,19 +220,72 @@ export default function GuidePage() {
 - `variant="primary"`（緑）: **レガシー**。`@deprecated` コメント付き。将来の参照性のため定義は残すが新規使用禁止
 - `variant="outline"`: セカンダリ（白地 + 枠）
 
-### PDF テンプレート（`src/lib/constructionPdfGenerator.tsx`）
-- `@react-pdf/renderer` で描画。色定数は `colors` オブジェクトで集約管理
-- `primary` / `primaryDark` / `primaryLight` / `primaryBorder` は全て navy 系 hex
-- PDF とプレビュー（`ConstructionPreview.tsx`）は**同じ見た目になるよう両方とも navy で統一**する
+### PDF 出力（現行方式: `html2canvas + jsPDF`）
+- 実装: `src/lib/constructionPdfFromPreview.ts` — `ConstructionPreview`（`.printable-root` で囲まれた要素）を html2canvas でキャプチャ → jsPDF に埋め込んで Blob ダウンロード
+- トリガー: `ConstructionPdfDownloadButton.tsx` で、生成中→完了の2段モーダル表示 + 通常のブラウザダウンロード
+- **テキスト選択不可**（画像埋め込みのため）。業務提出用は実用上問題なし
+- 元の `src/lib/constructionPdfGenerator.tsx`（@react-pdf/renderer）は dead code として保持。**呼び出し経路なし**、テキスト選択可能な PDF が必要になった時の再利用候補
+- **次の移行トリガー**: MRR 1万円突破 / Solo 有料ユーザー複数名。その時点で Vercel Pro + `@sparticuz/chromium-min + puppeteer-core` でサーバー side PDF 化へ
+
+### プラン別機能ゲート（`SoloFeatureLock.tsx`）
+- `useSoloFeatureLock()` フックで Solo 誘導ダイアログを提供。Free/未ログインがタップすると「Soloプラン詳細へ」モーダル
+- 現在ゲートしている機能:
+  - 取引先マスタ（`CustomerPicker`）
+  - 単価マスタ（`PriceMasterPicker`、明細行の「マスタ」ボタン経由）
+  - 原価・粗利トグル（`showCost`）
+  - 工事写真アップロード
+- エディタ側で**既に非表示**にしている Solo-only 機能:
+  - 書類変換（`ConvertButtons`）
+  - 会計CSV出力（`AccountingCsvButton`）
+  - メール送信（Solo以上のみボタン表示）
+- **AI積算** は Free も月1回使える（サーバー側 paywall が処理）→ ゲート対象外
+
+### Free / Solo の課金設計
+- Free プラン制限: 見積作成は無制限・PDF出力は無制限（**透かし常時あり**）・保存は月3通まで（API route `/api/quotes` で 402 返却）
+- 有料誘導の主ドライバーは**透かし**、保存3通制限は補助
+- 課金フロー: LP (`/construction`) → Pricing セクション → `PlanCheckoutButton variant="kenmitsu"` → Stripe Checkout → Webhook で plan 更新 → マイページ反映
+- 解約フロー: マイページ → `CancelRetentionDialog`（3段階リテンション：実績提示→理由ヒアリング→料金理由なら 50%OFF オファー）→ `PortalButton` 経由で Stripe Customer Portal
+
+### エディタ アクションボタン順序（`ConstructionEditor.tsx`）
+1. PDF ダウンロード（全員）
+2. 未ログイン/Free は登録・Solo 誘導カード（PDF 直後の熱量タイミング）
+3. 見積書を保存（ログイン済み）
+4. 書類変換・CSV・メール送信（Solo/Team 限定）
+5. マイページリンク
 
 ### 絶対に触らない（ケンミツ改修時の保護対象）
 - `src/app/layout.tsx` のルート設定全て（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
 - `lib/supabase/` のロジック（`getCurrentUserProfile` / `isSupabaseConfigured` を含む）
-- Stripe 決済フロー本体（`PlanCheckoutButton` の `/api/stripe/checkout` 呼び出し部分、`PortalButton`、Stripe webhook）
+- Stripe 決済フロー本体（`PlanCheckoutButton` の `/api/stripe/checkout` 呼び出し部分、`PortalButton`、Stripe webhook の署名検証・plan 切替ロジック）
 - `src/app/construction/page.tsx` 内の SoftwareApplication + FAQPage JSON-LD、`metadata`、`TrackPageView name="construction_lp_view"`
 - `/construction/` 配下のサブルート13本のレイアウト構造・情報項目・ラベル・ガイダンス文言・デフォ値（色だけは統一OK）
+- `/api/quotes` の 402 enforce ロジック（月3通制限）
+- `/api/stripe/webhook` の `constructEvent` 署名検証
 
 ### モバイルブレークポイント注意点（LP）
 - `Comparison.tsx`: **sm 以下ではカード積層に切替**（テーブルではない）。3列squeezeを避けるための専用レイアウト
 - `Pricing.tsx`: 単列 → 2列 → 3列。Solo の浮き上がり（`translate-y`）は **lg 以上限定**でモバイル時のクリッピングを回避
 - `Hero`: アラートリボンのテキストは **sm 以下で短縮表示**（フル文言「施行から N 日経過 — 未対応は法令リスク」は sm 以上のみ）
+
+### noindex 対象（認証系・プライベート画面）
+以下は meta robots `{ index: false, follow: false }` + `public/robots.txt` で `Disallow` 指定済み:
+- `/construction/admin`
+- `/construction/mypage`
+- `/construction/login`
+- `/construction/reset-password`
+- `/construction/quotes/[id]`
+- `/api/*`
+
+### 広告運用開始前の参照ドキュメント
+- [`docs/PRE_LAUNCH_CHECKLIST.md`](./docs/PRE_LAUNCH_CHECKLIST.md) — 総合チェックリスト（ブロッカー3つ + 高優先5つ + 推奨）
+- [`docs/E2E_TEST_SCENARIOS.md`](./docs/E2E_TEST_SCENARIOS.md) — 本番切替後の手動 E2E 11シナリオ
+- [`docs/setup-instructions/`](./docs/setup-instructions/) — 外部サービス別セットアップ手順書（01〜07）
+- [`.env.example`](./.env.example) — 必要な環境変数 20+（Supabase / Stripe / Resend / Analytics / AI / 管理）
+
+### 景表法・誇大表現の抑制ルール
+LP・広告コピーで避けるべき表現:
+- 「業界最安値」「業界No.1」「圧倒的」等 — 合理的根拠（他社比較表等）の証跡がない限り使用禁止
+- 「完全対応」「100%」等 — 根拠リスト（例: 改正法の条項を LawCompliance セクションで列挙）とセットでのみ OK
+- 「3分で作れる」等の数値訴求 — 実測根拠（社内計測）を用意
+
+2026-04-19 時点で「業界最安値帯」→「月¥980〜」「登録不要で試せる」に差し替え済み。

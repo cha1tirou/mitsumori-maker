@@ -12,6 +12,9 @@
 
 - **[SERVICE.md](./SERVICE.md)** — サービス全体像・コンセプト・機能一覧・ページ一覧・データモデル
 - **[SETUP_CONSTRUCTION.md](./SETUP_CONSTRUCTION.md)** — 本番起動の詳細手順書（Supabase・Stripe・HeyGen・YouTube等）
+- **[docs/PRE_LAUNCH_CHECKLIST.md](./docs/PRE_LAUNCH_CHECKLIST.md)** — 広告運用開始前の総合チェックリスト
+- **[docs/E2E_TEST_SCENARIOS.md](./docs/E2E_TEST_SCENARIOS.md)** — 本番切替後の手動 E2E シナリオ
+- **[docs/setup-instructions/](./docs/setup-instructions/)** — 外部サービス別セットアップ手順書（Vercel/Resend/Meta Pixel/Google Ads/Supabase/Stripe/Sentry）
 - **[CLAUDE.md](./CLAUDE.md)** — Claude Code 運用ガイド
 - **[supabase/schema.sql](./supabase/schema.sql)** — DBスキーマ
 - **[.env.example](./.env.example)** — 環境変数リファレンス
@@ -19,9 +22,11 @@
 ## 技術スタック
 
 - **Next.js 14** (App Router) / **TypeScript** / **Tailwind CSS**
-- **Supabase** — 認証・DB・ストレージ
-- **Stripe** — サブスク課金（Solo ¥980/月）
-- **@react-pdf/renderer** — PDF生成（透かしあり/なし）
+- **Supabase** — 認証（メール/パスワード）・DB・ストレージ
+- **Stripe** — サブスク課金（Solo ¥980/月 / Team 準備中）
+- **PDF 生成**:
+  - `/construction` → **html2canvas + jsPDF**（クライアント側ラスタライズ、ハング回避）
+  - `/` `/tools/*` → **@react-pdf/renderer**（選択可能テキスト）
 - **Resend** — メール送信・ドリップ配信
 - **Anthropic Claude API + HeyGen + YouTube Data API** — 週次動画自動投稿
 
@@ -67,7 +72,7 @@ main ブランチへのpushで Vercel が自動デプロイします。
 | `/construction/quotes/[id]` | 保存済み見積書の再編集 |
 | `/construction/mypage` | マイページ（プラン・履歴・紹介・フィードバック） |
 | `/construction/checklist` | 改正建設業法2025対応チェックリスト（リードマグネット） |
-| `/construction/login` | マジックリンクログイン |
+| `/construction/login` | ログイン（メール/パスワード・新規登録・パスワードリセット） |
 | `/construction/terms` `/privacy` `/tokushoho` | 法的ページ |
 | `/construction/admin` | 管理ダッシュボード（ADMIN_EMAILS限定） |
 | `/` | 汎用見積書ツール（既存） |
