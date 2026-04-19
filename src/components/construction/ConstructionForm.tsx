@@ -44,6 +44,10 @@ import CustomerPicker from "./CustomerPicker";
 import ExcelImportButton from "./ExcelImportButton";
 import AiTakeoffDialog from "./AiTakeoffDialog";
 import { useSoloFeatureLock, SoloLockBadge } from "./SoloFeatureLock";
+import {
+  detectItujiInconsistencies,
+  type ItujiTargetField,
+} from "@/lib/itujiMap";
 
 interface Props {
   data: ConstructionQuoteData;
@@ -106,6 +110,32 @@ function Field({
         </span>
       )}
     </label>
+  );
+}
+
+/**
+ * 異体字混在の注意書き (#24)。blocking しない soft warning で、
+ * 意図的な使い分けのケースがあり得るので dismissible にしている。
+ */
+function ItujiWarningRow({
+  message,
+  onDismiss,
+}: {
+  message: string;
+  onDismiss: () => void;
+}) {
+  return (
+    <span className="mt-1 flex items-start gap-1.5 text-[10px] text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 leading-relaxed">
+      <span className="flex-1">{message}</span>
+      <button
+        type="button"
+        onClick={onDismiss}
+        className="text-amber-600 hover:text-amber-900 shrink-0"
+        aria-label="この警告を閉じる"
+      >
+        <X className="w-3 h-3" strokeWidth={2.5} />
+      </button>
+    </span>
   );
 }
 
@@ -397,6 +427,29 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
   >(null);
   const [customerPickerOpen, setCustomerPickerOpen] = useState(false);
   const [aiDialogOpen, setAiDialogOpen] = useState(false);
+  // 異体字不整合 warning の dismiss 状態（フィールド名+variantChar をキーに保持）
+  const [itujiDismissed, setItujiDismissed] = useState<Set<string>>(new Set());
+  const itujiWarnings = detectItujiInconsistencies({
+    clientName: data.clientName,
+    siteAddress: data.siteAddress,
+    subject: data.subject,
+  }).filter(
+    (w) => !itujiDismissed.has(`${w.field}:${w.variantChar}:${w.standardChar}`),
+  );
+  const warningsByField = itujiWarnings.reduce<
+    Partial<Record<ItujiTargetField, typeof itujiWarnings>>
+  >((acc, w) => {
+    const list = acc[w.field] ?? [];
+    list.push(w);
+    acc[w.field] = list;
+    return acc;
+  }, {});
+  const dismissItuji = (field: string, v: string, s: string) =>
+    setItujiDismissed((prev) => {
+      const next = new Set(prev);
+      next.add(`${field}:${v}:${s}`);
+      return next;
+    });
 
   useEffect(() => {
     setHasSavedCompany(hasSavedConstructionCompanyInfo());
@@ -793,6 +846,15 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
               value={data.subject}
               onChange={(e) => update("subject", e.target.value)}
             />
+            {warningsByField.subject?.map((w) => (
+              <ItujiWarningRow
+                key={`${w.variantChar}-${w.standardChar}`}
+                message={w.message}
+                onDismiss={() =>
+                  dismissItuji(w.field, w.variantChar, w.standardChar)
+                }
+              />
+            ))}
           </Field>
           <Field label="見積日">
             <input
@@ -826,6 +888,15 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
               value={data.siteAddress}
               onChange={(e) => update("siteAddress", e.target.value)}
             />
+            {warningsByField.siteAddress?.map((w) => (
+              <ItujiWarningRow
+                key={`${w.variantChar}-${w.standardChar}`}
+                message={w.message}
+                onDismiss={() =>
+                  dismissItuji(w.field, w.variantChar, w.standardChar)
+                }
+              />
+            ))}
           </Field>
           <Field label="工事期間" className="col-span-2" help="日付指定・日数指定どちらでもOK。入力した内容がそのままPDFに印刷されます">
             <input
