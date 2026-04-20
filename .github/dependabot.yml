@@ -1,0 +1,27 @@
+version: 2
+
+# Dependabot による依存パッケージの自動脆弱性スキャン + 更新 PR 生成。
+# クレジット取引セキュリティ対策協議会「セキュリティ・チェックリスト」
+# #3「Web アプリケーションの脆弱性対策 - 脆弱性診断またはペネトレーションテストを
+# 定期的に実施」への対応の一環として週次で自動実行。
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    # security アラート（CVE 等）は schedule とは無関係に即時 PR 化される
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      # パッチバージョンはまとめて 1 PR に
+      patch-updates:
+        update-types:
+          - "patch"
