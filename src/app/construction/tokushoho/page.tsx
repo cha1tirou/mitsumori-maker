@@ -12,16 +12,15 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// TODO: バーチャルオフィス契約完了後、下記 TODO の値を実データに置き換える
 const businessInfo = {
-  name: "（審査中・契約確定後に公開）",
-  representative: "（審査中・契約確定後に公開）",
-  address: "（審査中・バーチャルオフィス契約確定後に公開）",
-  phone: "（審査中・契約確定後に公開）",
-  email: "（準備中）",
+  name: "宇野 想一郎",
+  representative: "宇野 想一郎",
+  address: "〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F",
+  phone: "050-1793-1278",
+  email: "kenmitsu.support@gmail.com",
 };
 
-const IS_PUBLISHED = false;
+const IS_PUBLISHED = true;
 
 export default function ConstructionTokushohoPage() {
   return (
@@ -151,7 +150,7 @@ export default function ConstructionTokushohoPage() {
           </table>
 
           <p className="text-xs text-gray-500 mt-10 pt-6 border-t border-gray-200">
-            最終改定日: 2026年4月14日
+            最終改定日: 2026年4月20日
           </p>
         </article>
       </main>
