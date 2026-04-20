@@ -102,3 +102,8 @@
 - [x] sitemap.xml に28記事の未掲載エントリを一括追加（2026-04-19）
 - [x] 新規ガイド記事追加（相見積もり・印刷方法・管理方法）→ guide/competitive-quote・printing・quote-management 実装済み（2026-04-19）
 - [x] sitemap.xml に competitive-quote・printing・quote-management エントリ追加（2026-04-19）
+- [x] 業種別ガイド記事追加（水道工事・設備工事業）→ guide/plumbing 実装済み（2026-04-20）
+- [x] 業種別ガイド記事追加（造園・外構工事業）→ guide/garden 実装済み（2026-04-20）
+- [x] 業種別ガイド記事追加（音楽教室・演奏業）→ guide/music 実装済み（2026-04-20）
+- [x] guide/page.tsx に plumbing・garden・music を追加・記事数66→69本に更新（2026-04-20）
+- [x] sitemap.xml に plumbing・garden・music エントリ追加（2026-04-20）
