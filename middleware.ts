@@ -65,7 +65,17 @@ function isLocked(ip: string): boolean {
 function requireBasicAuth(request: NextRequest): NextResponse | null {
   const user = process.env.ADMIN_BASIC_AUTH_USER;
   const pass = process.env.ADMIN_BASIC_AUTH_PASS;
-  if (!user || !pass) return null;
+  if (!user || !pass) {
+    // 本番では環境変数未設定は fail-closed。管理画面が丸裸でスルーすることを
+    // 防ぐため 503 を返す（設定ミスを即検知）。開発環境では認証スキップ。
+    if (process.env.NODE_ENV === "production") {
+      return new NextResponse(
+        "Admin Basic Auth is misconfigured: set ADMIN_BASIC_AUTH_USER and ADMIN_BASIC_AUTH_PASS in Vercel environment variables.",
+        { status: 503 },
+      );
+    }
+    return null;
+  }
 
   const ip = getClientIp(request);
 
