@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const businessInfo = {
   name: "宇野 想一郎",
   representative: "宇野 想一郎",
-  address: "〒1500021 東京都渋谷区恵比寿西2丁目4番8号ウィンド恵比寿ビル8F",
+  address: "〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F",
   phone: "050-1793-1278",
   email: "kenmitsu.support@gmail.com",
 };
