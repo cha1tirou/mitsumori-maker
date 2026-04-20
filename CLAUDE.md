@@ -1,11 +1,31 @@
-# 見積書メーカー — Claude Code 運用ガイド
+# 見積書メーカー / ケンミツ — Claude Code 運用ガイド
+
+## ⚠️ 2026-04-20: 見積書メーカー側のコンテンツ作業は凍結
+
+**現在のメイン開発は `/construction` 配下の『ケンミツ』（建設業一人親方向け有料プラン）です。**
+
+以下の作業は**実行禁止**:
+- ❌ `src/app/guide/xxx/page.tsx` 等、見積書メーカー側ガイド記事の自動生成・追加
+- ❌ `/next` スラッシュコマンドの実行（`.claude/commands/next.md` で凍結済み）
+- ❌ content-agent / orchestrator で「見積書メーカーの記事を量産」指示を解釈して着手すること
+- ❌ `todo.md` の未完了項目のうち、見積書メーカー側の未着手タスクへの着手（AdSense承認後の広告ユニット設置などは承認後に手動で判断）
+
+OK なのは:
+- ✅ `/construction/` 配下の実装・バグ修正・機能追加
+- ✅ ケンミツのドキュメント整備（`docs/qa/`, `docs/setup-instructions/`）
+- ✅ 既存の見積書メーカー側コードのバグ修正（新規記事追加ではないリファクタ・不具合対応）
+- ✅ Vercel cron (`drip-email` / `weekly-report`) — ケンミツ用なので継続稼働
+
+凍結解除の判断はユーザーが明示的に「凍結解除」と指示した時のみ。
+
+---
 
 ## プロジェクト概要
-- **サービス名**: 見積書メーカー
-- **本番URL**: https://mitsumori-maker.com
+- **サービス名**: 見積書メーカー（凍結中）/ **ケンミツ**（現行メイン）
+- **本番URL**: https://mitsumori-maker.com （/ = 見積書メーカー / /construction = ケンミツ）
 - **GitHub**: cha1tirou/mitsumori-maker
 - **Vercel**: cha1tirous-projects / mitsumori-maker（mainへのpushで自動デプロイ）
-- **目標**: 最短での広告・アフィリエイト収益化
+- **目標**: ケンミツの有料プラン課金ユーザー獲得 → MRR 1万円突破 → サービス側インフラ強化（PDF Puppeteer化等）へ
 
 ---
 

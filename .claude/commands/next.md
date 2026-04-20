@@ -1,10 +1,21 @@
-CLAUDE.mdを読み込み、コンテンツ戦略に記載されているガイド記事のうちまだ`src/app/guide/`に存在しないものを確認する。
+# /next コマンドは凍結中（2026-04-20〜）
 
-手順:
-1. `src/app/guide/` 配下の既存ディレクトリを確認する
-2. CLAUDE.mdの「作成すべきコンテンツページ」リストと照合して、まだ作成されていない最優先の記事を1本選ぶ
-3. その記事をCLAUDE.mdのルール（1,500字以上、H2×3〜5、CTA必須、メタdescription120字以内）に従って作成する
-4. `public/sitemap.xml` に priority 0.7 で追加する
-5. `npx next build` でビルドが通ることを確認する
-6. `git add` → `git commit` → `git push origin main` する
-7. 完了後、次に作成すべき記事を1行で報告する
+このコマンドはガイド記事を自動生成する用途でしたが、プロジェクトは **ケンミツ (/construction)** にピボットしたため**凍結**しています。
+
+## 動作
+実行しても**何もしないで終了**してください。記事生成・コミット・pushは一切実行しないこと。
+
+```
+ユーザーから /next が叩かれた場合の返答:
+「見積書メーカー側のガイド記事作成は 2026-04-20 に凍結されました。
+ 現在のメイン開発は /construction (ケンミツ) 配下です。
+ ケンミツに関する作業は CLAUDE.md の『ケンミツ運用ガイド』セクションを参照してください。
+ 凍結を解除したい場合は .claude/commands/next.md を復旧してください。」
+```
+
+## 解除方法
+将来的に見積書メーカー側の記事追加を再開する場合は、このファイルを git history から復旧する:
+```
+git log --all --oneline -- .claude/commands/next.md
+git show <old-sha>:.claude/commands/next.md > .claude/commands/next.md
+```
