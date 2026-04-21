@@ -17,7 +17,6 @@ import {
 import PortalButton from "@/components/construction/PortalButton";
 import SignOutButton from "@/components/construction/SignOutButton";
 import QuoteList from "@/components/construction/QuoteList";
-import ReferralCard from "@/components/construction/ReferralCard";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
@@ -237,9 +236,6 @@ export default async function MyPage({
           plan={plan}
           freeLimit={FREE_PLAN_MONTHLY_LIMIT}
         />
-
-        {/* 紹介プログラム */}
-        <ReferralCard />
 
         {/* アカウント設定 */}
         <AccountSettings email={user.email ?? ""} />

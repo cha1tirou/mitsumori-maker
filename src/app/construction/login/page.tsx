@@ -22,7 +22,6 @@ type Mode = "login" | "signup" | "forgot" | "sent" | "signup-sent";
 function LoginForm() {
   const params = useSearchParams();
   const redirectTo = params.get("redirect") || "/construction/mypage";
-  const refCode = params.get("ref") || "";
   const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -95,7 +94,6 @@ function LoginForm() {
           emailRedirectTo: `${origin}/auth/confirm?next=${encodeURIComponent(
             redirectTo,
           )}`,
-          data: refCode ? { referral_code: refCode } : undefined,
         },
       });
       if (authError) {
@@ -230,15 +228,6 @@ function LoginForm() {
 
   return (
     <Shell>
-      {refCode && (
-        <div className="mb-5 bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900">
-          <p className="font-bold mb-0.5">紹介コード適用中: {refCode}</p>
-          <p>
-            紹介者経由での登録が記録されます。紹介プログラムの特典は今後のお知らせでご案内します。
-          </p>
-        </div>
-      )}
-
       {/* タブ切り替え */}
       {mode !== "forgot" && (
         <div className="flex mb-6 border-b border-gray-200">
