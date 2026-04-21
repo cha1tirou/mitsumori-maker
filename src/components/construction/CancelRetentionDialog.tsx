@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   X,
   AlertTriangle,
@@ -33,9 +32,8 @@ export default function CancelRetentionDialog({
   quotesCount,
   emailsSent,
 }: Props) {
-  const router = useRouter();
   const toast = useToast();
-  const [step, setStep] = useState<"stats" | "reason" | "offer">("stats");
+  const [step, setStep] = useState<"stats" | "reason">("stats");
   const [reason, setReason] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -192,13 +190,7 @@ export default function CancelRetentionDialog({
                 戻る
               </button>
               <button
-                onClick={() => {
-                  if (reason === "price") {
-                    setStep("offer");
-                  } else {
-                    goToPortal();
-                  }
-                }}
+                onClick={goToPortal}
                 disabled={!reason || loading}
                 className="flex-1 flex items-center justify-center gap-1 bg-gray-900 hover:bg-gray-800 disabled:opacity-40 text-white text-sm font-bold py-3 rounded-lg transition-colors"
               >
@@ -209,57 +201,6 @@ export default function CancelRetentionDialog({
                     解約手続きへ
                     <ChevronRight className="w-4 h-4" strokeWidth={2} />
                   </>
-                )}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: 料金が理由の場合の割引オファー */}
-        {step === "offer" && (
-          <div className="p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-2">
-              特別オファー
-            </h2>
-            <p className="text-sm text-gray-600 mb-5">
-              料金が理由とのこと、ご意見ありがとうございます。
-              もしよろしければ、次の3ヶ月間を特別価格でご利用いただけます。
-            </p>
-
-            <div className="bg-kenmitsu-navy50 border-2 border-kenmitsu-navy100 rounded-xl p-5 mb-5 text-center">
-              <p className="text-xs text-kenmitsu-navy font-bold mb-1">
-                3ヶ月間限定
-              </p>
-              <p className="text-3xl font-bold text-gray-900 mb-1">
-                ¥490<span className="text-sm font-normal text-gray-500">/月</span>
-              </p>
-              <p className="text-xs text-gray-500">
-                通常¥980 → <span className="text-kenmitsu-orange font-bold">50%OFF</span>
-              </p>
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  toast.success(
-                    "割引クーポンの適用はお問い合わせください。担当より連絡いたします。"
-                  );
-                  handleClose();
-                  router.refresh();
-                }}
-                className="flex-1 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors"
-              >
-                50%OFFで続ける
-              </button>
-              <button
-                onClick={goToPortal}
-                disabled={loading}
-                className="flex-1 flex items-center justify-center gap-1 border border-gray-200 hover:bg-gray-50 text-gray-500 text-sm font-medium py-3 rounded-lg transition-colors"
-              >
-                {loading ? (
-                  <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2.5} />
-                ) : (
-                  "それでも解約する"
                 )}
               </button>
             </div>
