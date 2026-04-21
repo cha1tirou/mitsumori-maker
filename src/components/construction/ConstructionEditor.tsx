@@ -201,12 +201,6 @@ export default function ConstructionEditor({
                 ログイン
               </Link>
             )}
-            <ConstructionPdfDownloadButton
-              data={data}
-              plan={plan}
-              isAuthenticated={Boolean(userEmail)}
-              className="!py-2 !px-3 !text-xs"
-            />
           </div>
         </div>
       </header>
