@@ -437,22 +437,6 @@ function ConstructionPdf({
       <Page size="A4" style={s.page}>
         {watermark ? <WatermarkOverlay /> : null}
         {watermark ? <FooterWatermark /> : null}
-        {data.logoDataUrl ? (
-          <View
-            style={{
-              position: "absolute",
-              top: "10mm",
-              left: "10mm",
-              width: 100,
-              height: 40,
-            }}
-          >
-            <Image
-              src={data.logoDataUrl}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            />
-          </View>
-        ) : null}
         {/* タイトル */}
         <Text style={s.title}>工事見積書</Text>
         <View style={s.divider} />
@@ -509,23 +493,6 @@ function ConstructionPdf({
           </View>
 
           <View style={s.rightCol}>
-            {data.sealDataUrl ? (
-              <View
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  top: -5,
-                  width: 45,
-                  height: 45,
-                  opacity: 0.9,
-                }}
-              >
-                <Image
-                  src={data.sealDataUrl}
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
-              </View>
-            ) : null}
             <Text style={s.companyName}>
               {data.companyName || "（施工者）"}
             </Text>

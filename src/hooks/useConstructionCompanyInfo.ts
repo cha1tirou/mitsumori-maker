@@ -14,8 +14,6 @@ export interface ConstructionCompanyInfo {
   companyEmail: string;
   companyRegistrationNumber: string;
   constructionLicenseNumber: string;
-  logoDataUrl: string;
-  sealDataUrl: string;
 }
 
 const storedFields: (keyof ConstructionCompanyInfo)[] = [
@@ -27,8 +25,6 @@ const storedFields: (keyof ConstructionCompanyInfo)[] = [
   "companyEmail",
   "companyRegistrationNumber",
   "constructionLicenseNumber",
-  "logoDataUrl",
-  "sealDataUrl",
 ];
 
 export function getSavedConstructionCompanyInfo():
@@ -81,11 +77,7 @@ export function useConstructionCompanyInfo(
 
     // 既に何か入力されている場合は自動読込しない
     const hasAnyFilled =
-      data.companyName ||
-      data.companyAddress ||
-      data.companyTel ||
-      data.logoDataUrl ||
-      data.sealDataUrl;
+      data.companyName || data.companyAddress || data.companyTel;
     if (hasAnyFilled) return;
 
     const updated = { ...data };
@@ -112,8 +104,6 @@ export function useConstructionCompanyInfo(
       companyEmail: data.companyEmail,
       companyRegistrationNumber: data.companyRegistrationNumber,
       constructionLicenseNumber: data.constructionLicenseNumber,
-      logoDataUrl: data.logoDataUrl,
-      sealDataUrl: data.sealDataUrl,
     };
     saveConstructionCompanyInfo(info);
   }, [data]);

@@ -83,14 +83,6 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
             ))}
           </div>
         )}
-        {data.logoDataUrl && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={data.logoDataUrl}
-            alt="ロゴ"
-            className="absolute top-[10mm] left-[10mm] max-w-[40mm] max-h-[18mm] object-contain"
-          />
-        )}
         {/* ヘッダー */}
         <div className="text-center mb-5">
           <h1 className="text-2xl font-bold tracking-widest text-kenmitsu-navy">
@@ -130,15 +122,6 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
           </div>
 
           <div className="w-[40%] text-right text-[10px] text-gray-600 space-y-0.5 relative">
-            {data.sealDataUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={data.sealDataUrl}
-                alt="印"
-                className="absolute -left-2 top-0 w-[14mm] h-[14mm] object-contain opacity-90"
-                style={{ mixBlendMode: "multiply" }}
-              />
-            )}
             <p className="text-sm font-semibold text-kenmitsu-navy">
               {data.companyName || "（施工者）"}
             </p>

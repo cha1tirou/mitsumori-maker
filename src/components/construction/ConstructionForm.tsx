@@ -280,57 +280,6 @@ function ItemRow({
   );
 }
 
-function ImageUploader({
-  label,
-  description,
-  dataUrl,
-  inputRef,
-  onChange,
-}: {
-  label: string;
-  description: string;
-  dataUrl: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  onChange: (file: File | null) => void;
-}) {
-  return (
-    <div>
-      <p className="text-xs text-gray-500 mb-1">{label}</p>
-      <p className="text-[10px] text-gray-400 mb-2">{description}</p>
-      {dataUrl ? (
-        <div className="relative w-full h-24 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden flex items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={dataUrl} alt={label} className="max-w-full max-h-full object-contain" />
-          <button
-            type="button"
-            onClick={() => onChange(null)}
-            className="absolute top-1 right-1 bg-white/90 hover:bg-white border border-gray-200 rounded-md p-1 text-gray-600"
-            aria-label="画像を削除"
-          >
-            <X className="w-3 h-3" strokeWidth={2.5} />
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          className="w-full h-24 bg-gray-50 hover:bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-kenmitsu-navy transition-colors"
-        >
-          <Upload className="w-5 h-5" strokeWidth={2} />
-          <span className="text-[10px] font-medium">画像を選択</span>
-        </button>
-      )}
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/png,image/jpeg,image/jpg"
-        className="hidden"
-        onChange={(e) => onChange(e.target.files?.[0] ?? null)}
-      />
-    </div>
-  );
-}
-
 const categoryColors: Record<CostCategory, string> = {
   labor: "bg-amber-50 text-amber-800 border-amber-200",
   material: "bg-blue-50 text-blue-800 border-blue-200",
@@ -453,8 +402,6 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
     setHasSavedCompany(hasSavedConstructionCompanyInfo());
   }, []);
 
-  const logoInputRef = useRef<HTMLInputElement>(null);
-  const sealInputRef = useRef<HTMLInputElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
 
   const update = <K extends keyof ConstructionQuoteData>(
@@ -1080,53 +1027,6 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
             </Field>
           </div>
 
-          {/* ロゴ・印影 */}
-          <div className="grid grid-cols-2 gap-3 pt-3 border-t border-gray-100">
-            <ImageUploader
-              label="会社ロゴ"
-              description="見積書左上に表示。PNG推奨（背景透過）"
-              dataUrl={data.logoDataUrl}
-              inputRef={logoInputRef}
-              onChange={async (file) => {
-                if (!file) {
-                  update("logoDataUrl", "");
-                  return;
-                }
-                if (file.size > 500 * 1024) {
-                  alert("ロゴ画像は 500KB 以下にしてください。");
-                  return;
-                }
-                try {
-                  const dataUrl = await fileToDataUrl(file);
-                  update("logoDataUrl", dataUrl);
-                } catch (err) {
-                  alert(err instanceof Error ? err.message : "読込失敗");
-                }
-              }}
-            />
-            <ImageUploader
-              label="印影画像"
-              description="会社角印や代表印。正方形推奨"
-              dataUrl={data.sealDataUrl}
-              inputRef={sealInputRef}
-              onChange={async (file) => {
-                if (!file) {
-                  update("sealDataUrl", "");
-                  return;
-                }
-                if (file.size > 500 * 1024) {
-                  alert("印影画像は 500KB 以下にしてください。");
-                  return;
-                }
-                try {
-                  const dataUrl = await fileToDataUrl(file);
-                  update("sealDataUrl", dataUrl);
-                } catch (err) {
-                  alert(err instanceof Error ? err.message : "読込失敗");
-                }
-              }}
-            />
-          </div>
         </div>
       </section>
 

@@ -78,8 +78,6 @@ export interface ConstructionQuoteData {
   companyContact: string;
   companyRegistrationNumber: string;
   constructionLicenseNumber: string;
-  logoDataUrl: string;
-  sealDataUrl: string;
 
   // 見積情報
   quoteNumber: string;
@@ -139,8 +137,6 @@ export const defaultConstructionQuoteData: ConstructionQuoteData = {
   companyContact: "",
   companyRegistrationNumber: "",
   constructionLicenseNumber: "",
-  logoDataUrl: "",
-  sealDataUrl: "",
   quoteNumber: "",
   quoteDate: new Date().toISOString().split("T")[0],
   validityDays: 30,

@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
   Building2,
   Save,
-  Image as ImageIcon,
-  X,
   Loader2,
   CheckCircle2,
 } from "lucide-react";
@@ -28,57 +26,7 @@ const EMPTY: ConstructionCompanyInfo = {
   companyEmail: "",
   companyRegistrationNumber: "",
   constructionLicenseNumber: "",
-  logoDataUrl: "",
-  sealDataUrl: "",
 };
-
-// 入力ファイルの許容上限。リサイズ前のチェック用（大きすぎる画像の取り込みを抑える）
-const MAX_UPLOAD_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-
-// リサイズ後の最大長辺（見積書 PDF 上で十分な解像度）
-const LOGO_MAX_SIDE = 600;
-const SEAL_MAX_SIDE = 300;
-
-/**
- * 画像を canvas で縮小して data URL に変換する。
- * 透明背景 PNG 入力時は PNG で維持、それ以外は JPEG に変換して容量削減。
- */
-async function resizeImageToDataUrl(
-  file: File,
-  maxSide: number
-): Promise<string> {
-  const srcUrl = await new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = () => reject(new Error("ファイル読み込み失敗"));
-    reader.readAsDataURL(file);
-  });
-  const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-    const i = new Image();
-    i.onload = () => resolve(i);
-    i.onerror = () => reject(new Error("画像のデコードに失敗"));
-    i.src = srcUrl;
-  });
-
-  const longest = Math.max(img.width, img.height);
-  const scale = longest > maxSide ? maxSide / longest : 1;
-  const w = Math.max(1, Math.round(img.width * scale));
-  const h = Math.max(1, Math.round(img.height * scale));
-
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("canvas コンテキストが取得できません");
-  ctx.drawImage(img, 0, 0, w, h);
-
-  // 透明背景維持のため PNG 入力は PNG で出力、それ以外は JPEG 0.85
-  const isPng = file.type === "image/png";
-  return canvas.toDataURL(
-    isPng ? "image/png" : "image/jpeg",
-    isPng ? undefined : 0.85
-  );
-}
 
 export default function CompanyInfoEditor() {
   const toast = useToast();
@@ -86,8 +34,6 @@ export default function CompanyInfoEditor() {
   const [loaded, setLoaded] = useState(false);
   const [saving, setSaving] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<number | null>(null);
-  const logoInputRef = useRef<HTMLInputElement>(null);
-  const sealInputRef = useRef<HTMLInputElement>(null);
 
   const onSyncError = useCallback(
     (msg: string) => toast.error(msg),
@@ -106,30 +52,6 @@ export default function CompanyInfoEditor() {
     value: ConstructionCompanyInfo[K]
   ) => {
     setInfo((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleImageUpload = async (
-    key: "logoDataUrl" | "sealDataUrl",
-    file: File | null
-  ) => {
-    if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      toast.error("画像ファイルを選択してください");
-      return;
-    }
-    if (file.size > MAX_UPLOAD_FILE_SIZE) {
-      toast.error(
-        `画像サイズは ${MAX_UPLOAD_FILE_SIZE / 1024 / 1024}MB 以下にしてください`
-      );
-      return;
-    }
-    try {
-      const maxSide = key === "logoDataUrl" ? LOGO_MAX_SIDE : SEAL_MAX_SIDE;
-      const dataUrl = await resizeImageToDataUrl(file, maxSide);
-      update(key, dataUrl);
-    } catch {
-      toast.error("画像の処理に失敗しました。別の画像でお試しください。");
-    }
   };
 
   const save = async () => {
@@ -245,23 +167,6 @@ export default function CompanyInfoEditor() {
             placeholder="例: 東京都知事許可（般-XX）第XXXXXX号"
             hint="許可を受けている場合のみ入力"
           />
-
-          <ImageField
-            label="ロゴ画像"
-            hint="PNG / JPEG・5MB まで。選択後に自動で縮小・圧縮されます"
-            dataUrl={info.logoDataUrl}
-            inputRef={logoInputRef}
-            onSelect={(f) => handleImageUpload("logoDataUrl", f)}
-            onRemove={() => update("logoDataUrl", "")}
-          />
-          <ImageField
-            label="印影画像"
-            hint="背景透過 PNG 推奨・5MB まで。選択後に自動で縮小されます"
-            dataUrl={info.sealDataUrl}
-            inputRef={sealInputRef}
-            onSelect={(f) => handleImageUpload("sealDataUrl", f)}
-            onRemove={() => update("sealDataUrl", "")}
-          />
         </div>
 
         <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -325,79 +230,6 @@ function Field({
         className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
       />
       {hint && <p className="text-[11px] text-gray-500 mt-1">{hint}</p>}
-    </div>
-  );
-}
-
-function ImageField({
-  label,
-  hint,
-  dataUrl,
-  inputRef,
-  onSelect,
-  onRemove,
-}: {
-  label: string;
-  hint?: string;
-  dataUrl: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  onSelect: (file: File | null) => void;
-  onRemove: () => void;
-}) {
-  return (
-    <div>
-      <label className="block text-xs font-bold text-gray-700 mb-1.5">
-        {label}
-      </label>
-      <div className="flex items-center gap-3">
-        <div className="w-20 h-20 rounded-lg border border-dashed border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden shrink-0">
-          {dataUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={dataUrl}
-              alt={label}
-              className="max-w-full max-h-full object-contain"
-            />
-          ) : (
-            <ImageIcon
-              className="w-6 h-6 text-gray-300"
-              strokeWidth={2}
-            />
-          )}
-        </div>
-        <div className="flex-1 flex flex-col gap-2">
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => inputRef.current?.click()}
-              className="text-xs font-bold px-3 py-1.5 border border-gray-200 rounded-md hover:bg-gray-50"
-            >
-              {dataUrl ? "画像を差し替える" : "画像を選択"}
-            </button>
-            {dataUrl && (
-              <button
-                type="button"
-                onClick={onRemove}
-                className="inline-flex items-center gap-1 text-xs text-red-600 hover:bg-red-50 px-2 py-1.5 rounded-md"
-              >
-                <X className="w-3.5 h-3.5" strokeWidth={2.5} />
-                削除
-              </button>
-            )}
-          </div>
-          <input
-            ref={inputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => {
-              onSelect(e.target.files?.[0] ?? null);
-              e.target.value = "";
-            }}
-          />
-          {hint && <p className="text-[11px] text-gray-500">{hint}</p>}
-        </div>
-      </div>
     </div>
   );
 }

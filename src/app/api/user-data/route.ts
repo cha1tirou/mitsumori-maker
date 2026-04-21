@@ -44,7 +44,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "画像サイズが大きすぎて保存できません。ロゴや印影の画像をより小さなものに差し替えるか、削除してから再度お試しください。",
+          "保存データが大きすぎて同期できません。取引先マスタ・単価マスタの不要な項目を削除してから再度お試しください。",
       },
       { status: 413 }
     );
