@@ -210,7 +210,7 @@ export default function GuidePage() {
 ### 概要
 - ケンミツは `/construction` 配下で提供する建設業一人親方向けの独立ブランド。見積書メーカーとインフラ共有、訴求軸（改正建設業法2025対応）とビジュアルアイデンティティは別
 - **LP**: `src/app/construction/page.tsx` は薄いオーケストレーター、セクション本体は `src/components/construction/lp/`
-- **サービス画面**: `/construction/new`（見積書作成）・`/construction/mypage`（マイページ）・`/construction/mypage/company`（自社情報マスタ）・`/construction/mypage/customers`（取引先マスタ・Solo限定）・`/construction/mypage/price-master`（単価マスタ・Solo限定）・`/construction/checklist`（法令対応チェックリスト）・`/construction/login`・`/construction/faq`・`/construction/how-to`・`/construction/quotes/[id]` など
+- **サービス画面**: `/construction/new`（見積書作成）・`/construction/mypage`（マイページ）・`/construction/mypage/company`（自社情報マスタ）・`/construction/mypage/customers`（取引先マスタ・Solo限定）・`/construction/mypage/price-master`（単価マスタ・Solo限定）・`/construction/mypage/receipt`（領収書の発行方法・Stripe Portal 導線付き）・`/construction/checklist`（法令対応チェックリスト）・`/construction/login`・`/construction/faq`・`/construction/how-to`・`/construction/quotes/[id]` など
 
 ### ブランドカラー（`tailwind.config.ts` の `kenmitsu.*`）
 - `kenmitsu.navy` (#1E40AF) — メイン、構造・ヘッダー・ナビ

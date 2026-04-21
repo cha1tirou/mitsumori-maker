@@ -13,6 +13,7 @@ import {
   Crown,
   FileText,
   ArrowUpRight,
+  Receipt,
 } from "lucide-react";
 import PortalButton from "@/components/construction/PortalButton";
 import SignOutButton from "@/components/construction/SignOutButton";
@@ -245,6 +246,13 @@ export default async function MyPage({
             >
               新しい見積書を作成
               <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+            </Link>
+            <Link
+              href="/construction/mypage/receipt"
+              className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors"
+            >
+              <Receipt className="w-4 h-4" strokeWidth={2.25} />
+              領収書の発行方法
             </Link>
           </div>
         </section>
