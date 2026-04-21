@@ -48,14 +48,14 @@ export default function CancelRetentionDialog({
   const goToPortal = async () => {
     setLoading(true);
     try {
-      // 解約理由をフィードバックとして送信
+      // 解約理由を DB に記録（後のサービス改善の分析材料として使う）
       if (reason) {
         await fetch("/api/feedback", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             category: "churn",
-            message: `解約理由: ${reason}`,
+            reasonCode: reason,
           }),
         }).catch(() => {});
       }

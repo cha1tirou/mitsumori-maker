@@ -145,6 +145,37 @@ group by user_id;
 grant select on public.current_month_ai_takeoff_counts to authenticated;
 
 -- =====================================================================
+-- 2.58 churn_feedback: Solo プラン解約理由の記録
+--       目的: 後日 claude 等でサービス改善施策を検討する時の分析材料
+--       insert は CancelRetentionDialog → /api/feedback 経由
+--       select は service_role のみ（admin-queries 経由で admin page に表示）
+-- =====================================================================
+create table if not exists public.churn_feedback (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete set null,
+  email text,
+  reason_code text not null, -- 'price' | 'not_using' | 'switched' | 'missing_feature' | 'other'
+  message text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists churn_feedback_created_at_idx
+  on public.churn_feedback(created_at desc);
+create index if not exists churn_feedback_reason_code_idx
+  on public.churn_feedback(reason_code);
+
+alter table public.churn_feedback enable row level security;
+
+-- INSERT: 認証ユーザーが自分の user_id でのみ記録可能
+drop policy if exists "churn_feedback_insert_own" on public.churn_feedback;
+create policy "churn_feedback_insert_own"
+  on public.churn_feedback for insert
+  with check (auth.uid() = user_id);
+
+-- SELECT: 明示ポリシー無し = service_role のみアクセス可能
+--         （admin-queries が service_role を使う前提）
+
+-- =====================================================================
 -- 2.6 video_post_logs: YouTube動画自動投稿ログ
 -- =====================================================================
 create table if not exists public.video_post_logs (
