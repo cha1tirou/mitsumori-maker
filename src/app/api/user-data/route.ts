@@ -42,7 +42,10 @@ export async function PUT(request: NextRequest) {
   const text = await request.text();
   if (text.length > MAX_PAYLOAD_BYTES) {
     return NextResponse.json(
-      { error: "ペイロードが大きすぎます（1MB以下）" },
+      {
+        error:
+          "画像サイズが大きすぎて保存できません。ロゴや印影の画像をより小さなものに差し替えるか、削除してから再度お試しください。",
+      },
       { status: 413 }
     );
   }
@@ -55,22 +58,44 @@ export async function PUT(request: NextRequest) {
   try {
     body = JSON.parse(text);
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
-  }
-  if (!body) {
-    return NextResponse.json({ error: "Invalid body" }, { status: 400 });
-  }
-
-  // 配列サイズ上限
-  if (Array.isArray(body.priceMaster) && body.priceMaster.length > MAX_MASTER_ITEMS) {
     return NextResponse.json(
-      { error: `単価マスタは${MAX_MASTER_ITEMS}件まで` },
+      {
+        error:
+          "データの形式に問題があり保存できませんでした。時間をおいて再度お試しください。",
+      },
       { status: 400 }
     );
   }
-  if (Array.isArray(body.customerMaster) && body.customerMaster.length > MAX_MASTER_ITEMS) {
+  if (!body) {
     return NextResponse.json(
-      { error: `取引先マスタは${MAX_MASTER_ITEMS}件まで` },
+      {
+        error:
+          "データの形式に問題があり保存できませんでした。時間をおいて再度お試しください。",
+      },
+      { status: 400 }
+    );
+  }
+
+  // 配列サイズ上限
+  if (
+    Array.isArray(body.priceMaster) &&
+    body.priceMaster.length > MAX_MASTER_ITEMS
+  ) {
+    return NextResponse.json(
+      {
+        error: `単価マスタの登録は ${MAX_MASTER_ITEMS} 件までです。不要な品目を削除してから再度お試しください。`,
+      },
+      { status: 400 }
+    );
+  }
+  if (
+    Array.isArray(body.customerMaster) &&
+    body.customerMaster.length > MAX_MASTER_ITEMS
+  ) {
+    return NextResponse.json(
+      {
+        error: `取引先マスタの登録は ${MAX_MASTER_ITEMS} 件までです。不要な取引先を削除してから再度お試しください。`,
+      },
       { status: 400 }
     );
   }

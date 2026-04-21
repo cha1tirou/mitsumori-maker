@@ -102,11 +102,14 @@ export function useMasterSync(
           if (!res.ok) {
             const payload = await res.json().catch(() => ({}));
             onErrorRef.current?.(
-              payload?.error ?? "サーバーへの同期に失敗しました"
+              payload?.error ??
+                "サーバーに保存できませんでした。時間をおいて再度お試しください。"
             );
           }
         } catch {
-          onErrorRef.current?.("ネットワークエラーで同期できませんでした");
+          onErrorRef.current?.(
+            "通信エラーでサーバーに保存できませんでした。接続状況をご確認ください。"
+          );
         }
       }, 3000);
     };

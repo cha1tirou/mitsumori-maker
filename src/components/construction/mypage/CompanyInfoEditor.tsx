@@ -90,7 +90,7 @@ export default function CompanyInfoEditor() {
   const sealInputRef = useRef<HTMLInputElement>(null);
 
   const onSyncError = useCallback(
-    (msg: string) => toast.error(`同期エラー: ${msg}`),
+    (msg: string) => toast.error(msg),
     [toast]
   );
   useMasterSync(true, onSyncError);

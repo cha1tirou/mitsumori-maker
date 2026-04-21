@@ -34,7 +34,7 @@ export default function CustomerMasterManager() {
   const { items, loaded, add, update, remove } = useCustomerMaster();
   const toast = useToast();
   const onSyncError = useCallback(
-    (msg: string) => toast.error(`同期エラー: ${msg}`),
+    (msg: string) => toast.error(msg),
     [toast]
   );
   useMasterSync(true, onSyncError);
