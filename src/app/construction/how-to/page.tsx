@@ -8,7 +8,6 @@ import {
   Users,
   Download,
   Save,
-  Mail,
   Layers,
   Wand2,
 } from "lucide-react";
@@ -97,9 +96,9 @@ const steps = [
   },
   {
     num: 8,
-    title: "（Solo以上）下書き保存・メール送信・会計CSV出力",
+    title: "（Solo以上）下書き保存・会計CSV出力",
     description:
-      "「下書き保存」でクラウドに保存、マイページから再編集・複製できます。「メールで送信」で発注者に直接PDF添付メール。freee / MF / 弥生向けの会計ソフトCSV出力にも対応。",
+      "「下書き保存」でクラウドに保存、マイページから再編集・複製できます。freee / MF / 弥生向けの会計ソフトCSV出力にも対応。",
     icon: Save,
     hint: null,
   },
@@ -120,11 +119,6 @@ const featureBlocks = [
     icon: Download,
     title: "Excelインポート",
     body: "既存のExcel見積を取り込み、セクション・明細を自動展開。",
-  },
-  {
-    icon: Mail,
-    title: "メール直接送信",
-    body: "発注者にPDF添付メールを本ツールから即送信（Solo以上）。",
   },
 ];
 

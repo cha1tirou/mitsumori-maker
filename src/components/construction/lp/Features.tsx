@@ -24,7 +24,7 @@ const items: { kind: IluKind; tag: string; title: string; body: string }[] = [
     kind: "phone",
     tag: "モバイル",
     title: "スマホで完結する軽量UI",
-    body: "現場から見積書を作成→PDF出力→即メール送信まで完結。PC専用の重いソフトとは違い、片手のスマホ操作で見積業務が終わります。",
+    body: "現場から見積書を作成→PDFダウンロードまで完結。PC専用の重いソフトとは違い、片手のスマホ操作で見積業務が終わります。",
   },
   {
     kind: "rocket",

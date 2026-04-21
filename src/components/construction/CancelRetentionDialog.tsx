@@ -5,7 +5,6 @@ import {
   X,
   AlertTriangle,
   FileText,
-  Mail,
   Loader2,
   ChevronRight,
 } from "lucide-react";
@@ -15,7 +14,6 @@ interface Props {
   open: boolean;
   onClose: () => void;
   quotesCount: number;
-  emailsSent: number;
 }
 
 const CANCEL_REASONS = [
@@ -30,7 +28,6 @@ export default function CancelRetentionDialog({
   open,
   onClose,
   quotesCount,
-  emailsSent,
 }: Props) {
   const toast = useToast();
   const [step, setStep] = useState<"stats" | "reason">("stats");
@@ -115,21 +112,6 @@ export default function CancelRetentionDialog({
                   </p>
                 </div>
               </div>
-              {emailsSent > 0 && (
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-blue-700" strokeWidth={2} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-gray-900">
-                      {emailsSent}通のメールを送信
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Freeプランではメール送信不可
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
 
             <div className="flex gap-3">

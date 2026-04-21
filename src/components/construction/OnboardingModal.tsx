@@ -20,9 +20,9 @@ const STEPS = [
   },
   {
     icon: Download,
-    title: "3. PDF出力・送信",
+    title: "3. PDF出力",
     description:
-      "完成した見積書をPDFでダウンロード。Soloプランなら透かしなしで発注者にメール送信もできます。",
+      "完成した見積書をPDFでダウンロード。Soloプランなら「無料版」透かしなしで発注者に提出できます。",
   },
 ] as const;
 

@@ -108,7 +108,7 @@ export default function ConstructionPrivacyPage() {
                 <strong>Google Fonts (Noto Sans JP)</strong> — フォント配信
               </li>
               <li>
-                <strong>Resend</strong> — トランザクションメール配信（確認メール・見積書メール送信・チェックリストPDF配布・解約通知等）。送信先メールアドレスが一時的に Resend のサーバーを経由します
+                <strong>Resend</strong> — トランザクションメール配信（確認メール・チェックリストPDF配布・解約通知等）。送信先メールアドレスが一時的に Resend のサーバーを経由します
               </li>
             </ul>
             <p>

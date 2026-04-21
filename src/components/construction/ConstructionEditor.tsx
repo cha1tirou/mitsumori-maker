@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import SendEmailDialog from "@/components/construction/SendEmailDialog";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -27,7 +26,6 @@ import {
   LogIn,
   CircleUser,
   AlertCircle,
-  Mail,
 } from "lucide-react";
 
 const ConstructionPdfDownloadButton = dynamic(
@@ -64,7 +62,6 @@ export default function ConstructionEditor({
   const isEdit = Boolean(quoteId);
   const hasStartedRef = useRef(false);
   const [mobileView, setMobileView] = useState<"form" | "preview">("form");
-  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
   // 未保存変更フラグ。保存成功 / 下書きクリア時に false に戻す。
   // beforeunload 警告のために使う（QAバグ #11）
   const [isDirty, setIsDirty] = useState(false);
@@ -350,10 +347,6 @@ export default function ConstructionEditor({
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          メール直接送信
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
                           原価・粗利分析
                         </span>
                         <span className="flex items-center gap-1">
@@ -375,18 +368,9 @@ export default function ConstructionEditor({
                   />
                 )}
 
-                {/* 4. Solo / Team 専用: CSV出力・メール送信 */}
+                {/* 4. Solo / Team 専用: CSV出力 */}
                 {(plan === "solo" || plan === "team") && (
-                  <>
-                    <AccountingCsvButton data={data} />
-                    <button
-                      onClick={() => setEmailDialogOpen(true)}
-                      className="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold py-2.5 rounded-lg transition-colors"
-                    >
-                      <Mail className="w-4 h-4" strokeWidth={2.5} />
-                      メールで送信
-                    </button>
-                  </>
+                  <AccountingCsvButton data={data} />
                 )}
 
                 {/* マイページ: ログイン済みのみ */}
@@ -444,11 +428,6 @@ export default function ConstructionEditor({
         </div>
       </main>
 
-      <SendEmailDialog
-        open={emailDialogOpen}
-        onClose={() => setEmailDialogOpen(false)}
-        data={data}
-      />
     </div>
   );
 }

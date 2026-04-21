@@ -275,7 +275,7 @@ export default async function MyPage({
                 Soloプランにアップグレード
               </Link>
             ) : (
-              <PortalButton quotesCount={quotes.length} emailsSent={0} />
+              <PortalButton quotesCount={quotes.length} />
             )}
             <Link
               href="/construction/mypage/receipt"

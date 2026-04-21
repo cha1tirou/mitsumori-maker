@@ -78,7 +78,7 @@ export function useSoloFeatureLock() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>
-                会計ソフトCSV出力・メール送信
+                会計ソフトCSV出力
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>

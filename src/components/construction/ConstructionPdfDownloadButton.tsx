@@ -255,7 +255,7 @@ export default function ConstructionPdfDownloadButton({
               </h3>
               <p className="text-xs text-kenmitsu-navy100 leading-relaxed">
                 本格的にご利用いただくなら、<strong>透かしなしの正式版</strong>＋
-                <strong>見積履歴の保存</strong>＋<strong>自動メール送信</strong>
+                <strong>見積履歴の無制限保存</strong>
                 が使える Soloプラン（月¥980）がおすすめです。
               </p>
             </div>
@@ -271,7 +271,7 @@ export default function ConstructionPdfDownloadButton({
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-kenmitsu-ok font-bold">✓</span>
-                  発注者へメール直接送信
+                  会計ソフトCSV連携（freee/MF/弥生）
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-kenmitsu-ok font-bold">✓</span>

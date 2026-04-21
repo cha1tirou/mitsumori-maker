@@ -6,13 +6,9 @@ import CancelRetentionDialog from "@/components/construction/CancelRetentionDial
 
 interface Props {
   quotesCount?: number;
-  emailsSent?: number;
 }
 
-export default function PortalButton({
-  quotesCount = 0,
-  emailsSent = 0,
-}: Props) {
+export default function PortalButton({ quotesCount = 0 }: Props) {
   const [loading, setLoading] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
 
@@ -61,7 +57,6 @@ export default function PortalButton({
         open={cancelOpen}
         onClose={() => setCancelOpen(false)}
         quotesCount={quotesCount}
-        emailsSent={emailsSent}
       />
     </>
   );
