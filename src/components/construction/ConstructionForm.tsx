@@ -42,7 +42,6 @@ import { itemAmount, itemCost, itemProfit, itemMarginRate } from "@/lib/construc
 import PriceMasterPicker from "./PriceMasterPicker";
 import CustomerPicker from "./CustomerPicker";
 import ExcelImportButton from "./ExcelImportButton";
-import AiTakeoffDialog from "./AiTakeoffDialog";
 import { useSoloFeatureLock, SoloLockBadge } from "./SoloFeatureLock";
 import {
   detectItujiInconsistencies,
@@ -426,7 +425,6 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
     | null
   >(null);
   const [customerPickerOpen, setCustomerPickerOpen] = useState(false);
-  const [aiDialogOpen, setAiDialogOpen] = useState(false);
   // 異体字不整合 warning の dismiss 状態（フィールド名+variantChar をキーに保持）
   const [itujiDismissed, setItujiDismissed] = useState<Set<string>>(new Set());
   const itujiWarnings = detectItujiInconsistencies({
@@ -1179,15 +1177,7 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
           )}
         </p>
 
-        <div className="mb-4 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => setAiDialogOpen(true)}
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold py-2.5 rounded-lg shadow-sm transition-all"
-          >
-            <Sparkles className="w-4 h-4" strokeWidth={2.25} />
-            AIで積算（β）
-          </button>
+        <div className="mb-4">
           <ExcelImportButton data={data} onChange={onChange} />
         </div>
 
@@ -1651,12 +1641,6 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
           title: data.clientTitle,
           contact: data.clientContact,
         }}
-      />
-      <AiTakeoffDialog
-        open={aiDialogOpen}
-        onClose={() => setAiDialogOpen(false)}
-        currentData={data}
-        onApply={(next) => onChange(next)}
       />
       {/* Solo 機能ロック時の案内ダイアログ */}
       {lock.dialog}

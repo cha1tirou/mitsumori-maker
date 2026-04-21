@@ -258,7 +258,7 @@ export default function GuidePage() {
   - 書類変換（`ConvertButtons`）
   - 会計CSV出力（`AccountingCsvButton`）
   - メール送信（Solo以上のみボタン表示）
-- **AI積算** は Free も月1回使える（サーバー側 paywall が処理）→ ゲート対象外
+- **AI積算**（`/api/ai-takeoff` / `AiTakeoffDialog.tsx`）は**封印中（2026-04-21〜）**。Opus 4.6 の API コストが Solo ¥980 の粗利を食い潰すため、LP・エディタ UI・ドリップメールから露出を全撤去。実装コード・DB スキーマ（`ai_takeoff_logs` + ビュー）は保持。**再開条件**: MRR 1万円突破 or Solo 有料 3名到達時点で、Sonnet 4.6 で精度・コスト実測のうえ再評価
 
 ### Free / Solo の課金設計
 - Free プラン制限: 見積作成は無制限・PDF出力は無制限（**透かし常時あり**）・保存は月3通まで（API route `/api/quotes` で 402 返却）
