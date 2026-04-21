@@ -58,11 +58,11 @@ const plans: Plan[] = [
     subprice: "小規模工務店向け（〜5名）",
     features: [
       ["ok", "Solo全機能"],
-      ["dev", "5アカウントまで（開発中）"],
-      ["dev", "顧客管理・案件紐付（開発中）"],
-      ["dev", "請求書との連動（開発中）"],
-      ["dev", "電子サイン（開発中）"],
-      ["dev", "電子帳簿保存法対応（開発中）"],
+      ["dev", "5アカウントまで（検討中）"],
+      ["dev", "顧客管理・案件紐付（検討中）"],
+      ["dev", "請求書との連動（検討中）"],
+      ["dev", "電子サイン（検討中）"],
+      ["dev", "電子帳簿保存法対応（検討中）"],
     ],
   },
 ];
@@ -201,10 +201,10 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                   <button
                     type="button"
                     disabled
-                    title="Team プランは開発中です。リリースまでお待ちください。"
+                    title="Team プランは現在検討中です。提供時期は未定のため、当面は Solo をご利用ください。"
                     className="w-full cursor-not-allowed rounded-[12px] border border-dashed border-kenmitsu-line bg-kenmitsu-paper px-5 py-3.5 text-center text-[14px] font-bold text-kenmitsu-muted md:text-[15px]"
                   >
-                    リリース予定 — Solo をご利用ください
+                    検討中 — 現在は Solo をご利用ください
                   </button>
                 )}
               </article>
