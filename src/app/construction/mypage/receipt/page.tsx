@@ -199,7 +199,7 @@ export default async function ReceiptHelpPage() {
                 </h2>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-4 text-xs space-y-1.5 text-gray-700">
-                <Row label="発行者" value="ケンミツ（代表: 宇野想一郎）" />
+                <Row label="発行者" value="ケンミツ" />
                 <Row
                   label="住所"
                   value="〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F"
