@@ -1504,7 +1504,7 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
                 <input
                   type="text"
                   className="w-full text-[10.5px] px-2 py-1.5 border-t border-gray-200 focus:outline-none"
-                  placeholder="キャプション（例: 施工前）"
+                  placeholder="説明文（例: 施工前 / 施工中 / 完成時）"
                   value={photo.caption}
                   onChange={(e) => updatePhotoCaption(photo.id, e.target.value)}
                 />

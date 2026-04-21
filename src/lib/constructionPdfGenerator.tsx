@@ -760,16 +760,18 @@ function ConstructionPdf({
                     objectFit: "cover",
                   }}
                 />
-                <Text
-                  style={{
-                    fontSize: 8,
-                    color: colors.gray700,
-                    padding: 4,
-                    backgroundColor: colors.gray50,
-                  }}
-                >
-                  図{i + 1}. {photo.caption || "（キャプション未設定）"}
-                </Text>
+                {photo.caption ? (
+                  <Text
+                    style={{
+                      fontSize: 8,
+                      color: colors.gray700,
+                      padding: 4,
+                      backgroundColor: colors.gray50,
+                    }}
+                  >
+                    {photo.caption}
+                  </Text>
+                ) : null}
               </View>
             ))}
           </View>

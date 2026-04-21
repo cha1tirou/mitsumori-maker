@@ -414,9 +414,11 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
                   alt={photo.caption || `工事写真${i + 1}`}
                   className="w-full h-40 object-cover"
                 />
-                <p className="text-[9px] text-gray-700 px-2 py-1 bg-gray-50 border-t border-gray-200">
-                  図{i + 1}. {photo.caption || "（キャプション未設定）"}
-                </p>
+                {photo.caption && (
+                  <p className="text-[9px] text-gray-700 px-2 py-1 bg-gray-50 border-t border-gray-200">
+                    {photo.caption}
+                  </p>
+                )}
               </div>
             ))}
           </div>
