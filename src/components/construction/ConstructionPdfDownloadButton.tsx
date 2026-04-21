@@ -271,7 +271,7 @@ export default function ConstructionPdfDownloadButton({
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-kenmitsu-ok font-bold">✓</span>
-                  会計ソフトCSV連携（freee/MF/弥生）
+                  工事写真の添付・原価粗利分析
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-kenmitsu-ok font-bold">✓</span>

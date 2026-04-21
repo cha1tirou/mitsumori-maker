@@ -120,14 +120,14 @@ export async function POST(request: NextRequest) {
 <li>PDF の無料版「SAMPLE」透かしがすべて消えます</li>
 <li>見積書をクラウドに無制限保存・再編集・複製</li>
 <li>単価マスタ・取引先マスタで2通目以降の作成が10倍速</li>
-<li>会計ソフトCSV出力（freee / MF / 弥生）</li>
+<li>原価・粗利分析と工事写真の添付</li>
 <li>いつでもワンクリックで解約できます</li>
 </ul>
 <p>また、まずは無料のまま建設業法チェッカーや工種プリセットをお試しいただくのも歓迎です。</p>`,
             ctaLabel: "Soloプランの詳細を見る",
             ctaUrl: `${lpUrl}#pricing`,
           }),
-          text: "Solo プランで PDF透かしなし＋無制限保存＋会計ソフトCSV出力が使えます: " + lpUrl + "#pricing",
+          text: "Solo プランで PDF透かしなし＋無制限保存＋マスタ機能が使えます: " + lpUrl + "#pricing",
         })
         .catch(() => {
           // scheduledAt対応してない場合は無視

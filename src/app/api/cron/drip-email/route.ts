@@ -191,8 +191,7 @@ function buildUpgradeEmail(): string {
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
       <li><strong>透かしなし</strong>の正式版PDFが出力できる</li>
       <li>見積書の<strong>無制限</strong>クラウド保存・履歴管理</li>
-      <li>freee/MF/弥生向けの<strong>会計ソフトCSV出力</strong></li>
-      <li>顧客マスタ・単価マスタで2通目以降の作成時間を大幅短縮</li>
+      <li><strong>取引先マスタ・単価マスタ</strong>で2通目以降の作成時間を大幅短縮</li>
       <li>工事写真・原価粗利分析も利用可</li>
     </ul>
     ${ctaButton("Soloプランを見る →", "https://mitsumori-maker.com/construction#pricing")}

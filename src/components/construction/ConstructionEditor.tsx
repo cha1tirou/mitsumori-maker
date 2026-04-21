@@ -36,10 +36,6 @@ const SaveQuoteButton = dynamic(
   () => import("@/components/construction/SaveQuoteButton"),
   { ssr: false }
 );
-const AccountingCsvButton = dynamic(
-  () => import("@/components/construction/AccountingCsvButton"),
-  { ssr: false }
-);
 
 interface Props {
   initialData?: ConstructionQuoteData;
@@ -339,10 +335,6 @@ export default function ConstructionEditor({
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          会計ソフトCSV連携
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
                           顧客・単価マスタ
                         </span>
                         <span className="flex items-center gap-1">
@@ -352,6 +344,10 @@ export default function ConstructionEditor({
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
                           見積書の無制限保存
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          工事写真の添付
                         </span>
                       </div>
                     </div>
@@ -366,11 +362,6 @@ export default function ConstructionEditor({
                     className="w-full"
                     onSaved={handleSaved}
                   />
-                )}
-
-                {/* 4. Solo / Team 専用: CSV出力 */}
-                {(plan === "solo" || plan === "team") && (
-                  <AccountingCsvButton data={data} />
                 )}
 
                 {/* マイページ: ログイン済みのみ */}

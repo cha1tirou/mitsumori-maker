@@ -78,10 +78,6 @@ export function useSoloFeatureLock() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>
-                会計ソフトCSV出力
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-kenmitsu-ok font-bold">✓</span>
                 見積書の無制限保存・履歴管理
               </li>
             </ul>
