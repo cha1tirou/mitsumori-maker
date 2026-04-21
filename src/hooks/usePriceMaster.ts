@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { CostCategory } from "@/types/construction";
 
 const STORAGE_KEY = "mitsumori-construction-price-master-v1";
+export const PRICE_MASTER_LIMIT = 500;
 
 export interface PriceMasterItem {
   id: string;
@@ -46,8 +47,11 @@ export function usePriceMaster() {
     setLoaded(true);
   }, []);
 
-  const add = useCallback((item: Omit<PriceMasterItem, "id">) => {
+  const add = useCallback((item: Omit<PriceMasterItem, "id">): boolean => {
+    let added = false;
     setItems((prev) => {
+      if (prev.length >= PRICE_MASTER_LIMIT) return prev;
+      added = true;
       const next = [
         ...prev,
         { ...item, id: `pm-${Date.now()}-${Math.random().toString(36).slice(2, 7)}` },
@@ -55,6 +59,7 @@ export function usePriceMaster() {
       persist(next);
       return next;
     });
+    return added;
   }, []);
 
   const update = useCallback((id: string, patch: Partial<PriceMasterItem>) => {

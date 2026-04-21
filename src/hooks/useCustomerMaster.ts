@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 const STORAGE_KEY = "mitsumori-construction-customer-master-v1";
+export const CUSTOMER_MASTER_LIMIT = 500;
 
 export interface CustomerMasterItem {
   id: string;
@@ -43,8 +44,11 @@ export function useCustomerMaster() {
     setLoaded(true);
   }, []);
 
-  const add = useCallback((item: Omit<CustomerMasterItem, "id">) => {
+  const add = useCallback((item: Omit<CustomerMasterItem, "id">): boolean => {
+    let added = false;
     setItems((prev) => {
+      if (prev.length >= CUSTOMER_MASTER_LIMIT) return prev;
+      added = true;
       const next = [
         ...prev,
         { ...item, id: `cm-${Date.now()}-${Math.random().toString(36).slice(2, 7)}` },
@@ -52,6 +56,7 @@ export function useCustomerMaster() {
       persist(next);
       return next;
     });
+    return added;
   }, []);
 
   const update = useCallback((id: string, patch: Partial<CustomerMasterItem>) => {
@@ -71,16 +76,20 @@ export function useCustomerMaster() {
   }, []);
 
   const addOrUpdateByName = useCallback(
-    (item: Omit<CustomerMasterItem, "id">) => {
+    (item: Omit<CustomerMasterItem, "id">): boolean => {
+      let added = false;
       setItems((prev) => {
         const existing = prev.find((c) => c.name === item.name);
         if (existing) {
+          added = true;
           const next = prev.map((c) =>
             c.id === existing.id ? { ...c, ...item } : c
           );
           persist(next);
           return next;
         }
+        if (prev.length >= CUSTOMER_MASTER_LIMIT) return prev;
+        added = true;
         const next = [
           ...prev,
           { ...item, id: `cm-${Date.now()}-${Math.random().toString(36).slice(2, 7)}` },
@@ -88,6 +97,7 @@ export function useCustomerMaster() {
         persist(next);
         return next;
       });
+      return added;
     },
     []
   );

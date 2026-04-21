@@ -2,14 +2,27 @@
 
 import { useEffect, useRef } from "react";
 
+type SyncErrorHandler = (message: string) => void;
+
 /**
  * ログインユーザーの自社情報・マスタをサーバーと自動同期する。
  * - mount 時：サーバーから取得して localStorage に反映（サーバーが勝つ）
- * - 定期的：localStorage の内容をサーバーへ PUT（1秒 debounce）
+ * - 定期的：localStorage の内容をサーバーへ PUT（3秒 debounce）
+ *
+ * onError を渡すと、PUT が 4xx/5xx で失敗した時にメッセージを受け取れる。
+ * マイページのマスタ管理画面ではこれをトースト表示に接続する。
  */
-export function useMasterSync(isAuthenticated: boolean) {
+export function useMasterSync(
+  isAuthenticated: boolean,
+  onError?: SyncErrorHandler
+) {
   const syncedOnceRef = useRef(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onErrorRef = useRef(onError);
+
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
 
   // mount 時のダウンロード
   useEffect(() => {
@@ -81,13 +94,19 @@ export function useMasterSync(isAuthenticated: boolean) {
               "mitsumori-construction-customer-master-v1"
             ) || "[]"
           );
-          await fetch("/api/user-data", {
+          const res = await fetch("/api/user-data", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ companyInfo, priceMaster, customerMaster }),
           });
+          if (!res.ok) {
+            const payload = await res.json().catch(() => ({}));
+            onErrorRef.current?.(
+              payload?.error ?? "サーバーへの同期に失敗しました"
+            );
+          }
         } catch {
-          /* ignore */
+          onErrorRef.current?.("ネットワークエラーで同期できませんでした");
         }
       }, 3000);
     };

@@ -19,6 +19,9 @@ export interface Profile {
   stripe_subscription_id: string | null;
   subscription_status: SubscriptionStatus;
   current_period_end: string | null; // ISO8601
+  company_info: Record<string, unknown> | null;
+  customer_master: unknown[] | null;
+  price_master: unknown[] | null;
   created_at: string;
   updated_at: string;
 }

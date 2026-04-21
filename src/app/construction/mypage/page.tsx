@@ -19,6 +19,7 @@ import SignOutButton from "@/components/construction/SignOutButton";
 import QuoteList from "@/components/construction/QuoteList";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
+import MasterHubCard from "@/components/construction/mypage/MasterHubCard";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const metadata: Metadata = {
@@ -70,10 +71,25 @@ export default async function MyPage({
   const plan = profile?.plan ?? "free";
   const planLabel =
     plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
+  const isPaid =
+    (plan === "solo" || plan === "team") &&
+    (profile?.subscription_status === "active" ||
+      profile?.subscription_status === "trialing");
   const remaining =
     plan === "free"
       ? Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth)
       : "無制限";
+  const companyRegistered = Boolean(
+    profile?.company_info &&
+      typeof profile.company_info === "object" &&
+      Object.keys(profile.company_info).length > 0
+  );
+  const customerCount = Array.isArray(profile?.customer_master)
+    ? profile.customer_master.length
+    : 0;
+  const priceCount = Array.isArray(profile?.price_master)
+    ? profile.price_master.length
+    : 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -229,6 +245,14 @@ export default async function MyPage({
             </Link>
           </div>
         </section>
+
+        {/* マスタ管理 */}
+        <MasterHubCard
+          isPaid={isPaid}
+          companyRegistered={companyRegistered}
+          customerCount={customerCount}
+          priceCount={priceCount}
+        />
 
         {/* 見積履歴（検索付き） */}
         <QuoteList
