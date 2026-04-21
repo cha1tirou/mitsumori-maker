@@ -20,6 +20,7 @@ import QuoteList from "@/components/construction/QuoteList";
 import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
 import MasterHubCard from "@/components/construction/mypage/MasterHubCard";
+import AccountLabel from "@/components/construction/mypage/AccountLabel";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const metadata: Metadata = {
@@ -112,9 +113,11 @@ export default async function MyPage({
             </span>
           </Link>
           <div className="flex items-center gap-3 text-xs text-gray-600 min-w-0">
-            <span className="hidden sm:inline truncate max-w-[180px]" title={user.email}>
-              {user.email}
-            </span>
+            <AccountLabel
+              email={user.email ?? ""}
+              plan={plan}
+              companyInfo={profile?.company_info ?? null}
+            />
             <SignOutButton />
           </div>
         </div>

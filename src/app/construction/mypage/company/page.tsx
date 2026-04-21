@@ -6,6 +6,7 @@ import { getCurrentUserProfile } from "@/lib/supabase/queries";
 import { HardHat } from "lucide-react";
 import SignOutButton from "@/components/construction/SignOutButton";
 import CompanyInfoEditor from "@/components/construction/mypage/CompanyInfoEditor";
+import AccountLabel from "@/components/construction/mypage/AccountLabel";
 
 export const metadata: Metadata = {
   title: "自社情報 | ケンミツ",
@@ -18,10 +19,11 @@ export default async function CompanyMasterPage() {
   if (!isSupabaseConfigured()) {
     redirect("/construction/mypage");
   }
-  const { user } = await getCurrentUserProfile();
+  const { user, profile } = await getCurrentUserProfile();
   if (!user) {
     redirect("/construction/login?redirect=/construction/mypage/company");
   }
+  const plan = profile?.plan ?? "free";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -38,12 +40,11 @@ export default async function CompanyMasterPage() {
             <span>ケンミツ</span>
           </Link>
           <div className="flex items-center gap-3 text-xs text-gray-600 min-w-0">
-            <span
-              className="hidden sm:inline truncate max-w-[180px]"
-              title={user.email}
-            >
-              {user.email}
-            </span>
+            <AccountLabel
+              email={user.email ?? ""}
+              plan={plan}
+              companyInfo={profile?.company_info ?? null}
+            />
             <SignOutButton />
           </div>
         </div>

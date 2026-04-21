@@ -7,6 +7,7 @@ import { HardHat } from "lucide-react";
 import SignOutButton from "@/components/construction/SignOutButton";
 import CustomerMasterManager from "@/components/construction/mypage/CustomerMasterManager";
 import MasterLockedView from "@/components/construction/mypage/MasterLockedView";
+import AccountLabel from "@/components/construction/mypage/AccountLabel";
 
 export const metadata: Metadata = {
   title: "取引先マスタ | ケンミツ",
@@ -45,12 +46,11 @@ export default async function CustomersMasterPage() {
             <span>ケンミツ</span>
           </Link>
           <div className="flex items-center gap-3 text-xs text-gray-600 min-w-0">
-            <span
-              className="hidden sm:inline truncate max-w-[180px]"
-              title={user.email}
-            >
-              {user.email}
-            </span>
+            <AccountLabel
+              email={user.email ?? ""}
+              plan={plan}
+              companyInfo={profile?.company_info ?? null}
+            />
             <SignOutButton />
           </div>
         </div>
