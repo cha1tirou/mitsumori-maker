@@ -32,7 +32,53 @@ const EMPTY: ConstructionCompanyInfo = {
   sealDataUrl: "",
 };
 
-const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
+// 入力ファイルの許容上限。リサイズ前のチェック用（大きすぎる画像の取り込みを抑える）
+const MAX_UPLOAD_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+// リサイズ後の最大長辺（見積書 PDF 上で十分な解像度）
+const LOGO_MAX_SIDE = 600;
+const SEAL_MAX_SIDE = 300;
+
+/**
+ * 画像を canvas で縮小して data URL に変換する。
+ * 透明背景 PNG 入力時は PNG で維持、それ以外は JPEG に変換して容量削減。
+ */
+async function resizeImageToDataUrl(
+  file: File,
+  maxSide: number
+): Promise<string> {
+  const srcUrl = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(new Error("ファイル読み込み失敗"));
+    reader.readAsDataURL(file);
+  });
+  const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+    const i = new Image();
+    i.onload = () => resolve(i);
+    i.onerror = () => reject(new Error("画像のデコードに失敗"));
+    i.src = srcUrl;
+  });
+
+  const longest = Math.max(img.width, img.height);
+  const scale = longest > maxSide ? maxSide / longest : 1;
+  const w = Math.max(1, Math.round(img.width * scale));
+  const h = Math.max(1, Math.round(img.height * scale));
+
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("canvas コンテキストが取得できません");
+  ctx.drawImage(img, 0, 0, w, h);
+
+  // 透明背景維持のため PNG 入力は PNG で出力、それ以外は JPEG 0.85
+  const isPng = file.type === "image/png";
+  return canvas.toDataURL(
+    isPng ? "image/png" : "image/jpeg",
+    isPng ? undefined : 0.85
+  );
+}
 
 export default function CompanyInfoEditor() {
   const toast = useToast();
@@ -62,27 +108,28 @@ export default function CompanyInfoEditor() {
     setInfo((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleImageUpload = (
+  const handleImageUpload = async (
     key: "logoDataUrl" | "sealDataUrl",
     file: File | null
   ) => {
     if (!file) return;
-    if (file.size > MAX_IMAGE_SIZE) {
-      toast.error(
-        `画像サイズは ${MAX_IMAGE_SIZE / 1024 / 1024}MB 以下にしてください`
-      );
-      return;
-    }
     if (!file.type.startsWith("image/")) {
       toast.error("画像ファイルを選択してください");
       return;
     }
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = typeof reader.result === "string" ? reader.result : "";
-      update(key, result);
-    };
-    reader.readAsDataURL(file);
+    if (file.size > MAX_UPLOAD_FILE_SIZE) {
+      toast.error(
+        `画像サイズは ${MAX_UPLOAD_FILE_SIZE / 1024 / 1024}MB 以下にしてください`
+      );
+      return;
+    }
+    try {
+      const maxSide = key === "logoDataUrl" ? LOGO_MAX_SIDE : SEAL_MAX_SIDE;
+      const dataUrl = await resizeImageToDataUrl(file, maxSide);
+      update(key, dataUrl);
+    } catch {
+      toast.error("画像の処理に失敗しました。別の画像でお試しください。");
+    }
   };
 
   const save = async () => {
@@ -201,7 +248,7 @@ export default function CompanyInfoEditor() {
 
           <ImageField
             label="ロゴ画像"
-            hint="PNG 推奨・1MB まで"
+            hint="PNG / JPEG・5MB まで。選択後に自動で縮小・圧縮されます"
             dataUrl={info.logoDataUrl}
             inputRef={logoInputRef}
             onSelect={(f) => handleImageUpload("logoDataUrl", f)}
@@ -209,7 +256,7 @@ export default function CompanyInfoEditor() {
           />
           <ImageField
             label="印影画像"
-            hint="背景透過 PNG 推奨・1MB まで"
+            hint="背景透過 PNG 推奨・5MB まで。選択後に自動で縮小されます"
             dataUrl={info.sealDataUrl}
             inputRef={sealInputRef}
             onSelect={(f) => handleImageUpload("sealDataUrl", f)}
