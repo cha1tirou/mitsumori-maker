@@ -12,7 +12,7 @@ import {
   CheckCircle2,
   Crown,
   FileText,
-  ArrowUpRight,
+  ArrowRight,
   Receipt,
 } from "lucide-react";
 import PortalButton from "@/components/construction/PortalButton";
@@ -148,35 +148,73 @@ export default async function MyPage({
           </div>
         )}
 
-        {/* 初回ウェルカム */}
-        {quotes.length === 0 && usedThisMonth === 0 && (
-          <section className="bg-gradient-to-r from-kenmitsu-navy to-kenmitsu-navy700 rounded-2xl p-6 text-white">
-            <h2 className="text-lg font-bold mb-2">
-              ようこそ、ケンミツへ！
-            </h2>
-            <p className="text-sm text-kenmitsu-navy100 mb-4 leading-relaxed">
-              アカウント登録が完了しました。まずは見積書を1通作成してみましょう。
-              <br />
-              工種プリセットを使えば、数分で見積書が完成します。
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/construction/new"
-                className="inline-flex items-center gap-2 bg-white text-kenmitsu-navy font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-kenmitsu-navy50 transition-colors"
-              >
-                最初の見積書を作成する →
-              </Link>
+        {/* ===== 作業エリア ===== */}
+
+        {/* ヒーロー CTA（常時表示）: ツールの本質アクション */}
+        <section className="bg-gradient-to-br from-kenmitsu-navy to-kenmitsu-navy700 rounded-2xl p-6 md:p-8 text-white shadow-lg">
+          <div className="flex items-start gap-4 mb-5">
+            <div className="w-12 h-12 rounded-xl bg-kenmitsu-orange flex items-center justify-center shrink-0">
+              <HardHat className="w-6 h-6 text-white" strokeWidth={2.25} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-lg md:text-xl font-bold mb-1">
+                {quotes.length === 0
+                  ? "ようこそ、ケンミツへ！"
+                  : "見積書を作成"}
+              </h2>
+              <p className="text-xs md:text-sm text-kenmitsu-navy100 leading-relaxed">
+                {quotes.length === 0
+                  ? "まずは1通作成してみましょう。工種プリセットで数分で完成します。"
+                  : "改正建設業法2025対応・工種プリセット・建設業法チェッカー搭載。"}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/construction/new"
+              className="inline-flex items-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white font-bold text-base px-7 py-3.5 rounded-lg shadow-md transition-colors"
+            >
+              新しい見積書を作成
+              <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
+            </Link>
+            {quotes.length === 0 && (
               <Link
                 href="/construction/how-to"
-                className="inline-flex items-center gap-2 border border-white/30 text-white font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2 border border-white/30 text-white font-bold text-sm px-5 py-3.5 rounded-lg hover:bg-white/10 transition-colors"
               >
                 使い方を見る
               </Link>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
 
-        {/* プラン状況 */}
+        {/* 見積履歴 */}
+        <QuoteList
+          quotes={quotes as import("@/lib/supabase/types").ConstructionQuoteRow[]}
+          plan={plan}
+          freeLimit={FREE_PLAN_MONTHLY_LIMIT}
+        />
+
+        {/* マスタ管理（見積書作成の事前準備） */}
+        <MasterHubCard
+          isPaid={isPaid}
+          companyRegistered={companyRegistered}
+          customerCount={customerCount}
+          priceCount={priceCount}
+        />
+
+        {/* ===== アカウント管理エリアの区切り ===== */}
+        <div className="pt-2">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-[10px] font-bold tracking-wider text-gray-400 uppercase">
+              アカウント・設定
+            </span>
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
+        </div>
+
+        {/* プラン情報 */}
         <section className="bg-white rounded-2xl border border-gray-100 p-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -218,14 +256,16 @@ export default async function MyPage({
               label="次回更新日"
               value={
                 profile?.current_period_end
-                  ? new Date(profile.current_period_end).toLocaleDateString("ja-JP")
+                  ? new Date(profile.current_period_end).toLocaleDateString(
+                      "ja-JP",
+                    )
                   : "—"
               }
               sub={plan === "free" ? "Freeプランは更新なし" : undefined}
             />
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {plan === "free" ? (
               <Link
                 href="/construction#pricing"
@@ -235,57 +275,33 @@ export default async function MyPage({
                 Soloプランにアップグレード
               </Link>
             ) : (
-              <PortalButton
-                quotesCount={quotes.length}
-                emailsSent={0}
-              />
+              <PortalButton quotesCount={quotes.length} emailsSent={0} />
             )}
             <Link
-              href="/construction/new"
-              className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors"
-            >
-              新しい見積書を作成
-              <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
-            </Link>
-            <Link
               href="/construction/mypage/receipt"
-              className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium px-4 py-2.5 rounded-lg transition-colors"
             >
               <Receipt className="w-4 h-4" strokeWidth={2.25} />
               領収書の発行方法
             </Link>
           </div>
+
+          {plan !== "free" && (
+            <p className="mt-4 text-[11px] text-gray-500 leading-relaxed flex items-start gap-1.5">
+              <CheckCircle2
+                className="w-3.5 h-3.5 text-kenmitsu-ok shrink-0 mt-0.5"
+                strokeWidth={2.5}
+              />
+              ご請求・ご解約の履歴は Stripe カスタマーポータルからご確認いただけます。いつでもワンクリックで解約可能です。
+            </p>
+          )}
         </section>
-
-        {/* マスタ管理 */}
-        <MasterHubCard
-          isPaid={isPaid}
-          companyRegistered={companyRegistered}
-          customerCount={customerCount}
-          priceCount={priceCount}
-        />
-
-        {/* 見積履歴（検索付き） */}
-        <QuoteList
-          quotes={quotes as import("@/lib/supabase/types").ConstructionQuoteRow[]}
-          plan={plan}
-          freeLimit={FREE_PLAN_MONTHLY_LIMIT}
-        />
 
         {/* アカウント設定 */}
         <AccountSettings email={user.email ?? ""} />
 
-        {/* βフィードバック */}
+        {/* βフィードバック / お問い合わせ誘導 */}
         <FeedbackCard />
-
-        <section className="bg-white rounded-2xl border border-gray-100 p-6 flex items-center gap-3">
-          <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok" strokeWidth={2.25} />
-          <p className="text-xs text-gray-600 leading-relaxed">
-            ご請求・ご解約の履歴は
-            {plan === "free" ? "ご契約後に" : " Stripe カスタマーポータルにて"}
-            ご確認いただけます。カスタマーポータルからはいつでもワンクリックで解約可能です。
-          </p>
-        </section>
       </main>
     </div>
   );
