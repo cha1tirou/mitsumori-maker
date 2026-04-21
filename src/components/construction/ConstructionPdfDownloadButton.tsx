@@ -104,12 +104,16 @@ export default function ConstructionPdfDownloadButton({
         quoteNumber: data.quoteNumber,
       });
 
-      const safeClient = (data.clientName || "未設定").replace(
-        /[/\\?%*:|"<>]/g,
-        "_",
-      );
+      const sanitize = (s: string) => s.replace(/[/\\?%*:|"<>]/g, "_").trim();
+      const safeClient = sanitize(data.clientName || "");
+      const safeTitle = sanitize(data.clientTitle || "");
+      const clientPart = safeClient
+        ? safeTitle
+          ? `${safeClient}${safeTitle}`
+          : safeClient
+        : "未設定";
       const safeDate = data.quoteDate || "未設定";
-      const name = `工事見積書_${safeClient}_${safeDate}.pdf`;
+      const name = `工事見積書_${clientPart}_${safeDate}.pdf`;
       setFilename(name);
 
       // ブラウザ通常のダウンロードを発火
