@@ -125,7 +125,10 @@ function requireBasicAuth(request: NextRequest): NextResponse | null {
 }
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/construction/admin")) {
+  if (
+    request.nextUrl.pathname.startsWith("/construction/admin") ||
+    request.nextUrl.pathname.startsWith("/api/admin/")
+  ) {
     const unauthorized = requireBasicAuth(request);
     if (unauthorized) return unauthorized;
   }
