@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { Resend } from "resend";
-import { isResendConfigured, getResendConfig } from "@/lib/email";
+import {
+  isResendConfigured,
+  getResendConfig,
+  buildUnsubscribeUrl,
+  mailFooterHtml,
+} from "@/lib/email";
 import { isSupabaseConfigured, getSupabaseEnv } from "@/lib/supabase/env";
 
 export const runtime = "nodejs";
@@ -69,6 +74,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ sent: 0 });
   }
 
+  const origin = new URL(request.url).origin;
   let sentCount = 0;
 
   for (const user of users) {
@@ -78,6 +84,11 @@ export async function GET(request: NextRequest) {
     );
     const dripSent: Record<string, boolean> = (user.drip_sent as Record<string, boolean>) ?? {};
 
+    // 配信停止済みフラグ（すべて true）は一括で除外
+    if (dripSent.__unsubscribed__) continue;
+
+    const unsubscribeUrl = buildUnsubscribeUrl(origin, user.email);
+
     for (const step of DRIP_STEPS) {
       if (daysSinceSignup >= step.day && !dripSent[step.key]) {
         try {
@@ -85,7 +96,7 @@ export async function GET(request: NextRequest) {
             from,
             to: user.email,
             subject: step.subject,
-            html: step.html(),
+            html: step.html(unsubscribeUrl),
           });
 
           // 送信済みフラグを更新
@@ -108,33 +119,30 @@ export async function GET(request: NextRequest) {
 
 // --- メールテンプレート ---
 
-function emailWrapper(content: string): string {
+function emailWrapper(content: string, unsubscribeUrl: string): string {
   return `
 <div style="font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 20px; color: #1a1a1a;">
   <div style="text-align: center; margin-bottom: 24px;">
-    <span style="font-size: 20px; font-weight: bold; color: #15803d;">ケンミツ</span>
+    <span style="font-size: 20px; font-weight: bold; color: #1E40AF;">ケンミツ</span>
     <span style="font-size: 12px; color: #6b7280; margin-left: 4px;">建設業の見積書</span>
   </div>
   ${content}
-  <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
-  <p style="font-size: 11px; color: #9ca3af; line-height: 1.6; text-align: center;">
-    ケンミツ — 建設業向け見積書作成ツール<br>
-    <a href="https://mitsumori-maker.com/construction" style="color: #9ca3af;">https://mitsumori-maker.com/construction</a>
-  </p>
+  ${mailFooterHtml(unsubscribeUrl)}
 </div>`;
 }
 
 function ctaButton(text: string, url: string): string {
   return `
 <div style="text-align: center; margin: 24px 0;">
-  <a href="${url}" style="display: inline-block; background-color: #15803d; color: #ffffff; font-size: 14px; font-weight: bold; text-decoration: none; padding: 14px 32px; border-radius: 8px;">
+  <a href="${url}" style="display: inline-block; background-color: #F59E0B; color: #ffffff; font-size: 14px; font-weight: bold; text-decoration: none; padding: 14px 32px; border-radius: 8px;">
     ${text}
   </a>
 </div>`;
 }
 
-function buildWelcomeEmail(): string {
-  return emailWrapper(`
+function buildWelcomeEmail(unsubscribeUrl: string): string {
+  return emailWrapper(
+    `
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">ご登録ありがとうございます</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       ケンミツへようこそ！<br>
@@ -150,11 +158,14 @@ function buildWelcomeEmail(): string {
       まずは1通、見積書を作成してみてください。
     </p>
     ${ctaButton("見積書を作成する →", "https://mitsumori-maker.com/construction/new")}
-  `);
+  `,
+    unsubscribeUrl,
+  );
 }
 
-function buildTipsEmail(): string {
-  return emailWrapper(`
+function buildTipsEmail(unsubscribeUrl: string): string {
+  return emailWrapper(
+    `
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">3分で見積書を完成させるコツ</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       ケンミツを使いこなすための3つのポイントをご紹介します。
@@ -178,11 +189,14 @@ function buildTipsEmail(): string {
       </p>
     </div>
     ${ctaButton("見積書を作成する →", "https://mitsumori-maker.com/construction/new")}
-  `);
+  `,
+    unsubscribeUrl,
+  );
 }
 
-function buildUpgradeEmail(): string {
-  return emailWrapper(`
+function buildUpgradeEmail(unsubscribeUrl: string): string {
+  return emailWrapper(
+    `
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">取引先提出用の見積書、透かしで困っていませんか？</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       無料プランの PDF には「無料版 SAMPLE」の透かしが入ります。<br>
@@ -198,5 +212,7 @@ function buildUpgradeEmail(): string {
     <p style="font-size: 12px; color: #6b7280; text-align: center;">
       いつでもワンクリックで解約できます。
     </p>
-  `);
+  `,
+    unsubscribeUrl,
+  );
 }

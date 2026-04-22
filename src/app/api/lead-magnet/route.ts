@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { Resend } from "resend";
 import { createServerClient } from "@supabase/ssr";
-import { isResendConfigured, getResendConfig } from "@/lib/email";
+import {
+  isResendConfigured,
+  getResendConfig,
+  buildUnsubscribeUrl,
+  mailFooterHtml,
+} from "@/lib/email";
 import { getSupabaseEnv, isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const runtime = "nodejs";
@@ -50,6 +55,7 @@ export async function POST(request: NextRequest) {
   const downloadUrl = `${origin}/construction/checklist?download=1`;
   const lpUrl = `${origin}/construction`;
   const toolUrl = `${origin}/construction/new`;
+  const unsubscribeUrl = buildUnsubscribeUrl(origin, email);
 
   // メール送信（未設定時は DL URL だけ返す）
   if (isResendConfigured()) {
@@ -71,8 +77,9 @@ export async function POST(request: NextRequest) {
 <p>ご不明点・ご要望は、このメールにご返信ください。</p>`,
           ctaLabel: "ケンミツを見る",
           ctaUrl: lpUrl,
+          unsubscribeUrl,
         }),
-        text: `改正建設業法2025対応チェックリストのダウンロードリンクをお送りします。\n${downloadUrl}\n\n— ケンミツ 編集部`,
+        text: `改正建設業法2025対応チェックリストのダウンロードリンクをお送りします。\n${downloadUrl}\n\n配信停止: ${unsubscribeUrl}`,
       });
 
       // Day 3：チェックリスト活用のコツ
@@ -96,8 +103,9 @@ export async function POST(request: NextRequest) {
 <p>登録不要で今すぐ試せます：</p>`,
             ctaLabel: "無料で試してみる",
             ctaUrl: toolUrl,
+            unsubscribeUrl,
           }),
-          text: "チェックリスト活用のヒント。登録不要で試せます: " + toolUrl,
+          text: `チェックリスト活用のヒント。登録不要で試せます: ${toolUrl}\n\n配信停止: ${unsubscribeUrl}`,
         })
         .catch(() => {
           // scheduledAt対応してない場合は無視
@@ -126,8 +134,9 @@ export async function POST(request: NextRequest) {
 <p>また、まずは無料のまま建設業法チェッカーや工種プリセットをお試しいただくのも歓迎です。</p>`,
             ctaLabel: "Soloプランの詳細を見る",
             ctaUrl: `${lpUrl}#pricing`,
+            unsubscribeUrl,
           }),
-          text: "Solo プランで PDF透かしなし＋無制限保存＋マスタ機能が使えます: " + lpUrl + "#pricing",
+          text: `Solo プランで PDF透かしなし＋無制限保存＋マスタ機能が使えます: ${lpUrl}#pricing\n\n配信停止: ${unsubscribeUrl}`,
         })
         .catch(() => {
           // scheduledAt対応してない場合は無視
@@ -145,23 +154,21 @@ function mailTemplate({
   body,
   ctaLabel,
   ctaUrl,
+  unsubscribeUrl,
 }: {
   title: string;
   body: string;
   ctaLabel: string;
   ctaUrl: string;
+  unsubscribeUrl: string;
 }): string {
   return `
 <div style="font-family:sans-serif; max-width:600px; margin:0 auto; color:#1f2937;">
-  <h2 style="color:#166534; margin-top:0;">${title}</h2>
+  <h2 style="color:#1E40AF; margin-top:0;">${title}</h2>
   ${body}
   <div style="text-align:center; margin:32px 0;">
-    <a href="${ctaUrl}" style="display:inline-block; background:#166534; color:white; text-decoration:none; padding:12px 32px; border-radius:8px; font-weight:bold;">${ctaLabel}</a>
+    <a href="${ctaUrl}" style="display:inline-block; background:#F59E0B; color:white; text-decoration:none; padding:12px 32px; border-radius:8px; font-weight:bold;">${ctaLabel}</a>
   </div>
-  <hr style="border:none; border-top:1px solid #e5e7eb; margin:32px 0;" />
-  <p style="font-size:11px; color:#9ca3af; text-align:center;">
-    ケンミツ 編集部 / mitsumori-maker.com<br />
-    配信停止は <a href="mailto:contact@mitsumori-maker.com" style="color:#6b7280;">contact@mitsumori-maker.com</a> までご連絡ください。
-  </p>
+  ${mailFooterHtml(unsubscribeUrl)}
 </div>`;
 }
