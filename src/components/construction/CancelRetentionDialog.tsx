@@ -90,10 +90,23 @@ export default function CancelRetentionDialog({
               </h2>
             </div>
 
-            <p className="text-sm text-gray-600 mb-5">
-              解約するとSoloプランの全機能にアクセスできなくなります。
-              保存した見積書は閲覧のみ可能ですが、新規作成は月3通に制限されます。
+            <p className="text-sm text-gray-600 mb-3 leading-relaxed">
+              解約すると Free プランに戻ります。以下の変化があります:
             </p>
+            <ul className="text-xs text-gray-600 space-y-1 mb-5 pl-4 leading-relaxed list-disc">
+              <li>
+                過去見積書の<strong>閲覧・PDF 再出力は可能</strong>（180日間保管）
+              </li>
+              <li>
+                <strong>再編集・複製・マスタ機能は利用不可</strong>
+              </li>
+              <li>
+                新規見積作成は<strong>月 3 通</strong>まで（透かし付き PDF）
+              </li>
+              <li>
+                Solo に再契約すれば保管期間中のデータにフルアクセスが復活
+              </li>
+            </ul>
 
             <div className="bg-gray-50 rounded-xl p-4 mb-5 space-y-3">
               <p className="text-xs font-bold text-gray-500 mb-2">

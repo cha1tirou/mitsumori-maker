@@ -22,6 +22,7 @@ import FeedbackCard from "@/components/construction/FeedbackCard";
 import AccountSettings from "@/components/construction/AccountSettings";
 import MasterHubCard from "@/components/construction/mypage/MasterHubCard";
 import AccountLabel from "@/components/construction/mypage/AccountLabel";
+import CheckoutPendingBanner from "@/components/construction/mypage/CheckoutPendingBanner";
 import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const metadata: Metadata = {
@@ -128,17 +129,35 @@ export default async function MyPage({
         <h1 className="text-xl font-bold text-gray-900">マイページ</h1>
 
         {/* チェックアウト結果 */}
-        {checkoutResult === "success" && (
+        {checkoutResult === "success" && isPaid && (
           <div className="bg-kenmitsu-okBg border border-kenmitsu-ok/30 rounded-xl p-4 flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 text-kenmitsu-ok shrink-0 mt-0.5" strokeWidth={2.25} />
-            <div>
-              <p className="text-sm font-bold text-gray-900">プランのアップグレードが完了しました</p>
-              <p className="text-xs text-gray-600 mt-0.5">
-                Soloプランの全機能をご利用いただけます。反映まで数秒かかる場合があります。
+            <div className="flex-1">
+              <p className="text-sm font-bold text-gray-900">
+                プランのアップグレードが完了しました
               </p>
+              <p className="text-xs text-gray-600 mt-0.5">
+                Soloプランの全機能をご利用いただけます。
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link
+                  href="/construction/new"
+                  className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg"
+                >
+                  続けて見積書を作成する
+                  <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                </Link>
+                <Link
+                  href="/construction/mypage/receipt"
+                  className="inline-flex items-center gap-1.5 border border-gray-200 hover:bg-white text-gray-700 text-xs font-bold px-4 py-2 rounded-lg"
+                >
+                  領収書の受け取り方
+                </Link>
+              </div>
             </div>
           </div>
         )}
+        {checkoutResult === "success" && !isPaid && <CheckoutPendingBanner />}
         {checkoutResult === "canceled" && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" strokeWidth={2.25} />
