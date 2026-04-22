@@ -184,31 +184,37 @@
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/new</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mitsumori-maker.com/construction/contact</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://mitsumori-maker.com/construction/terms</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/privacy</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/tokushoho</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -232,19 +238,19 @@
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/checklist</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/how-to</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/construction/faq</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PlanCheckoutButton from "@/components/construction/PlanCheckoutButton";
 import SectionHeading from "./SectionHeading";
+import PricingSectionTracker from "./PricingSectionTracker";
 import { AlertIcon, CheckIcon, ClockIcon, HelmetIcon } from "./icons";
 
 type Kind = "ok" | "hl" | "note" | "dev";
@@ -87,6 +88,7 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
       id="pricing"
       className="bg-white py-[clamp(64px,9vw,120px)]"
     >
+      <PricingSectionTracker />
       <div className="mx-auto max-w-[1160px] px-5 md:px-6">
         <div className="mb-14">
           <SectionHeading

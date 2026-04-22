@@ -160,10 +160,32 @@ export default async function MyPage({
         {checkoutResult === "success" && !isPaid && <CheckoutPendingBanner />}
         {checkoutResult === "canceled" && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" strokeWidth={2.25} />
-            <p className="text-sm text-gray-700">
-              チェックアウトがキャンセルされました。いつでも再度お申し込みいただけます。
-            </p>
+            <CheckCircle2
+              className="w-5 h-5 text-amber-600 shrink-0 mt-0.5"
+              strokeWidth={2.25}
+            />
+            <div className="flex-1">
+              <p className="text-sm font-bold text-gray-900 mb-1">
+                チェックアウトがキャンセルされました
+              </p>
+              <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                いつでも再度お申し込みいただけます。料金やプラン内容で気になる点がございましたら、お気軽にお問い合わせください。
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href="/construction#pricing"
+                  className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg"
+                >
+                  もう一度 Solo を検討する
+                </Link>
+                <Link
+                  href="/construction/contact"
+                  className="inline-flex items-center gap-1.5 border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-xs font-bold px-4 py-2 rounded-lg"
+                >
+                  お問い合わせ
+                </Link>
+              </div>
+            </div>
           </div>
         )}
 

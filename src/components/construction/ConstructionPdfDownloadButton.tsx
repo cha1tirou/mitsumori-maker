@@ -142,7 +142,27 @@ export default function ConstructionPdfDownloadButton({
     } catch (e) {
       console.error("PDF generation failed:", e);
       setStatus("idle");
-      alert("PDFの生成に失敗しました。もう一度お試しください。");
+      const photoCount = (data.sitePhotos ?? []).length;
+      const lines = ["PDFの生成に失敗しました。"];
+      if (photoCount >= 3) {
+        lines.push(
+          "",
+          `工事写真が ${photoCount} 枚添付されています。`,
+          "写真が多い場合はメモリ不足が原因の可能性があります。",
+          "写真を数枚減らしてから、もう一度お試しください。",
+        );
+      } else {
+        lines.push(
+          "",
+          "ページを再読み込みしてから、もう一度お試しください。",
+        );
+      }
+      lines.push(
+        "",
+        "解消しない場合はお問い合わせください:",
+        "kenmitsu.support@gmail.com",
+      );
+      alert(lines.join("\n"));
     }
   };
 
