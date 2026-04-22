@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 import SiteFooter from "@/components/SiteFooter";
+import PageviewTracker from "@/components/PageviewTracker";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -90,6 +92,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <Suspense fallback={null}>
+          <PageviewTracker />
+        </Suspense>
         {children}
         {/* Google Analytics ＋ Google Ads — afterInteractive で遅延読み込み */}
         <Script

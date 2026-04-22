@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackConversion } from "@/lib/analytics";
 
 /**
  * Pricing セクションが画面に 30% 以上表示されたタイミングで
- * `pricing_view` イベントを 1 回だけ発火する。
- * Google Ads / GA4 でファネル計測に使い、広告最適化の学習を速める。
+ * `construction_pricing_view` イベントを 1 回だけ発火する。
+ * GA4 + Meta Pixel + Google Ads の 3 系統同時送信でファネル計測に使い、
+ * 広告最適化の学習を速める。
  */
 export default function PricingSectionTracker() {
   const sentRef = useRef(false);
@@ -21,7 +22,7 @@ export default function PricingSectionTracker() {
         const entry = entries[0];
         if (entry.isIntersecting && !sentRef.current) {
           sentRef.current = true;
-          trackEvent("pricing_view");
+          trackConversion("construction_pricing_view");
           observer.disconnect();
         }
       },
