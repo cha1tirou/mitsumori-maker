@@ -58,7 +58,7 @@ export default function LawCompliance({ lawDays }: Props) {
             eyebrowColor="#FDE68A"
             title={
               <>
-                改正建設業法で、
+                改正建設業法2025で、
                 <br />
                 見積書の何が変わったか
               </>

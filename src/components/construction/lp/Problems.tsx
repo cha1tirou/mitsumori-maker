@@ -7,7 +7,7 @@ const items: { kind: IluKind; title: string; body: string; quote: string }[] = [
   {
     kind: "rejected",
     title: "「一式」で差し戻された",
-    body: "改正建設業法で内訳明示が努力義務化。元請の検収部門から「一式では通らない」と戻されることが増えた。",
+    body: "改正建設業法2025で内訳明示が努力義務化。元請の検収部門から「一式では通らない」と戻されることが増えた。",
     quote: "「一式じゃダメ」ってなんで最近急に言われるの？",
   },
   {

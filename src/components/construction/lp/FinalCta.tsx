@@ -39,7 +39,7 @@ export default function FinalCta({ lawDays }: Props) {
         <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[rgba(245,158,11,0.5)] bg-[rgba(245,158,11,0.15)] px-4 py-2 text-[12px] font-bold md:mb-7 md:text-[13px]">
           <AlertIcon color="#FDE68A" />
           <span>
-            改正建設業法 施行から{" "}
+            改正建設業法2025 施行から{" "}
             <span className="font-mono font-black text-[#FDE68A]">
               {lawDays}
             </span>{" "}

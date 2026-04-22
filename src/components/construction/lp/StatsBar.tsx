@@ -2,7 +2,7 @@ import { AlertIcon, BoltIcon, CheckIcon, HelmetIcon } from "./icons";
 
 const items = [
   {
-    label: "改正建設業法",
+    label: "改正建設業法2025",
     value: "2025/12",
     note: "施行済・対応済",
     Icon: <CheckIcon color="#1E40AF" />,

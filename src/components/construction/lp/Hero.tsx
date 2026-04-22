@@ -19,7 +19,7 @@ export default function Hero({ lawDays }: Props) {
         <div className="mb-7 inline-flex max-w-full items-center rounded-full border-[1.5px] border-kenmitsu-warn bg-white p-1 shadow-[0_4px_12px_-4px_rgba(180,83,9,0.25)] md:mb-9">
           <div className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-kenmitsu-warn px-2.5 py-1 text-[10px] font-black tracking-[0.04em] text-white md:gap-2 md:px-3 md:py-1.5 md:text-xs md:tracking-[0.06em]">
             <AlertIcon color="#fff" />
-            <span>改正建設業法 施行中</span>
+            <span>改正建設業法2025 施行中</span>
           </div>
           <div className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold text-kenmitsu-ink md:gap-1.5 md:px-3 md:py-1.5 md:text-[13px]">
             <span className="hidden sm:inline">施行から</span>
@@ -48,7 +48,7 @@ export default function Hero({ lawDays }: Props) {
               </span>
             </h1>
             <p className="mb-6 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-9 md:text-lg">
-              改正建設業法に準拠した工事見積書を、
+              改正建設業法2025に準拠した工事見積書を、
               <br className="hidden md:block" />
               <strong className="text-kenmitsu-ink">片手のスマホ</strong>で、
               <strong className="text-kenmitsu-ink">月980円</strong>で、

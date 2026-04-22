@@ -11,7 +11,7 @@ export default function OurStory() {
 
         <div className="flex flex-col gap-5 text-[15px] leading-[2] text-kenmitsu-ink2 md:text-[17px]">
           <p className="m-0">
-            改正建設業法が
+            改正建設業法2025が
             <strong className="text-kenmitsu-ink">2025年12月に全面施行</strong>
             され、一人親方・小規模工務店の現場では見積書の書き方を見直す必要が出ました。
           </p>
@@ -64,7 +64,7 @@ export default function OurStory() {
               <span className="bg-kenmitsu-orange50 px-1.5 shadow-[inset_0_-10px_0_0_theme(colors.kenmitsu.orange)]">
                 月¥980
               </span>
-              で、 改正建設業法に完全準拠した、
+              で、 改正建設業法2025に完全準拠した、
               <br />
               <strong>登録不要で試せる</strong>ツール ——
             </p>
