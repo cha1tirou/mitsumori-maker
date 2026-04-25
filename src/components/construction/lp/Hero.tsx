@@ -1,6 +1,5 @@
 import { IluHeroKeyArt } from "./illustrations";
 import { AlertIcon, ArrowIcon } from "./icons";
-import ConstructionTape from "./ConstructionTape";
 import BlueprintBg from "./BlueprintBg";
 
 type Props = {
@@ -11,7 +10,6 @@ export default function Hero({ lawDays }: Props) {
   return (
     <section className="relative overflow-hidden pb-16 md:pb-20">
       <BlueprintBg opacity={0.6} cell={16} />
-      <ConstructionTape placement="top-right" width={360} height={8} />
 
       <div className="relative mx-auto max-w-[1160px] px-5 pt-10 md:px-6">
         {/* law-days alert ribbon */}
