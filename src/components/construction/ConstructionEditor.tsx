@@ -131,7 +131,7 @@ export default function ConstructionEditor({
   };
 
   const planLabel =
-    plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
+    plan === "solo" ? "有料" : plan === "team" ? "Team" : "Free";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -316,13 +316,13 @@ export default function ConstructionEditor({
                 {/* 2b. Free プラン: Solo アップグレード誘導カード（PDFダウンロード直後に露出） */}
                 {userEmail && plan === "free" && (
                   <Link
-                    href="/construction#pricing"
+                    href="/construction#solo-upgrade"
                     className="relative block w-full rounded-xl border-2 border-kenmitsu-orange bg-gradient-to-br from-kenmitsu-orange50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
                   >
                     <div className="relative">
                       <div className="flex items-baseline gap-2 mb-1.5">
                         <span className="inline-flex items-center gap-1 rounded-full bg-kenmitsu-orange text-white text-[10px] font-bold px-2 py-0.5">
-                          Solo
+                          有料
                         </span>
                         <span className="font-mono text-lg font-black text-kenmitsu-orange600 leading-none">
                           ¥980
@@ -335,7 +335,7 @@ export default function ConstructionEditor({
                         </span>
                       </div>
                       <p className="text-sm font-black text-gray-900 mb-1.5 leading-tight">
-                        改正建設業法 2025 対応版で出力できるように
+                        改正建設業法のルールに沿った見積書を作成
                       </p>
                       <p className="text-[10px] text-kenmitsu-muted mb-2 leading-relaxed">
                         ¥1,000 台で改正法対応の見積書を出せるのはケンミツだけ。
@@ -343,7 +343,7 @@ export default function ConstructionEditor({
                       <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-gray-700 leading-relaxed">
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          改正法対応 PDF
+                          改正法対応の見積書
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>

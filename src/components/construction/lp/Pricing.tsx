@@ -39,7 +39,7 @@ const plans: Plan[] = [
     period: "/月",
     subprice: "年払い ¥9,800（2ヶ月分お得）",
     features: [
-      ["hl", "改正建設業法 2025 対応 PDF を出力"],
+      ["hl", "改正建設業法のルールに沿った見積書を作成"],
       ["hl", "労務費・法定福利費の内訳明示"],
       ["hl", "改正建設業法チェッカー（リアルタイム）"],
       ["ok", "顧客・単価マスタで入力時間を短縮"],
@@ -192,7 +192,7 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                     <PlanCheckoutButton
                       plan="solo"
                       billing="monthly"
-                      label={isPaid ? "Soloプランに変更" : "Soloで始める"}
+                      label={isPaid ? "有料プランに変更" : "有料プランで始める"}
                       variant="kenmitsu"
                     />
                   ))}

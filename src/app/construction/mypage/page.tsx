@@ -129,7 +129,7 @@ export default async function MyPage({
                 プランのアップグレードが完了しました
               </p>
               <p className="text-xs text-gray-600 mt-0.5">
-                Soloプランの全機能をご利用いただけます。
+                有料プランの全機能をご利用いただけます。
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link
@@ -300,11 +300,11 @@ export default async function MyPage({
           <div className="flex flex-wrap gap-2">
             {plan === "free" ? (
               <Link
-                href="/construction#pricing"
+                href="/construction#solo-upgrade"
                 className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
               >
                 <Crown className="w-4 h-4" strokeWidth={2.25} />
-                Soloプランにアップグレード
+                有料プランにアップグレード
               </Link>
             ) : (
               <PortalButton quotesCount={quotes.length} />

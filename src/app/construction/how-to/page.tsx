@@ -90,7 +90,7 @@ const steps = [
     num: 7,
     title: "PDFダウンロードで完成",
     description:
-      "「PDFダウンロード」をクリックして保存。Free プランは通常フォーマットで出力、Solo プランは改正建設業法 2025 対応版（労務費・法定福利費・経費の内訳明示）で出力されます。印刷機能からも PDF 化可能。",
+      "「PDFダウンロード」をクリックして保存。Free プランは通常フォーマットで出力、有料プランは改正建設業法のルールに沿った見積書（労務費・法定福利費・経費の内訳明示）で出力されます。印刷機能からも PDF 化可能。",
     icon: Download,
     hint: null,
   },
@@ -223,23 +223,23 @@ export default function HowToPage() {
 
         <section className="mt-12">
           <h2 className="text-xl font-bold text-gray-900 mb-4">
-            Soloプランにアップグレードする手順
+            有料プランにアップグレードする手順
           </h2>
           <ol className="list-decimal pl-5 text-sm text-gray-700 space-y-2">
             <li>
-              <Link href="/construction/login" className="text-kenmitsu-navy hover:underline">
-                ログインページ
+              <Link href="/construction/start" className="text-kenmitsu-navy hover:underline">
+                登録ページ
               </Link>
-              でメールアドレスを登録（マジックリンク）
+              でメールアドレスを登録
             </li>
             <li>
-              <Link href="/construction#pricing" className="text-kenmitsu-navy hover:underline">
+              <Link href="/construction#solo-upgrade" className="text-kenmitsu-navy hover:underline">
                 料金プラン
               </Link>
-              の「Soloで始める」をクリック
+              の「月契約で始める」または「年契約で始める」をクリック
             </li>
             <li>Stripe の決済画面でクレジットカード情報を入力</li>
-            <li>決済完了後、マイページで自動的に「Soloプラン」に切替わる</li>
+            <li>決済完了後、マイページで自動的に有料プランに切替わる</li>
             <li>
               解約は
               <Link
@@ -281,7 +281,7 @@ export default function HowToPage() {
             まずは無料で試してみてください
           </h2>
           <p className="text-gray-400 mb-4 text-sm">
-            メアド登録だけ・カード不要 / 改正建設業法対応版 PDF は Solo（月¥980）から
+            メアド登録だけ・カード不要 / 改正建設業法のルールに沿った見積書は有料プラン（月¥980）から
           </p>
           <Link
             href="/construction/new"

@@ -44,7 +44,7 @@ export default function MasterHubCard({
           status={
             isPaid
               ? `${customerCount} 社登録済`
-              : "Solo プランで利用可"
+              : "有料プランで利用可"
           }
           description="発注者情報をワンクリックで呼び出し"
           locked={!isPaid}
@@ -56,7 +56,7 @@ export default function MasterHubCard({
           status={
             isPaid
               ? `${priceCount} 品目登録済`
-              : "Solo プランで利用可"
+              : "有料プランで利用可"
           }
           description="よく使う品目を明細行へ即挿入"
           locked={!isPaid}

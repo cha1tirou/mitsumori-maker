@@ -35,18 +35,18 @@ export default function Hero({ lawDays }: Props) {
         <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center md:gap-12">
           <div>
             <span className="mb-4 inline-block rounded-full bg-kenmitsu-orange/15 px-3 py-1 text-[11px] font-black tracking-[0.18em] text-kenmitsu-orange600 md:text-[12px]">
-              SOLO プラン
+              有料プラン
             </span>
             <h1 className="mb-6 text-[30px] font-black leading-[1.25] tracking-[-0.01em] text-kenmitsu-ink md:mb-7 md:text-[clamp(36px,4.4vw,52px)]">
               <span className="text-kenmitsu-navy">
                 改正建設業法 2025
               </span>
-              に
+              の
               <br />
-              対応した見積書を、月¥980 で。
+              ルールに沿った見積書を、月¥980 で。
             </h1>
             <p className="mb-7 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-8 md:text-lg">
-              ケンミツの有料プラン（Solo）にアップグレードすると、労務費・法定福利費を内訳明示した改正法対応 PDF が出力できます。
+              ケンミツの有料プランにアップグレードすると、労務費・法定福利費を内訳明示した、改正建設業法のルールに沿った見積書を作成できます。
             </p>
 
             <div id="hero-cta" className="flex flex-wrap gap-3">
@@ -54,7 +54,7 @@ export default function Hero({ lawDays }: Props) {
                 href="#solo-upgrade"
                 className="inline-flex items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-7 py-4 text-[15px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_10px_24px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px md:px-8 md:py-5 md:text-[17px]"
               >
-                Solo プランの詳細を見る
+                有料プランの詳細を見る
                 <ArrowIcon color="#1A1200" />
               </a>
             </div>

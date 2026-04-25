@@ -1053,7 +1053,7 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
               title={
                 isPaid
                   ? "原価・粗利を表示（社内用）"
-                  : "Soloプラン限定機能"
+                  : "有料プラン限定機能"
               }
             >
               <TrendingUp className="w-3 h-3" strokeWidth={2.5} />

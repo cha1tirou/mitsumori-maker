@@ -1,6 +1,4 @@
-import Link from "next/link";
 import SectionHeading from "./SectionHeading";
-import { ArrowIcon } from "./icons";
 
 type Row = {
   label: string;
@@ -36,7 +34,7 @@ const rows: Row[] = [
     lawCompliant: false,
   },
   {
-    label: "ケンミツ Solo",
+    label: "ケンミツ（有料プラン）",
     type: "見積特化（中小建設業者向け）",
     price: "¥980 / 月",
     lawCompliant: true,
@@ -123,16 +121,6 @@ export default function PriceComparison() {
         <p className="mt-3 text-[10.5px] leading-relaxed text-kenmitsu-muted md:text-[11px]">
           ※ 各社公式サイト掲載価格・機能に基づく（2026 年 4 月時点）。プラン構成・対応範囲は各社公式情報をご確認ください。
         </p>
-
-        <div className="mt-10 text-center">
-          <Link
-            href="#solo-upgrade"
-            className="inline-flex items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-7 py-4 text-[15px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_10px_24px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px md:px-8 md:py-4 md:text-[16px]"
-          >
-            Solo プランの詳細を見る
-            <ArrowIcon color="#1A1200" />
-          </Link>
-        </div>
       </div>
     </section>
   );

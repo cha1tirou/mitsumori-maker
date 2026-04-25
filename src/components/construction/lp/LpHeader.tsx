@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowIcon } from "./icons";
 
 type Props = {
   isLoggedIn: boolean;
@@ -31,44 +30,14 @@ export default function LpHeader({ isLoggedIn, planLabel }: Props) {
           </div>
         </Link>
 
-        <nav
-          className="hidden items-center gap-7 text-sm font-medium text-kenmitsu-ink2 md:flex"
-          aria-label="ページ内ナビゲーション"
-        >
-          <a href="#problems" className="hover:text-kenmitsu-navy">
-            課題
-          </a>
-          <a href="#features" className="hover:text-kenmitsu-navy">
-            機能
-          </a>
-          <a href="#compare" className="hover:text-kenmitsu-navy">
-            比較
-          </a>
-          <a href="#pricing" className="hover:text-kenmitsu-navy">
-            料金
-          </a>
-          <a href="#faq" className="hover:text-kenmitsu-navy">
-            FAQ
-          </a>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          {isLoggedIn && (
-            <Link
-              href="/construction/mypage"
-              className="hidden text-xs font-bold text-kenmitsu-ink2 hover:text-kenmitsu-navy sm:inline"
-            >
-              {planLabel}・マイページ
-            </Link>
-          )}
+        {isLoggedIn && (
           <Link
-            href={isLoggedIn ? "/construction/new" : "/construction/start"}
-            className="inline-flex items-center gap-2 rounded-[10px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-4 py-2.5 text-[13px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_18px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px"
+            href="/construction/mypage"
+            className="text-xs font-bold text-kenmitsu-ink2 hover:text-kenmitsu-navy sm:text-sm"
           >
-            {isLoggedIn ? "見積書を作成" : "無料で始める"}
-            <ArrowIcon color="#1A1200" />
+            {planLabel}・マイページ
           </Link>
-        </div>
+        )}
       </div>
     </header>
   );

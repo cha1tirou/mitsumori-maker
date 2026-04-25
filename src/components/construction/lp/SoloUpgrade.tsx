@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading";
 import { CheckIcon, HelmetIcon } from "./icons";
 
 const benefits = [
-  "改正建設業法 2025 対応 PDF を出力",
+  "改正建設業法のルールに沿った見積書を作成できる",
   "労務費・法定福利費の内訳明示（自動計算）",
   "リアルタイム法令チェッカー",
   "取引先マスタ・単価マスタで入力時間短縮",
@@ -25,12 +25,12 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
       id="solo-upgrade"
       className="bg-white py-[clamp(56px,8vw,100px)]"
     >
-      <div className="mx-auto max-w-[720px] px-5 md:px-6">
+      <div className="mx-auto max-w-[760px] px-5 md:px-6">
         <div className="mb-12">
           <SectionHeading
             eyebrow="Upgrade"
-            title="Solo プランで改正法対応版を出力"
-            lead="月¥980（年払いなら月換算 ¥816）。いつでもワンクリック解約可能。"
+            title="有料プランで改正法対応版を出力"
+            lead="月契約と年契約から選べます。いつでもワンクリック解約可能。"
           />
         </div>
 
@@ -41,22 +41,10 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
           </div>
 
           <div className="mb-2 text-center text-[12px] font-black tracking-[0.22em] text-kenmitsu-orange600 md:text-[13px]">
-            SOLO
+            有料プラン
           </div>
 
-          <div className="mb-1 flex items-baseline justify-center gap-1">
-            <span className="font-mono text-[44px] font-black leading-none tracking-[-0.02em] text-kenmitsu-ink md:text-[56px]">
-              ¥980
-            </span>
-            <span className="text-[14px] font-bold text-kenmitsu-muted md:text-[16px]">
-              /月
-            </span>
-          </div>
-          <p className="mb-7 text-center text-[12px] text-kenmitsu-muted md:text-[13px]">
-            年払い ¥9,800（2 ヶ月分お得・月換算 ¥816）
-          </p>
-
-          <ul className="mb-8 space-y-3">
+          <ul className="mb-8 mt-6 space-y-3">
             {benefits.map((b) => (
               <li
                 key={b}
@@ -78,15 +66,61 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
               契約中・マイページへ →
             </Link>
           ) : (
-            <PlanCheckoutButton
-              plan="solo"
-              billing="monthly"
-              label={isPaid ? "Solo プランに変更" : "Solo プランを開始"}
-              variant="kenmitsu"
-            />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {/* 月契約 */}
+              <div className="rounded-2xl border border-kenmitsu-line bg-white p-5">
+                <p className="mb-1 text-[11px] font-black tracking-[0.16em] text-kenmitsu-muted md:text-[12px]">
+                  月契約
+                </p>
+                <div className="mb-1 flex items-baseline gap-1">
+                  <span className="font-mono text-[32px] font-black leading-none tracking-[-0.02em] text-kenmitsu-ink md:text-[40px]">
+                    ¥980
+                  </span>
+                  <span className="text-[12px] font-bold text-kenmitsu-muted md:text-[14px]">
+                    /月
+                  </span>
+                </div>
+                <p className="mb-4 text-[11px] text-kenmitsu-muted md:text-[12px]">
+                  毎月自動更新
+                </p>
+                <PlanCheckoutButton
+                  plan="solo"
+                  billing="monthly"
+                  label={isPaid ? "月契約に変更" : "月契約で始める"}
+                  variant="kenmitsu"
+                />
+              </div>
+
+              {/* 年契約 */}
+              <div className="relative rounded-2xl border-[1.5px] border-kenmitsu-orange bg-kenmitsu-orange/5 p-5">
+                <span className="absolute -top-2.5 right-4 inline-block rounded-full bg-kenmitsu-orange px-2.5 py-0.5 text-[10px] font-black tracking-[0.08em] text-white md:text-[11px]">
+                  2 ヶ月分お得
+                </span>
+                <p className="mb-1 text-[11px] font-black tracking-[0.16em] text-kenmitsu-orange600 md:text-[12px]">
+                  年契約
+                </p>
+                <div className="mb-1 flex items-baseline gap-1">
+                  <span className="font-mono text-[32px] font-black leading-none tracking-[-0.02em] text-kenmitsu-ink md:text-[40px]">
+                    ¥9,800
+                  </span>
+                  <span className="text-[12px] font-bold text-kenmitsu-muted md:text-[14px]">
+                    /年
+                  </span>
+                </div>
+                <p className="mb-4 text-[11px] text-kenmitsu-muted md:text-[12px]">
+                  月換算 ¥816（約 17% お得）
+                </p>
+                <PlanCheckoutButton
+                  plan="solo"
+                  billing="yearly"
+                  label={isPaid ? "年契約に変更" : "年契約で始める"}
+                  variant="kenmitsu"
+                />
+              </div>
+            </div>
           )}
 
-          <p className="mt-4 text-center text-[11px] text-kenmitsu-muted md:text-[12px]">
+          <p className="mt-6 text-center text-[11px] text-kenmitsu-muted md:text-[12px]">
             いつでもワンクリック解約可能・解約後 180 日間データ保持
           </p>
         </article>

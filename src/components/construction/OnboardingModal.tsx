@@ -22,7 +22,7 @@ const STEPS = [
     icon: Download,
     title: "3. PDF出力",
     description:
-      "完成した見積書を PDF でダウンロード。Solo プランなら改正建設業法 2025 対応版で出力できます。",
+      "完成した見積書を PDF でダウンロード。有料プランなら改正建設業法のルールに沿った見積書を出力できます。",
   },
 ] as const;
 

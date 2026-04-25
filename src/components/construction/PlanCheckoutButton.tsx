@@ -30,7 +30,7 @@ const PRICES = {
 } as const;
 
 const SOLO_BENEFITS = [
-  "改正建設業法 2025 対応 PDF を出力",
+  "改正建設業法のルールに沿った見積書を作成できる",
   "労務費・法定福利費の内訳明示",
   "取引先マスタ・単価マスタで入力時間を短縮",
   "原価・粗利分析、工事写真の添付",
@@ -151,7 +151,7 @@ export default function PlanCheckoutButton({
                     strokeWidth={2}
                   />
                   <span className="text-xs font-bold tracking-wider uppercase text-kenmitsu-orange">
-                    {plan === "solo" ? "Solo プラン" : "Team プラン"}
+                    {plan === "solo" ? "有料プラン" : "Team プラン"}
                   </span>
                 </div>
                 <h2 className="text-lg font-bold">
@@ -225,7 +225,7 @@ export default function PlanCheckoutButton({
                   </p>
                   <p>
                     <span className="font-bold">即時有効</span> — 決済完了後、すぐに
-                    Solo プランの機能が使えます。
+                    有料プランの機能が使えます。
                   </p>
                 </div>
 

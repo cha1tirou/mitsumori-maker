@@ -49,7 +49,7 @@ export default function CheckoutPendingBanner() {
         <p className="text-sm font-bold text-gray-900">
           {timedOut
             ? "反映に時間がかかっています"
-            : "Solo プランを反映中..."}
+            : "有料プランを反映中..."}
         </p>
         <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">
           {timedOut

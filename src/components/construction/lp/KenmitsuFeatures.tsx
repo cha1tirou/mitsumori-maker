@@ -3,7 +3,7 @@ import { CheckIcon } from "./icons";
 
 const features = [
   {
-    title: "改正建設業法 2025 対応 PDF",
+    title: "改正建設業法のルールに沿った見積書を作成",
     body: "労務費・法定福利費・経費を内訳明示した形式で PDF 出力。元請けへの提出書類として法令準拠の書式で出せます。",
   },
   {

@@ -86,7 +86,7 @@ export default async function ReceiptHelpPage() {
                 領収書の発行方法
               </h1>
               <p className="text-[11px] text-gray-500 mt-0.5">
-                ケンミツ Solo プランの領収書は決済代行の Stripe から自動で発行されます
+                ケンミツ有料プランの領収書は決済代行の Stripe から自動で発行されます
               </p>
             </div>
           </div>
@@ -168,18 +168,18 @@ export default async function ReceiptHelpPage() {
                     />
                     <div className="flex-1">
                       <p className="text-sm font-bold text-gray-900 mb-1">
-                        Solo プランご契約後にご利用いただけます
+                        有料プランご契約後にご利用いただけます
                       </p>
                       <p className="text-xs text-gray-600 leading-relaxed mb-3">
-                        領収書の自動発行は Solo プラン（月¥980）の決済後からご利用可能です。
+                        領収書の自動発行は有料プラン（月¥980）の決済後からご利用可能です。
                         Free プランは無料のため領収書発行の対象外となります。
                       </p>
                       <Link
-                        href="/construction#pricing"
+                        href="/construction#solo-upgrade"
                         className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg"
                       >
                         <Crown className="w-3.5 h-3.5" strokeWidth={2.25} />
-                        Solo プランの詳細を見る
+                        有料プランの詳細を見る
                       </Link>
                     </div>
                   </div>

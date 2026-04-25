@@ -18,7 +18,7 @@ export default function MasterLockedView({
         <div className="flex items-center gap-2 mb-2">
           <Lock className="w-4 h-4 text-kenmitsu-orange" strokeWidth={2.5} />
           <span className="text-xs font-bold tracking-wider uppercase text-kenmitsu-orange">
-            Solo プラン限定機能
+            有料プラン限定機能
           </span>
         </div>
         <h2 className="text-xl font-bold mb-2">{featureTitle}</h2>
@@ -30,7 +30,7 @@ export default function MasterLockedView({
       <div className="p-6 space-y-5">
         <div>
           <p className="text-xs font-bold text-gray-500 tracking-wider uppercase mb-3">
-            Solo プランの特典
+            有料プランの特典
           </p>
           <ul className="space-y-2">
             {benefits.map((b) => (
@@ -58,11 +58,11 @@ export default function MasterLockedView({
 
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
-            href="/construction#pricing"
+            href="/construction#solo-upgrade"
             className="flex-1 inline-flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-sm font-bold py-3 rounded-lg transition-colors"
           >
             <Crown className="w-4 h-4" strokeWidth={2.25} />
-            Solo プランの詳細を見る
+            有料プランの詳細を見る
           </Link>
           <Link
             href="/construction/mypage"

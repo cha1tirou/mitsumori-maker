@@ -261,7 +261,7 @@ export default function QuoteList({ quotes, plan }: Props) {
             strokeWidth={2.25}
           />
           <span>
-            Freeプランでも見積書は無制限に作成・保存できます。改正建設業法 2025 対応版で出力したい場合は Solo プラン（月¥980）をご利用ください。
+            Freeプランでも見積書は無制限に作成・保存できます。改正建設業法のルールに沿った見積書を作成したい場合は有料プラン（月¥980）をご利用ください。
           </span>
         </div>
       )}

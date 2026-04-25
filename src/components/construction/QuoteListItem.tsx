@@ -56,7 +56,7 @@ export default function QuoteListItem({ quote }: Props) {
       if (res.status === 402) {
         toast.error(
           json.message ||
-            "無料プランの月間上限に達しました。Soloプランで解除できます。",
+            "無料プランの月間上限に達しました。有料プランで解除できます。",
         );
         setBusy(null);
         return;
