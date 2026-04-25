@@ -54,8 +54,9 @@ export default function PlanCheckoutButton({
       });
 
       if (res.status === 401) {
+        // 未ログインなら登録ファースト導線へ（/start は登録 + 既存ログイン両対応）
         router.push(
-          `/construction/login?redirect=${encodeURIComponent(
+          `/construction/start?redirect=${encodeURIComponent(
             "/construction#pricing",
           )}`,
         );
