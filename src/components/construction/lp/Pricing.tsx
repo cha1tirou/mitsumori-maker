@@ -28,7 +28,7 @@ const plans: Plan[] = [
       ["ok", "見積書作成・PDF出力（無制限）"],
       ["ok", "クラウド保存・再編集（無制限）"],
       ["ok", "工種プリセット・諸経費自動計算"],
-      ["note", "PDF は通常フォーマット（改正法対応版は Solo）"],
+      ["note", "PDF は通常フォーマット（改正法対応版は有料プラン）"],
     ],
   },
   {
@@ -54,7 +54,7 @@ const plans: Plan[] = [
     period: "/月",
     subprice: "小規模工務店向け（〜5名）",
     features: [
-      ["ok", "Solo全機能"],
+      ["ok", "有料プラン全機能"],
       ["dev", "5アカウントまで（検討中）"],
       ["dev", "顧客管理・案件紐付（検討中）"],
       ["dev", "請求書との連動（検討中）"],
@@ -199,10 +199,10 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                   <button
                     type="button"
                     disabled
-                    title="Team プランは現在検討中です。提供時期は未定のため、当面は Solo をご利用ください。"
+                    title="Team プランは現在検討中です。提供時期は未定のため、当面は有料プランをご利用ください。"
                     className="w-full cursor-not-allowed rounded-[12px] border border-dashed border-kenmitsu-line bg-kenmitsu-paper px-5 py-3.5 text-center text-[14px] font-bold text-kenmitsu-muted md:text-[15px]"
                   >
-                    検討中 — 現在は Solo をご利用ください
+                    検討中 — 現在は有料プランをご利用ください
                   </button>
                 )}
               </article>

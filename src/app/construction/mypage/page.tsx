@@ -68,7 +68,7 @@ export default async function MyPage({
 
   const plan = profile?.plan ?? "free";
   const planLabel =
-    plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
+    plan === "solo" ? "有料" : plan === "team" ? "Team" : "Free";
   const isPaid =
     (plan === "solo" || plan === "team") &&
     (profile?.subscription_status === "active" ||
@@ -168,7 +168,7 @@ export default async function MyPage({
                   href="/construction#pricing"
                   className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg"
                 >
-                  もう一度 Solo を検討する
+                  もう一度 有料プランを検討する
                 </Link>
                 <Link
                   href="/construction/contact"

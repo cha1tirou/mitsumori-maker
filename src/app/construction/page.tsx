@@ -98,7 +98,7 @@ export default async function ConstructionLandingPage() {
   const isLoggedIn = Boolean(userEmail);
   const isPaid = plan === "solo" || plan === "team";
   const planLabel =
-    plan === "solo" ? "Solo" : plan === "team" ? "Team" : "Free";
+    plan === "solo" ? "有料" : plan === "team" ? "Team" : "Free";
   const lawDays = daysSinceLawEnforcement();
 
   // 構造化データ：SoftwareApplication + FAQPage

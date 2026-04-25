@@ -9,7 +9,7 @@ const rows = [
   },
   {
     label: "料金（一人親方向け）",
-    us: "月1,980円（Solo）",
+    us: "月1,980円（有料プラン）",
     them: "月9,800〜数万円（大手ソフト）",
     highlight: true,
   },

@@ -104,7 +104,7 @@ export default function CancelRetentionDialog({
                 <strong>改正建設業法のルールに沿った見積書</strong>は作成不可（通常版のみ）
               </li>
               <li>
-                Solo に再契約すれば保管期間中のデータにフルアクセスが復活
+                有料プランに再契約すれば保管期間中のデータにフルアクセスが復活
               </li>
             </ul>
 

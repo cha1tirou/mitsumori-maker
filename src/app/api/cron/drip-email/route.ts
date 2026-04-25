@@ -29,7 +29,7 @@ const DRIP_STEPS = [
   {
     day: 5,
     key: "upgrade",
-    subject: "【ケンミツ】取引先に出せるPDFが欲しければ Solo プラン",
+    subject: "【ケンミツ】改正建設業法 2025 対応版の見積書を出すには",
     html: buildUpgradeEmail,
   },
 ] as const;
@@ -146,16 +146,19 @@ function buildWelcomeEmail(unsubscribeUrl: string): string {
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">ご登録ありがとうございます</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       ケンミツへようこそ！<br>
-      無料プランでは月3通までクラウド保存できます（PDFは透かし付き）。
+      無料プランで、見積書の作成・PDF 出力・クラウド保存がすべて無制限でご利用いただけます。
     </p>
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
-      <li>見積書の作成・PDF出力（無制限・透かし付き）</li>
-      <li>月3通までクラウド保存・再編集</li>
-      <li>改正建設業法2025の自動チェック</li>
-      <li>8工種のプリセット・諸経費自動計算</li>
+      <li>見積書の作成・PDF 出力（無制限）</li>
+      <li>クラウド保存・再編集（無制限）</li>
+      <li>8 工種のプリセット・諸経費自動計算</li>
+      <li>3 階層見積（中項目対応）</li>
     </ul>
+    <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
+      なお、改正建設業法 2025 のルールに沿った見積書（労務費・法定福利費の内訳明示・リアルタイム法令チェッカー・取引先 / 単価マスタ・原価分析・工事写真の添付）は<strong>有料プラン（月¥1,980）</strong>でご利用いただけます。改正法対応については後日メールでご案内します。
+    </p>
     <p style="font-size: 14px; line-height: 1.8;">
-      まずは1通、見積書を作成してみてください。
+      まずは 1 通、見積書を作成してみてください。
     </p>
     ${ctaButton("見積書を作成する →", "https://mitsumori-maker.com/construction/new")}
   `,
@@ -197,18 +200,20 @@ function buildTipsEmail(unsubscribeUrl: string): string {
 function buildUpgradeEmail(unsubscribeUrl: string): string {
   return emailWrapper(
     `
-    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">取引先提出用の見積書、透かしで困っていませんか？</h1>
+    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">その見積書、改正建設業法 2025 に対応していますか？</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
-      無料プランの PDF には「無料版 SAMPLE」の透かしが入ります。<br>
-      取引先に正式な見積書として提出するには <strong>Soloプラン（月¥1,980）</strong> をご検討ください。
+      2025 年 12 月施行の改正建設業法では、<strong>労務費（人件費）の内訳明示</strong>と<strong>法定福利費の独立計上</strong>が義務化されました。違反すると指導 → 勧告 → 企業名公表 → 業務改善命令 → 営業停止 → 建設業許可の取消の段階処分対象になります。
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
+      無料プランの PDF は通常フォーマットで、内訳明示が反映されません。取引先に正式な見積書として提出するには <strong>有料プラン（月¥1,980）</strong> の改正法対応版 PDF をご検討ください。
     </p>
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
-      <li><strong>透かしなし</strong>の正式版PDFが出力できる</li>
-      <li>見積書の<strong>無制限</strong>クラウド保存・履歴管理</li>
-      <li><strong>取引先マスタ・単価マスタ</strong>で2通目以降の作成時間を大幅短縮</li>
-      <li>工事写真・原価粗利分析も利用可</li>
+      <li>改正建設業法のルールに沿った見積書（<strong>労務費・法定福利費の内訳明示</strong>）</li>
+      <li>リアルタイム<strong>法令チェッカー</strong>（一式記載・労務費未入力・瑕疵担保未記載などを警告）</li>
+      <li><strong>取引先マスタ・単価マスタ</strong>で 2 通目以降の作成時間を大幅短縮</li>
+      <li>原価・粗利分析、工事写真の添付</li>
     </ul>
-    ${ctaButton("Soloプランを見る →", "https://mitsumori-maker.com/construction#pricing")}
+    ${ctaButton("有料プランを見る →", "https://mitsumori-maker.com/construction#pricing")}
     <p style="font-size: 12px; color: #6b7280; text-align: center;">
       いつでもワンクリックで解約できます。
     </p>

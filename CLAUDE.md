@@ -210,7 +210,7 @@ export default function GuidePage() {
 ### 概要
 - ケンミツは `/construction` 配下で提供する建設業一人親方向けの独立ブランド。見積書メーカーとインフラ共有、訴求軸（改正建設業法2025対応）とビジュアルアイデンティティは別
 - **LP**: `src/app/construction/page.tsx` は薄いオーケストレーター、セクション本体は `src/components/construction/lp/`
-- **サービス画面**: `/construction/new`（見積書作成）・`/construction/mypage`（マイページ）・`/construction/mypage/company`（自社情報マスタ）・`/construction/mypage/customers`（取引先マスタ・Solo限定）・`/construction/mypage/price-master`（単価マスタ・Solo限定）・`/construction/mypage/receipt`（領収書の発行方法・Stripe Portal 導線付き）・`/construction/checklist`（法令対応チェックリスト）・`/construction/login`・`/construction/faq`・`/construction/how-to`・`/construction/quotes/[id]` など
+- **サービス画面**: `/construction/new`（見積書作成）・`/construction/mypage`（マイページ）・`/construction/mypage/company`（自社情報マスタ）・`/construction/mypage/customers`（取引先マスタ・有料限定）・`/construction/mypage/price-master`（単価マスタ・有料限定）・`/construction/mypage/receipt`（領収書の発行方法・Stripe Portal 導線付き・有料限定）・`/construction/checklist`（法令対応チェックリスト）・`/construction/start`（軽量登録）・`/construction/login`・`/construction/faq`・`/construction/how-to`・`/construction/quotes/[id]` など
 
 ### ブランドカラー（`tailwind.config.ts` の `kenmitsu.*`）
 - `kenmitsu.navy` (#1E40AF) — メイン、構造・ヘッダー・ナビ
@@ -221,7 +221,7 @@ export default function GuidePage() {
 - `ink` / `muted` / `paper` 系 — 標準テキスト/背景
 
 ### 色の使い分けルール
-- **プライマリCTA**（見積書作成・PDFダウンロード・保存・ログイン送信・Soloアップグレード等の前進アクション）: `bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white`
+- **プライマリCTA**（見積書作成・PDFダウンロード・保存・ログイン送信・有料プランアップグレード等の前進アクション）: `bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white`
 - **構造・ナビ・リンク・強調**（ヘッダー帯・ロゴ・フォーカスring・セクション見出し・選択中状態）: `kenmitsu-navy` 系（`navy50` / `navy100` / `navy` / `navy700` / `navy900`）
 - **成功**（チェックマーク・「自動チェック済」・「対応済」・「ACTIVE」バッジ・成功トースト・PDFのOKスタンプ）: `kenmitsu-ok` / `kenmitsu-okBg`
 - **警告**（要注意バッジなど）: `kenmitsu-warn` / `kenmitsu-warnBg`（実装済みは少ない。`amber-*` で既に書かれている箇所は触らない）
@@ -245,33 +245,55 @@ export default function GuidePage() {
 - トリガー: `ConstructionPdfDownloadButton.tsx` で、生成中→完了の2段モーダル表示 + 通常のブラウザダウンロード
 - **テキスト選択不可**（画像埋め込みのため）。業務提出用は実用上問題なし
 - 元の `src/lib/constructionPdfGenerator.tsx`（@react-pdf/renderer）は dead code として保持。**呼び出し経路なし**、テキスト選択可能な PDF が必要になった時の再利用候補
-- **次の移行トリガー**: MRR 1万円突破 / Solo 有料ユーザー複数名。その時点で Vercel Pro + `@sparticuz/chromium-min + puppeteer-core` でサーバー side PDF 化へ
+- **次の移行トリガー**: MRR 1万円突破 / 有料ユーザー複数名。その時点で Vercel Pro + `@sparticuz/chromium-min + puppeteer-core` でサーバー side PDF 化へ
 
 ### プラン別機能ゲート（`SoloFeatureLock.tsx`）
-- `useSoloFeatureLock()` フックで Solo 誘導ダイアログを提供。Free/未ログインがタップすると「Soloプラン詳細へ」モーダル
-- 現在ゲートしている機能:
+- `useSoloFeatureLock()` フックで誘導ダイアログを提供。Free/未ログインがタップすると「有料プラン詳細へ」モーダル
+- ゲートしている機能（タップでロックモーダル）:
   - 取引先マスタ（`CustomerPicker`）
   - 単価マスタ（`PriceMasterPicker`、明細行の「マスタ」ボタン経由）
   - 原価・粗利トグル（`showCost`）
   - 工事写真アップロード
-- エディタ側で**既に非表示**にしている Solo-only 機能:
-  - 書類変換（`ConvertButtons`）
-  - 会計CSV出力（`AccountingCsvButton`）
-  - メール送信（Solo以上のみボタン表示）
-- **AI積算**（`/api/ai-takeoff` / `AiTakeoffDialog.tsx`）は**封印中（2026-04-21〜）**。Opus 4.6 の API コストが Solo ¥980 の粗利を食い潰すため、LP・エディタ UI・ドリップメールから露出を全撤去。実装コード・DB スキーマ（`ai_takeoff_logs` + ビュー）は保持。**再開条件**: MRR 1万円突破 or Solo 有料 3名到達時点で、Sonnet 4.6 で精度・コスト実測のうえ再評価
+- Free に対して**非表示**にしている機能:
+  - 改正建設業法チェッカー（右ペイン、`ConstructionEditor.tsx:415` `isLawCompliant && <LawCheckPanel />`）
+  - PDF の内訳明示セクション（労務費・法定福利費の独立計上、`ConstructionPreview.tsx`）
+  - PDF フッターの "Compliant with Construction Industry Act 2025 (revised)" ラベル
+  - マイページの「領収書の発行方法」ボタン（`/construction/mypage/page.tsx:312`、plan !== "free" 時のみ表示）
+- 既に**完全削除**された機能（過去の機能ゲート対象だった）:
+  - 書類変換 / 会計CSV出力（`5b5dab4`） / メール送信（`7b06d27`） / ロゴ・印影画像（`490ef65`）
+- **AI積算**（`/api/ai-takeoff` / `AiTakeoffDialog.tsx`）は**封印中（2026-04-21〜）**。LP・エディタ UI・ドリップメールから露出を全撤去。実装コード・DB スキーマ（`ai_takeoff_logs` + ビュー）は保持。**再開条件**: MRR 1万円突破 or 有料 3名到達時点で、Sonnet 4.6 で精度・コスト実測のうえ再評価
 
-### Free / Solo の課金設計
-- Free プラン制限: 見積作成は無制限・PDF出力は無制限（**透かし常時あり**）・保存は月3通まで（API route `/api/quotes` で 402 返却）
-- 有料誘導の主ドライバーは**透かし**、保存3通制限は補助
-- 課金フロー: LP (`/construction`) → Pricing セクション → `PlanCheckoutButton variant="kenmitsu"` → Stripe Checkout → Webhook で plan 更新 → マイページ反映
+### Free / 有料プラン の課金設計（2026-04-25 ピボット後）
+- **Free プラン**: 見積作成・編集・PDF出力・クラウド保存・再編集 すべて**無制限**。透かしなし・通常フォーマット（内訳明示なし）。改正建設業法チェッカーは右ペインに非表示。マスタ・原価/粗利・工事写真はロック（タップで誘導モーダル）
+- **有料プラン (Solo, Team)**: ¥1,980/月 or ¥19,800/年。Free 制限すべて解除 + PDF が改正法対応版（労務費・法定福利費の独立計上 + Compliance バッジ）+ チェッカー右ペイン表示 + Stripe Customer Portal アクセス
+- **過去にあった「透かし常時 ON」「月3通保存制限」は撤廃済み**（commit `40000fe`、2026-04-25 朝）。撤廃理由はピボット戦略（後述）
+- 課金フロー: LP (`/construction`) → Pricing or SoloUpgrade セクション → `PlanCheckoutButton variant="kenmitsu"` → Stripe Checkout 直行（中間モーダルなし、`a6f7298`） → Webhook で plan 更新 → マイページ反映
 - 解約フロー: マイページ → `CancelRetentionDialog`（3段階リテンション：実績提示→理由ヒアリング→料金理由なら 50%OFF オファー）→ `PortalButton` 経由で Stripe Customer Portal
+
+### Phase 1 ピボットの戦略コンテキスト（2026-04-25）
+広告運用 4 日（4/22〜4/25）の判断材料から戦略転換:
+- **広告キーワード分析**: 「見積書制作」系は CPA が安く取れる、「改正建設業法」系は検索ヒットが取れない（需要薄）
+- **競合分析**: 無料の見積書ツールは他社多数。「無料で見積書」軸で勝てない
+- **差別化価値**: 大手より安く（¥1,980 vs ¥9,800〜）改正建設業法対応の見積書を作成できる
+- **新ファネル**: 広告 → 「無料の見積書ツール」で集客（CPA 安いキーワード活用）→ ツール内バナー・プレビューで「改正法未対応ですよ」と訴求 → 有料版（改正法対応版）への課金転換 という時間差ファネル
+- このため Free を**完全無料化**する経済合理性が成立する
+- **登録必須化**: 旧来「登録不要で試せる」訴求を撤回し、メアド登録を必須化。理由は **改正建設業法に関する啓発ドリップメールを配信して課金転換に繋げるためのリスト構築**。LP / 広告 CTA は `/construction/start`（軽量登録ページ）経由。`登録不要` 系コピーは実装意図に反するため使用禁止（旧コピーが残存している箇所は順次置換）
+
+### ユーザー向け呼称ルール
+- ユーザー向けコピーで「Solo」と書かない。「**有料プラン**」を使う（2026-04-25 ピボット時に決定）
+- 内部識別子としての "Solo" は残す:
+  - DB enum `profiles.plan` の値 `"solo"` / `"team"` / `"free"`
+  - component / variable / file 名（`SoloUpgrade.tsx`、`useSoloFeatureLock`、`solo-upgrade` anchor 等）
+  - LP Pricing カードの SKU バッジ「FREE」「SOLO」「TEAM」（branding として）
+  - 規約・特商法の billing 詳細（「Solo プラン: 月額 ¥1,980」のように識別子併記でもOK）
+  - admin 画面（社内向け）
+  - JSON-LD の Offer name（schema 上の SKU 名）
 
 ### エディタ アクションボタン順序（`ConstructionEditor.tsx`）
 1. PDF ダウンロード（全員）
-2. 未ログイン/Free は登録・Solo 誘導カード（PDF 直後の熱量タイミング）
-3. 見積書を保存（ログイン済み）
-4. 書類変換・CSV・メール送信（Solo/Team 限定）
-5. マイページリンク
+2. 未ログイン/Free は登録・有料プラン誘導カード（PDF 直後の熱量タイミング）
+3. 見積書を保存（ログイン済み・全プラン無制限）
+4. マイページリンク
 
 ### 絶対に触らない（ケンミツ改修時の保護対象）
 - `src/app/layout.tsx` のルート設定全て（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
@@ -279,12 +301,11 @@ export default function GuidePage() {
 - Stripe 決済フロー本体（`PlanCheckoutButton` の `/api/stripe/checkout` 呼び出し部分、`PortalButton`、Stripe webhook の署名検証・plan 切替ロジック）
 - `src/app/construction/page.tsx` 内の SoftwareApplication + FAQPage JSON-LD、`metadata`、`TrackPageView name="construction_lp_view"`
 - `/construction/` 配下のサブルート13本のレイアウト構造・情報項目・ラベル・ガイダンス文言・デフォ値（色だけは統一OK）
-- `/api/quotes` の 402 enforce ロジック（月3通制限）
 - `/api/stripe/webhook` の `constructEvent` 署名検証
 
 ### モバイルブレークポイント注意点（LP）
 - `Comparison.tsx`: **sm 以下ではカード積層に切替**（テーブルではない）。3列squeezeを避けるための専用レイアウト
-- `Pricing.tsx`: 単列 → 2列 → 3列。Solo の浮き上がり（`translate-y`）は **lg 以上限定**でモバイル時のクリッピングを回避
+- `Pricing.tsx`: 単列 → 2列 → 3列。SOLO カードの浮き上がり（`translate-y`）は **lg 以上限定**でモバイル時のクリッピングを回避
 - `Hero`: アラートリボンのテキストは **sm 以下で短縮表示**（フル文言「施行から N 日経過 — 未対応は法令リスク」は sm 以上のみ）
 
 ### noindex 対象（認証系・プライベート画面）
@@ -308,4 +329,6 @@ LP・広告コピーで避けるべき表現:
 - 「完全対応」「100%」等 — 根拠リスト（例: 改正法の条項を LawCompliance セクションで列挙）とセットでのみ OK
 - 「3分で作れる」等の数値訴求 — 実測根拠（社内計測）を用意
 
-2026-04-19 時点で「業界最安値帯」→「月¥980〜」「登録不要で試せる」に差し替え済み。
+2026-04-19 時点で「業界最安値帯」→「月¥980〜」に差し替え済み。さらに 2026-04-25 ピボットで:
+- 「月¥980〜」→「月¥1,980〜」（commit `246dc1b`）
+- 「登録不要で試せる」→ メアド登録必須に転換、コピーも「メアド登録だけで〜」に統一（drip email 配信のためのリスト構築が目的）

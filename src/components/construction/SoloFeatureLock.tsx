@@ -117,7 +117,7 @@ export function SoloLockBadge({ className = "" }: { className?: string }) {
       title="有料プラン限定機能"
     >
       <Lock className="w-2.5 h-2.5" strokeWidth={3} />
-      Solo
+      有料
     </span>
   );
 }
