@@ -289,13 +289,13 @@ export default function FaqPage() {
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
           <h2 className="text-xl font-bold mb-2">まずは無料で試してみる</h2>
           <p className="text-gray-400 mb-4 text-sm">
-            登録不要・クレジットカード不要
+            メアド登録だけ・クレジットカード不要
           </p>
           <Link
-            href="/construction/new"
+            href="/construction/start"
             className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            見積書を作成する →
+            無料で始める →
           </Link>
         </div>
       </main>

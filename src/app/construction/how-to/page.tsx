@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "使い方ガイド | ケンミツ",
   description:
-    "ケンミツの使い方を全8ステップで解説。工種プリセット・明細入力・法定福利費・諸経費・PDF出力・保存・マスタ登録まで。登録不要で今すぐ試せます。",
+    "ケンミツの使い方を全8ステップで解説。工種プリセット・明細入力・法定福利費・諸経費・PDF出力・保存・マスタ登録まで。メアド登録だけですぐ使えます。",
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/how-to",
   },

@@ -64,9 +64,9 @@ export default function OurStory() {
               <span className="bg-kenmitsu-orange50 px-1.5 shadow-[inset_0_-10px_0_0_theme(colors.kenmitsu.orange)]">
                 月¥980
               </span>
-              で、 改正建設業法2025に完全準拠した、
+              で、 改正建設業法2025に対応した、
               <br />
-              <strong>登録不要で試せる</strong>ツール ——
+              <strong>メアド登録だけで使える</strong>ツール ——
             </p>
             <p className="mt-4 text-[14px] leading-[1.85] text-kenmitsu-ink2 md:text-[15px]">
               この穴を埋めるために開発しました。広告収入にも頼らず、全ユーザーのサブスク収入だけで運営。機能追加は全員のフィードバックで優先順位を決めます。建設業界全体の適法化の一助となれば、という想いで作っています。

@@ -62,10 +62,10 @@ export default function LpHeader({ isLoggedIn, planLabel }: Props) {
             </Link>
           )}
           <Link
-            href="/construction/new"
+            href={isLoggedIn ? "/construction/new" : "/construction/start"}
             className="inline-flex items-center gap-2 rounded-[10px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-4 py-2.5 text-[13px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_18px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px"
           >
-            {isLoggedIn ? "見積書を作成" : "登録不要で試す"}
+            {isLoggedIn ? "見積書を作成" : "無料で始める"}
             <ArrowIcon color="#1A1200" />
           </Link>
         </div>

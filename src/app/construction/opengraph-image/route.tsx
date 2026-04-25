@@ -64,7 +64,7 @@ export async function GET() {
         >
           建設業の見積書を
           <br />
-          月980円で、スマホで、3分で。
+          月980円で、改正法対応で、3分で。
         </div>
 
         <div
@@ -75,7 +75,7 @@ export async function GET() {
             marginBottom: "32px",
           }}
         >
-          改正建設業法2025対応 ・ 登録不要で今すぐ試せる
+          改正建設業法2025対応 ・ メアド登録だけで使える
         </div>
 
         <div

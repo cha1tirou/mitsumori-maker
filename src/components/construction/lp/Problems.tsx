@@ -90,10 +90,10 @@ export default function Problems() {
 
         <div className="mt-14 text-center">
           <Link
-            href="/construction/new"
+            href="/construction/start"
             className="inline-flex items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-8 py-4 text-[15px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_10px_24px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px md:text-[17px]"
           >
-            ↑ 全部解決するツールを試す（登録不要）
+            ↑ 全部解決するツールを使う（無料登録）
             <ArrowIcon color="#1A1200" />
           </Link>
         </div>

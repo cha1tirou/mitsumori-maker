@@ -18,7 +18,7 @@ export default function ConstructionPromoBanner() {
               建設業専用・月980円の見積書ツールがあります
             </h3>
             <p className="text-xs text-gray-600 leading-relaxed mb-3">
-              階層見積・法定福利費・労務費内訳・瑕疵担保条項 ― 改正建設業法2025対応の工事見積書を、登録不要で試せます。
+              階層見積・法定福利費・労務費内訳・瑕疵担保条項 ― 改正建設業法2025対応の工事見積書を、メアド登録だけで作成できます。
             </p>
             <Link
               href="/construction"
