@@ -22,6 +22,51 @@ interface FaqCategory {
   items: FaqItem[];
 }
 
+/**
+ * FAQ 回答内の `[文字列](URL)` マークダウン記法を Link コンポーネントに展開して
+ * 描画する。URL が `/` で始まる内部リンクなら next/link、それ以外は外部リンク。
+ */
+function renderAnswer(text: string) {
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: (string | { label: string; href: string })[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push({ label: match[1], href: match[2] });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+
+  return parts.map((p, i) => {
+    if (typeof p === "string") return <span key={i}>{p}</span>;
+    if (p.href.startsWith("/")) {
+      return (
+        <Link
+          key={i}
+          href={p.href}
+          className="text-kenmitsu-navy underline hover:text-kenmitsu-navy700"
+        >
+          {p.label}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={i}
+        href={p.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-kenmitsu-navy underline hover:text-kenmitsu-navy700"
+      >
+        {p.label}
+      </a>
+    );
+  });
+}
+
 const faqCategories: FaqCategory[] = [
   {
     title: "料金・プラン",
@@ -36,11 +81,11 @@ const faqCategories: FaqCategory[] = [
       },
       {
         q: "年払いは割引がありますか？",
-        a: "はい。有料プラン年額 ¥19,800（月額換算 ¥1,650、約2ヶ月分お得）、Team 年額 ¥29,800 となっています。Stripe Checkout の画面で月額/年額を選択できます。",
+        a: "はい。有料プラン年額 ¥19,800（月額換算 ¥1,650、約2ヶ月分お得）です。Stripe Checkout の画面で月額/年額を選択できます。",
       },
       {
-        q: "Teamプランは使えますか？",
-        a: "Teamプランは現在検討段階で、提供時期は未定です。新規受付は一時停止しています。当面は有料プラン（個人）をご利用ください。提供を開始する場合は、Team機能（複数アカウント・顧客管理・請求書連動・電子サイン）のご案内を優先的にお送りします。",
+        q: "複数人で使えますか？",
+        a: "複数人でアカウントを共有できるプランを検討中です。希望される場合は[お問い合わせフォーム](/construction/contact)よりご連絡ください。",
       },
       {
         q: "領収書は発行されますか？",
@@ -52,7 +97,7 @@ const faqCategories: FaqCategory[] = [
       },
       {
         q: "法人契約・請求書払いはできますか？",
-        a: "申し訳ございませんが、現時点では対応しておりません。有料プランは中小建設業者向けの小規模プラン（月¥1,980）として、クレジットカード決済のみでの提供となります。複数アカウントが必要な工務店向けの Team プランは検討段階です。",
+        a: "申し訳ございませんが、現時点では対応しておりません。有料プランは中小建設業者向けの小規模プラン（月¥1,980）として、クレジットカード決済のみでの提供となります。複数アカウントが必要な工務店向けの共有プランは検討中で、希望される場合は[お問い合わせフォーム](/construction/contact)よりご連絡ください。",
       },
     ],
   },
@@ -173,7 +218,8 @@ export default function FaqPage() {
         name: item.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: item.a,
+          // JSON-LD では markdown 記法を平文化（[text](url) → text）
+          text: item.a.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"),
         },
       }))
     ),
@@ -233,7 +279,7 @@ export default function FaqPage() {
                       />
                     </summary>
                     <div className="px-5 pb-4 text-sm text-gray-700 leading-relaxed border-t border-gray-100">
-                      <p className="mt-3 whitespace-pre-line">{item.a}</p>
+                      <p className="mt-3 whitespace-pre-line">{renderAnswer(item.a)}</p>
                     </div>
                   </details>
                 ))}

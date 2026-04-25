@@ -77,8 +77,7 @@ export default function ConstructionTokushohoPage() {
                 label="販売価格"
                 value={
                   <div className="space-y-1">
-                    <p>Solo プラン: 月額 ¥1,980（税込） / 年額 ¥19,800（税込）</p>
-                    <p>Team プラン: 月額 ¥2,980（税込） / 年額 ¥29,800（税込）</p>
+                    <p>有料プラン: 月額 ¥1,980（税込） / 年額 ¥19,800（税込）</p>
                   </div>
                 }
               />

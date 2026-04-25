@@ -46,22 +46,6 @@ const plans: Plan[] = [
     ],
     featured: true,
   },
-  {
-    id: "team",
-    name: "TEAM",
-    tag: "準備中",
-    price: "¥2,980",
-    period: "/月",
-    subprice: "小規模工務店向け（〜5名）",
-    features: [
-      ["ok", "有料プラン全機能"],
-      ["dev", "5アカウントまで（検討中）"],
-      ["dev", "顧客管理・案件紐付（検討中）"],
-      ["dev", "請求書との連動（検討中）"],
-      ["dev", "電子サイン（検討中）"],
-      ["dev", "電子帳簿保存法対応（検討中）"],
-    ],
-  },
 ];
 
 type Props = {
@@ -99,10 +83,9 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
         </div>
 
         {/* featured SOLO gets -translate-y-2 on lg+ ONLY to avoid clipping on mobile */}
-        <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2">
           {plans.map((p) => {
             const featured = p.featured;
-            const disabled = p.id === "team";
             return (
               <article
                 key={p.id}
@@ -111,7 +94,6 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                   featured
                     ? "border-[2.5px] border-kenmitsu-orange p-7 shadow-[0_40px_80px_-30px_rgba(245,158,11,0.35)] lg:-translate-y-2 md:p-8"
                     : "border-[1.5px] border-kenmitsu-line p-6 md:p-7",
-                  disabled ? "opacity-80 sm:col-span-2 lg:col-span-1" : "",
                 ].join(" ")}
               >
                 {featured && p.tag && (
@@ -195,16 +177,6 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                       variant="kenmitsu"
                     />
                   ))}
-                {p.id === "team" && (
-                  <button
-                    type="button"
-                    disabled
-                    title="Team プランは現在検討中です。提供時期は未定のため、当面は有料プランをご利用ください。"
-                    className="w-full cursor-not-allowed rounded-[12px] border border-dashed border-kenmitsu-line bg-kenmitsu-paper px-5 py-3.5 text-center text-[14px] font-bold text-kenmitsu-muted md:text-[15px]"
-                  >
-                    検討中 — 現在は有料プランをご利用ください
-                  </button>
-                )}
               </article>
             );
           })}

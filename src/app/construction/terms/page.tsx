@@ -5,7 +5,7 @@ import { HardHat } from "lucide-react";
 export const metadata: Metadata = {
   title: "利用規約（建設業向け有料プラン）| ケンミツ",
   description:
-    "ケンミツ（建設業向け有料プラン）の利用規約。Soloプラン・Teamプランの契約・料金・解約・返金・責任範囲について定めています。",
+    "ケンミツ（建設業向け有料プラン）の利用規約。有料プランの契約・料金・解約・返金・責任範囲について定めています。",
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/terms",
   },
@@ -58,7 +58,7 @@ export default function ConstructionTermsPage() {
             <ol>
               <li>「運営者」とは、本サービスを提供する事業者をいいます。</li>
               <li>「利用者」とは、本サービスに登録し、利用する個人または法人をいいます。</li>
-              <li>「有料プラン」とは、Soloプラン・Teamプラン等、月額または年額の対価を伴う利用形態をいいます。</li>
+              <li>「有料プラン」とは、月額または年額の対価を伴う利用形態をいいます。</li>
               <li>「無料プラン」とは、メールアドレスを登録するだけで利用できる、機能制限付きの利用形態をいいます。</li>
             </ol>
           </Section>
@@ -79,8 +79,7 @@ export default function ConstructionTermsPage() {
               <li>
                 本サービスの料金は以下のとおりとします（すべて税込）。
                 <ul>
-                  <li>Solo プラン: 月額 ¥1,980 / 年額 ¥19,800</li>
-                  <li>Team プラン: 月額 ¥2,980 / 年額 ¥29,800</li>
+                  <li>有料プラン: 月額 ¥1,980 / 年額 ¥19,800</li>
                 </ul>
               </li>
               <li>
@@ -138,7 +137,7 @@ export default function ConstructionTermsPage() {
               <li>他者の権利を侵害する行為</li>
               <li>本サービスの運営を妨害する行為（大量リクエスト・不正なアクセスを含む）</li>
               <li>本サービスをリバースエンジニアリング、複製、再販売する行為</li>
-              <li>他者にアカウント情報を譲渡または貸与する行為（Teamプランの正規の共有を除く）</li>
+              <li>他者にアカウント情報を譲渡または貸与する行為</li>
             </ol>
           </Section>
 

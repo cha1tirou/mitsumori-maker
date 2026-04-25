@@ -120,7 +120,7 @@ export default async function ConstructionLandingPage() {
       },
       {
         "@type": "Offer",
-        name: "Solo プラン",
+        name: "有料プラン",
         price: "1980",
         priceCurrency: "JPY",
         priceSpecification: {
