@@ -104,7 +104,7 @@ export default async function ReceiptHelpPage() {
               </div>
               <div className="pl-8 text-sm text-gray-700 leading-relaxed space-y-2">
                 <p>
-                  ¥980 の決済が完了すると、登録メールアドレス宛に
+                  ¥1,980 の決済が完了すると、登録メールアドレス宛に
                   領収書 PDF が添付されたメールが自動で届きます。
                 </p>
                 <div className="bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-600 flex items-start gap-2">
@@ -171,7 +171,7 @@ export default async function ReceiptHelpPage() {
                         有料プランご契約後にご利用いただけます
                       </p>
                       <p className="text-xs text-gray-600 leading-relaxed mb-3">
-                        領収書の自動発行は有料プラン（月¥980）の決済後からご利用可能です。
+                        領収書の自動発行は有料プラン（月¥1,980）の決済後からご利用可能です。
                         Free プランは無料のため領収書発行の対象外となります。
                       </p>
                       <Link
@@ -205,7 +205,7 @@ export default async function ReceiptHelpPage() {
                   value="〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F"
                 />
                 <Row label="連絡先" value="kenmitsu.support@gmail.com" />
-                <Row label="金額" value="¥980（月額・税込）" />
+                <Row label="金額" value="¥1,980（月額・税込）" />
                 <Row label="支払方法 / 支払日 / 領収書番号" value="毎回自動記録" />
               </div>
             </section>
@@ -240,7 +240,7 @@ export default async function ReceiptHelpPage() {
                 />
                 <Faq
                   q="消費税の内訳（税額）が記載されていません"
-                  a="現在は税込 ¥980 として表示しており、内訳の税額欄は省略しています。取引先から内訳表示を求められた場合はお問い合わせください。"
+                  a="現在は税込 ¥1,980 として表示しており、内訳の税額欄は省略しています。取引先から内訳表示を求められた場合はお問い合わせください。"
                 />
               </div>
             </section>

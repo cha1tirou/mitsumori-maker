@@ -34,9 +34,9 @@ const plans: Plan[] = [
   {
     id: "solo",
     name: "SOLO",
-    price: "¥980",
+    price: "¥1,980",
     period: "/月",
-    subprice: "年払い ¥9,800（2ヶ月分お得）",
+    subprice: "年払い ¥19,800（2ヶ月分お得）",
     features: [
       ["hl", "改正建設業法のルールに沿った見積書を作成"],
       ["hl", "労務費・法定福利費の内訳明示"],

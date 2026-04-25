@@ -57,7 +57,7 @@ export function useSoloFeatureLock() {
           </div>
           <div className="p-5">
             <p className="text-sm text-gray-700 leading-relaxed mb-4">
-              有料プラン（月¥980・年払い ¥9,800）では、以下の機能がすべて使えます:
+              有料プラン（月¥1,980・年払い ¥19,800）では、以下の機能がすべて使えます:
             </p>
             <ul className="text-xs text-gray-700 space-y-1.5 mb-5">
               <li className="flex items-center gap-2">

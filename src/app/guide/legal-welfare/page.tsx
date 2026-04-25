@@ -196,7 +196,7 @@ export default function LegalWelfarePage() {
               法定福利費を自動計算できる見積書ツール
             </h2>
             <p className="text-gray-400 mb-4 text-sm">
-              登録不要・月¥980から / 労務費を入れるだけで法定福利費・諸経費が自動計上
+              登録不要・月¥1,980から / 労務費を入れるだけで法定福利費・諸経費が自動計上
             </p>
             <Link
               href="/construction"

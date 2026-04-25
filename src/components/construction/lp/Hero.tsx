@@ -41,7 +41,7 @@ export default function Hero({ lawDays }: Props) {
               </span>
               の
               <br />
-              ルールに沿った見積書を、月¥980 で。
+              ルールに沿った見積書を、月¥1,980 で。
             </h1>
             <p className="mb-7 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-8 md:text-lg">
               ケンミツの有料プランにアップグレードすると、労務費・法定福利費を内訳明示した、改正建設業法のルールに沿った見積書を作成できます。

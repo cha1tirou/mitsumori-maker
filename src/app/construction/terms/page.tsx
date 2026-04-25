@@ -79,7 +79,7 @@ export default function ConstructionTermsPage() {
               <li>
                 本サービスの料金は以下のとおりとします（すべて税込）。
                 <ul>
-                  <li>Solo プラン: 月額 ¥980 / 年額 ¥9,800</li>
+                  <li>Solo プラン: 月額 ¥1,980 / 年額 ¥19,800</li>
                   <li>Team プラン: 月額 ¥2,980 / 年額 ¥29,800</li>
                 </ul>
               </li>

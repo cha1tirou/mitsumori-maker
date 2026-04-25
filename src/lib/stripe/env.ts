@@ -34,8 +34,8 @@ export const planConfigs: PlanConfig[] = [
   {
     plan: "solo",
     label: "Solo",
-    priceMonthly: 980,
-    priceYearly: 9800,
+    priceMonthly: 1980,
+    priceYearly: 19800,
     stripeMonthlyPriceId: process.env.STRIPE_PRICE_SOLO_MONTHLY,
     stripeYearlyPriceId: process.env.STRIPE_PRICE_SOLO_YEARLY,
   },

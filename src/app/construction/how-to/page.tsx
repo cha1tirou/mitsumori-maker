@@ -281,7 +281,7 @@ export default function HowToPage() {
             まずは無料で試してみてください
           </h2>
           <p className="text-gray-400 mb-4 text-sm">
-            メアド登録だけ・カード不要 / 改正建設業法のルールに沿った見積書は有料プラン（月¥980）から
+            メアド登録だけ・カード不要 / 改正建設業法のルールに沿った見積書は有料プラン（月¥1,980）から
           </p>
           <Link
             href="/construction/new"

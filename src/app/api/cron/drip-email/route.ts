@@ -200,7 +200,7 @@ function buildUpgradeEmail(unsubscribeUrl: string): string {
     <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">取引先提出用の見積書、透かしで困っていませんか？</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       無料プランの PDF には「無料版 SAMPLE」の透かしが入ります。<br>
-      取引先に正式な見積書として提出するには <strong>Soloプラン（月¥980）</strong> をご検討ください。
+      取引先に正式な見積書として提出するには <strong>Soloプラン（月¥1,980）</strong> をご検討ください。
     </p>
     <ul style="font-size: 14px; line-height: 2; padding-left: 20px; margin-bottom: 16px;">
       <li><strong>透かしなし</strong>の正式版PDFが出力できる</li>

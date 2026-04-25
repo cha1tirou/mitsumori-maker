@@ -142,7 +142,7 @@ export async function fetchAdminStats(): Promise<AdminStats> {
   const paidN = paidUsers ?? 0;
   const totalN = totalUsers ?? 0;
   const churnN = churnCount30d ?? 0;
-  const mrr = soloN * 980 + teamN * 2980;
+  const mrr = soloN * 1980 + teamN * 2980;
   const cvr = totalN > 0 ? Math.round((paidN / totalN) * 1000) / 10 : 0;
   const churnBase = paidN + churnN;
   const churnRate30d = churnBase > 0 ? Math.round((churnN / churnBase) * 1000) / 10 : 0;

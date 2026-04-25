@@ -56,7 +56,7 @@ export default function FinalCta({ lawDays }: Props) {
         <p className="mb-10 text-[15px] leading-[1.85] text-white/85 md:text-[17px]">
           登録・カード登録は不要、今すぐ触れます。
           <br />
-          気に入ったら月980円。嫌ならそのまま使わないだけ。
+          気に入ったら月1,980円。嫌ならそのまま使わないだけ。
         </p>
 
         <div className="mb-14 flex flex-wrap justify-center gap-3.5">

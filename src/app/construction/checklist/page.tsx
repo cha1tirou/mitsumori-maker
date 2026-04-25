@@ -505,7 +505,7 @@ export default function ChecklistPage() {
             <p className="text-sm text-white/85 mb-6 leading-relaxed max-w-xl mx-auto">
               ケンミツなら、労務費の内訳明示・法定福利費の独立計上・見積条件書の必須項目を
               <strong>入力画面で自動チェック</strong>
-              しながら作成できます。月¥980・PC・スマホ・タブレット対応。
+              しながら作成できます。月¥1,980・PC・スマホ・タブレット対応。
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link

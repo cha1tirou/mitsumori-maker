@@ -325,7 +325,7 @@ export default function ConstructionEditor({
                           有料
                         </span>
                         <span className="font-mono text-lg font-black text-kenmitsu-orange600 leading-none">
-                          ¥980
+                          ¥1,980
                         </span>
                         <span className="text-[11px] text-kenmitsu-muted">
                           /月

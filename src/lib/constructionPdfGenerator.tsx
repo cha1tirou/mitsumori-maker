@@ -416,7 +416,7 @@ function FooterWatermark() {
       }}
     >
       <Text style={{ fontSize: 8, color: "#6b7280", textAlign: "center" }}>
-        ケンミツ 無料版で作成 ｜ 透かしなしの正式版は月¥980（Solo）から / mitsumori-maker.com/construction
+        ケンミツ 無料版で作成 ｜ 透かしなしの正式版は月¥1,980（Solo）から / mitsumori-maker.com/construction
       </Text>
     </View>
   );

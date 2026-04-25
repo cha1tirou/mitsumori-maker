@@ -62,7 +62,7 @@ export default function OurStory() {
               に特化して、
               <br className="hidden md:block" />
               <span className="bg-kenmitsu-orange50 px-1.5 shadow-[inset_0_-10px_0_0_theme(colors.kenmitsu.orange)]">
-                月¥980
+                月¥1,980
               </span>
               で、 改正建設業法2025に対応した、
               <br />

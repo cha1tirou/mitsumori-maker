@@ -36,7 +36,7 @@ const rows: Row[] = [
   {
     label: "ケンミツ（有料プラン）",
     type: "見積特化（中小建設業者向け）",
-    price: "¥980 / 月",
+    price: "¥1,980 / 月",
     lawCompliant: true,
     highlight: true,
   },

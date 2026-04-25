@@ -22,15 +22,15 @@ function daysSinceLawEnforcement(): number {
 }
 
 export const metadata: Metadata = {
-  title: "建設業の見積書作成｜改正建設業法2025対応・月980円｜ケンミツ",
+  title: "建設業の見積書作成｜改正建設業法2025対応・月1,980円｜ケンミツ",
   description:
-    "中小建設業者向けの見積書作成ツール。改正建設業法のルールに沿った見積書を月¥980 で作成できるサービスはケンミツだけ。無料登録で見積書は何枚でも作成・PDF ダウンロード可。",
+    "中小建設業者向けの見積書作成ツール。改正建設業法のルールに沿った見積書を月¥1,980 で作成できるサービスはケンミツだけ。無料登録で見積書は何枚でも作成・PDF ダウンロード可。",
   keywords:
     "建設業 見積書, 改正建設業法 2025, 建設業法 改正, 工事見積書 アプリ, 労務費 内訳, 見積書 ソフト 建設, 中小建設業者",
   openGraph: {
-    title: "建設業の見積書作成｜改正建設業法2025対応・月980円",
+    title: "建設業の見積書作成｜改正建設業法2025対応・月1,980円",
     description:
-      "改正建設業法 2025 対応の見積書を月¥980 で出せるサービスはケンミツだけ。無料登録で何枚でも作成・PDF 可。",
+      "改正建設業法 2025 対応の見積書を月¥1,980 で出せるサービスはケンミツだけ。無料登録で何枚でも作成・PDF 可。",
     url: "https://mitsumori-maker.com/construction",
     siteName: "ケンミツ",
     locale: "ja_JP",
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
         url: "https://mitsumori-maker.com/construction/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "ケンミツ — 改正建設業法2025対応・月¥980 から。",
+        alt: "ケンミツ — 改正建設業法2025対応・月¥1,980 から。",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "建設業の見積書作成｜改正建設業法2025対応・月980円｜ケンミツ",
+    title: "建設業の見積書作成｜改正建設業法2025対応・月1,980円｜ケンミツ",
     description:
-      "改正建設業法 2025 対応の見積書を月¥980 で出せるサービスはケンミツだけ。",
+      "改正建設業法 2025 対応の見積書を月¥1,980 で出せるサービスはケンミツだけ。",
     images: ["https://mitsumori-maker.com/construction/opengraph-image"],
   },
   alternates: {
@@ -66,8 +66,8 @@ const faqsForLd = [
     a: "監督官庁から段階的に処分が下されます。指導 → 勧告 → 企業名公表 → 業務改善命令 → 営業停止 → 建設業許可の取消。経営事項審査評点も下がり公共工事入札で不利に。元請けからの見積書差し戻し・取引縮小のリスクもあります。",
   },
   {
-    q: "なぜケンミツは月¥980 で改正法対応にできるのですか？",
-    a: "建設業向けの業務管理 SaaS は顧客・案件・工程・原価・帳票をフル装備した月¥9,800〜¥30,000 のプロダクトが中心です。ケンミツは「中小建設業者の見積書作成」に機能を絞り込むことで、改正建設業法のルールに沿った見積書を月¥980 で提供できます。",
+    q: "なぜケンミツは月¥1,980 で改正法対応にできるのですか？",
+    a: "建設業向けの業務管理 SaaS は顧客・案件・工程・原価・帳票をフル装備した月¥9,800〜¥30,000 のプロダクトが中心です。ケンミツは「中小建設業者の見積書作成」に機能を絞り込むことで、改正建設業法のルールに沿った見積書を月¥1,980 で提供できます。",
   },
   {
     q: "解約はいつでもできますか？",
@@ -102,7 +102,7 @@ export default async function ConstructionLandingPage() {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description:
-      "中小建設業者向けの建設業特化・見積書作成クラウドツール。改正建設業法のルールに沿った見積書を月¥980 で作成可能。",
+      "中小建設業者向けの建設業特化・見積書作成クラウドツール。改正建設業法のルールに沿った見積書を月¥1,980 で作成可能。",
     offers: [
       {
         "@type": "Offer",
@@ -113,11 +113,11 @@ export default async function ConstructionLandingPage() {
       {
         "@type": "Offer",
         name: "Solo プラン",
-        price: "980",
+        price: "1980",
         priceCurrency: "JPY",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "980",
+          price: "1980",
           priceCurrency: "JPY",
           referenceQuantity: {
             "@type": "QuantitativeValue",

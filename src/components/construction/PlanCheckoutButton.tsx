@@ -25,7 +25,7 @@ interface Props {
 }
 
 const PRICES = {
-  solo: { monthly: 980, yearly: 9800, monthlyEquivalent: 816 },
+  solo: { monthly: 1980, yearly: 19800, monthlyEquivalent: 1650 },
   team: { monthly: 2980, yearly: 29800, monthlyEquivalent: 2483 },
 } as const;
 

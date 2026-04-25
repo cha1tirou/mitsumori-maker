@@ -231,7 +231,7 @@ export default function KaiseiKensetsuPage() {
               改正建設業法2025対応の見積書を、今すぐ無料で
             </h2>
             <p className="text-gray-400 mb-4 text-sm">
-              登録不要・月¥980から / 法令チェッカー・法定福利費自動計算・工種プリセット搭載
+              登録不要・月¥1,980から / 法令チェッカー・法定福利費自動計算・工種プリセット搭載
             </p>
             <Link
               href="/construction"

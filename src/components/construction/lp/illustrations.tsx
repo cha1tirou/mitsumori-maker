@@ -904,7 +904,7 @@ export function IluHeroKeyArt() {
         </g>
       </g>
 
-      {/* floating ¥980 badge top-right */}
+      {/* floating ¥1,980 badge top-right */}
       <g transform="translate(400 90)">
         <circle r="58" fill={ILU.helmet} />
         <circle
@@ -919,8 +919,8 @@ export function IluHeroKeyArt() {
         <text y="-6" textAnchor="middle" fontSize="11" fontWeight="700" fill="#1A1200">
           月額たった
         </text>
-        <text y="20" textAnchor="middle" fontSize="28" fontWeight="900" fill="#1A1200">
-          ¥980
+        <text y="20" textAnchor="middle" fontSize="26" fontWeight="900" fill="#1A1200">
+          ¥1,980
         </text>
         <text
           y="38"

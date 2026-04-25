@@ -69,7 +69,7 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
                 </p>
                 <div className="mb-1 flex items-baseline gap-1">
                   <span className="font-mono text-[32px] font-black leading-none tracking-[-0.02em] text-kenmitsu-ink md:text-[40px]">
-                    ¥980
+                    ¥1,980
                   </span>
                   <span className="text-[12px] font-bold text-kenmitsu-muted md:text-[14px]">
                     /月
@@ -96,14 +96,14 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
                 </p>
                 <div className="mb-1 flex items-baseline gap-1">
                   <span className="font-mono text-[32px] font-black leading-none tracking-[-0.02em] text-kenmitsu-ink md:text-[40px]">
-                    ¥9,800
+                    ¥19,800
                   </span>
                   <span className="text-[12px] font-bold text-kenmitsu-muted md:text-[14px]">
                     /年
                   </span>
                 </div>
                 <p className="mb-4 text-[11px] text-kenmitsu-muted md:text-[12px]">
-                  月換算 ¥816（約 17% お得）
+                  月換算 ¥1,650（約 17% お得）
                 </p>
                 <PlanCheckoutButton
                   plan="solo"

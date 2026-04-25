@@ -21,7 +21,7 @@ const items = [
   },
   {
     label: "月額",
-    value: "¥980〜",
+    value: "¥1,980〜",
     note: "メアド登録だけ・カード不要",
     Icon: <BoltIcon />,
   },

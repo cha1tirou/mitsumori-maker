@@ -50,9 +50,9 @@ export default function MasterLockedView({
 
         <div className="bg-kenmitsu-navy50 rounded-xl p-4 flex items-baseline gap-2">
           <span className="text-xs text-kenmitsu-navy font-bold">月額</span>
-          <span className="text-2xl font-bold text-gray-900">¥980</span>
+          <span className="text-2xl font-bold text-gray-900">¥1,980</span>
           <span className="text-xs text-gray-500">
-            / 年払い ¥9,800（2ヶ月分お得）
+            / 年払い ¥19,800（2ヶ月分お得）
           </span>
         </div>
 

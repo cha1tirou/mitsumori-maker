@@ -180,7 +180,7 @@ export default function FreelanceLawPage() {
               フリーランス新法・改正建設業法に対応した見積書ツール
             </h2>
             <p className="text-gray-400 mb-4 text-sm">
-              月¥980 から / 中小建設業者のための、法令対応の見積書メーカー
+              月¥1,980 から / 中小建設業者のための、法令対応の見積書メーカー
             </p>
             <Link
               href="/construction"
