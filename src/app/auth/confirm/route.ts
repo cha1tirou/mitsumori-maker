@@ -36,6 +36,20 @@ export async function GET(request: NextRequest) {
       token_hash: tokenHash,
     });
     if (!error) {
+      // セッション確立後、user_metadata.password_set が未設定なら
+      // Supabase テンプレ側の next（/construction/mypage 等）を無視して
+      // /setup-password に強制ガード。OTP 経由の新規登録ではここで PW を設定させる。
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const passwordSet = (
+        user?.user_metadata as { password_set?: boolean } | null
+      )?.password_set;
+      if (user && passwordSet !== true) {
+        return NextResponse.redirect(
+          `${origin}/construction/setup-password`,
+        );
+      }
       return NextResponse.redirect(`${origin}${next}`);
     }
     console.error("auth/confirm verifyOtp error:", error);
