@@ -5,11 +5,8 @@ import Link from "next/link";
 import {
   HardHat,
   Mail,
-  Lock,
   Loader2,
   AlertTriangle,
-  Eye,
-  EyeOff,
   CheckCircle2,
   Shield,
   Smartphone,
@@ -24,24 +21,23 @@ interface Props {
 }
 
 export default function StartForm({ redirectTo }: Props) {
+  // 旧設計の名残: redirectTo パラメータを残しているが、OTP フローでは
+  // パスワード設定後に必ず /construction/mypage に着地する設計に統一。
+  void redirectTo;
+
   // /start ページの到達を計測（広告ランディング）
   useEffect(() => {
     trackConversion("construction_start_view");
   }, []);
+
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [sent, setSent] = useState(false);
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) return;
-
-    if (password.length < 6) {
-      setError("パスワードは6文字以上で設定してください。");
-      return;
-    }
+    if (!email || loading) return;
 
     if (!isSupabaseConfigured()) {
       setError("認証機能は現在準備中です。");
@@ -52,42 +48,35 @@ export default function StartForm({ redirectTo }: Props) {
     setError("");
     try {
       const supabase = createClient();
-      const { data, error: authError } = await supabase.auth.signUp({
+      const origin = window.location.origin;
+      // OTP（マジックリンク）送信。新規メアドはアカウント自動作成、
+      // 既存メアドはログインリンクとして送信。
+      // クリック後 → /auth/confirm → /construction/setup-password でパスワード設定。
+      const { error: authError } = await supabase.auth.signInWithOtp({
         email,
-        password,
+        options: {
+          emailRedirectTo: `${origin}/auth/confirm?next=${encodeURIComponent(
+            "/construction/setup-password",
+          )}`,
+          shouldCreateUser: true,
+        },
       });
       if (authError) {
-        if (authError.message.includes("already registered")) {
-          setError(
-            "このメールアドレスは既に登録済みです。下記のリンクからログインしてください。",
-          );
-        } else if (
-          authError.message.includes("Password should be at least") ||
-          authError.message.includes("password")
-        ) {
-          setError("パスワードは6文字以上で設定してください。");
-        } else {
-          setError(authError.message);
-        }
+        setError(authError.message);
         return;
       }
-      // Supabase は既登録メアドの再登録でも成功ステータスを返すが、
-      // identities が空配列なら既存ユーザー（セキュリティ上の仕様）。
-      if (data.user && (data.user.identities?.length ?? 0) === 0) {
-        setError(
-          "このメールアドレスは既に登録されています。ログイン画面からログインまたはパスワードリセットをお試しください。",
-        );
-        return;
-      }
-      // Email Confirmation OFF 前提なので signUp 成功 = session 即時発行。
-      // window.location.href でリダイレクトすると middleware を通って Cookie が反映される。
       trackConversion("construction_signup");
-      window.location.href = redirectTo;
+      setSent(true);
     } catch {
-      setError("登録に失敗しました。もう一度お試しください。");
+      setError("送信に失敗しました。もう一度お試しください。");
+    } finally {
       setLoading(false);
     }
   };
+
+  if (sent) {
+    return <SentScreen email={email} onChangeEmail={() => setSent(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-kenmitsu-navy to-kenmitsu-navy900 text-white">
@@ -104,7 +93,7 @@ export default function StartForm({ redirectTo }: Props) {
             <span className="text-sm font-bold">ケンミツ</span>
           </Link>
           <Link
-            href={`/construction/login?redirect=${encodeURIComponent(redirectTo)}`}
+            href="/construction/login"
             className="text-xs text-white/70 hover:text-white"
           >
             ログイン
@@ -137,7 +126,7 @@ export default function StartForm({ redirectTo }: Props) {
                   className="w-4 h-4 text-kenmitsu-orange shrink-0"
                   strokeWidth={2.5}
                 />
-                <span>登録 30 秒・カード登録不要</span>
+                <span>メアド登録だけ・カード登録不要</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2
@@ -188,10 +177,10 @@ export default function StartForm({ redirectTo }: Props) {
           <div className="order-1 lg:order-2 bg-white rounded-2xl shadow-2xl text-gray-900 p-6 sm:p-8">
             <h2 className="text-lg font-bold mb-1">無料アカウント登録</h2>
             <p className="text-xs text-gray-500 mb-5">
-              メールアドレスとパスワードだけで、すぐに使い始められます。
+              メールアドレスを入力してください。届いたリンクからパスワード設定 → 利用開始です。
             </p>
 
-            <form onSubmit={handleSignup} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <label className="block">
                 <span className="text-xs text-gray-600 font-medium mb-1 block">
                   メールアドレス
@@ -212,45 +201,6 @@ export default function StartForm({ redirectTo }: Props) {
                     disabled={loading}
                     className="w-full pl-9 pr-3 py-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
                   />
-                </div>
-              </label>
-
-              <label className="block">
-                <span className="text-xs text-gray-600 font-medium mb-1 block">
-                  パスワード{" "}
-                  <span className="text-gray-400">（6文字以上）</span>
-                </span>
-                <div className="relative">
-                  <Lock
-                    className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
-                    strokeWidth={2.25}
-                  />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    required
-                    minLength={6}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    autoComplete="new-password"
-                    disabled={loading}
-                    className="w-full pl-9 pr-10 py-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-kenmitsu-navy focus:ring-1 focus:ring-kenmitsu-navy/20"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                    tabIndex={-1}
-                    aria-label={
-                      showPassword ? "パスワードを隠す" : "パスワードを表示"
-                    }
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4" strokeWidth={2} />
-                    ) : (
-                      <Eye className="w-4 h-4" strokeWidth={2} />
-                    )}
-                  </button>
                 </div>
               </label>
 
@@ -275,10 +225,10 @@ export default function StartForm({ redirectTo }: Props) {
                       className="w-4 h-4 animate-spin"
                       strokeWidth={2.5}
                     />
-                    登録中...
+                    送信中...
                   </>
                 ) : (
-                  "無料で始める →"
+                  "確認メールを送る →"
                 )}
               </button>
             </form>
@@ -288,7 +238,7 @@ export default function StartForm({ redirectTo }: Props) {
                 既にアカウントをお持ちの方
               </p>
               <Link
-                href={`/construction/login?redirect=${encodeURIComponent(redirectTo)}`}
+                href="/construction/login"
                 className="text-xs text-kenmitsu-navy font-bold hover:underline"
               >
                 ログインはこちら
@@ -340,6 +290,47 @@ export default function StartForm({ redirectTo }: Props) {
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function SentScreen({
+  email,
+  onChangeEmail,
+}: {
+  email: string;
+  onChangeEmail: () => void;
+}) {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-kenmitsu-navy to-kenmitsu-navy900 text-white flex items-center justify-center p-4">
+      <div className="bg-white text-gray-900 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
+        <CheckCircle2
+          className="w-12 h-12 text-kenmitsu-ok mx-auto mb-4"
+          strokeWidth={1.75}
+        />
+        <h2 className="text-lg font-bold mb-2">確認メールを送信しました</h2>
+        <p className="text-xs text-gray-600 leading-relaxed mb-2">
+          <strong className="text-gray-900 break-all">{email}</strong>{" "}
+          宛にメールをお送りしました。
+        </p>
+        <p className="text-xs text-gray-600 leading-relaxed mb-5">
+          メール内のリンクをクリックして、パスワード設定に進んでください。
+        </p>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-[11px] text-amber-900 leading-relaxed mb-5">
+          <strong>メールが届かない場合:</strong>
+          <br />
+          ・迷惑メールフォルダをご確認ください
+          <br />
+          ・数分待ってからもう一度お試しください
+        </div>
+        <button
+          type="button"
+          onClick={onChangeEmail}
+          className="text-xs text-kenmitsu-navy font-bold hover:underline"
+        >
+          メールアドレスを変更する
+        </button>
+      </div>
     </div>
   );
 }
