@@ -48,11 +48,12 @@ export default function Hero({ lawDays }: Props) {
               </span>
             </h1>
             <p className="mb-6 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-9 md:text-lg">
-              改正建設業法2025に準拠した工事見積書を、
+              改正建設業法 2025 に対応した工事見積書を、
               <br className="hidden md:block" />
-              <strong className="text-kenmitsu-ink">片手のスマホ</strong>で、
-              <strong className="text-kenmitsu-ink">月980円</strong>で、
-              <strong className="text-kenmitsu-ink">登録不要</strong>で作れます。
+              <strong className="text-kenmitsu-ink">月¥980</strong> で出せるサービスは
+              <strong className="text-kenmitsu-ink">ケンミツだけ</strong>。
+              <br className="hidden md:block" />
+              無料登録で見積書は何枚でも作成・PDF ダウンロードできます。
             </p>
             <p className="mb-7 text-[13px] text-kenmitsu-muted md:mb-8">
               一人親方・小規模工務店のための、建設業特化・月¥980〜の見積書ツール
@@ -63,10 +64,10 @@ export default function Hero({ lawDays }: Props) {
               className="mb-5 flex flex-wrap gap-3"
             >
               <Link
-                href="/construction/new"
+                href="/construction/start"
                 className="inline-flex items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-7 py-4 text-[15px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_10px_24px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px md:px-8 md:py-5 md:text-[17px]"
               >
-                登録不要で今すぐ試す
+                無料で始める
                 <ArrowIcon color="#1A1200" />
               </Link>
               <a
@@ -85,7 +86,7 @@ export default function Hero({ lawDays }: Props) {
               <span className="hidden h-3 w-px bg-kenmitsu-line md:inline-block" />
               <span className="inline-flex items-center gap-1.5">
                 <CheckIcon color="#0E7A52" />
-                無料版は「SAMPLE」透かし付き
+                無料で何枚でも PDF ダウンロード
               </span>
             </div>
           </div>

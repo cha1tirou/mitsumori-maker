@@ -75,7 +75,7 @@ export default async function CustomersMasterPage() {
                 "見積書作成時にワンクリック呼び出し",
                 "担当者・支払条件などのメモ欄付き",
                 "複数端末でクラウド同期",
-                "PDF 透かしなし・見積無制限保存など Solo 全機能も利用可",
+                "改正建設業法 2025 対応 PDF など Solo 全機能も利用可",
               ]}
             />
           </>

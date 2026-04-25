@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { redirect, notFound } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
-import { getCurrentUserProfile, getCurrentMonthQuoteCount } from "@/lib/supabase/queries";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
+import { getCurrentUserProfile } from "@/lib/supabase/queries";
 import ConstructionEditor from "@/components/construction/ConstructionEditor";
 import type {
   ConstructionQuoteData,
@@ -49,14 +48,6 @@ export default async function ConstructionEditPage({ params }: PageProps) {
   }
 
   const plan = (profile?.plan ?? "free") as "free" | "solo" | "team";
-  const remainingFree =
-    plan === "free"
-      ? Math.max(
-          0,
-          FREE_PLAN_MONTHLY_LIMIT -
-            (await getCurrentMonthQuoteCount(user.id))
-        )
-      : null;
 
   const storedData = row.data as Partial<ConstructionQuoteData> | null;
   const initialData: ConstructionQuoteData = {
@@ -74,7 +65,6 @@ export default async function ConstructionEditPage({ params }: PageProps) {
       quoteId={params.id}
       userEmail={user.email ?? null}
       plan={plan}
-      remainingFree={remainingFree}
     />
   );
 }

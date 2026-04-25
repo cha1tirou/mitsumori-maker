@@ -2,7 +2,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { ConstructionQuoteData } from "@/types/construction";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export async function POST(
   _request: NextRequest,
@@ -31,33 +30,6 @@ export async function POST(
 
   if (!original) {
     return NextResponse.json({ error: "見積書が見つかりません" }, { status: 404 });
-  }
-
-  // プラン取得
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("plan")
-    .eq("id", user.id)
-    .maybeSingle<{ plan: "free" | "solo" | "team" }>();
-  const plan = profile?.plan ?? "free";
-
-  // フリープラン月制限チェック
-  if (plan === "free") {
-    const { data: countRow } = await supabase
-      .from("current_month_quote_counts")
-      .select("count")
-      .eq("user_id", user.id)
-      .maybeSingle<{ count: number }>();
-    const count = countRow?.count ?? 0;
-    if (count >= FREE_PLAN_MONTHLY_LIMIT) {
-      return NextResponse.json(
-        {
-          error: "monthly_limit_exceeded",
-          message: `無料プランでは月${FREE_PLAN_MONTHLY_LIMIT}通までしか保存できません。`,
-        },
-        { status: 402 }
-      );
-    }
   }
 
   const originalData = original.data as ConstructionQuoteData;

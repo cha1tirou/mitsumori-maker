@@ -22,7 +22,7 @@ const STEPS = [
     icon: Download,
     title: "3. PDF出力",
     description:
-      "完成した見積書をPDFでダウンロード。Soloプランなら「無料版」透かしなしで発注者に提出できます。",
+      "完成した見積書を PDF でダウンロード。Solo プランなら改正建設業法 2025 対応版で出力できます。",
   },
 ] as const;
 

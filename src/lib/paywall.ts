@@ -1,7 +1,5 @@
 import { Profile } from "@/lib/supabase/types";
 
-export const FREE_PLAN_MONTHLY_LIMIT = 3;
-
 export type AccessFeature =
   | "save_quote"
   | "quote_history"
@@ -21,21 +19,11 @@ export function canAccess(
 
   switch (feature) {
     case "save_quote":
-      return true; // 月3通制限は別途カウントで判定
     case "quote_history":
-      return true; // Free でも保存した見積書の履歴は閲覧可能
     case "unlimited_quotes":
-      return plan === "solo" || plan === "team";
+      return true;
     case "team_seat":
     case "customer_management":
       return plan === "team";
   }
-}
-
-export function remainingFreeQuotes(
-  plan: "free" | "solo" | "team",
-  usedThisMonth: number,
-): number | "unlimited" {
-  if (plan !== "free") return "unlimited";
-  return Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth);
 }

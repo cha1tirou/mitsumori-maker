@@ -10,8 +10,15 @@ import { calcConstructionTotals, itemAmount } from "@/lib/constructionCalc";
 
 interface Props {
   data: ConstructionQuoteData;
-  watermark?: boolean;
+  /**
+   * 改正建設業法 2025 対応版 内訳サマリーを末尾に追加するか。
+   * Solo / Team プランで有効化。null/undefined なら非表示（Free プラン）。
+   * 値は労務費比率（0〜1）。法定福利費は労務費 × 14.6% で自動算出。
+   */
+  lawCompliantSummary?: number | null;
 }
+
+const STATUTORY_WELFARE_RATE = 0.146;
 
 const categoryBadge: Record<CostCategory, string> = {
   labor: "bg-amber-100 text-amber-800",
@@ -56,33 +63,25 @@ function splitNotesParagraphs(notes: string): string[] {
     .filter((p) => p.length > 0);
 }
 
-export default function ConstructionPreview({ data, watermark = true }: Props) {
+export default function ConstructionPreview({
+  data,
+  lawCompliantSummary,
+}: Props) {
   const totals = calcConstructionTotals(data);
+  const showLawSummary =
+    typeof lawCompliantSummary === "number" &&
+    lawCompliantSummary >= 0 &&
+    lawCompliantSummary <= 1 &&
+    totals.subtotal > 0;
+  const laborCost = showLawSummary
+    ? Math.round(totals.subtotal * (lawCompliantSummary as number))
+    : 0;
+  const statutoryWelfare = Math.round(laborCost * STATUTORY_WELFARE_RATE);
+  const otherCost = showLawSummary ? totals.subtotal - laborCost : 0;
 
   return (
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
       <div className="bg-white w-full p-[12mm] text-[11px] leading-relaxed text-gray-800 font-sans relative">
-        {watermark && (
-          <div
-            data-preview-watermark
-            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-between z-10"
-            style={{ paddingTop: "25%", paddingBottom: "20%" }}
-          >
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="text-kenmitsu-navy opacity-[0.25] font-bold tracking-widest"
-                style={{
-                  transform: "rotate(-30deg)",
-                  fontSize: "80px",
-                  letterSpacing: "0.5em",
-                }}
-              >
-                SAMPLE
-              </span>
-            ))}
-          </div>
-        )}
         {/* ヘッダー */}
         <div className="text-center mb-5">
           <h1 className="text-2xl font-bold tracking-widest text-kenmitsu-navy">
@@ -341,6 +340,37 @@ export default function ConstructionPreview({ data, watermark = true }: Props) {
             </div>
           </div>
         </div>
+
+        {/* 改正建設業法 2025 対応 内訳サマリー（Solo / Team プランのみ） */}
+        {showLawSummary && (
+          <div
+            data-pdf-no-break
+            className="border border-kenmitsu-navy/40 bg-kenmitsu-navy50/40 rounded p-3 mb-3 text-[10px]"
+          >
+            <p className="font-bold text-kenmitsu-navy mb-1.5 tracking-wide">
+              ◆ 改正建設業法 2025 対応 内訳明示
+            </p>
+            <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-gray-800">
+              <span>労務費（推定 {Math.round((lawCompliantSummary as number) * 100)}%）</span>
+              <span className="text-right font-medium">
+                {formatCurrency(laborCost)}
+              </span>
+              <span>
+                法定福利費（労務費 × {Math.round(STATUTORY_WELFARE_RATE * 100)}%）
+              </span>
+              <span className="text-right font-medium">
+                {formatCurrency(statutoryWelfare)}
+              </span>
+              <span>材料費・経費合計</span>
+              <span className="text-right font-medium">
+                {formatCurrency(otherCost)}
+              </span>
+            </div>
+            <p className="text-[9px] text-gray-600 mt-2 leading-snug">
+              本見積は改正建設業法（2025 年 12 月施行）に基づき、労務費・法定福利費等を内訳明示しています。労務費比率は工事内容に応じて調整可。法定福利費 14.6% は健康保険・厚生年金・雇用保険等の標準率です。
+            </p>
+          </div>
+        )}
 
         {/* 見積条件・保証・追加工事 */}
         {(data.warrantyPeriod || data.warrantyScope || data.additionalWorkPolicy) && (

@@ -59,14 +59,6 @@ export default function SaveQuoteButton({
 
       const json = await res.json();
 
-      if (res.status === 402) {
-        setStatus("error");
-        setErrorMessage(
-          json.message ||
-            "無料プランでは月3通までしか保存できません。Soloプランにアップグレードしてください。"
-        );
-        return;
-      }
       if (res.status === 400 && json?.error === "empty_quote") {
         setStatus("error");
         setErrorMessage(

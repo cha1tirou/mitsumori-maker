@@ -3,8 +3,6 @@ import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { ConstructionQuoteData } from "@/types/construction";
 import { calcConstructionTotals } from "@/lib/constructionCalc";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
-import type { Profile } from "@/lib/supabase/types";
 
 // 金額上限（1兆円）とフィールド検証
 const MAX_AMOUNT = 1_000_000_000_000;
@@ -82,7 +80,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid body" }, { status: 400 });
   }
 
-  // 空の見積書の保存を拒否（Free プランの月3通枠をムダに消費しないように）
+  // 空の見積書の保存を拒否（無題の¥0見積書が一覧に溜まらないようにするため）
   if (!hasMeaningfulContent(body.data)) {
     return NextResponse.json(
       {
@@ -101,15 +99,6 @@ export async function POST(request: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: "ログインが必要です" }, { status: 401 });
   }
-
-  // プラン取得
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .maybeSingle<Profile>();
-
-  const plan = profile?.plan ?? "free";
 
   const sanitized = sanitizeData(body.data);
   const total = Math.min(MAX_AMOUNT, calcConstructionTotals(sanitized).total);
@@ -134,26 +123,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     return NextResponse.json({ quote: data });
-  }
-
-  // 新規作成時はフリープラン制限（月3通）をチェック
-  if (plan === "free") {
-    const { data: countRow } = await supabase
-      .from("current_month_quote_counts")
-      .select("count")
-      .eq("user_id", user.id)
-      .maybeSingle<{ count: number }>();
-
-    const count = countRow?.count ?? 0;
-    if (count >= FREE_PLAN_MONTHLY_LIMIT) {
-      return NextResponse.json(
-        {
-          error: "monthly_limit_exceeded",
-          message: `無料プランでは月${FREE_PLAN_MONTHLY_LIMIT}通までしか保存できません。Soloプランで無制限にご利用いただけます。`,
-        },
-        { status: 402 }
-      );
-    }
   }
 
   const { data, error } = await supabase

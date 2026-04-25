@@ -9,7 +9,7 @@ import {
   defaultConstructionQuoteData,
 } from "@/types/construction";
 import { runConstructionLawChecks } from "@/lib/constructionLawChecker";
-import { trackConversion } from "@/lib/analytics";
+import { trackConversion, trackEvent } from "@/lib/analytics";
 import { useDraftSave } from "@/hooks/useDraftSave";
 import { useMasterSync } from "@/hooks/useMasterSync";
 import ConstructionForm from "@/components/construction/ConstructionForm";
@@ -21,11 +21,11 @@ import {
   HardHat,
   Eye,
   FileEdit,
-  Lock,
   User,
   LogIn,
   CircleUser,
-  AlertCircle,
+  AlertTriangle,
+  Shield,
 } from "lucide-react";
 
 const ConstructionPdfDownloadButton = dynamic(
@@ -42,7 +42,6 @@ interface Props {
   quoteId?: string;
   userEmail?: string | null;
   plan?: "free" | "solo" | "team";
-  remainingFree?: number | null;
 }
 
 const DRAFT_KEY_NEW = "mitsumori-construction-draft-v1";
@@ -52,7 +51,6 @@ export default function ConstructionEditor({
   quoteId,
   userEmail,
   plan = "free",
-  remainingFree,
 }: Props) {
   const router = useRouter();
   const isEdit = Boolean(quoteId);
@@ -61,6 +59,11 @@ export default function ConstructionEditor({
   // 未保存変更フラグ。保存成功 / 下書きクリア時に false に戻す。
   // beforeunload 警告のために使う（QAバグ #11）
   const [isDirty, setIsDirty] = useState(false);
+
+  // Solo / Team 限定: 改正建設業法 対応版の労務費比率（PDF 内訳サマリーに反映）。
+  // セッション内のみ保持。既定 60%（一人親方の標準的な比率）。
+  const [laborCostRatio, setLaborCostRatio] = useState(0.6);
+  const isLawCompliant = plan === "solo" || plan === "team";
 
   // 新規作成時のみ下書き保存を有効化。編集モードではサーバーのデータを正とする
   const draft = useDraftSave<ConstructionQuoteData>({
@@ -199,27 +202,27 @@ export default function ConstructionEditor({
       </header>
 
 
-      {/* 使用量アラート（無料・残少ない時のみ） */}
-      {userEmail && plan === "free" && typeof remainingFree === "number" && (
-        <UsageAlert remaining={remainingFree} />
-      )}
-
-      {/* 未ログイン or Freeプラン：透かし案内バナー */}
-      {(plan === "free") && (
+      {/* Free プラン: 改正建設業法対応バナー（Solo 課金導線） */}
+      {plan === "free" && (
         <div className="bg-amber-50 border-b border-amber-200">
-          <div className="max-w-7xl mx-auto px-4 py-2 text-[11px] text-amber-900 flex items-center gap-2">
-            <Lock className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />
-            <span className="flex-1">
-              無料版：PDFに「SAMPLE」透かしが入ります。取引先に提出する正式版は
-              <Link
-                href="/construction#pricing"
-                className="mx-1 font-bold underline hover:text-amber-700"
-              >
-                Soloプラン（月¥980）
-              </Link>
-              で透かしを削除できます。
-            </span>
-          </div>
+          <Link
+            href="/construction"
+            onClick={() => trackEvent("construction_law_banner_click")}
+            className="block hover:bg-amber-100/60 transition-colors"
+          >
+            <div className="max-w-7xl mx-auto px-4 py-2.5 text-[12px] text-amber-900 flex items-center gap-2">
+              <AlertTriangle
+                className="w-4 h-4 shrink-0 text-amber-700"
+                strokeWidth={2.25}
+              />
+              <span className="flex-1 font-bold leading-snug">
+                改正建設業法 2025、対応しなくて大丈夫ですか？
+                <span className="ml-2 font-normal text-amber-800">
+                  この見積書を改正法対応版にする →
+                </span>
+              </span>
+            </div>
+          </Link>
         </div>
       )}
 
@@ -268,14 +271,13 @@ export default function ConstructionEditor({
                 <ConstructionPdfDownloadButton
                   data={data}
                   plan={plan}
-                  isAuthenticated={Boolean(userEmail)}
                   className="w-full"
                 />
 
                 {/* 2a. 未ログイン: 登録誘導カード（PDFダウンロード直後に露出） */}
                 {!userEmail && (
                   <Link
-                    href={`/construction/login?redirect=${encodeURIComponent(
+                    href={`/construction/start?redirect=${encodeURIComponent(
                       isEdit
                         ? `/construction/quotes/${quoteId}`
                         : "/construction/new",
@@ -292,10 +294,10 @@ export default function ConstructionEditor({
                         </span>
                       </div>
                       <p className="text-sm font-black text-kenmitsu-navy mb-1 leading-tight">
-                        見積書を保存して、いつでも編集・再出力
+                        見積書をクラウドに保存して、いつでも編集・再出力
                       </p>
                       <p className="text-[11px] text-kenmitsu-muted leading-relaxed">
-                        月3通まで無料でクラウド保存。顧客別の履歴管理・Excelインポート・過去見積の複製も利用可。
+                        無料登録で見積書は無制限に保存・編集・複製可能。顧客別の履歴管理や Excel インポートにも対応。
                       </p>
                     </div>
                   </Link>
@@ -323,15 +325,19 @@ export default function ConstructionEditor({
                         </span>
                       </div>
                       <p className="text-sm font-black text-gray-900 mb-1.5 leading-tight">
-                        透かしを消して、取引先に出せる正式版にする
+                        改正建設業法 2025 対応版で出力できるように
                       </p>
                       <p className="text-[10px] text-kenmitsu-muted mb-2 leading-relaxed">
-                        以下の機能は Solo プランで解放されます（現在は無効化中）
+                        ¥1,000 台で改正法対応の見積書を出せるのはケンミツだけ。
                       </p>
                       <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-gray-700 leading-relaxed">
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          透かしなし PDF
+                          改正法対応 PDF
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="text-kenmitsu-ok">✓</span>
+                          労務費・法定福利費の内訳明示
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
@@ -343,10 +349,6 @@ export default function ConstructionEditor({
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="text-kenmitsu-ok">✓</span>
-                          見積書の無制限保存
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
                           工事写真の添付
                         </span>
                       </div>
@@ -354,7 +356,7 @@ export default function ConstructionEditor({
                   </Link>
                 )}
 
-                {/* 3. 見積書を保存: ログイン済みのみ（Free は月3通制限、Solo/Team は無制限） */}
+                {/* 3. 見積書を保存: ログイン済みのみ（全プラン無制限） */}
                 {userEmail && (
                   <SaveQuoteButton
                     data={data}
@@ -408,10 +410,48 @@ export default function ConstructionEditor({
                   A4サイズ
                 </span>
               </div>
+              {/* Solo / Team 限定: 改正法対応 PDF の労務費比率コントロール */}
+              {isLawCompliant && (
+                <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy/20 rounded-lg p-3 mb-3">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Shield
+                        className="w-4 h-4 text-kenmitsu-navy"
+                        strokeWidth={2.25}
+                      />
+                      <span className="text-xs font-bold text-kenmitsu-navy">
+                        改正建設業法 2025 対応版
+                      </span>
+                    </div>
+                    <label className="flex items-center gap-2 text-xs text-gray-700">
+                      <span className="whitespace-nowrap">労務費比率</span>
+                      <input
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={5}
+                        value={Math.round(laborCostRatio * 100)}
+                        onChange={(e) =>
+                          setLaborCostRatio(Number(e.target.value) / 100)
+                        }
+                        className="w-24 accent-kenmitsu-navy"
+                        aria-label="労務費比率"
+                      />
+                      <span className="font-mono font-bold text-kenmitsu-navy w-10 text-right">
+                        {Math.round(laborCostRatio * 100)}%
+                      </span>
+                    </label>
+                  </div>
+                  <p className="text-[10px] text-gray-600 mt-1.5 leading-relaxed">
+                    工事原価のうち労務費が占める割合。法定福利費（労務費 × 14.6%）の自動算出に使用し、PDF 末尾に内訳明示として印字されます。
+                  </p>
+                </div>
+              )}
+
               <div className="printable-root">
                 <ConstructionPreview
                   data={data}
-                  watermark={plan !== "solo" && plan !== "team"}
+                  lawCompliantSummary={isLawCompliant ? laborCostRatio : null}
                 />
               </div>
             </div>
@@ -419,40 +459,6 @@ export default function ConstructionEditor({
         </div>
       </main>
 
-    </div>
-  );
-}
-
-function UsageAlert({ remaining }: { remaining: number }) {
-  if (remaining > 1) {
-    return (
-      <div className="bg-blue-50 border-b border-blue-200">
-        <div className="max-w-7xl mx-auto px-4 py-2 text-[11px] text-blue-900 flex items-center gap-2">
-          <AlertCircle className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />
-          <span>
-            無料プラン: 今月の保存残り <strong>{remaining} 通</strong>
-            です。Soloプラン（月¥980）で無制限＋履歴保存が可能。
-          </span>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="bg-amber-100 border-b border-amber-300">
-      <div className="max-w-7xl mx-auto px-4 py-2 text-[11px] text-amber-900 flex items-center gap-2">
-        <AlertCircle className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />
-        <span className="flex-1">
-          {remaining === 0
-            ? "無料プランの月間保存上限に達しました。"
-            : "無料プランの月間保存残り 1 通です。"}
-          <Link
-            href="/construction#pricing"
-            className="ml-1 font-bold underline hover:text-amber-700"
-          >
-            Soloプランで無制限に解除 →
-          </Link>
-        </span>
-      </div>
     </div>
   );
 }

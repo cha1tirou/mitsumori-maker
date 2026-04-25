@@ -101,7 +101,7 @@ export default function CancelRetentionDialog({
                 <strong>再編集・複製・マスタ機能は利用不可</strong>
               </li>
               <li>
-                新規見積作成は<strong>月 3 通</strong>まで（透かし付き PDF）
+                <strong>改正建設業法 2025 対応版 PDF</strong> は出力不可（通常版のみ）
               </li>
               <li>
                 Solo に再契約すれば保管期間中のデータにフルアクセスが復活
@@ -121,7 +121,7 @@ export default function CancelRetentionDialog({
                     {quotesCount}通の見積書を作成
                   </p>
                   <p className="text-xs text-gray-500">
-                    Freeプランでは月3通に制限されます
+                    Free でも作成・保存は無制限。改正法対応 PDF のみ Solo で利用可
                   </p>
                 </div>
               </div>

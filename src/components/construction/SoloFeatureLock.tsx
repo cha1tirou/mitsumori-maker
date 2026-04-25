@@ -62,7 +62,11 @@ export function useSoloFeatureLock() {
             <ul className="text-xs text-gray-700 space-y-1.5 mb-5">
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>
-                PDF の透かし完全削除
+                改正建設業法 2025 対応 PDF
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-kenmitsu-ok font-bold">✓</span>
+                労務費・法定福利費の内訳明示
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>
@@ -75,10 +79,6 @@ export function useSoloFeatureLock() {
               <li className="flex items-center gap-2">
                 <span className="text-kenmitsu-ok font-bold">✓</span>
                 工事写真を見積書に添付
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-kenmitsu-ok font-bold">✓</span>
-                見積書の無制限保存・履歴管理
               </li>
             </ul>
             <div className="flex flex-col gap-2">

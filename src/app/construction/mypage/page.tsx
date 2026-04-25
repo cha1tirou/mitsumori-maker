@@ -5,7 +5,6 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import {
   getCurrentUserProfile,
   getRecentQuotes,
-  getCurrentMonthQuoteCount,
 } from "@/lib/supabase/queries";
 import {
   HardHat,
@@ -23,7 +22,6 @@ import AccountSettings from "@/components/construction/AccountSettings";
 import MasterHubCard from "@/components/construction/mypage/MasterHubCard";
 import AccountLabel from "@/components/construction/mypage/AccountLabel";
 import CheckoutPendingBanner from "@/components/construction/mypage/CheckoutPendingBanner";
-import { FREE_PLAN_MONTHLY_LIMIT } from "@/lib/paywall";
 
 export const metadata: Metadata = {
   title: "マイページ | ケンミツ",
@@ -66,10 +64,7 @@ export default async function MyPage({
     redirect("/construction/login?redirect=/construction/mypage");
   }
 
-  const [quotes, usedThisMonth] = await Promise.all([
-    getRecentQuotes(user.id, 100),
-    getCurrentMonthQuoteCount(user.id),
-  ]);
+  const quotes = await getRecentQuotes(user.id, 100);
 
   const plan = profile?.plan ?? "free";
   const planLabel =
@@ -78,10 +73,7 @@ export default async function MyPage({
     (plan === "solo" || plan === "team") &&
     (profile?.subscription_status === "active" ||
       profile?.subscription_status === "trialing");
-  const remaining =
-    plan === "free"
-      ? Math.max(0, FREE_PLAN_MONTHLY_LIMIT - usedThisMonth)
-      : "無制限";
+  const totalQuotes = quotes.length;
   const companyRegistered = Boolean(
     profile?.company_info &&
       typeof profile.company_info === "object" &&
@@ -233,7 +225,6 @@ export default async function MyPage({
         <QuoteList
           quotes={quotes as import("@/lib/supabase/types").ConstructionQuoteRow[]}
           plan={plan}
-          freeLimit={FREE_PLAN_MONTHLY_LIMIT}
         />
 
         {/* マスタ管理（見積書作成の事前準備） */}
@@ -289,9 +280,9 @@ export default async function MyPage({
 
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <Stat
-              label="今月の作成数"
-              value={`${usedThisMonth} 通`}
-              sub={plan === "free" ? `残り ${remaining} 通` : "無制限"}
+              label="作成済み見積書"
+              value={`${totalQuotes} 通`}
+              sub={plan === "free" ? "保存数の上限なし" : "無制限"}
             />
             <Stat
               label="次回更新日"

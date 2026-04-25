@@ -18,7 +18,6 @@ import { ConstructionQuoteRow } from "@/lib/supabase/types";
 interface Props {
   quotes: ConstructionQuoteRow[];
   plan: string;
-  freeLimit: number;
 }
 
 type SortKey = "createdDesc" | "createdAsc" | "totalDesc" | "totalAsc";
@@ -66,7 +65,7 @@ function formatMonthLabel(key: string): string {
   return `${y}年${parseInt(m, 10)}月`;
 }
 
-export default function QuoteList({ quotes, plan, freeLimit }: Props) {
+export default function QuoteList({ quotes, plan }: Props) {
   const [query, setQuery] = useState("");
   const [period, setPeriod] = useState<PeriodKey>("all");
   const [clientFilter, setClientFilter] = useState<string>("");
@@ -262,7 +261,7 @@ export default function QuoteList({ quotes, plan, freeLimit }: Props) {
             strokeWidth={2.25}
           />
           <span>
-            Freeプランでは月{freeLimit}通まで保存できます。Soloプランにアップグレードすると、無制限に保存・再編集・複製が可能です。
+            Freeプランでも見積書は無制限に作成・保存できます。改正建設業法 2025 対応版で出力したい場合は Solo プラン（月¥980）をご利用ください。
           </span>
         </div>
       )}

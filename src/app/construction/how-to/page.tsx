@@ -90,7 +90,7 @@ const steps = [
     num: 7,
     title: "PDFダウンロードで完成",
     description:
-      "「PDFダウンロード」をクリックして保存。無料版は「SAMPLE」透かし付き、Soloプラン以上は透かしなしの正式版が出力されます。印刷機能からもPDF化可能。",
+      "「PDFダウンロード」をクリックして保存。Free プランは通常フォーマットで出力、Solo プランは改正建設業法 2025 対応版（労務費・法定福利費・経費の内訳明示）で出力されます。印刷機能からも PDF 化可能。",
     icon: Download,
     hint: null,
   },
@@ -281,7 +281,7 @@ export default function HowToPage() {
             まずは無料で試してみてください
           </h2>
           <p className="text-gray-400 mb-4 text-sm">
-            登録不要・クレジットカード不要 / 月3通までの保存は有料プラン
+            メアド登録だけ・カード不要 / 改正建設業法対応版 PDF は Solo（月¥980）から
           </p>
           <Link
             href="/construction/new"

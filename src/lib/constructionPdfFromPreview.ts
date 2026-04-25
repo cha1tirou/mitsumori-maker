@@ -8,9 +8,8 @@
  * トレードオフ: PDF 内のテキストが選択不可（画像として埋め込むため）。
  *              業務提出用には実用上問題なし。
  *
- * 透かし・フッターは jsPDF レイヤーで各ページに描画するため、ページ跨ぎでの
- * カバレッジ抜け（#22 バグ）が起きない。プレビュー DOM 側の SAMPLE オーバーレイは
- * キャプチャ時に一時的に display:none にして二重描画を避ける。
+ * フッターは jsPDF レイヤーで各ページに描画するため、ページ跨ぎでの
+ * カバレッジ抜け（#22 バグ）が起きない。
  */
 
 import { jsPDF } from "jspdf";
@@ -23,17 +22,17 @@ const CAPTURE_SCALE = 2;
 const JPEG_QUALITY = 0.92;
 
 export interface PdfGenOptions {
-  /** 未課金プランの透かしを全ページに入れるか。既定: false */
-  watermark?: boolean;
   /** 見積番号。各ページのフッターに印字する（ASCII想定）。 */
   quoteNumber?: string;
+  /** Solo 課金者向けに「改正建設業法 2025 対応版」フッター文言を追加するか */
+  lawCompliantBadge?: boolean;
 }
 
 export async function generatePdfBlobFromElement(
   element: HTMLElement,
   options: PdfGenOptions = {},
 ): Promise<Blob> {
-  const { watermark = false, quoteNumber = "" } = options;
+  const { quoteNumber = "", lawCompliantBadge = false } = options;
 
   if (typeof document !== "undefined" && document.fonts?.ready) {
     await document.fonts.ready;
@@ -52,30 +51,14 @@ export async function generatePdfBlobFromElement(
     };
   });
 
-  // 透かしは jsPDF レイヤーで描画するので、プレビュー DOM の装飾は一時的に隠す。
-  const previewWatermarks = Array.from(
-    element.querySelectorAll<HTMLElement>("[data-preview-watermark]"),
-  );
-  const prevDisplays = previewWatermarks.map((el) => el.style.display);
-  previewWatermarks.forEach((el) => {
-    el.style.display = "none";
+  const canvas = await html2canvas(element, {
+    scale: CAPTURE_SCALE,
+    useCORS: true,
+    logging: false,
+    backgroundColor: "#ffffff",
+    allowTaint: false,
+    imageTimeout: 15000,
   });
-
-  let canvas: HTMLCanvasElement;
-  try {
-    canvas = await html2canvas(element, {
-      scale: CAPTURE_SCALE,
-      useCORS: true,
-      logging: false,
-      backgroundColor: "#ffffff",
-      allowTaint: false,
-      imageTimeout: 15000,
-    });
-  } finally {
-    previewWatermarks.forEach((el, i) => {
-      el.style.display = prevDisplays[i];
-    });
-  }
 
   const pdf = new jsPDF({
     orientation: "portrait",
@@ -105,10 +88,7 @@ export async function generatePdfBlobFromElement(
     const offsetMm = -pageStartsPx[i] * pxToMm;
     pdf.addImage(imgData, "JPEG", 0, offsetMm, imgWidthMm, imgHeightMm);
 
-    if (watermark) {
-      drawSampleWatermark(pdf);
-    }
-    drawPageFooter(pdf, quoteNumber, i + 1, totalPages);
+    drawPageFooter(pdf, quoteNumber, i + 1, totalPages, lawCompliantBadge);
   }
 
   return pdf.output("blob");
@@ -153,15 +133,16 @@ function computePageStarts(
 }
 
 /**
- * 各ページ右下に "Ref.: {quoteNumber}   {page}/{total}" を印字。
- * 印刷時にページがバラけた際の出所・ページ順の担保（#23）。
- * jsPDF の既定フォント（Helvetica）で描画するため ASCII に限定。
+ * 各ページ右下にページ番号を印字（印刷時にページがバラけた際の担保 #23）。
+ * Solo 課金者には「改正建設業法 2025 対応版」フッター文言も中央左に追加。
+ * jsPDF の既定フォント（Helvetica）で描画するため英数字・記号に限定。
  */
 function drawPageFooter(
   pdf: jsPDF,
   quoteNumber: string,
   page: number,
   total: number,
+  lawCompliantBadge: boolean,
 ) {
   pdf.saveGraphicsState();
   try {
@@ -178,36 +159,16 @@ function drawPageFooter(
     : `${page} / ${total}`;
 
   pdf.text(label, A4_WIDTH_MM - 12, A4_HEIGHT_MM - 8, { align: "right" });
-  pdf.restoreGraphicsState();
-}
 
-/**
- * 1ページ全体に斜めに "SAMPLE" を3段重ねで描画する。ASCII なので
- * 既定の Helvetica で問題なく出る（日本語フォント埋め込み不要）。
- * トリミング攻撃で透かしなし領域を抜き取られないよう、上・中・下3か所に置く。
- */
-function drawSampleWatermark(pdf: jsPDF) {
-  pdf.saveGraphicsState();
-
-  // 不透明度 0.13 前後で視認性と薄さのバランス。jsPDF の GState ファクトリ経由。
-  try {
-    pdf.setGState(pdf.GState({ opacity: 0.13 }));
-  } catch {
-    // 透過未サポート環境では色を淡くしてフォールバック
-  }
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setTextColor(30, 64, 175); // kenmitsu-navy
-  pdf.setFontSize(72);
-
-  const centerX = A4_WIDTH_MM / 2;
-  const ys = [A4_HEIGHT_MM * 0.22, A4_HEIGHT_MM * 0.52, A4_HEIGHT_MM * 0.82];
-  for (const y of ys) {
-    pdf.text("SAMPLE", centerX, y, {
-      align: "center",
-      baseline: "middle",
-      angle: 30,
-    });
+  if (lawCompliantBadge) {
+    pdf.setTextColor(30, 64, 175); // kenmitsu-navy
+    pdf.setFontSize(7);
+    pdf.text(
+      "Compliant with Construction Industry Act 2025 (revised)",
+      12,
+      A4_HEIGHT_MM - 8,
+      { align: "left" },
+    );
   }
 
   pdf.restoreGraphicsState();

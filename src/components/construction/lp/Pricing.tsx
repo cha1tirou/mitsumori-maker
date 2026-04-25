@@ -24,12 +24,12 @@ const plans: Plan[] = [
     price: "¥0",
     period: "ずっと無料",
     features: [
-      ["ok", "登録不要で即利用"],
+      ["ok", "メアド登録だけで利用開始"],
       ["ok", "見積書作成・PDF出力（無制限）"],
+      ["ok", "クラウド保存・再編集（無制限）"],
       ["ok", "建設業法チェッカー"],
       ["ok", "工種プリセット・諸経費自動計算"],
-      ["note", "PDFに「無料版」透かしが入ります"],
-      ["note", "見積履歴の保存は月3通まで（要登録）"],
+      ["note", "PDF は通常フォーマット（改正法対応版は Solo）"],
     ],
   },
   {
@@ -40,9 +40,10 @@ const plans: Plan[] = [
     period: "/月",
     subprice: "年払い ¥9,800（2ヶ月分お得）",
     features: [
-      ["hl", "PDF透かしなし（正式版）"],
-      ["ok", "見積書の無制限保存・再編集・複製"],
-      ["ok", "顧客・単価マスタ・原価粗利分析・工事写真"],
+      ["hl", "改正建設業法 2025 対応 PDF を出力"],
+      ["hl", "労務費・法定福利費の内訳明示"],
+      ["ok", "顧客・単価マスタで入力時間を短縮"],
+      ["ok", "原価・粗利分析、工事写真の添付"],
     ],
     featured: true,
   },
@@ -96,6 +97,80 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
             title="料金プラン"
             lead="いつでも解約できます。自動更新停止もワンクリック。"
           />
+        </div>
+
+        {/* 競合価格比較 */}
+        <div className="mb-12 rounded-2xl border border-kenmitsu-line bg-kenmitsu-paper/50 p-5 md:p-7">
+          <p className="mb-1 text-[11px] font-black tracking-[0.18em] text-kenmitsu-muted md:text-[12px]">
+            COMPETITOR COMPARISON
+          </p>
+          <h3 className="mb-1 text-[18px] font-black text-kenmitsu-ink md:text-[22px]">
+            改正建設業法 2025 対応 × 月¥1,000台 — ケンミツだけ
+          </h3>
+          <p className="mb-5 text-[12px] leading-relaxed text-kenmitsu-muted md:text-[13px]">
+            汎用ツールは改正法非対応。建設特化ツールは月¥9,800〜¥30,000台。
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] border-collapse text-[12px] md:text-[13px]">
+              <thead>
+                <tr className="border-b-2 border-kenmitsu-line">
+                  <th className="py-2 pr-3 text-left font-bold text-kenmitsu-muted">
+                    サービス
+                  </th>
+                  <th className="py-2 px-3 text-left font-bold text-kenmitsu-muted">
+                    タイプ
+                  </th>
+                  <th className="py-2 px-3 text-right font-bold text-kenmitsu-muted">
+                    月額
+                  </th>
+                  <th className="py-2 pl-3 text-center font-bold text-kenmitsu-muted">
+                    改正法対応
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-kenmitsu-line/60">
+                  <td className="py-2.5 pr-3 font-bold text-kenmitsu-ink">freee 見積書</td>
+                  <td className="py-2.5 px-3 text-kenmitsu-muted">汎用</td>
+                  <td className="py-2.5 px-3 text-right font-mono">¥0〜</td>
+                  <td className="py-2.5 pl-3 text-center text-kenmitsu-muted">—</td>
+                </tr>
+                <tr className="border-b border-kenmitsu-line/60">
+                  <td className="py-2.5 pr-3 font-bold text-kenmitsu-ink">MISOCA</td>
+                  <td className="py-2.5 px-3 text-kenmitsu-muted">汎用</td>
+                  <td className="py-2.5 px-3 text-right font-mono">¥0〜（月10通）</td>
+                  <td className="py-2.5 pl-3 text-center text-kenmitsu-muted">—</td>
+                </tr>
+                <tr className="border-b border-kenmitsu-line/60">
+                  <td className="py-2.5 pr-3 font-bold text-kenmitsu-ink">サクミル</td>
+                  <td className="py-2.5 px-3 text-kenmitsu-muted">建設特化</td>
+                  <td className="py-2.5 px-3 text-right font-mono">¥9,800〜</td>
+                  <td className="py-2.5 pl-3 text-center text-kenmitsu-ok">○</td>
+                </tr>
+                <tr className="border-b border-kenmitsu-line/60">
+                  <td className="py-2.5 pr-3 font-bold text-kenmitsu-ink">AnyONE</td>
+                  <td className="py-2.5 px-3 text-kenmitsu-muted">建設特化</td>
+                  <td className="py-2.5 px-3 text-right font-mono">¥18,000〜</td>
+                  <td className="py-2.5 pl-3 text-center text-kenmitsu-ok">○</td>
+                </tr>
+                <tr className="border-b border-kenmitsu-line/60">
+                  <td className="py-2.5 pr-3 font-bold text-kenmitsu-ink">コンクルー Cloud</td>
+                  <td className="py-2.5 px-3 text-kenmitsu-muted">建設特化</td>
+                  <td className="py-2.5 px-3 text-right font-mono">¥21,890〜</td>
+                  <td className="py-2.5 pl-3 text-center text-kenmitsu-ok">○</td>
+                </tr>
+                <tr className="bg-kenmitsu-orange/10">
+                  <td className="py-3 pr-3 font-black text-kenmitsu-orange600">ケンミツ Solo</td>
+                  <td className="py-3 px-3 font-bold text-kenmitsu-ink">建設特化</td>
+                  <td className="py-3 px-3 text-right font-mono font-black text-kenmitsu-orange600">¥980</td>
+                  <td className="py-3 pl-3 text-center text-kenmitsu-ok font-black">○</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-[10.5px] leading-relaxed text-kenmitsu-muted md:text-[11px]">
+            ※ 各社公式サイト掲載価格に基づく（2026 年 4 月時点）。プラン構成・機能差は各社公式をご確認ください。
+          </p>
         </div>
 
         {/* featured SOLO gets -translate-y-2 on lg+ ONLY to avoid clipping on mobile */}
@@ -173,10 +248,10 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                 {/* CTA */}
                 {p.id === "free" && (
                   <Link
-                    href="/construction/new"
+                    href="/construction/start"
                     className="block w-full rounded-[12px] border-[1.5px] border-kenmitsu-line bg-white px-5 py-3.5 text-center text-[14px] font-bold text-kenmitsu-ink hover:border-kenmitsu-ink md:text-[15px]"
                   >
-                    無料で試す
+                    無料で始める
                   </Link>
                 )}
                 {p.id === "solo" &&

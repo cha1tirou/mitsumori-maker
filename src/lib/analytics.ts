@@ -58,6 +58,7 @@ export function trackConversion(
 
 export type ConversionName =
   | "construction_lp_view"
+  | "construction_start_view"
   | "construction_tool_start"
   | "construction_pdf_download"
   | "construction_pricing_view"
@@ -68,6 +69,7 @@ export type ConversionName =
 // Meta Pixel 標準イベントへのマッピング
 const metaEventMap: Record<ConversionName, string> = {
   construction_lp_view: "ViewContent",
+  construction_start_view: "ViewContent",
   construction_tool_start: "StartTrial",
   construction_pdf_download: "Lead",
   construction_pricing_view: "ViewContent",
@@ -80,6 +82,7 @@ const metaEventMap: Record<ConversionName, string> = {
 // 設定方法: NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_<NAME> = "xxxxxxxx" 等
 const conversionLabels: Record<ConversionName, string | undefined> = {
   construction_lp_view: undefined,
+  construction_start_view: undefined,
   construction_tool_start: process.env.NEXT_PUBLIC_GADS_CONV_TOOL_START,
   construction_pdf_download: process.env.NEXT_PUBLIC_GADS_CONV_PDF,
   construction_pricing_view: undefined,
