@@ -22,7 +22,6 @@ import {
   Eye,
   FileEdit,
   User,
-  LogIn,
   CircleUser,
   AlertTriangle,
   Shield,
@@ -173,7 +172,7 @@ export default function ConstructionEditor({
                 プレビュー
               </button>
             </div>
-            {userEmail ? (
+            {userEmail && (
               <Link
                 href="/construction/mypage"
                 className="hidden sm:inline-flex items-center gap-1.5 text-xs text-gray-700 hover:text-gray-900 px-2.5 py-1.5 rounded-lg hover:bg-gray-100"
@@ -182,16 +181,6 @@ export default function ConstructionEditor({
                 <CircleUser className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2} />
                 <span className="font-bold">{planLabel}</span>
                 <span className="text-gray-400">プラン</span>
-              </Link>
-            ) : (
-              <Link
-                href={`/construction/login?redirect=${encodeURIComponent(
-                  isEdit ? `/construction/quotes/${quoteId}` : "/construction/new"
-                )}`}
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 hover:text-kenmitsu-navy px-2.5 py-1.5 rounded-lg hover:bg-gray-100"
-              >
-                <LogIn className="w-4 h-4" strokeWidth={2.25} />
-                ログイン
               </Link>
             )}
           </div>
@@ -281,37 +270,11 @@ export default function ConstructionEditor({
                   className="w-full"
                 />
 
-                {/* 2a. 未ログイン: 登録誘導カード（PDFダウンロード直後に露出） */}
-                {!userEmail && (
-                  <Link
-                    href={`/construction/start?redirect=${encodeURIComponent(
-                      isEdit
-                        ? `/construction/quotes/${quoteId}`
-                        : "/construction/new",
-                    )}`}
-                    className="relative block w-full rounded-xl border-2 border-kenmitsu-navy bg-gradient-to-br from-kenmitsu-navy50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
-                  >
-                    <div className="relative">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-kenmitsu-navy text-white text-[10px] font-bold px-2 py-0.5">
-                          無料登録
-                        </span>
-                        <span className="text-[10px] text-kenmitsu-navy font-bold">
-                          所要30秒・カード不要
-                        </span>
-                      </div>
-                      <p className="text-sm font-black text-kenmitsu-navy mb-1 leading-tight">
-                        見積書をクラウドに保存して、いつでも編集・再出力
-                      </p>
-                      <p className="text-[11px] text-kenmitsu-muted leading-relaxed">
-                        無料登録で見積書は無制限に保存・編集・複製可能。顧客別の履歴管理や Excel インポートにも対応。
-                      </p>
-                    </div>
-                  </Link>
-                )}
-
-                {/* 2b. Free プラン: Solo アップグレード誘導カード（PDFダウンロード直後に露出） */}
-                {userEmail && plan === "free" && (
+                {/* Free プラン: 有料プランアップグレード誘導カード（PDF ダウンロード直後に露出）
+                   /construction/new と /construction/quotes/[id] は両方 auth gate 済み
+                   なので未ログイン分岐は不要（dev 環境で Supabase 未設定なら userEmail=null
+                   になるが、その場合は LP 経由でも到達できないので無視）。 */}
+                {plan === "free" && (
                   <Link
                     href="/construction#solo-upgrade"
                     className="relative block w-full rounded-xl border-2 border-kenmitsu-orange bg-gradient-to-br from-kenmitsu-orange50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
@@ -363,26 +326,22 @@ export default function ConstructionEditor({
                   </Link>
                 )}
 
-                {/* 3. 見積書を保存: ログイン済みのみ（全プラン無制限） */}
-                {userEmail && (
-                  <SaveQuoteButton
-                    data={data}
-                    quoteId={quoteId}
-                    className="w-full"
-                    onSaved={handleSaved}
-                  />
-                )}
+                {/* 見積書を保存（全プラン無制限） */}
+                <SaveQuoteButton
+                  data={data}
+                  quoteId={quoteId}
+                  className="w-full"
+                  onSaved={handleSaved}
+                />
 
-                {/* マイページ: ログイン済みのみ */}
-                {userEmail && (
-                  <Link
-                    href="/construction/mypage"
-                    className="flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 py-1"
-                  >
-                    <User className="w-3.5 h-3.5" strokeWidth={2.25} />
-                    マイページを開く
-                  </Link>
-                )}
+                {/* マイページ */}
+                <Link
+                  href="/construction/mypage"
+                  className="flex items-center justify-center gap-1 text-xs text-gray-500 hover:text-gray-700 py-1"
+                >
+                  <User className="w-3.5 h-3.5" strokeWidth={2.25} />
+                  マイページを開く
+                </Link>
 {!isEdit && data.sections.some((s) => s.items.some((i) => i.name)) && (
                   <button
                     type="button"
@@ -431,7 +390,7 @@ export default function ConstructionEditor({
                     </span>
                   </div>
                   <p className="text-[10px] text-gray-600 mt-1.5 leading-relaxed">
-                    労務費・法定福利費の内訳明示が PDF 末尾に印字されます。労務費は明細の費目「労務費」の合計、法定福利費は労務費 × 14.6%（健保・厚年・雇用・労災等の標準率）で自動算出。
+                    労務費・法定福利費の内訳明示が PDF 末尾に印字されます。労務費は明細の費目「労務費」の合計、法定福利費は労務費に対する設定料率（諸経費セクションで編集可）で自動算出。
                   </p>
                 </div>
               )}

@@ -130,7 +130,7 @@ export default function StartForm({ redirectTo }: Props) {
               建築見積書を、
               <br />
               <span className="text-kenmitsu-orange">
-                30秒で。PC でもスマホでも。
+                ブラウザでサッと。PC でもスマホでも。
               </span>
             </h1>
             <p className="text-sm sm:text-base text-white/85 leading-relaxed mb-6">
@@ -178,7 +178,7 @@ export default function StartForm({ redirectTo }: Props) {
                   className="w-5 h-5 mb-1.5 text-kenmitsu-orange"
                   strokeWidth={2}
                 />
-                <p className="text-[11px] font-bold">30秒で完成</p>
+                <p className="text-[11px] font-bold">すぐに作成</p>
                 <p className="text-[10px] text-white/60">PC・スマホ両対応</p>
               </div>
               <div>
@@ -308,7 +308,7 @@ export default function StartForm({ redirectTo }: Props) {
               className="w-5 h-5 mx-auto mb-1.5 text-kenmitsu-orange"
               strokeWidth={2}
             />
-            <p className="text-[11px] font-bold">30秒で完成</p>
+            <p className="text-[11px] font-bold">すぐに作成</p>
           </div>
           <div className="text-white/85">
             <FileText

@@ -5,9 +5,9 @@ import { getCurrentUserProfile } from "@/lib/supabase/queries";
 import StartForm from "./StartForm";
 
 export const metadata: Metadata = {
-  title: "無料登録｜建設業の見積書を30秒で作成｜ケンミツ",
+  title: "無料登録｜建設業の見積書をかんたん作成｜ケンミツ",
   description:
-    "建設業の見積書を 30 秒で作成。メールアドレスだけで無料登録、何枚でも作成・PDF ダウンロード・クラウド保存ができます。クレジットカード登録不要。",
+    "建設業の見積書をブラウザですぐに作成。メールアドレスだけで無料登録、何枚でも作成・PDF ダウンロード・クラウド保存ができます。クレジットカード登録不要。",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/start",

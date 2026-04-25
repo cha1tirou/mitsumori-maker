@@ -215,7 +215,7 @@ export default function KaiseiKensetsuPage() {
             <Link href="/construction" className="text-green-700 hover:underline font-bold">
               建設業向け見積書メーカー
             </Link>
-            は、改正建設業法2025に完全対応しており、以下の機能が標準装備です：
+            は、改正建設業法 2025 のルールに沿った見積書を出力できる有料プランを提供しており、以下の機能が標準装備です：
           </p>
           <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-6 space-y-1">
             <li>労務費・材料費・外注費の自動分類</li>

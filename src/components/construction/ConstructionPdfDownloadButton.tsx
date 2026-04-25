@@ -132,11 +132,9 @@ export default function ConstructionPdfDownloadButton({
       >
         <Download className="w-4 h-4" strokeWidth={2.5} />
         PDFダウンロード
-        {isLawCompliant && (
-          <span className="text-[10px] font-normal opacity-75">
-            （改正法対応版）
-          </span>
-        )}
+        <span className="text-[10px] font-normal opacity-75">
+          （{isLawCompliant ? "改正法対応版" : "通常フォーマット"}）
+        </span>
       </button>
 
       {/* 生成中モーダル */}

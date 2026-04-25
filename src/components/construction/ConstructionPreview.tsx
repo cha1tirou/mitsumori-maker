@@ -13,13 +13,12 @@ interface Props {
   /**
    * 改正建設業法 2025 対応版 内訳サマリーを末尾に追加するか。
    * Solo / Team プランで true。Free プランは false。
-   * 労務費は明細の category="labor" 合計を実額で使い、法定福利費は労務費 × 14.6%
-   * を自動算出する（旧スライダー方式の比率推定は撤廃）。
+   * 労務費は明細の category="labor" 合計を実額で使い、法定福利費は
+   * data.legalWelfareRate（ユーザー設定値）で算出する。本文と末尾サマリーの
+   * 料率を統一し、PDF 内で異なる数字が並ぶ問題を解消（2026-04-26〜）。
    */
   lawCompliantSummary?: boolean;
 }
-
-const STATUTORY_WELFARE_RATE = 0.146;
 
 const categoryBadge: Record<CostCategory, string> = {
   labor: "bg-amber-100 text-amber-800",
@@ -70,8 +69,9 @@ export default function ConstructionPreview({
 }: Props) {
   const totals = calcConstructionTotals(data);
   const showLawSummary = lawCompliantSummary === true && totals.subtotal > 0;
+  const welfareRate = data.legalWelfareRate / 100;
   const laborCost = showLawSummary ? totals.byCategory.labor : 0;
-  const statutoryWelfare = Math.round(laborCost * STATUTORY_WELFARE_RATE);
+  const statutoryWelfare = Math.round(laborCost * welfareRate);
   const otherCost = showLawSummary
     ? Math.max(0, totals.subtotal - laborCost - statutoryWelfare)
     : 0;
@@ -353,7 +353,7 @@ export default function ConstructionPreview({
                 {formatCurrency(laborCost)}
               </span>
               <span>
-                法定福利費（労務費 × {Math.round(STATUTORY_WELFARE_RATE * 100)}%）
+                法定福利費（労務費 × {data.legalWelfareRate}%）
               </span>
               <span className="text-right font-medium">
                 {formatCurrency(statutoryWelfare)}
@@ -364,7 +364,7 @@ export default function ConstructionPreview({
               </span>
             </div>
             <p className="text-[9px] text-gray-600 mt-2 leading-snug">
-              本見積は改正建設業法（2025 年 12 月施行）に基づき、労務費・法定福利費等を内訳明示しています。労務費は明細の費目「労務費」の合計を、法定福利費 14.6% は健康保険・厚生年金・雇用保険等の標準率を採用しています。
+              本見積は改正建設業法（2025 年 12 月施行）に基づき、労務費・法定福利費等を内訳明示しています。労務費は明細の費目「労務費」の合計、法定福利費は労務費に対する {data.legalWelfareRate}%（健康保険・厚生年金・雇用保険・労災等の事業主負担分。料率は工事や規模で編集可）を採用しています。
             </p>
           </div>
         )}

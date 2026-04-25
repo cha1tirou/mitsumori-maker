@@ -23,7 +23,7 @@ const DRIP_STEPS = [
   {
     day: 3,
     key: "tips",
-    subject: "【ケンミツ】3分で見積書を完成させるコツ",
+    subject: "【ケンミツ】見積書をスムーズに完成させるコツ",
     html: buildTipsEmail,
   },
   {
@@ -169,7 +169,7 @@ function buildWelcomeEmail(unsubscribeUrl: string): string {
 function buildTipsEmail(unsubscribeUrl: string): string {
   return emailWrapper(
     `
-    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">3分で見積書を完成させるコツ</h1>
+    <h1 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">見積書をスムーズに完成させるコツ</h1>
     <p style="font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
       ケンミツを使いこなすための3つのポイントをご紹介します。
     </p>

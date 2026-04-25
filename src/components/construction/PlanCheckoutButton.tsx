@@ -12,7 +12,7 @@ interface Props {
    */
   billing?: "monthly" | "yearly";
   label: string;
-  variant: "primary" | "outline" | "kenmitsu";
+  variant: "outline" | "kenmitsu";
 }
 
 export default function PlanCheckoutButton({
@@ -26,11 +26,9 @@ export default function PlanCheckoutButton({
   const [error, setError] = useState<string | null>(null);
 
   const triggerClassName =
-    variant === "primary"
-      ? "w-full flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white text-sm font-bold py-3 rounded-lg transition-colors"
-      : variant === "kenmitsu"
-        ? "w-full flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 text-white text-sm font-bold py-3 rounded-lg transition-colors"
-        : "w-full flex items-center justify-center gap-2 border border-gray-300 hover:border-gray-400 disabled:opacity-60 text-gray-800 text-sm font-bold py-3 rounded-lg transition-colors";
+    variant === "kenmitsu"
+      ? "w-full flex items-center justify-center gap-2 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 disabled:opacity-60 text-white text-sm font-bold py-3 rounded-lg transition-colors"
+      : "w-full flex items-center justify-center gap-2 border border-gray-300 hover:border-gray-400 disabled:opacity-60 text-gray-800 text-sm font-bold py-3 rounded-lg transition-colors";
 
   const proceedToCheckout = async () => {
     setLoading(true);
