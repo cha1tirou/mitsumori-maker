@@ -59,22 +59,47 @@ export async function POST(request: NextRequest) {
   const stripe = getStripe();
   const origin = new URL(request.url).origin;
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    payment_method_types: ["card"],
-    line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${origin}/construction/mypage?checkout=success`,
-    cancel_url: `${origin}/construction/mypage?checkout=canceled`,
-    customer: profile?.stripe_customer_id || undefined,
-    customer_email: profile?.stripe_customer_id ? undefined : user.email,
-    client_reference_id: user.id,
-    metadata: { user_id: user.id, plan, billing },
-    subscription_data: {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${origin}/construction/mypage?checkout=success`,
+      cancel_url: `${origin}/construction/mypage?checkout=canceled`,
+      customer: profile?.stripe_customer_id || undefined,
+      customer_email: profile?.stripe_customer_id ? undefined : user.email,
+      client_reference_id: user.id,
       metadata: { user_id: user.id, plan, billing },
-    },
-    allow_promotion_codes: true,
-    automatic_tax: { enabled: false },
-  });
+      subscription_data: {
+        metadata: { user_id: user.id, plan, billing },
+      },
+      allow_promotion_codes: true,
+      automatic_tax: { enabled: false },
+    });
 
-  return NextResponse.json({ url: session.url });
+    if (!session.url) {
+      return NextResponse.json(
+        { error: "Stripe からチェックアウト URL を取得できませんでした。" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "unknown";
+    console.error("[stripe/checkout] session.create failed", {
+      priceId,
+      plan,
+      billing,
+      userId: user.id,
+      message,
+    });
+    return NextResponse.json(
+      {
+        error: "stripe_session_failed",
+        message: `Stripe セッション作成に失敗: ${message}`,
+      },
+      { status: 500 },
+    );
+  }
 }

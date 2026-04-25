@@ -35,19 +35,23 @@ export default function PlanCheckoutButton({
   const proceedToCheckout = async () => {
     setLoading(true);
     setError(null);
-    trackConversion(
-      plan === "solo"
-        ? "construction_subscribe_solo"
-        : "construction_subscribe_team",
-    );
 
     try {
+      try {
+        trackConversion(
+          plan === "solo"
+            ? "construction_subscribe_solo"
+            : "construction_subscribe_team",
+        );
+      } catch {
+        // analytics の失敗で課金導線を止めない
+      }
+
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan, billing }),
       });
-      const json = await res.json();
 
       if (res.status === 401) {
         router.push(
@@ -57,19 +61,36 @@ export default function PlanCheckoutButton({
         );
         return;
       }
+
+      let json: { url?: string; error?: string; message?: string } = {};
+      try {
+        json = await res.json();
+      } catch {
+        // 非JSONレスポンス（500のHTMLページ等）
+      }
+
       if (res.status === 503) {
-        setError("決済機能は現在準備中です。しばらくお待ちください。");
+        setError(
+          json.message || json.error || "決済機能は現在準備中です。しばらくお待ちください。",
+        );
         setLoading(false);
         return;
       }
+
       if (json.url) {
         window.location.href = json.url;
         return;
       }
-      setError(json.error || "決済セッションの作成に失敗しました。");
+
+      const detail =
+        json.message ||
+        json.error ||
+        `HTTP ${res.status} ${res.statusText || ""}`.trim();
+      setError(`決済セッションの作成に失敗しました: ${detail}`);
       setLoading(false);
-    } catch {
-      setError("通信エラーが発生しました。");
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : "unknown";
+      setError(`通信エラーが発生しました: ${detail}`);
       setLoading(false);
     }
   };
