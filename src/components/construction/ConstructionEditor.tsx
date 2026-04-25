@@ -204,23 +204,33 @@ export default function ConstructionEditor({
 
       {/* Free プラン: 改正建設業法対応バナー（Solo 課金導線） */}
       {plan === "free" && (
-        <div className="bg-amber-50 border-b border-amber-200">
+        <div className="bg-amber-50 border-b-2 border-amber-300">
           <Link
             href="/construction"
             onClick={() => trackEvent("construction_law_banner_click")}
             className="block hover:bg-amber-100/60 transition-colors"
           >
-            <div className="max-w-7xl mx-auto px-4 py-2.5 text-[12px] text-amber-900 flex items-center gap-2">
+            <div className="max-w-7xl mx-auto px-4 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-start gap-3">
               <AlertTriangle
-                className="w-4 h-4 shrink-0 text-amber-700"
+                className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-amber-700"
                 strokeWidth={2.25}
               />
-              <span className="flex-1 font-bold leading-snug">
-                改正建設業法 2025、対応しなくて大丈夫ですか？
-                <span className="ml-2 font-normal text-amber-800">
-                  この見積書を改正法対応版にする →
-                </span>
-              </span>
+              <div className="flex-1">
+                <p className="text-[15px] sm:text-base lg:text-lg font-black text-amber-900 leading-tight mb-1.5">
+                  改正建設業法に対応しなくて大丈夫ですか？
+                </p>
+                <p className="text-[11px] sm:text-xs text-amber-900/90 leading-relaxed">
+                  労務費・法定福利費の内訳明示が義務化されました。違反は監督官庁の
+                  <strong className="font-bold">【指導・勧告・企業名公表】</strong>
+                  の対象、元請けからの
+                  <strong className="font-bold">【差し戻し・取引縮小】</strong>
+                  につながるリスクがあります。
+                </p>
+                <p className="mt-2 text-xs sm:text-[13px] font-bold text-amber-900 inline-flex items-center gap-1">
+                  この見積書を改正法対応版にする
+                  <span aria-hidden>→</span>
+                </p>
+              </div>
             </div>
           </Link>
         </div>
