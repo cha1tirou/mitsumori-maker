@@ -172,7 +172,7 @@ export default function FreelanceLawPage() {
             <Link href="/construction" className="text-green-700 hover:underline font-bold">
               建設業向け見積書メーカー
             </Link>
-            は、改正建設業法2025とフリーランス新法の両方を意識したフォーマットを標準で採用しています。見積条件書・労務費内訳・支払条件・瑕疵担保のすべてを漏れなく記載できるため、一人親方でも法令準拠の見積書を簡単に作成できます。
+            は、改正建設業法2025とフリーランス新法の両方を意識したフォーマットを標準で採用しています。見積条件書・労務費内訳・支払条件・瑕疵担保のすべてを漏れなく記載できるため、中小建設業者でも法令準拠の見積書を簡単に作成できます。
           </p>
 
           <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
@@ -180,7 +180,7 @@ export default function FreelanceLawPage() {
               フリーランス新法・改正建設業法に対応した見積書ツール
             </h2>
             <p className="text-gray-400 mb-4 text-sm">
-              登録不要・月¥980から / 一人親方のための、法令対応の見積書メーカー
+              月¥980 から / 中小建設業者のための、法令対応の見積書メーカー
             </p>
             <Link
               href="/construction"

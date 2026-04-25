@@ -35,28 +35,17 @@ export default function Hero({ lawDays }: Props) {
 
         <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center md:gap-12">
           <div>
-            <h1 className="mb-6 text-[32px] font-black leading-[1.25] tracking-[-0.01em] text-kenmitsu-ink md:mb-7 md:text-[clamp(40px,4.6vw,60px)]">
-              <span className="inline-block bg-kenmitsu-orange50 px-2.5 shadow-[inset_0_-14px_0_0_theme(colors.kenmitsu.orange)]">
-                「一式」
-              </span>
-              書いたら
-              <br />
-              発注元から差し戻された。
-              <br />
+            <h1 className="mb-6 text-[32px] font-black leading-[1.25] tracking-[-0.01em] text-kenmitsu-ink md:mb-7 md:text-[clamp(40px,4.6vw,58px)]">
               <span className="text-kenmitsu-navy">
-                もう、そんな手戻りは不要です。
+                改正建設業法 2025、
               </span>
+              <br />
+              対応していますか？
             </h1>
-            <p className="mb-6 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-9 md:text-lg">
-              改正建設業法 2025 に対応した工事見積書を、
+            <p className="mb-7 max-w-[560px] text-[15px] leading-[1.85] text-kenmitsu-ink2 md:mb-8 md:text-lg">
+              中小建設業者のための、改正建設業法 2025 対応の見積書作成ツール。
               <br className="hidden md:block" />
-              <strong className="text-kenmitsu-ink">月¥980</strong> で出せるサービスは
-              <strong className="text-kenmitsu-ink">ケンミツだけ</strong>。
-              <br className="hidden md:block" />
-              無料登録で見積書は何枚でも作成・PDF ダウンロードできます。
-            </p>
-            <p className="mb-7 text-[13px] text-kenmitsu-muted md:mb-8">
-              一人親方・小規模工務店のための、建設業特化・月¥980〜の見積書ツール
+              月¥980 から、改正法に準拠した PDF が出せます。
             </p>
 
             <div

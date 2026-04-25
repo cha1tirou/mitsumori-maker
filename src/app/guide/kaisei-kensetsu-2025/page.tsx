@@ -6,8 +6,8 @@ import ConstructionPromoBanner from "@/components/construction/ConstructionPromo
 export const metadata: Metadata = {
   title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則 | 見積書メーカー",
   description:
-    "2025年12月1日全面施行の改正建設業法について、見積書作成の観点から解説。労務費の内訳明示・「一式」表記の規制・見積条件書の必須項目・違反時の罰則まで。一人親方・工務店向け実務対応ガイド。",
-  keywords: "改正建設業法, 建設業法 2025, 建設業法 改正, 見積書, 労務費, 一式, 一人親方, 工務店",
+    "2025年12月1日全面施行の改正建設業法について、見積書作成の観点から解説。労務費の内訳明示・「一式」表記の規制・見積条件書の必須項目・違反時の罰則まで。中小建設業者向け実務対応ガイド。",
+  keywords: "改正建設業法, 建設業法 2025, 建設業法 改正, 見積書, 労務費, 一式, 中小建設業者",
   openGraph: {
     title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則",
     description:
@@ -51,7 +51,7 @@ export default function KaiseiKensetsuPage() {
           <ConstructionPromoBanner />
 
           <p className="text-gray-700 leading-relaxed mb-8">
-            2025年12月1日、改正建設業法が全面施行されました。一人親方・工務店・下請建設業者を含むすべての建設業者にとって、見積書の書き方・契約書の記載事項・労務費の扱いに大きな変更が入っています。本記事では、見積書作成の観点から「何が変わり、どう対応すべきか」を実務レベルで徹底解説します。
+            2025年12月1日、改正建設業法が全面施行されました。中小建設業者を含むすべての建設業者にとって、見積書の書き方・契約書の記載事項・労務費の扱いに大きな変更が入っています。本記事では、見積書作成の観点から「何が変わり、どう対応すべきか」を実務レベルで徹底解説します。
           </p>
 
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 my-8 text-sm">
@@ -62,7 +62,7 @@ export default function KaiseiKensetsuPage() {
               <li>「一式」表記の注意点と代替案</li>
               <li>見積条件書の必須記載事項</li>
               <li>違反時の罰則・リスク</li>
-              <li>一人親方・工務店が今すぐやるべき対応チェックリスト</li>
+              <li>中小建設業者が今すぐやるべき対応チェックリスト</li>
             </ul>
           </div>
 
@@ -172,7 +172,7 @@ export default function KaiseiKensetsuPage() {
           </p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
-            一人親方・工務店の対応チェックリスト
+            中小建設業者の対応チェックリスト
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
             以下、改正建設業法2025への対応として今すぐやるべきことをまとめました。
