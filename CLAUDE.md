@@ -244,7 +244,7 @@ export default function GuidePage() {
 - 実装: `src/lib/constructionPdfFromPreview.ts` — `ConstructionPreview`（`.printable-root` で囲まれた要素）を html2canvas でキャプチャ → jsPDF に埋め込んで Blob ダウンロード
 - トリガー: `ConstructionPdfDownloadButton.tsx` で、生成中→完了の2段モーダル表示 + 通常のブラウザダウンロード
 - **テキスト選択不可**（画像埋め込みのため）。業務提出用は実用上問題なし
-- 元の `src/lib/constructionPdfGenerator.tsx`（@react-pdf/renderer）は dead code として保持。**呼び出し経路なし**、テキスト選択可能な PDF が必要になった時の再利用候補
+- 旧実装の `src/lib/constructionPdfGenerator.tsx`（@react-pdf/renderer + 透かし）は 2026-04-25 に削除。テキスト選択可能な PDF が必要になったら、稼働中の `purchaseOrderPdfGenerator.tsx` / `invoicePdfGenerator.tsx` 等を参考に再実装する
 - **次の移行トリガー**: MRR 1万円突破 / 有料ユーザー複数名。その時点で Vercel Pro + `@sparticuz/chromium-min + puppeteer-core` でサーバー side PDF 化へ
 
 ### プラン別機能ゲート（`SoloFeatureLock.tsx`）
@@ -315,6 +315,7 @@ export default function GuidePage() {
 - `/construction/login`
 - `/construction/reset-password`
 - `/construction/quotes/[id]`
+- `/construction/new`（2026-04-25 〜 認証必須化により追加。未ログインは `/construction/start` へリダイレクト）
 - `/api/*`
 
 ### 広告運用開始前の参照ドキュメント
