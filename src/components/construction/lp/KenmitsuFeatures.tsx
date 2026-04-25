@@ -20,11 +20,6 @@ const features = [
   },
 ];
 
-const others = [
-  "汎用見積書ツール（freee 見積書・MISOCA 等）には改正法対応のフォーマットなし",
-  "建設業向けの大手 SaaS（業務管理フル装備）は月¥9,800 〜 ¥30,000 と高額",
-];
-
 export default function KenmitsuFeatures() {
   return (
     <section className="bg-white py-[clamp(56px,8vw,100px)]">
@@ -56,29 +51,6 @@ export default function KenmitsuFeatures() {
               </p>
             </article>
           ))}
-        </div>
-
-        <div className="mt-10 rounded-2xl bg-kenmitsu-paper/60 p-5 md:p-6">
-          <p className="mb-3 text-[11px] font-black tracking-[0.18em] text-kenmitsu-muted md:text-[12px]">
-            VS OTHERS
-          </p>
-          <p className="mb-3 text-[14px] font-bold text-kenmitsu-ink md:text-[15px]">
-            汎用ツールでは改正法に対応できない、大手 SaaS は高すぎる
-          </p>
-          <ul className="space-y-1.5">
-            {others.map((o) => (
-              <li
-                key={o}
-                className="flex items-start gap-2 text-[12px] text-kenmitsu-ink2 md:text-[13px]"
-              >
-                <span
-                  aria-hidden
-                  className="mt-[7px] inline-block h-1 w-1 shrink-0 rounded-full bg-kenmitsu-muted"
-                />
-                <span>{o}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

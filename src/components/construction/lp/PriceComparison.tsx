@@ -126,10 +126,10 @@ export default function PriceComparison() {
 
         <div className="mt-10 text-center">
           <Link
-            href="#pricing"
+            href="#solo-upgrade"
             className="inline-flex items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-b from-[#FBB43C] to-kenmitsu-orange px-7 py-4 text-[15px] font-bold text-[#1A1200] shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_10px_24px_-10px_rgba(245,158,11,0.55)] transition-transform hover:-translate-y-px md:px-8 md:py-4 md:text-[16px]"
           >
-            ケンミツの料金プランを見る
+            Solo プランの詳細を見る
             <ArrowIcon color="#1A1200" />
           </Link>
         </div>
