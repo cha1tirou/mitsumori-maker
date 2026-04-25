@@ -104,7 +104,7 @@ export default function StartForm({ redirectTo }: Props) {
       <main className="max-w-5xl mx-auto px-4 py-8 lg:py-14">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start lg:items-center">
           {/* Hero */}
-          <div className="order-2 lg:order-1">
+          <div>
             {/* ブランドマーク */}
             <div className="flex items-center gap-3 mb-5">
               <div className="w-12 h-12 rounded-xl bg-kenmitsu-orange flex items-center justify-center shadow-lg">
@@ -201,7 +201,7 @@ export default function StartForm({ redirectTo }: Props) {
           </div>
 
           {/* Form */}
-          <div className="order-1 lg:order-2 bg-white rounded-2xl shadow-2xl text-gray-900 p-6 sm:p-8">
+          <div className="bg-white rounded-2xl shadow-2xl text-gray-900 p-6 sm:p-8">
             <div className="flex items-center gap-2 mb-3">
               <HardHat
                 className="w-4 h-4 text-kenmitsu-orange"
