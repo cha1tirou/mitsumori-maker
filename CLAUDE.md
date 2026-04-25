@@ -1,5 +1,25 @@
 # 見積書メーカー / ケンミツ — Claude Code 運用ガイド
 
+## ⚠️ ケンミツ コピー絶対ルール（2026-04-25 ピボット以降・厳守）
+
+**有料プランの呼称は「有料プラン」一本。「Solo」「Soloプラン」を user-facing コピーで書かない。**
+
+- ✅ 使う: 「有料プラン」「有料プランで始める」「有料プランに変更」「有料プラン限定」「有料プラン年額」
+- ❌ 書かない: 「Solo」「Soloプラン」「Solo に〜」「Solo 月額」「Solo 年額」「Solo 限定」
+- ❌ 「Team」「Teamプラン」も同様。Team は提供していないので、user-facing コピーから完全削除
+
+**例外（内部識別子としてのみ "Solo"/"Team" を残す）**:
+- DB enum の値 `profiles.plan = "solo" | "team" | "free"`
+- component / variable / file 名（`SoloUpgrade.tsx`、`useSoloFeatureLock`、`solo-upgrade` anchor 等）
+- LP Pricing カードの SKU バッジ「FREE」「SOLO」（branding として）
+- admin 画面（社内向け）
+
+**user-facing なら必ず修正対象**: 利用規約・特商法・FAQ・LP body・ドリップメール・OG image・metadata description・JSON-LD Offer name など。Team プランの言及があったら削除（提供していないため記載すると景表法・特商法的にリスク）。
+
+新規にコピーを書く時、または既存コピーを編集する時、必ずこのルールを確認すること。
+
+---
+
 ## ⚠️ 2026-04-20: 見積書メーカー側のコンテンツ作業は凍結
 
 **現在のメイン開発は `/construction` 配下の『ケンミツ』（建設業一人親方向け有料プラン）です。**

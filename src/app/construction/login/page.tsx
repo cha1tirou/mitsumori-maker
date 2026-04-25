@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import BackLink from "@/components/construction/BackLink";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import {
@@ -427,13 +428,10 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-kenmitsu-navy50 to-white">
       <div className="max-w-md mx-auto px-4 py-12">
-        <Link
-          href="/construction"
-          className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-8"
-        >
+        <BackLink className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-8">
           <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
-          ← ケンミツトップへ
-        </Link>
+          ← 前のページに戻る
+        </BackLink>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <div className="flex items-center gap-2 mb-6">

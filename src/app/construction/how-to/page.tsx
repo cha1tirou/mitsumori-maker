@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { getCurrentUserProfile } from "@/lib/supabase/queries";
+import BackLink from "@/components/construction/BackLink";
 
 export const metadata: Metadata = {
   title: "使い方ガイド | ケンミツ",
@@ -177,8 +178,6 @@ export default async function HowToPage() {
   }
 
   const isPaid = plan === "solo" || plan === "team";
-  const backLinkHref = isLoggedIn ? "/construction/mypage" : "/construction";
-  const backLinkLabel = isLoggedIn ? "マイページに戻る" : "ケンミツトップに戻る";
   const steps = buildSteps(plan);
 
   const featureBlocks = isPaid
@@ -222,19 +221,30 @@ export default async function HowToPage() {
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
           <nav className="text-xs text-gray-500 mb-2">
-            <Link href={backLinkHref} className="hover:text-gray-700">
-              {isLoggedIn ? "マイページ" : "ケンミツ"}
-            </Link>
+            {isLoggedIn ? (
+              <Link href="/construction/mypage" className="hover:text-gray-700">
+                マイページ
+              </Link>
+            ) : (
+              <span>ケンミツ</span>
+            )}
             <span className="mx-1">/</span>
             <span className="text-gray-700">使い方ガイド</span>
           </nav>
-          <Link
-            href={backLinkHref}
-            className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
-          >
-            <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
-            ← {backLinkLabel}
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              href="/construction/mypage"
+              className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
+            >
+              <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
+              ← マイページに戻る
+            </Link>
+          ) : (
+            <BackLink className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5">
+              <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
+              ← 前のページに戻る
+            </BackLink>
+          )}
         </div>
       </header>
 

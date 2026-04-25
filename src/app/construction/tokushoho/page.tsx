@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat, AlertTriangle } from "lucide-react";
+import BackLink from "@/components/construction/BackLink";
 
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記 | ケンミツ",
@@ -34,13 +35,10 @@ export default function ConstructionTokushohoPage() {
             <span className="mx-1">/</span>
             <span className="text-gray-700">特定商取引法に基づく表記</span>
           </nav>
-          <Link
-            href="/construction"
-            className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
-          >
+          <BackLink className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5">
             <HardHat className="w-4 h-4 text-kenmitsu-navy" strokeWidth={2.25} />
-            ← ケンミツトップに戻る
-          </Link>
+            ← 前のページに戻る
+          </BackLink>
         </div>
       </header>
 

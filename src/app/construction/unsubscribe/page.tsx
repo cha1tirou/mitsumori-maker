@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { HardHat, Mail, AlertTriangle, Send } from "lucide-react";
 import { verifyUnsubscribeToken } from "@/lib/email";
 import UnsubscribeForm from "./UnsubscribeForm";
+import BackLink from "@/components/construction/BackLink";
 
 export const metadata: Metadata = {
   title: "配信停止 | ケンミツ",
@@ -26,16 +26,13 @@ export default async function UnsubscribePage({
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <Link
-            href="/construction"
-            className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
-          >
+          <BackLink className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5">
             <HardHat
               className="w-4 h-4 text-kenmitsu-navy"
               strokeWidth={2.25}
             />
-            ← ケンミツトップに戻る
-          </Link>
+            ← 前のページに戻る
+          </BackLink>
         </div>
       </header>
 
