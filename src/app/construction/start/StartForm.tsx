@@ -8,8 +8,8 @@ import {
   Loader2,
   AlertTriangle,
   CheckCircle2,
-  Shield,
-  Smartphone,
+  FileText,
+  Save,
   Zap,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -106,7 +106,7 @@ export default function StartForm({ redirectTo }: Props) {
           {/* Hero */}
           <div className="order-2 lg:order-1">
             <span className="inline-block bg-kenmitsu-orange text-white text-[11px] font-bold px-3 py-1.5 rounded-full mb-4">
-              改正建設業法 2025 対応
+              完全無料・カード登録不要
             </span>
             <h1 className="text-2xl sm:text-3xl lg:text-[34px] font-black leading-tight mb-4">
               建築見積書を、
@@ -116,8 +116,9 @@ export default function StartForm({ redirectTo }: Props) {
               </span>
             </h1>
             <p className="text-sm sm:text-base text-white/85 leading-relaxed mb-6">
-              改正建設業法 2025 対応の見積書を月¥980 で出せるサービスはケンミツだけ。
-              まずは無料で何枚でも作成・PDF ダウンロード。
+              メアド登録だけで、何枚でも見積書が作れます。
+              <br />
+              PDF ダウンロード・クラウド保存もすべて無料。
             </p>
 
             <div className="space-y-2.5 mb-8">
@@ -133,15 +134,23 @@ export default function StartForm({ redirectTo }: Props) {
                   className="w-4 h-4 text-kenmitsu-orange shrink-0"
                   strokeWidth={2.5}
                 />
-                <span>無料で何枚でも作成・PDF ダウンロード</span>
+                <span>何枚でも作成・PDF ダウンロード</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2
                   className="w-4 h-4 text-kenmitsu-orange shrink-0"
                   strokeWidth={2.5}
                 />
-                <span>改正建設業法 2025 対応版は Solo（月¥980）で</span>
+                <span>クラウド保存で再編集・複製も自由</span>
               </div>
+            </div>
+
+            {/* 見積書イメージ（こんな見積書が作れます） */}
+            <div className="mb-8">
+              <p className="text-[11px] text-white/70 mb-3 font-medium tracking-wide">
+                ↓ こんな見積書が作れます
+              </p>
+              <QuoteMockup />
             </div>
 
             {/* 信頼バッジ */}
@@ -155,20 +164,20 @@ export default function StartForm({ redirectTo }: Props) {
                 <p className="text-[10px] text-white/60">PC・スマホ両対応</p>
               </div>
               <div>
-                <Shield
+                <FileText
                   className="w-5 h-5 mb-1.5 text-kenmitsu-orange"
                   strokeWidth={2}
                 />
-                <p className="text-[11px] font-bold">改正法対応</p>
-                <p className="text-[10px] text-white/60">2025年12月施行</p>
+                <p className="text-[11px] font-bold">PDF 出力</p>
+                <p className="text-[10px] text-white/60">無制限ダウンロード</p>
               </div>
               <div>
-                <Smartphone
+                <Save
                   className="w-5 h-5 mb-1.5 text-kenmitsu-orange"
                   strokeWidth={2}
                 />
-                <p className="text-[11px] font-bold">月¥980 から</p>
-                <p className="text-[10px] text-white/60">いつでも解約可</p>
+                <p className="text-[11px] font-bold">クラウド保存</p>
+                <p className="text-[10px] text-white/60">再編集・複製自由</p>
               </div>
             </div>
           </div>
@@ -275,21 +284,84 @@ export default function StartForm({ redirectTo }: Props) {
             <p className="text-[11px] font-bold">30秒で完成</p>
           </div>
           <div className="text-white/85">
-            <Shield
+            <FileText
               className="w-5 h-5 mx-auto mb-1.5 text-kenmitsu-orange"
               strokeWidth={2}
             />
-            <p className="text-[11px] font-bold">改正法対応</p>
+            <p className="text-[11px] font-bold">PDF 出力</p>
           </div>
           <div className="text-white/85">
-            <Smartphone
+            <Save
               className="w-5 h-5 mx-auto mb-1.5 text-kenmitsu-orange"
               strokeWidth={2}
             />
-            <p className="text-[11px] font-bold">月¥980 から</p>
+            <p className="text-[11px] font-bold">クラウド保存</p>
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+/**
+ * 見積書サンプルのインライン Mockup。
+ * 実 PDF をスクショではなく Tailwind で軽量に描画して
+ * 「こんな見積書が作れる」を一目で伝える。
+ */
+function QuoteMockup() {
+  return (
+    <div className="bg-white text-gray-900 rounded-lg shadow-2xl p-4 sm:p-5 max-w-sm transform -rotate-[1deg] origin-top-left">
+      <div className="text-center mb-3 pb-2 border-b-2 border-kenmitsu-navy">
+        <h3 className="text-[15px] font-bold tracking-[0.18em] text-kenmitsu-navy">
+          工事見積書
+        </h3>
+      </div>
+      <div className="text-[10px] mb-3 leading-relaxed">
+        <p className="font-bold text-[12px] border-b border-kenmitsu-navy pb-0.5 inline-block">
+          山田建設 御中
+        </p>
+        <p className="text-gray-500 mt-1.5">件名：内装リフォーム工事</p>
+        <p className="text-gray-500">工期：2026/04/01 〜 2026/05/15</p>
+      </div>
+      <table className="w-full text-[10px] mb-3 border-collapse">
+        <thead>
+          <tr className="border-y border-gray-300 text-gray-600 bg-gray-50">
+            <th className="text-left py-1 px-1.5 font-medium">品名</th>
+            <th className="text-right py-1 px-1.5 font-medium">数量</th>
+            <th className="text-right py-1 px-1.5 font-medium">金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-gray-100">
+            <td className="py-1 px-1.5">内装解体工事</td>
+            <td className="text-right py-1 px-1.5">1 式</td>
+            <td className="text-right py-1 px-1.5 font-mono">¥120,000</td>
+          </tr>
+          <tr className="border-b border-gray-100">
+            <td className="py-1 px-1.5">大工工事</td>
+            <td className="text-right py-1 px-1.5">1 式</td>
+            <td className="text-right py-1 px-1.5 font-mono">¥350,000</td>
+          </tr>
+          <tr className="border-b border-gray-100">
+            <td className="py-1 px-1.5">内装仕上げ</td>
+            <td className="text-right py-1 px-1.5">1 式</td>
+            <td className="text-right py-1 px-1.5 font-mono">¥98,000</td>
+          </tr>
+          <tr className="border-b border-gray-100">
+            <td className="py-1 px-1.5 text-gray-500">諸経費</td>
+            <td className="text-right py-1 px-1.5">1 式</td>
+            <td className="text-right py-1 px-1.5 font-mono text-gray-500">
+              ¥45,000
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div className="flex justify-between items-end pt-2 border-t-2 border-kenmitsu-navy">
+        <span className="text-[10px] text-gray-500">合計（税込）</span>
+        <span className="font-mono font-bold text-[15px] text-kenmitsu-navy">
+          ¥674,300
+        </span>
+      </div>
     </div>
   );
 }

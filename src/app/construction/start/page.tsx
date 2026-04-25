@@ -5,9 +5,9 @@ import { getCurrentUserProfile } from "@/lib/supabase/queries";
 import StartForm from "./StartForm";
 
 export const metadata: Metadata = {
-  title: "無料登録｜改正建設業法2025対応 見積書 月¥980｜ケンミツ",
+  title: "無料登録｜建設業の見積書を30秒で作成｜ケンミツ",
   description:
-    "建設業の見積書を30秒で作成。改正建設業法2025対応版が月¥980で使える唯一のサービス。メールアドレスだけで無料登録、すぐに使えます。",
+    "建設業の見積書を 30 秒で作成。メールアドレスだけで無料登録、何枚でも作成・PDF ダウンロード・クラウド保存ができます。クレジットカード登録不要。",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://mitsumori-maker.com/construction/start",
