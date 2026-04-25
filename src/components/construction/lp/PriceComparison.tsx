@@ -118,9 +118,6 @@ export default function PriceComparison() {
           </table>
         </div>
 
-        <p className="mt-3 text-[10.5px] leading-relaxed text-kenmitsu-muted md:text-[11px]">
-          ※ 各社公式サイト掲載価格・機能に基づく（2026 年 4 月時点）。プラン構成・対応範囲は各社公式情報をご確認ください。
-        </p>
       </div>
     </section>
   );

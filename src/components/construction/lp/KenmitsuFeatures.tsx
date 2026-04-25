@@ -28,7 +28,7 @@ export default function KenmitsuFeatures() {
           <SectionHeading
             eyebrow="Features"
             title="ケンミツが改正法対応のために搭載している機能"
-            lead="他社サービスには無い、改正建設業法 2025 に対応するための専用機能を標準装備。"
+            lead="改正建設業法 2025 に対応するための専用機能を標準装備。"
           />
         </div>
 
