@@ -12,10 +12,11 @@ interface Props {
   data: ConstructionQuoteData;
   /**
    * 改正建設業法 2025 対応版 内訳サマリーを末尾に追加するか。
-   * Solo / Team プランで有効化。null/undefined なら非表示（Free プラン）。
-   * 値は労務費比率（0〜1）。法定福利費は労務費 × 14.6% で自動算出。
+   * Solo / Team プランで true。Free プランは false。
+   * 労務費は明細の category="labor" 合計を実額で使い、法定福利費は労務費 × 14.6%
+   * を自動算出する（旧スライダー方式の比率推定は撤廃）。
    */
-  lawCompliantSummary?: number | null;
+  lawCompliantSummary?: boolean;
 }
 
 const STATUTORY_WELFARE_RATE = 0.146;
@@ -68,16 +69,12 @@ export default function ConstructionPreview({
   lawCompliantSummary,
 }: Props) {
   const totals = calcConstructionTotals(data);
-  const showLawSummary =
-    typeof lawCompliantSummary === "number" &&
-    lawCompliantSummary >= 0 &&
-    lawCompliantSummary <= 1 &&
-    totals.subtotal > 0;
-  const laborCost = showLawSummary
-    ? Math.round(totals.subtotal * (lawCompliantSummary as number))
-    : 0;
+  const showLawSummary = lawCompliantSummary === true && totals.subtotal > 0;
+  const laborCost = showLawSummary ? totals.byCategory.labor : 0;
   const statutoryWelfare = Math.round(laborCost * STATUTORY_WELFARE_RATE);
-  const otherCost = showLawSummary ? totals.subtotal - laborCost : 0;
+  const otherCost = showLawSummary
+    ? Math.max(0, totals.subtotal - laborCost - statutoryWelfare)
+    : 0;
 
   return (
     <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
@@ -351,7 +348,7 @@ export default function ConstructionPreview({
               ◆ 改正建設業法 2025 対応 内訳明示
             </p>
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-gray-800">
-              <span>労務費（推定 {Math.round((lawCompliantSummary as number) * 100)}%）</span>
+              <span>労務費（明細から算出）</span>
               <span className="text-right font-medium">
                 {formatCurrency(laborCost)}
               </span>
@@ -367,7 +364,7 @@ export default function ConstructionPreview({
               </span>
             </div>
             <p className="text-[9px] text-gray-600 mt-2 leading-snug">
-              本見積は改正建設業法（2025 年 12 月施行）に基づき、労務費・法定福利費等を内訳明示しています。労務費比率は工事内容に応じて調整可。法定福利費 14.6% は健康保険・厚生年金・雇用保険等の標準率です。
+              本見積は改正建設業法（2025 年 12 月施行）に基づき、労務費・法定福利費等を内訳明示しています。労務費は明細の費目「労務費」の合計を、法定福利費 14.6% は健康保険・厚生年金・雇用保険等の標準率を採用しています。
             </p>
           </div>
         )}

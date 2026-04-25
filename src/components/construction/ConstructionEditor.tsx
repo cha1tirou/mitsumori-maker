@@ -60,9 +60,6 @@ export default function ConstructionEditor({
   // beforeunload 警告のために使う（QAバグ #11）
   const [isDirty, setIsDirty] = useState(false);
 
-  // Solo / Team 限定: 改正建設業法 対応版の労務費比率（PDF 内訳サマリーに反映）。
-  // セッション内のみ保持。既定 60%（一人親方の標準的な比率）。
-  const [laborCostRatio, setLaborCostRatio] = useState(0.6);
   const isLawCompliant = plan === "solo" || plan === "team";
 
   // 新規作成時のみ下書き保存を有効化。編集モードではサーバーのデータを正とする
@@ -421,40 +418,20 @@ export default function ConstructionEditor({
                   A4サイズ
                 </span>
               </div>
-              {/* Solo / Team 限定: 改正法対応 PDF の労務費比率コントロール */}
+              {/* Solo / Team 限定: 改正法対応版である旨の表示 */}
               {isLawCompliant && (
                 <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy/20 rounded-lg p-3 mb-3">
-                  <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <Shield
-                        className="w-4 h-4 text-kenmitsu-navy"
-                        strokeWidth={2.25}
-                      />
-                      <span className="text-xs font-bold text-kenmitsu-navy">
-                        改正建設業法 2025 対応版
-                      </span>
-                    </div>
-                    <label className="flex items-center gap-2 text-xs text-gray-700">
-                      <span className="whitespace-nowrap">労務費比率</span>
-                      <input
-                        type="range"
-                        min={0}
-                        max={100}
-                        step={5}
-                        value={Math.round(laborCostRatio * 100)}
-                        onChange={(e) =>
-                          setLaborCostRatio(Number(e.target.value) / 100)
-                        }
-                        className="w-24 accent-kenmitsu-navy"
-                        aria-label="労務費比率"
-                      />
-                      <span className="font-mono font-bold text-kenmitsu-navy w-10 text-right">
-                        {Math.round(laborCostRatio * 100)}%
-                      </span>
-                    </label>
+                  <div className="flex items-center gap-2">
+                    <Shield
+                      className="w-4 h-4 text-kenmitsu-navy"
+                      strokeWidth={2.25}
+                    />
+                    <span className="text-xs font-bold text-kenmitsu-navy">
+                      改正建設業法 2025 対応版
+                    </span>
                   </div>
                   <p className="text-[10px] text-gray-600 mt-1.5 leading-relaxed">
-                    工事原価のうち労務費が占める割合。法定福利費（労務費 × 14.6%）の自動算出に使用し、PDF 末尾に内訳明示として印字されます。
+                    労務費・法定福利費の内訳明示が PDF 末尾に印字されます。労務費は明細の費目「労務費」の合計、法定福利費は労務費 × 14.6%（健保・厚年・雇用・労災等の標準率）で自動算出。
                   </p>
                 </div>
               )}
@@ -490,7 +467,7 @@ export default function ConstructionEditor({
               <div className="printable-root">
                 <ConstructionPreview
                   data={data}
-                  lawCompliantSummary={isLawCompliant ? laborCostRatio : null}
+                  lawCompliantSummary={isLawCompliant}
                 />
               </div>
             </div>
