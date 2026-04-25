@@ -401,7 +401,8 @@ export default function ConstructionEditor({
             }`}
           >
             <div className="lg:sticky lg:top-[80px] space-y-4">
-              <LawCheckPanel results={lawChecks} />
+              {/* 改正建設業法チェッカーは Solo / Team 限定機能 */}
+              {isLawCompliant && <LawCheckPanel results={lawChecks} />}
               <div className="flex items-center justify-between">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Preview
