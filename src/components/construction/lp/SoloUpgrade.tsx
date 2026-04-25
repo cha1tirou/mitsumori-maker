@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PlanCheckoutButton from "@/components/construction/PlanCheckoutButton";
 import SectionHeading from "./SectionHeading";
-import { CheckIcon, HelmetIcon } from "./icons";
+import { CheckIcon } from "./icons";
 
 const benefits = [
   "改正建設業法のルールに沿った見積書を作成できる",
@@ -35,11 +35,6 @@ export default function SoloUpgrade({ currentPlan, isPaid }: Props) {
         </div>
 
         <article className="relative overflow-hidden rounded-3xl border-[2.5px] border-kenmitsu-orange bg-white p-7 shadow-[0_40px_80px_-30px_rgba(245,158,11,0.35)] md:p-10">
-          <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-kenmitsu-orange px-4 py-2 text-[11px] font-black tracking-[0.1em] text-[#1A1200] shadow-[0_6px_16px_-6px_rgba(245,158,11,0.5)] md:text-[12px]">
-            <HelmetIcon color="#1A1200" />
-            個人事業主に人気
-          </div>
-
           <div className="mb-2 text-center text-[12px] font-black tracking-[0.22em] text-kenmitsu-orange600 md:text-[13px]">
             有料プラン
           </div>

@@ -34,7 +34,6 @@ const plans: Plan[] = [
   {
     id: "solo",
     name: "SOLO",
-    tag: "個人事業主に人気",
     price: "¥980",
     period: "/月",
     subprice: "年払い ¥9,800（2ヶ月分お得）",
@@ -115,7 +114,7 @@ export default function Pricing({ currentPlan, isPaid }: Props) {
                   disabled ? "opacity-80 sm:col-span-2 lg:col-span-1" : "",
                 ].join(" ")}
               >
-                {featured && (
+                {featured && p.tag && (
                   <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-kenmitsu-orange px-4 py-2 text-[11px] font-black tracking-[0.1em] text-[#1A1200] shadow-[0_6px_16px_-6px_rgba(245,158,11,0.5)] md:text-[12px]">
                     <HelmetIcon color="#1A1200" />
                     {p.tag}
