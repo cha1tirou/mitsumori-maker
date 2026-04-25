@@ -310,7 +310,7 @@ export default function StartForm({ redirectTo }: Props) {
  */
 function QuoteMockup() {
   return (
-    <div className="bg-white text-gray-900 rounded-lg shadow-2xl p-4 sm:p-5 max-w-sm transform -rotate-[1deg] origin-top-left">
+    <div className="bg-white text-gray-900 rounded-lg shadow-2xl p-4 sm:p-5 max-w-sm">
       <div className="text-center mb-3 pb-2 border-b-2 border-kenmitsu-navy">
         <h3 className="text-[15px] font-bold tracking-[0.18em] text-kenmitsu-navy">
           工事見積書
