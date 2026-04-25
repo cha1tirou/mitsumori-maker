@@ -105,6 +105,24 @@ export default function StartForm({ redirectTo }: Props) {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start lg:items-center">
           {/* Hero */}
           <div className="order-2 lg:order-1">
+            {/* ブランドマーク */}
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-kenmitsu-orange flex items-center justify-center shadow-lg">
+                <HardHat
+                  className="w-7 h-7 text-white"
+                  strokeWidth={2.25}
+                />
+              </div>
+              <div>
+                <p className="text-2xl font-black tracking-wide leading-none">
+                  ケンミツ
+                </p>
+                <p className="text-[11px] text-white/70 mt-1 font-medium">
+                  建設業の見積書ツール
+                </p>
+              </div>
+            </div>
+
             <span className="inline-block bg-kenmitsu-orange text-white text-[11px] font-bold px-3 py-1.5 rounded-full mb-4">
               完全無料・カード登録不要
             </span>
@@ -184,6 +202,15 @@ export default function StartForm({ redirectTo }: Props) {
 
           {/* Form */}
           <div className="order-1 lg:order-2 bg-white rounded-2xl shadow-2xl text-gray-900 p-6 sm:p-8">
+            <div className="flex items-center gap-2 mb-3">
+              <HardHat
+                className="w-4 h-4 text-kenmitsu-orange"
+                strokeWidth={2.25}
+              />
+              <span className="text-[11px] font-bold tracking-wider text-kenmitsu-navy uppercase">
+                Kenmitsu / ケンミツ
+              </span>
+            </div>
             <h2 className="text-lg font-bold mb-1">無料アカウント登録</h2>
             <p className="text-xs text-gray-500 mb-5">
               メールアドレスを入力してください。届いたリンクからパスワード設定 → 利用開始です。
@@ -376,6 +403,15 @@ function SentScreen({
   return (
     <div className="min-h-screen bg-gradient-to-b from-kenmitsu-navy to-kenmitsu-navy900 text-white flex items-center justify-center p-4">
       <div className="bg-white text-gray-900 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
+        <div className="flex items-center justify-center gap-2 mb-5">
+          <HardHat
+            className="w-4 h-4 text-kenmitsu-orange"
+            strokeWidth={2.25}
+          />
+          <span className="text-[11px] font-bold tracking-wider text-kenmitsu-navy uppercase">
+            Kenmitsu / ケンミツ
+          </span>
+        </div>
         <CheckCircle2
           className="w-12 h-12 text-kenmitsu-ok mx-auto mb-4"
           strokeWidth={1.75}
