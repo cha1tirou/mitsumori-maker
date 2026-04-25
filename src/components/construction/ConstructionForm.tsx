@@ -693,7 +693,7 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <SectionTitle>工種プリセット</SectionTitle>
         <p className="text-[11px] text-gray-500 mb-3 leading-relaxed">
-          工種を選ぶと代表的な明細5項目が自動で入ります。複数工種を追加して1つの見積書にまとめることもできます。
+          工種を選ぶと代表的な明細5項目が自動で入ります。{isPaid && "複数工種を追加して1つの見積書にまとめることもできます。"}
         </p>
         <div className="grid grid-cols-2 gap-2 mb-3">
           {(Object.keys(workTypeLabels) as WorkType[]).map((type) => {
@@ -1253,14 +1253,16 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
             );
           })}
 
-          <button
-            type="button"
-            onClick={() => addSection()}
-            className="w-full rounded-xl border-2 border-dashed border-kenmitsu-navy100 py-3 text-sm text-kenmitsu-navy hover:bg-kenmitsu-navy50 hover:border-kenmitsu-navy transition-colors flex items-center justify-center gap-2 font-bold"
-          >
-            <Plus className="w-4 h-4" strokeWidth={2.25} />
-            新しいセクションを追加
-          </button>
+          {isPaid && (
+            <button
+              type="button"
+              onClick={() => addSection()}
+              className="w-full rounded-xl border-2 border-dashed border-kenmitsu-navy100 py-3 text-sm text-kenmitsu-navy hover:bg-kenmitsu-navy50 hover:border-kenmitsu-navy transition-colors flex items-center justify-center gap-2 font-bold"
+            >
+              <Plus className="w-4 h-4" strokeWidth={2.25} />
+              新しいセクションを追加
+            </button>
+          )}
         </div>
 
         <div className="mt-4 pt-4 border-t border-gray-100">
@@ -1437,7 +1439,8 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
         </p>
       </section>
 
-      {/* 工事写真 */}
+      {/* 工事写真（有料プラン限定） */}
+      {isPaid && (
       <section className="bg-white rounded-2xl p-5 border border-gray-100">
         <div className="flex items-center justify-between mb-3">
           <SectionTitle>
@@ -1448,14 +1451,11 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
           </SectionTitle>
           <button
             type="button"
-            onClick={() =>
-              isPaid ? photoInputRef.current?.click() : lock.open("工事写真")
-            }
+            onClick={() => photoInputRef.current?.click()}
             className="text-[10px] font-bold px-2 py-1 rounded-md bg-kenmitsu-navy50 text-kenmitsu-navy border border-kenmitsu-navy100 hover:bg-kenmitsu-navy100 flex items-center gap-1"
           >
             <Upload className="w-3 h-3" strokeWidth={2.5} />
             写真を追加
-            {!isPaid && <SoloLockBadge className="ml-0.5" />}
           </button>
           <input
             ref={photoInputRef}
@@ -1513,6 +1513,7 @@ export default function ConstructionForm({ data, onChange, plan = "free" }: Prop
           </div>
         )}
       </section>
+      )}
 
       {/* 備考 */}
       <section className="bg-white rounded-2xl p-5 border border-gray-100">

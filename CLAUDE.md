@@ -249,15 +249,16 @@ export default function GuidePage() {
 
 ### プラン別機能ゲート（`SoloFeatureLock.tsx`）
 - `useSoloFeatureLock()` フックで誘導ダイアログを提供。Free/未ログインがタップすると「有料プラン詳細へ」モーダル
-- ゲートしている機能（タップでロックモーダル）:
+- ゲートしている機能（タップでロックモーダル・課金訴求の入口になるもの）:
   - 取引先マスタ（`CustomerPicker`）
   - 単価マスタ（`PriceMasterPicker`、明細行の「マスタ」ボタン経由）
   - 原価・粗利トグル（`showCost`）
-  - 工事写真アップロード
-- Free に対して**非表示**にしている機能:
+- Free に対して**非表示**にしている機能（UI シンプル化優先・2026-04-25〜）:
   - 改正建設業法チェッカー（右ペイン、`ConstructionEditor.tsx:415` `isLawCompliant && <LawCheckPanel />`）
   - PDF の内訳明示セクション（労務費・法定福利費の独立計上、`ConstructionPreview.tsx`）
   - PDF フッターの "Compliant with Construction Industry Act 2025 (revised)" ラベル
+  - 工事写真セクション全体（`ConstructionForm.tsx:1440` `{isPaid && (<section>...)}`）
+  - 複数工種セクション追加ボタン（`ConstructionForm.tsx:1256` 「新しいセクションを追加」を `{isPaid && (<button>)}`）
   - マイページの「領収書の発行方法」ボタン（`/construction/mypage/page.tsx:312`、plan !== "free" 時のみ表示）
 - 既に**完全削除**された機能（過去の機能ゲート対象だった）:
   - 書類変換 / 会計CSV出力（`5b5dab4`） / メール送信（`7b06d27`） / ロゴ・印影画像（`490ef65`）
