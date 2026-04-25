@@ -14,12 +14,22 @@
 
 ## 手順
 
+> **注意**: 最新の Supabase Dashboard UI では「Confirm email」設定が Project Settings 配下に移動している。
+> 左サイドバーの「Authentication（鍵アイコン）→ Providers → Email」**ではない**。
+
 1. https://supabase.com/dashboard にログイン
 2. ケンミツのプロジェクトを選択
-3. 左メニュー **Authentication** → **Providers**
-4. **Email** プロバイダの設定を開く
-5. **Confirm email** トグルを **OFF** にする
-6. **Save** をクリック
+3. 左サイドバー**最下部**の **Project Settings**（⚙️ 歯車アイコン）をクリック
+4. Project Settings 画面の左メニューから **Authentication** を選択
+5. 画面内の **User Signups** セクションを探す
+6. **Confirm email**（または **Email confirmations**）トグルを **OFF**
+7. **Save** をクリック
+
+直接 URL で開くなら:
+
+```
+https://supabase.com/dashboard/project/[プロジェクトID]/settings/auth
+```
 
 ## 影響範囲
 

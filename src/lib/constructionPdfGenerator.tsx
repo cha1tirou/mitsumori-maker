@@ -740,7 +740,7 @@ function ConstructionPdf({
               gap: 8,
             }}
           >
-            {photos.map((photo, i) => (
+            {photos.map((photo) => (
               <View
                 key={photo.id}
                 style={{
