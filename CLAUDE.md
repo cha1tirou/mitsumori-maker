@@ -237,8 +237,9 @@ export default function GuidePage() {
 
 ### PlanCheckoutButton（`src/components/construction/PlanCheckoutButton.tsx`）
 - `variant="kenmitsu"`（オレンジ）: ケンミツブランドのCTA用。**LP の Pricing、及びケンミツ配下のアップグレード誘導 CTA で使う**
-- `variant="primary"`（緑）: **レガシー**。`@deprecated` コメント付き。将来の参照性のため定義は残すが新規使用禁止
 - `variant="outline"`: セカンダリ（白地 + 枠）
+- 旧 `variant="primary"`（緑）は 2026-04-26 に完全削除（Phase 1 ピボット後の整理で利用箇所ゼロを確認）
+- クリック → 直接 Stripe Checkout に遷移（中間モーダルなし、`a6f7298`）。未ログインなら `/construction/start?redirect=/construction#pricing` へリダイレクト
 
 ### PDF 出力（現行方式: `html2canvas + jsPDF`）
 - 実装: `src/lib/constructionPdfFromPreview.ts` — `ConstructionPreview`（`.printable-root` で囲まれた要素）を html2canvas でキャプチャ → jsPDF に埋め込んで Blob ダウンロード
@@ -265,11 +266,15 @@ export default function GuidePage() {
 - **AI積算**（`/api/ai-takeoff` / `AiTakeoffDialog.tsx`）は**封印中（2026-04-21〜）**。LP・エディタ UI・ドリップメールから露出を全撤去。実装コード・DB スキーマ（`ai_takeoff_logs` + ビュー）は保持。**再開条件**: MRR 1万円突破 or 有料 3名到達時点で、Sonnet 4.6 で精度・コスト実測のうえ再評価
 
 ### Free / 有料プラン の課金設計（2026-04-25 ピボット後）
-- **Free プラン**: 見積作成・編集・PDF出力・クラウド保存・再編集 すべて**無制限**。透かしなし・通常フォーマット（内訳明示なし）。改正建設業法チェッカーは右ペインに非表示。マスタ・原価/粗利・工事写真はロック（タップで誘導モーダル）
+- **Free プラン**: 見積作成・編集・PDF出力・クラウド保存・再編集 すべて**無制限**。透かしなし・通常フォーマット（内訳明示なし）。改正建設業法チェッカーは右ペインに非表示。マスタ・原価/粗利はロック（タップで誘導モーダル）。複数工種セクション・工事写真は UI 非表示
 - **有料プラン (Solo, Team)**: ¥1,980/月 or ¥19,800/年。Free 制限すべて解除 + PDF が改正法対応版（労務費・法定福利費の独立計上 + Compliance バッジ）+ チェッカー右ペイン表示 + Stripe Customer Portal アクセス
 - **過去にあった「透かし常時 ON」「月3通保存制限」は撤廃済み**（commit `40000fe`、2026-04-25 朝）。撤廃理由はピボット戦略（後述）
+- **法定福利費の料率**: `data.legalWelfareRate`（デフォルト 20%）一本に統一。本文・改正法対応サマリー（PDF 末尾）どちらも同じ料率を使う。旧実装は本文 20% / サマリー 14.6% の二重表示で混乱の元だった
+- **改正法対応サマリーの労務費**: 明細の `category="labor"` 項目合計を実額で表示。旧スライダー方式（`subtotal × 比率`）は `53f5008` で撤廃
 - 課金フロー: LP (`/construction`) → Pricing or SoloUpgrade セクション → `PlanCheckoutButton variant="kenmitsu"` → Stripe Checkout 直行（中間モーダルなし、`a6f7298`） → Webhook で plan 更新 → マイページ反映
 - 解約フロー: マイページ → `CancelRetentionDialog`（3段階リテンション：実績提示→理由ヒアリング→料金理由なら 50%OFF オファー）→ `PortalButton` 経由で Stripe Customer Portal
+- ログアウト動線: `SignOutButton` → `/construction/login`（旧 LP 遷移は `5e21a59` で改修。再ログイン導線を最短化）
+- アカウント削除動線: `AccountSettings` のアカウント削除 → 削除完了後 `/construction`（LP）に戻す
 
 ### Phase 1 ピボットの戦略コンテキスト（2026-04-25）
 広告運用 4 日（4/22〜4/25）の判断材料から戦略転換:
@@ -291,10 +296,14 @@ export default function GuidePage() {
   - JSON-LD の Offer name（schema 上の SKU 名）
 
 ### エディタ アクションボタン順序（`ConstructionEditor.tsx`）
-1. PDF ダウンロード（全員）
-2. 未ログイン/Free は登録・有料プラン誘導カード（PDF 直後の熱量タイミング）
-3. 見積書を保存（ログイン済み・全プラン無制限）
+1. PDF ダウンロード（全員・Free は「通常フォーマット」、有料は「改正法対応版」をボタンに明示）
+2. Free プランは有料プラン誘導カード（PDF 直後の熱量タイミング）
+3. 見積書を保存（全プラン無制限）
 4. マイページリンク
+
+`/construction/new` と `/construction/quotes/[id]` は両方 server-side で auth gate
+されており、未ログインは `/construction/start` に redirect する（`94a7547`〜）。
+そのため editor 内の `!userEmail` 分岐は本番では到達不能で、`42151d9` で削除済み。
 
 ### 絶対に触らない（ケンミツ改修時の保護対象）
 - `src/app/layout.tsx` のルート設定全て（AdSense `ca-pub-6875835900503056` / GA4 `G-13VR2YEZKB` / Meta Pixel 条件分岐 / Search Console verification / WebApplication JSON-LD / SiteFooter / Noto_Sans_JP）
@@ -329,8 +338,11 @@ export default function GuidePage() {
 LP・広告コピーで避けるべき表現:
 - 「業界最安値」「業界No.1」「圧倒的」等 — 合理的根拠（他社比較表等）の証跡がない限り使用禁止
 - 「完全対応」「100%」等 — 根拠リスト（例: 改正法の条項を LawCompliance セクションで列挙）とセットでのみ OK
-- 「3分で作れる」等の数値訴求 — 実測根拠（社内計測）を用意
+- 「3分で作れる」「30 秒で完成」等の数値訴求 — 実測根拠（社内計測）を用意。なければ「すぐに」「短時間で」等に弱める
+- 「登録不要」 — メアド登録必須化（2026-04-25 ピボット）以降は事実と異なるため使用禁止。「クレジットカード登録不要」は OK
 
-2026-04-19 時点で「業界最安値帯」→「月¥980〜」に差し替え済み。さらに 2026-04-25 ピボットで:
-- 「月¥980〜」→「月¥1,980〜」（commit `246dc1b`）
-- 「登録不要で試せる」→ メアド登録必須に転換、コピーも「メアド登録だけで〜」に統一（drip email 配信のためのリスト構築が目的）
+抑制履歴:
+- 2026-04-19: 「業界最安値帯」→「月¥980〜」に差し替え（合理的根拠なし）
+- 2026-04-25: Phase 1 ピボットで「月¥980〜」→「月¥1,980〜」（`246dc1b`）、「登録不要で試せる」→「メアド登録だけで〜」（drip email 配信用リスト構築が目的）
+- 2026-04-26: 「改正建設業法 2025 に完全対応」→「改正建設業法 2025 対応版を出力」「ルールに沿った見積書」等に弱める（Free は通常フォーマットで未対応のため、完全対応は事実と異なる・`42151d9`）
+- 2026-04-26: 「3 分で作れる」「30 秒で完成」等の時間訴求を実測根拠不在のため「すぐに」「短時間で」等に置換（`42151d9`）
