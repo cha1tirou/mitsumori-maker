@@ -17,7 +17,11 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
-  const next = searchParams.get("next") ?? "/construction/mypage";
+  // 既定は /construction/setup-password。
+  // - 新規 OTP ユーザー: setup-password で PW 入力（user_metadata.password_set=false）
+  // - 既存ユーザー（PW 既設定）: setup-password 内で自動的に /mypage にリダイレクト
+  // メールテンプレに next パラメータが含まれない場合のフォールバックとして安全側に倒す。
+  const next = searchParams.get("next") ?? "/construction/setup-password";
 
   if (!isSupabaseConfigured()) {
     return NextResponse.redirect(
