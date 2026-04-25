@@ -10,7 +10,11 @@ import {
   Save,
   Layers,
   Wand2,
+  Crown,
+  Lock,
 } from "lucide-react";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { getCurrentUserProfile } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = {
   title: "使い方ガイド | ケンミツ",
@@ -22,107 +26,191 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const steps = [
-  {
-    num: 1,
-    title: "工種を選んでプリセットを読み込む",
-    description:
-      "8工種（電気・水道・内装・土木・外構・大工・左官・鳶足場）から今回の工事に近いものをタップ。「プリセットを読み込む」で代表5項目が自動投入されます。複数工種を扱う場合はセクションを追加して重ねられます。",
-    icon: Wand2,
-    hint: {
-      label: "8工種の例",
-      items: ["電気 → 配線・分電盤・照明", "水道 → 給排水管・給湯器", "内装 → クロス・床・天井", "土木 → 掘削・コンクリート", "外構 → フェンス・カーポート", "大工 → 木工造作・構造材", "左官 → モルタル・漆喰", "鳶足場 → 架設・解体・養生"],
-    },
-  },
-  {
-    num: 2,
-    title: "発注者・施工者情報を入力",
-    description:
-      "発注者名と敬称を入れ、「取引先マスタ」ボタンから過去の取引先を呼び出せます。施工者情報は一度「自社情報を保存」を押せば、次回から自動で入力されます。建設業許可番号・インボイス登録番号も入れられます。",
-    icon: Users,
-    hint: null,
-  },
-  {
-    num: 3,
-    title: "見積情報と工事概要を入力",
-    description:
-      "見積番号は「自動」ボタンで前回+1を提案。工事名・工事場所・工事期間・設計図書・有効期限（日数）を埋めます。改正建設業法で求められる記載事項を網羅しています。",
-    icon: CheckCircle2,
-    hint: {
-      label: "入力のコツ",
-      items: ["有効期限は14〜30日が一般的", "工事期間は「着工後 約14日間」のように自由記述OK", "設計図書は参照した図面の番号を記載"],
-    },
-  },
-  {
-    num: 4,
-    title: "明細を費目別に入力（労務費・材料費・外注費・その他）",
-    description:
-      "各明細行で費目をプルダウンから選び、品名・数量・単位・単価を入力。「マスタ」ボタンから単価マスタを呼び出せば即入力。中項目（サブセクション）を追加すれば3階層見積になります。",
-    icon: Layers,
-    hint: {
-      label: "費目の使い分け",
-      items: ["労務費 = 職人の手間賃・人工", "材料費 = 部材・資材・設備機器", "外注費 = 協力業者への支払い", "その他 = 仮設・運搬・養生・処分"],
-    },
-  },
-  {
-    num: 5,
-    title: "法定福利費・諸経費は自動計算",
-    description:
-      "労務費を入れると、法定福利費（デフォルト20%）が自動計上。現場管理費（6%）・一般管理費（10%）も業界標準料率で自動計算。料率は工事や規模で編集可能。",
-    icon: CheckCircle2,
-    hint: {
-      label: "料率の目安",
-      items: ["法定福利費: 労務費の約20%（健保+厚年+雇用+労災）", "現場管理費: 直接工事費の5〜8%", "一般管理費: 直接工事費の8〜15%"],
-    },
-  },
-  {
-    num: 6,
-    title: "建設業法チェッカーで法令遵守を確認",
-    description:
-      "右ペインの「建設業法2025チェッカー」が、「一式」の検知・労務費未入力・工事期間/場所未記入・瑕疵担保未記載などをリアルタイム警告。全てクリアすると OK バッジが出ます。",
-    icon: CheckCircle2,
-    hint: {
-      label: "チェック項目",
-      items: ["「一式」表記 → 内訳展開を推奨", "労務費の内訳 → 費目「労務費」の項目が必要", "法定福利費 → ON推奨", "工事場所・期間・有効期限 → 空欄は警告", "瑕疵担保・追加工事方針 → 記載推奨"],
-    },
-  },
-  {
-    num: 7,
-    title: "PDFダウンロードで完成",
-    description:
-      "「PDFダウンロード」をクリックして保存。Free プランは通常フォーマットで出力、有料プランは改正建設業法のルールに沿った見積書（労務費・法定福利費・経費の内訳明示）で出力されます。印刷機能からも PDF 化可能。",
-    icon: Download,
-    hint: null,
-  },
-  {
-    num: 8,
-    title: "（Solo以上）クラウド保存・マイページ管理",
-    description:
-      "「下書き保存」でクラウドに保存、マイページから再編集・複製できます。取引先マスタ・単価マスタに登録しておけば、次回以降の入力時間が大幅に短縮されます。",
-    icon: Save,
-    hint: null,
-  },
-];
+type Plan = "free" | "solo" | "team";
 
-const featureBlocks = [
-  {
-    icon: Star,
-    title: "単価マスタ",
-    body: "よく使う品目・単価・費目を登録。2通目以降の作成時間が1/10に。",
-  },
-  {
-    icon: Users,
-    title: "取引先マスタ",
-    body: "過去の発注者を登録。案件ごとにワンクリックで入力完了。",
-  },
-  {
-    icon: Download,
-    title: "Excelインポート",
-    body: "既存のExcel見積を取り込み、セクション・明細を自動展開。",
-  },
-];
+type Step = {
+  num: number;
+  title: string;
+  description: string;
+  icon: typeof Wand2;
+  hint: { label: string; items: string[] } | null;
+  paidOnly?: boolean;
+};
 
-export default function HowToPage() {
+function buildSteps(plan: Plan): Step[] {
+  const isPaid = plan === "solo" || plan === "team";
+
+  const common: Step[] = [
+    {
+      num: 1,
+      title: "工種を選んでプリセットを読み込む",
+      description:
+        "8工種（電気・水道・内装・土木・外構・大工・左官・鳶足場）から今回の工事に近いものをタップ。「プリセットを読み込む」で代表5項目が自動投入されます。複数工種を扱う場合はセクションを追加して重ねられます。",
+      icon: Wand2,
+      hint: {
+        label: "8工種の例",
+        items: [
+          "電気 → 配線・分電盤・照明",
+          "水道 → 給排水管・給湯器",
+          "内装 → クロス・床・天井",
+          "土木 → 掘削・コンクリート",
+          "外構 → フェンス・カーポート",
+          "大工 → 木工造作・構造材",
+          "左官 → モルタル・漆喰",
+          "鳶足場 → 架設・解体・養生",
+        ],
+      },
+    },
+    {
+      num: 2,
+      title: "発注者・施工者情報を入力",
+      description: isPaid
+        ? "発注者名と敬称を入れ、「取引先マスタ」ボタンから過去の取引先を呼び出せます。施工者情報は一度「自社情報を保存」を押せば、次回から自動で入力されます。建設業許可番号・インボイス登録番号も入れられます。"
+        : "発注者名と敬称を入れます。施工者情報は一度「自社情報を保存」を押せば、次回から自動で入力されます。建設業許可番号・インボイス登録番号も入れられます。取引先マスタは有料プラン限定機能です。",
+      icon: Users,
+      hint: null,
+    },
+    {
+      num: 3,
+      title: "見積情報と工事概要を入力",
+      description:
+        "見積番号は「自動」ボタンで前回+1を提案。工事名・工事場所・工事期間・設計図書・有効期限（日数）を埋めます。改正建設業法で求められる記載事項を網羅しています。",
+      icon: CheckCircle2,
+      hint: {
+        label: "入力のコツ",
+        items: [
+          "有効期限は14〜30日が一般的",
+          "工事期間は「着工後 約14日間」のように自由記述OK",
+          "設計図書は参照した図面の番号を記載",
+        ],
+      },
+    },
+    {
+      num: 4,
+      title: "明細を費目別に入力（労務費・材料費・外注費・その他）",
+      description: isPaid
+        ? "各明細行で費目をプルダウンから選び、品名・数量・単位・単価を入力。「マスタ」ボタンから単価マスタを呼び出せば即入力。中項目（サブセクション）を追加すれば3階層見積になります。"
+        : "各明細行で費目をプルダウンから選び、品名・数量・単位・単価を入力。中項目（サブセクション）を追加すれば3階層見積になります。単価マスタは有料プラン限定機能です。",
+      icon: Layers,
+      hint: {
+        label: "費目の使い分け",
+        items: [
+          "労務費 = 職人の手間賃・人工",
+          "材料費 = 部材・資材・設備機器",
+          "外注費 = 協力業者への支払い",
+          "その他 = 仮設・運搬・養生・処分",
+        ],
+      },
+    },
+    {
+      num: 5,
+      title: "法定福利費・諸経費は自動計算",
+      description:
+        "労務費を入れると、法定福利費（デフォルト20%）が自動計上。現場管理費（6%）・一般管理費（10%）も業界標準料率で自動計算。料率は工事や規模で編集可能。",
+      icon: CheckCircle2,
+      hint: {
+        label: "料率の目安",
+        items: [
+          "法定福利費: 労務費の約20%（健保+厚年+雇用+労災）",
+          "現場管理費: 直接工事費の5〜8%",
+          "一般管理費: 直接工事費の8〜15%",
+        ],
+      },
+    },
+    {
+      num: 6,
+      title: "建設業法チェッカーで法令遵守を確認",
+      description: isPaid
+        ? "右ペインの「建設業法2025チェッカー」が、「一式」の検知・労務費未入力・工事期間/場所未記入・瑕疵担保未記載などをリアルタイム警告。全てクリアすると OK バッジが出ます。指摘内容は改正法対応版 PDF にも反映されます。"
+        : "右ペインの「建設業法2025チェッカー」が、「一式」の検知・労務費未入力・工事期間/場所未記入・瑕疵担保未記載などをリアルタイム警告。全てクリアすると OK バッジが出ます。※ Free プランは通常フォーマット出力のため、チェッカーの指摘は表示のみで PDF には反映されません。",
+      icon: CheckCircle2,
+      hint: {
+        label: "チェック項目",
+        items: [
+          "「一式」表記 → 内訳展開を推奨",
+          "労務費の内訳 → 費目「労務費」の項目が必要",
+          "法定福利費 → ON推奨",
+          "工事場所・期間・有効期限 → 空欄は警告",
+          "瑕疵担保・追加工事方針 → 記載推奨",
+        ],
+      },
+    },
+    {
+      num: 7,
+      title: isPaid
+        ? "PDFダウンロード（改正法対応版・透かしなし）"
+        : "PDFダウンロード（通常フォーマット・透かし入り）",
+      description: isPaid
+        ? "「PDFダウンロード」をクリックして保存。改正建設業法のルールに沿った見積書（労務費・法定福利費・経費の内訳明示）が、透かしなしで出力されます。提出先からの差し戻しリスクを大幅に低減できます。"
+        : "「PDFダウンロード」をクリックして保存。Free プランは通常フォーマット（無料版 SAMPLE の透かし入り）で出力されます。改正建設業法のルールに沿った見積書（労務費・法定福利費・経費の内訳明示・透かしなし）を出力するには、有料プラン（月¥1,980）へのアップグレードが必要です。",
+      icon: Download,
+      hint: null,
+    },
+    {
+      num: 8,
+      title: isPaid
+        ? "クラウド保存・マスタ登録・原価管理を活用"
+        : "クラウド保存（Free は月 3 通まで）",
+      description: isPaid
+        ? "「見積書を保存」でクラウドに無制限保存、マイページから再編集・複製できます。取引先マスタ・単価マスタに登録しておけば、次回以降の入力時間が大幅に短縮されます。原価・粗利分析、工事写真の添付も利用可。"
+        : "「見積書を保存」でクラウドに保存できます。Free プランは月 3 通までの保存制限があり、それを超えると次月まで保存できません。取引先マスタ・単価マスタ・原価/粗利分析・工事写真の添付は有料プラン（月¥1,980）でご利用いただけます。",
+      icon: isPaid ? Save : Lock,
+      hint: null,
+      paidOnly: false,
+    },
+  ];
+
+  return common;
+}
+
+export default async function HowToPage() {
+  let plan: Plan = "free";
+  if (isSupabaseConfigured()) {
+    const { user, profile } = await getCurrentUserProfile();
+    if (user) {
+      plan = (profile?.plan ?? "free") as Plan;
+    }
+  }
+
+  const isPaid = plan === "solo" || plan === "team";
+  const steps = buildSteps(plan);
+
+  const featureBlocks = isPaid
+    ? [
+        {
+          icon: Star,
+          title: "単価マスタ",
+          body: "よく使う品目・単価・費目を登録。2通目以降の作成時間が1/10に。",
+        },
+        {
+          icon: Users,
+          title: "取引先マスタ",
+          body: "過去の発注者を登録。案件ごとにワンクリックで入力完了。",
+        },
+        {
+          icon: Download,
+          title: "Excelインポート",
+          body: "既存のExcel見積を取り込み、セクション・明細を自動展開。",
+        },
+      ]
+    : [
+        {
+          icon: Star,
+          title: "8 工種プリセット",
+          body: "電気・水道・内装ほか 8 工種から代表 5 項目を一括投入。",
+        },
+        {
+          icon: CheckCircle2,
+          title: "建設業法チェッカー",
+          body: "「一式」検知・労務費未入力などをリアルタイム警告（表示のみ）。",
+        },
+        {
+          icon: Download,
+          title: "PDF ダウンロード",
+          body: "通常フォーマット（透かし入り）で何枚でも出力可能。",
+        },
+      ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200">
@@ -145,21 +233,48 @@ export default function HowToPage() {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 py-10">
+        {/* プラン別バッジ */}
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-kenmitsu-navy50 border border-kenmitsu-navy100 px-3 py-1 text-[11px] font-bold text-kenmitsu-navy">
+          {isPaid ? (
+            <>
+              <Crown className="w-3 h-3" strokeWidth={2.5} />
+              {plan === "team" ? "Team" : "有料"} プラン版ガイド
+            </>
+          ) : (
+            <>Free プラン版ガイド</>
+          )}
+        </div>
+
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
           使い方ガイド
         </h1>
         <p className="text-gray-600 text-sm leading-relaxed mb-8">
-          ケンミツの使い方を全8ステップで解説。改正建設業法2025対応の見積書を、<strong>最短3分</strong>で作成できます。
+          {isPaid
+            ? "改正建設業法 2025 のルールに沿った見積書を、最短 3 分で。労務費・法定福利費・経費の内訳明示が自動で行われ、透かしなしの正式版 PDF が出力できます。"
+            : "ケンミツの使い方を全 8 ステップで解説。Free プランでは通常フォーマット（透かし入り）の見積書が無制限に作成・出力できます。"}
         </p>
 
-        <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-xl p-4 mb-8 text-sm">
-          <p className="font-bold text-kenmitsu-navy900 mb-1">💡 最初にやっておくと快適</p>
-          <ul className="list-disc pl-5 text-kenmitsu-navy900 space-y-0.5">
-            <li>施工者情報を一度入力して「自社情報を保存」を押す → 次回から自動入力</li>
-            <li>よく使う品目は「単価マスタ」に登録 → 2通目から一瞬</li>
-            <li>アカウント登録すると見積履歴が保存され、ブラウザ跨いでもマスタが同期されます</li>
-          </ul>
-        </div>
+        {isPaid ? (
+          <div className="bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-xl p-4 mb-8 text-sm">
+            <p className="font-bold text-kenmitsu-navy900 mb-1">💡 有料プランで快適に</p>
+            <ul className="list-disc pl-5 text-kenmitsu-navy900 space-y-0.5">
+              <li>施工者情報を一度入力して「自社情報を保存」を押す → 次回から自動入力</li>
+              <li>よく使う品目は「単価マスタ」に登録 → 2 通目から一瞬</li>
+              <li>取引先マスタに発注者を登録 → 案件ごとにワンクリックで呼び出し</li>
+              <li>原価率・粗利率・工事写真の添付も活用すると現場管理が楽になります</li>
+            </ul>
+          </div>
+        ) : (
+          <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 mb-8 text-sm">
+            <p className="font-bold text-amber-900 mb-1">📌 Free プランの仕様</p>
+            <ul className="list-disc pl-5 text-amber-900 space-y-0.5">
+              <li>見積書の作成・編集・PDF 出力は<strong>無制限</strong>（通常フォーマット・透かし入り）</li>
+              <li>クラウド保存は<strong>月 3 通まで</strong></li>
+              <li>取引先マスタ・単価マスタ・原価/粗利分析・工事写真の添付は<strong>有料プラン限定</strong></li>
+              <li>改正建設業法のルールに沿った見積書（労務費・法定福利費・経費の内訳明示・透かしなし）も<strong>有料プラン限定</strong></li>
+            </ul>
+          </div>
+        )}
 
         <ol className="space-y-5">
           {steps.map(({ num, title, description, icon: Icon, hint }) => (
@@ -221,37 +336,62 @@ export default function HowToPage() {
           </div>
         </section>
 
-        <section className="mt-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            有料プランにアップグレードする手順
-          </h2>
-          <ol className="list-decimal pl-5 text-sm text-gray-700 space-y-2">
-            <li>
-              <Link href="/construction/start" className="text-kenmitsu-navy hover:underline">
-                登録ページ
-              </Link>
-              でメールアドレスを登録
-            </li>
-            <li>
-              <Link href="/construction#solo-upgrade" className="text-kenmitsu-navy hover:underline">
-                料金プラン
-              </Link>
-              の「月契約で始める」または「年契約で始める」をクリック
-            </li>
-            <li>Stripe の決済画面でクレジットカード情報を入力</li>
-            <li>決済完了後、マイページで自動的に有料プランに切替わる</li>
-            <li>
-              解約は
+        {!isPaid && (
+          <section className="mt-12">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              有料プランにアップグレードする手順
+            </h2>
+            <ol className="list-decimal pl-5 text-sm text-gray-700 space-y-2">
+              <li>
+                <Link href="/construction/start" className="text-kenmitsu-navy hover:underline">
+                  登録ページ
+                </Link>
+                でメールアドレスを登録
+              </li>
+              <li>
+                <Link href="/construction#solo-upgrade" className="text-kenmitsu-navy hover:underline">
+                  料金プラン
+                </Link>
+                の「月契約で始める」または「年契約で始める」をクリック
+              </li>
+              <li>Stripe の決済画面でクレジットカード情報を入力</li>
+              <li>決済完了後、マイページで自動的に有料プランに切替わる</li>
+              <li>
+                解約は
+                <Link
+                  href="/construction/mypage"
+                  className="text-kenmitsu-navy hover:underline mx-1"
+                >
+                  マイページ
+                </Link>
+                の「プラン管理・解約」からワンクリックで可能
+              </li>
+            </ol>
+          </section>
+        )}
+
+        {isPaid && (
+          <section className="mt-12">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              プラン管理・解約
+            </h2>
+            <p className="text-sm text-gray-700 leading-relaxed mb-3">
+              現在ご契約中です。プラン変更・カード情報の更新・解約は
               <Link
                 href="/construction/mypage"
                 className="text-kenmitsu-navy hover:underline mx-1"
               >
                 マイページ
               </Link>
-              の「プラン管理・解約」からワンクリックで可能
-            </li>
-          </ol>
-        </section>
+              の「プラン管理・解約」からワンクリックで可能です。電話・メール
+              等での連絡は不要です。
+            </p>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              解約後も 180 日間はデータが保持されるため、再契約時に過去の見積
+              書・マスタを引き続き利用できます。
+            </p>
+          </section>
+        )}
 
         <section className="mt-12">
           <h2 className="text-xl font-bold text-gray-900 mb-4">関連ページ</h2>
@@ -276,20 +416,35 @@ export default function HowToPage() {
           </div>
         </section>
 
-        <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
-          <h2 className="text-xl font-bold mb-2">
-            まずは無料で試してみてください
-          </h2>
-          <p className="text-gray-400 mb-4 text-sm">
-            メアド登録だけ・カード不要 / 改正建設業法のルールに沿った見積書は有料プラン（月¥1,980）から
-          </p>
-          <Link
-            href="/construction/new"
-            className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            見積書を作成する →
-          </Link>
-        </div>
+        {isPaid ? (
+          <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
+            <h2 className="text-xl font-bold mb-2">続けて見積書を作成する</h2>
+            <p className="text-gray-400 mb-4 text-sm">
+              改正建設業法のルールに沿った見積書を、何枚でも作成できます。
+            </p>
+            <Link
+              href="/construction/new"
+              className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              見積書を作成する →
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
+            <h2 className="text-xl font-bold mb-2">
+              まずは無料で試してみてください
+            </h2>
+            <p className="text-gray-400 mb-4 text-sm">
+              メアド登録だけ・カード不要 / 改正建設業法のルールに沿った見積書は有料プラン（月¥1,980）から
+            </p>
+            <Link
+              href="/construction/new"
+              className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              見積書を作成する →
+            </Link>
+          </div>
+        )}
       </main>
     </div>
   );
