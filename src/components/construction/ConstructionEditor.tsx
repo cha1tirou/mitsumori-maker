@@ -459,6 +459,34 @@ export default function ConstructionEditor({
                 </div>
               )}
 
+              {/* Free プラン: このフォーマットが改正法未対応であることの明示 */}
+              {plan === "free" && (
+                <div className="bg-amber-50 border-2 border-amber-300 rounded-lg p-3 mb-3">
+                  <div className="flex items-start justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle
+                        className="w-4 h-4 text-amber-700"
+                        strokeWidth={2.25}
+                      />
+                      <span className="text-xs font-black text-amber-900">
+                        通常フォーマット — 改正建設業法 2025 <span className="underline decoration-2">未対応</span>
+                      </span>
+                    </div>
+                    <Link
+                      href="/construction"
+                      onClick={() => trackEvent("construction_preview_law_banner_click")}
+                      className="text-[11px] font-bold text-kenmitsu-orange600 hover:text-kenmitsu-orange700 inline-flex items-center gap-1 whitespace-nowrap"
+                    >
+                      改正法対応版にする
+                      <span aria-hidden>→</span>
+                    </Link>
+                  </div>
+                  <p className="text-[10px] text-amber-900/85 mt-1.5 leading-relaxed">
+                    労務費・法定福利費の内訳明示など、2025 年 12 月施行の法令要件を満たしていません。提出先によっては差し戻しの対象となる可能性があります。
+                  </p>
+                </div>
+              )}
+
               <div className="printable-root">
                 <ConstructionPreview
                   data={data}

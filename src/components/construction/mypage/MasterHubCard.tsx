@@ -89,7 +89,7 @@ function MasterTile({
       {locked && (
         <span className="absolute top-2 right-2 inline-flex items-center gap-0.5 rounded-full bg-kenmitsu-orange50 text-kenmitsu-orange600 text-[9px] font-bold px-1.5 py-0.5 leading-none">
           <Lock className="w-2.5 h-2.5" strokeWidth={3} />
-          Solo
+          有料
         </span>
       )}
       <div className="flex items-center gap-2 text-kenmitsu-navy">
