@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
-import BackLink from "@/components/construction/BackLink";
 
 export const metadata: Metadata = {
   title: "フリーランス新法と建設業一人親方への影響【2026年版】見積書・契約書の対応 | ケンミツ",
@@ -46,13 +45,16 @@ export default function FreelanceLawPage() {
             <span className="mx-1">/</span>
             <span className="text-gray-700">フリーランス新法と建設業</span>
           </nav>
-          <BackLink className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5">
+          <Link
+            href="/construction/guide"
+            className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5"
+          >
             <HardHat
               className="w-4 h-4 text-kenmitsu-navy"
               strokeWidth={2.25}
             />
-            ← 前のページに戻る
-          </BackLink>
+            ← ガイド一覧に戻る
+          </Link>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">
