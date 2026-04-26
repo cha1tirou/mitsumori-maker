@@ -99,8 +99,8 @@ export async function POST(request: NextRequest) {
 <li><strong>法定福利費の独立計上</strong>（68%が未対応）</li>
 <li><strong>瑕疵担保責任の見積書記載</strong>（61%が未対応）</li>
 </ol>
-<p>いずれも弊社のツールで自動化されます。労務費を入れれば法定福利費は自動計算、瑕疵担保条項は業界標準のテンプレ付きです。</p>
-<p>登録不要で今すぐ試せます：</p>`,
+<p>いずれもケンミツのツールで自動化されます。労務費を入れれば法定福利費は自動計算、瑕疵担保条項は業界標準のテンプレ付きです。</p>
+<p>メアド登録だけで今すぐ試せます：</p>`,
             ctaLabel: "無料で試してみる",
             ctaUrl: toolUrl,
             unsubscribeUrl,

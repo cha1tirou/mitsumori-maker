@@ -6,6 +6,7 @@ Disallow: /construction/admin
 Disallow: /construction/mypage
 Disallow: /construction/login
 Disallow: /construction/reset-password
+Disallow: /construction/setup-password
 Disallow: /construction/quotes/
 Disallow: /construction/unsubscribe
 Disallow: /construction/new
