@@ -16,9 +16,14 @@ import {
 
 interface Props {
   email: string;
+  /**
+   * 有料プラン契約中かつ Stripe サブスクが課金状態か。
+   * true の時はアカウント削除をブロックして Stripe Customer Portal 経由の解約を促す。
+   */
+  hasActiveSubscription: boolean;
 }
 
-export default function AccountSettings({ email }: Props) {
+export default function AccountSettings({ email, hasActiveSubscription }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -42,7 +47,7 @@ export default function AccountSettings({ email }: Props) {
           <hr className="border-gray-100" />
           <ChangeEmail currentEmail={email} />
           <hr className="border-gray-100" />
-          <DeleteAccount />
+          <DeleteAccount hasActiveSubscription={hasActiveSubscription} />
         </div>
       )}
     </section>
@@ -200,7 +205,11 @@ function ChangeEmail({ currentEmail }: { currentEmail: string }) {
 
 /* ─── アカウント削除 ─── */
 
-function DeleteAccount() {
+function DeleteAccount({
+  hasActiveSubscription,
+}: {
+  hasActiveSubscription: boolean;
+}) {
   const router = useRouter();
   const toast = useToast();
   const [confirmText, setConfirmText] = useState("");
@@ -214,7 +223,7 @@ function DeleteAccount() {
       const res = await fetch("/api/account/delete", { method: "DELETE" });
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
-        toast.error(json.error || "削除に失敗しました。");
+        toast.error(json.message || json.error || "削除に失敗しました。");
         setLoading(false);
         return;
       }
@@ -227,6 +236,32 @@ function DeleteAccount() {
       setLoading(false);
     }
   };
+
+  // 有料サブスク契約中はアカウント削除をブロック（Stripe で先に解約する必要がある）
+  if (hasActiveSubscription) {
+    return (
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <Trash2 className="w-4 h-4 text-red-500" strokeWidth={2} />
+          <h3 className="text-sm font-bold text-gray-900">アカウント削除</h3>
+        </div>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <p className="text-xs text-amber-900 mb-3 leading-relaxed">
+            <strong className="block mb-1">
+              有料プランをご契約中のため、アカウントを削除できません。
+            </strong>
+            アカウント削除前に、プラン管理画面から有料プランを解約してください。解約後にこのページに戻ると、削除ボタンが表示されます。
+          </p>
+          <a
+            href="/construction/mypage#plan-management"
+            className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
+          >
+            プラン管理画面へ →
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

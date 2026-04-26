@@ -38,30 +38,29 @@ export async function DELETE() {
     cookies: { getAll: () => [], setAll: () => {} },
   });
 
-  // Stripe サブスクリプションがアクティブな場合はキャンセル
+  // 有料サブスクが active な間はアカウント削除をブロック
+  // 自動キャンセル経路は採用しない（Stripe API 失敗で課金継続するリスクを排除する設計）。
+  // ユーザーは Stripe Customer Portal で先に解約する必要がある。
   const { data: profile } = await admin
     .from("profiles")
     .select("stripe_subscription_id, subscription_status")
     .eq("id", user.id)
     .maybeSingle();
 
+  const ACTIVE_STATES = ["active", "trialing", "past_due", "unpaid"];
   if (
     profile?.stripe_subscription_id &&
-    (profile.subscription_status === "active" ||
-      profile.subscription_status === "trialing")
+    profile.subscription_status &&
+    ACTIVE_STATES.includes(profile.subscription_status)
   ) {
-    try {
-      const { isStripeConfigured, getStripeSecretKey } = await import(
-        "@/lib/stripe/env"
-      );
-      if (isStripeConfigured()) {
-        const Stripe = (await import("stripe")).default;
-        const stripe = new Stripe(getStripeSecretKey());
-        await stripe.subscriptions.cancel(profile.stripe_subscription_id);
-      }
-    } catch {
-      // Stripe キャンセル失敗してもアカウント削除は続行
-    }
+    return NextResponse.json(
+      {
+        error: "subscription_active",
+        message:
+          "有料プランをご契約中のため、アカウントを削除できません。先にプラン管理画面から解約してください。",
+      },
+      { status: 409 },
+    );
   }
 
   // auth.users を削除（CASCADE で profiles, quotes 等も消える）

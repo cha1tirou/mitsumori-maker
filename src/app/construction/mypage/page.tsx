@@ -73,6 +73,14 @@ export default async function MyPage({
     (plan === "solo" || plan === "team") &&
     (profile?.subscription_status === "active" ||
       profile?.subscription_status === "trialing");
+  // アカウント削除のブロック判定（API 側のチェックと一致させる）
+  const hasActiveSubscription = Boolean(
+    profile?.stripe_subscription_id &&
+      profile?.subscription_status &&
+      ["active", "trialing", "past_due", "unpaid"].includes(
+        profile.subscription_status,
+      ),
+  );
   const totalQuotes = quotes.length;
   const companyRegistered = Boolean(
     profile?.company_info &&
@@ -332,7 +340,10 @@ export default async function MyPage({
         </section>
 
         {/* アカウント設定 */}
-        <AccountSettings email={user.email ?? ""} />
+        <AccountSettings
+          email={user.email ?? ""}
+          hasActiveSubscription={hasActiveSubscription}
+        />
 
         {/* βフィードバック / お問い合わせ誘導 */}
         <FeedbackCard />
