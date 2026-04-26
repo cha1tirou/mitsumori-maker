@@ -257,10 +257,10 @@ export default function ConstructionEditor({
                 {/*
                   ボタン配列の順序ポリシー:
                   1. PDF ダウンロード（Primary CTA・全員）
-                  2. 課金/登録誘導カード（Free/未ログインのみ。PDFを撮った直後の熱量を逃さない）
-                  3. 見積書を保存（ログイン済み）
-                  4. Solo 以上機能（CSV・メール）
-                  5. マイページ
+                     Free プランの有料誘導 CTA は ConstructionPdfDownloadButton の
+                     完了モーダル内に統合（初回 DL 時は大きく、2 回目以降は穏やかに）。
+                  2. 見積書を保存（全プラン無制限）
+                  3. マイページ
                 */}
 
                 {/* 1. PDF出力: 全ユーザー */}
@@ -269,62 +269,6 @@ export default function ConstructionEditor({
                   plan={plan}
                   className="w-full"
                 />
-
-                {/* Free プラン: 有料プランアップグレード誘導カード（PDF ダウンロード直後に露出）
-                   /construction/new と /construction/quotes/[id] は両方 auth gate 済み
-                   なので未ログイン分岐は不要（dev 環境で Supabase 未設定なら userEmail=null
-                   になるが、その場合は LP 経由でも到達できないので無視）。 */}
-                {plan === "free" && (
-                  <Link
-                    href="/construction#solo-upgrade"
-                    className="relative block w-full rounded-xl border-2 border-kenmitsu-orange bg-gradient-to-br from-kenmitsu-orange50 to-white p-4 hover:shadow-md transition-shadow overflow-hidden"
-                  >
-                    <div className="relative">
-                      <div className="flex items-baseline gap-2 mb-1.5">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-kenmitsu-orange text-white text-[10px] font-bold px-2 py-0.5">
-                          有料
-                        </span>
-                        <span className="font-mono text-lg font-black text-kenmitsu-orange600 leading-none">
-                          ¥1,980
-                        </span>
-                        <span className="text-[11px] text-kenmitsu-muted">
-                          /月
-                        </span>
-                        <span className="text-[10px] text-kenmitsu-muted ml-auto">
-                          年払いで2ヶ月分お得
-                        </span>
-                      </div>
-                      <p className="text-sm font-black text-gray-900 mb-1.5 leading-tight">
-                        改正建設業法のルールに沿った見積書を作成
-                      </p>
-                      <p className="text-[10px] text-kenmitsu-muted mb-2 leading-relaxed">
-                        ¥1,000 台で改正法対応の見積書を出せるのはケンミツだけ。
-                      </p>
-                      <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-gray-700 leading-relaxed">
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
-                          改正法対応の見積書
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
-                          労務費・法定福利費の内訳明示
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
-                          顧客・単価マスタ
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
-                          原価・粗利分析
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-kenmitsu-ok">✓</span>
-                          工事写真の添付
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                )}
 
                 {/* 見積書を保存（全プラン無制限） */}
                 <SaveQuoteButton
