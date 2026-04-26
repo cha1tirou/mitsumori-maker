@@ -416,10 +416,10 @@ export default async function HowToPage() {
             {[
               { href: "/construction/faq", label: "よくある質問（FAQ）" },
               { href: "/construction/checklist", label: "改正建設業法2025対応チェックリスト" },
-              { href: "/guide/kaisei-kensetsu-2025", label: "改正建設業法2025【完全ガイド】" },
-              { href: "/guide/legal-welfare", label: "法定福利費の計算方法と業界標準料率" },
-              { href: "/guide/freelance-law-construction", label: "フリーランス新法と建設業一人親方" },
-              { href: "/contact", label: "お問い合わせ" },
+              { href: "/construction/guide/kaisei-kensetsu-2025", label: "改正建設業法2025【完全ガイド】" },
+              { href: "/construction/guide/legal-welfare", label: "法定福利費の計算方法と業界標準料率" },
+              { href: "/construction/guide/freelance-law-construction", label: "フリーランス新法と建設業一人親方" },
+              { href: "/construction/contact", label: "お問い合わせ" },
             ].map((l) => (
               <Link
                 key={l.href}

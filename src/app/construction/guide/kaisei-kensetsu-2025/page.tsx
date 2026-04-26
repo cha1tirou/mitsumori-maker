@@ -1,44 +1,58 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import GuideJsonLd from "@/components/GuideJsonLd";
-import ConstructionPromoBanner from "@/components/construction/ConstructionPromoBanner";
+import { HardHat } from "lucide-react";
+import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import BackLink from "@/components/construction/BackLink";
 
 export const metadata: Metadata = {
-  title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則 | 見積書メーカー",
+  title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則 | ケンミツ",
   description:
     "2025年12月1日全面施行の改正建設業法について、見積書作成の観点から解説。労務費の内訳明示・「一式」表記の規制・見積条件書の必須項目・違反時の罰則まで。中小建設業者向け実務対応ガイド。",
-  keywords: "改正建設業法, 建設業法 2025, 建設業法 改正, 見積書, 労務費, 一式, 中小建設業者",
+  keywords:
+    "改正建設業法, 建設業法 2025, 建設業法 改正, 見積書, 労務費, 一式, 中小建設業者",
   openGraph: {
     title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則",
     description:
       "2025年12月1日全面施行の改正建設業法について、見積書作成の観点から解説。労務費の内訳明示・「一式」表記・見積条件書の必須項目・違反時の罰則まで実務レベルで解説。",
-    url: "https://mitsumori-maker.com/guide/kaisei-kensetsu-2025",
-    siteName: "見積書メーカー",
+    url: "https://mitsumori-maker.com/construction/guide/kaisei-kensetsu-2025",
+    siteName: "ケンミツ",
     locale: "ja_JP",
     type: "article",
   },
   alternates: {
-    canonical: "https://mitsumori-maker.com/guide/kaisei-kensetsu-2025",
+    canonical:
+      "https://mitsumori-maker.com/construction/guide/kaisei-kensetsu-2025",
   },
 };
 
 export default function KaiseiKensetsuPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <GuideJsonLd
+      <KenmitsuGuideJsonLd
         title="改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則"
         description="2025年12月1日全面施行の改正建設業法を見積書作成の観点から解説。労務費内訳・一式表記・見積条件書・罰則まで。"
         slug="kaisei-kensetsu-2025"
       />
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4 py-4">
-          <nav className="text-sm text-gray-500" aria-label="パンくずリスト">
-            <Link href="/" className="hover:text-gray-900">見積書メーカー</Link>
-            <span className="mx-2">›</span>
-            <Link href="/guide" className="hover:text-gray-900">ガイド</Link>
-            <span className="mx-2">›</span>
-            <span className="text-gray-800">改正建設業法2025</span>
+          <nav className="text-xs text-gray-500 mb-2" aria-label="パンくずリスト">
+            <Link href="/construction" className="hover:text-gray-700">
+              ケンミツ
+            </Link>
+            <span className="mx-1">/</span>
+            <Link href="/construction/guide" className="hover:text-gray-700">
+              ガイド
+            </Link>
+            <span className="mx-1">/</span>
+            <span className="text-gray-700">改正建設業法 2025</span>
           </nav>
+          <BackLink className="text-gray-600 hover:text-gray-900 text-sm flex items-center gap-1.5">
+            <HardHat
+              className="w-4 h-4 text-kenmitsu-navy"
+              strokeWidth={2.25}
+            />
+            ← 前のページに戻る
+          </BackLink>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-10">
@@ -46,9 +60,7 @@ export default function KaiseiKensetsuPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則
           </h1>
-          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月15日</p>
-
-          <ConstructionPromoBanner />
+          <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
 
           <p className="text-gray-700 leading-relaxed mb-8">
             2025年12月1日、改正建設業法が全面施行されました。中小建設業者を含むすべての建設業者にとって、見積書の書き方・契約書の記載事項・労務費の扱いに大きな変更が入っています。本記事では、見積書作成の観点から「何が変わり、どう対応すべきか」を実務レベルで徹底解説します。
@@ -66,7 +78,9 @@ export default function KaiseiKensetsuPage() {
             </ul>
           </div>
 
-          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">改正建設業法2025 のポイント</h2>
+          <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4">
+            改正建設業法2025 のポイント
+          </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
             2025年12月1日施行の改正建設業法の目的は、建設業界における「働き方改革」「適正な取引」「賃金水準の確保」です。これを実現するために、建設工事の見積書・請負契約書・下請負契約書などに、以下のような新しいルールが加わりました。
           </p>
@@ -155,16 +169,19 @@ export default function KaiseiKensetsuPage() {
           </p>
           <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-6 space-y-2">
             <li>
-              <strong>指示処分</strong> — 違反事実を是正するよう国土交通大臣・都道府県知事が文書で指示
+              <strong>指示処分</strong> —
+              違反事実を是正するよう国土交通大臣・都道府県知事が文書で指示
             </li>
             <li>
               <strong>営業停止処分</strong> — 最長1年の営業停止
             </li>
             <li>
-              <strong>許可取消処分</strong> — 建設業許可自体の取消（重大違反時）
+              <strong>許可取消処分</strong> —
+              建設業許可自体の取消（重大違反時）
             </li>
             <li>
-              <strong>元請との取引停止</strong> — 公共工事を含め、発注側からの信用失墜リスク
+              <strong>元請との取引停止</strong> —
+              公共工事を含め、発注側からの信用失墜リスク
             </li>
           </ul>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -211,9 +228,12 @@ export default function KaiseiKensetsuPage() {
             改正法対応は、ツールで自動化できる
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            これらを毎回 Excel で手動対応するのは現実的ではありません。弊社の
-            <Link href="/construction" className="text-green-700 hover:underline font-bold">
-              建設業向け見積書メーカー
+            これらを毎回 Excel で手動対応するのは現実的ではありません。
+            <Link
+              href="/construction"
+              className="text-kenmitsu-navy hover:underline font-bold"
+            >
+              ケンミツ
             </Link>
             は、改正建設業法 2025 のルールに沿った見積書を出力できる有料プランを提供しており、以下の機能が標準装備です：
           </p>
@@ -226,30 +246,64 @@ export default function KaiseiKensetsuPage() {
             <li>8工種のプリセット（電気・水道・内装・土木 ほか）</li>
           </ul>
 
-          <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">
+          <div className="mt-12 bg-kenmitsu-navy900 rounded-xl p-8 text-center text-white">
             <h2 className="text-xl font-bold mb-2">
-              改正建設業法2025対応の見積書を、今すぐ無料で
+              改正建設業法 2025 対応の見積書を、ケンミツで
             </h2>
-            <p className="text-gray-400 mb-4 text-sm">
-              登録不要・月¥1,980から / 法令チェッカー・法定福利費自動計算・工種プリセット搭載
+            <p className="text-white/70 mb-4 text-sm">
+              メアド登録だけで利用開始 / 有料プラン月¥1,980〜・法令チェッカー・法定福利費自動計算・工種プリセット搭載
             </p>
             <Link
-              href="/construction"
-              className="inline-block bg-white text-gray-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+              href="/construction/start"
+              className="inline-block bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white font-bold px-8 py-3 rounded-lg transition-colors"
             >
-              建設業向け見積書メーカーを見る →
+              ケンミツを無料で試す →
             </Link>
           </div>
 
           <div className="mt-10 text-sm text-gray-600 border-t border-gray-200 pt-6">
             <p className="font-bold mb-2">関連ガイド</p>
             <ul className="space-y-1">
-              <li><Link href="/construction/checklist" className="text-green-700 hover:underline font-bold">改正建設業法2025 対応チェックリスト（30項目・無料DL）</Link></li>
-              <li><Link href="/guide/legal-welfare" className="text-green-700 hover:underline">法定福利費の計算方法と業界標準料率</Link></li>
-              <li><Link href="/guide/construction" className="text-green-700 hover:underline">建設業の見積書の書き方【完全ガイド】</Link></li>
-              <li><Link href="/guide/lump-sum" className="text-green-700 hover:underline">見積書の「一式」の書き方・使い方</Link></li>
-              <li><Link href="/guide/labor-cost" className="text-green-700 hover:underline">見積書の人件費の書き方</Link></li>
-              <li><Link href="/guide/misc-expenses" className="text-green-700 hover:underline">見積書の諸経費の書き方</Link></li>
+              <li>
+                <Link
+                  href="/construction/checklist"
+                  className="text-kenmitsu-navy hover:underline font-bold"
+                >
+                  改正建設業法2025 対応チェックリスト（30項目・無料DL）
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/construction/guide/legal-welfare"
+                  className="text-kenmitsu-navy hover:underline"
+                >
+                  法定福利費の計算方法と業界標準料率
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/construction/guide/lump-sum"
+                  className="text-kenmitsu-navy hover:underline"
+                >
+                  見積書の「一式」の書き方・使い方
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/construction/guide/labor-cost"
+                  className="text-kenmitsu-navy hover:underline"
+                >
+                  見積書の人件費の書き方
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/construction/guide/freelance-law-construction"
+                  className="text-kenmitsu-navy hover:underline"
+                >
+                  フリーランス新法と建設業一人親方
+                </Link>
+              </li>
             </ul>
           </div>
         </article>

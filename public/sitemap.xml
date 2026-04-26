@@ -123,8 +123,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/guide/lump-sum</loc>
-    <lastmod>2026-04-10</lastmod>
+    <loc>https://mitsumori-maker.com/construction/guide/lump-sum</loc>
+    <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -219,20 +219,26 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/guide/kaisei-kensetsu-2025</loc>
-    <lastmod>2026-04-15</lastmod>
+    <loc>https://mitsumori-maker.com/construction/guide</loc>
+    <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/guide/legal-welfare</loc>
-    <lastmod>2026-04-15</lastmod>
+    <loc>https://mitsumori-maker.com/construction/guide/kaisei-kensetsu-2025</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mitsumori-maker.com/construction/guide/legal-welfare</loc>
+    <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/guide/freelance-law-construction</loc>
-    <lastmod>2026-04-15</lastmod>
+    <loc>https://mitsumori-maker.com/construction/guide/freelance-law-construction</loc>
+    <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -507,10 +513,10 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mitsumori-maker.com/guide/labor-cost</loc>
-    <lastmod>2026-04-19</lastmod>
+    <loc>https://mitsumori-maker.com/construction/guide/labor-cost</loc>
+    <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mitsumori-maker.com/guide/misc-expenses</loc>

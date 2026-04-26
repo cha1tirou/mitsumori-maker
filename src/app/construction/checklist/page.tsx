@@ -441,22 +441,22 @@ export default function ChecklistPage() {
           <div className="grid md:grid-cols-2 gap-3">
             {[
               {
-                href: "/guide/kaisei-kensetsu-2025",
+                href: "/construction/guide/kaisei-kensetsu-2025",
                 title: "改正建設業法2025【完全ガイド】",
                 desc: "見積書の書き方・対応事項・罰則まで法令全体像を解説",
               },
               {
-                href: "/guide/legal-welfare",
+                href: "/construction/guide/legal-welfare",
                 title: "法定福利費の計算方法と業界標準料率",
                 desc: "約20%の内訳と、元請への根拠説明ができる計算式",
               },
               {
-                href: "/guide/freelance-law-construction",
+                href: "/construction/guide/freelance-law-construction",
                 title: "フリーランス新法と建設業一人親方",
                 desc: "2024年11月施行のフリーランス新法と改正建設業法の関係",
               },
               {
-                href: "/guide/lump-sum",
+                href: "/construction/guide/lump-sum",
                 title: "見積書の『一式』表記は禁止？",
                 desc: "どこまで内訳展開すべきか、実務判断の基準",
               },
