@@ -116,8 +116,8 @@ export default function ConstructionPdfDownloadButton({
       }
       lines.push(
         "",
-        "解消しない場合はお問い合わせください:",
-        "kenmitsu.support@gmail.com",
+        "解消しない場合は以下のフォームよりお問い合わせください:",
+        "https://mitsumori-maker.com/construction/contact",
       );
       alert(lines.join("\n"));
     }

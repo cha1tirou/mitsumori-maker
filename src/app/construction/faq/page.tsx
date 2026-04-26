@@ -306,28 +306,17 @@ export default function FaqPage() {
             解決しなかった場合
           </h2>
           <p className="text-sm text-gray-700 mb-4">
-            FAQ で解決しないお問い合わせは、以下のいずれかの方法でご連絡ください。
+            FAQ で解決しないお問い合わせは、以下のフォームよりご連絡ください。
           </p>
-          <div className="grid md:grid-cols-2 gap-3">
-            <Link
-              href="/construction/contact"
-              className="block bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-4 hover:bg-kenmitsu-navy100 transition-colors"
-            >
-              <p className="text-sm font-bold text-kenmitsu-navy900 mb-1">
-                お問い合わせフォーム
-              </p>
-              <p className="text-xs text-kenmitsu-navy">通常1営業日以内に返信します</p>
-            </Link>
-            <Link
-              href="/construction/mypage"
-              className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
-            >
-              <p className="text-sm font-bold text-blue-900 mb-1">
-                マイページのβフィードバック
-              </p>
-              <p className="text-xs text-blue-800">Slackへ直接届きます</p>
-            </Link>
-          </div>
+          <Link
+            href="/construction/contact"
+            className="block bg-kenmitsu-navy50 border border-kenmitsu-navy100 rounded-lg p-4 hover:bg-kenmitsu-navy100 transition-colors"
+          >
+            <p className="text-sm font-bold text-kenmitsu-navy900 mb-1">
+              お問い合わせフォーム
+            </p>
+            <p className="text-xs text-kenmitsu-navy">通常 1 営業日以内に返信します</p>
+          </Link>
         </section>
 
         <div className="mt-12 bg-gray-900 rounded-xl p-8 text-center text-white">

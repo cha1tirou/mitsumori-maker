@@ -100,17 +100,17 @@ export default async function UnsubscribePage({
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-gray-900 mb-2">
-                        方法 2. 運営に直接連絡
+                        方法 2. お問い合わせフォーム経由
                       </p>
                       <p className="text-xs text-gray-600 leading-relaxed mb-3">
-                        下のボタンからメールを送信してください。件名・本文に停止したいメールアドレスをそのまま入れて送るだけで、運営側で手動停止対応します。
+                        お問い合わせフォームから配信停止希望を送信してください。停止したいメールアドレスを記入していただければ、運営側で手動停止対応します。
                       </p>
                       <a
-                        href="mailto:kenmitsu.support@gmail.com?subject=配信停止希望&body=配信停止を希望するメールアドレス%3A%20%0A%0A理由（任意）%3A%20%0A"
+                        href="/construction/contact"
                         className="inline-flex items-center gap-1.5 bg-kenmitsu-orange hover:bg-kenmitsu-orange600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
                       >
                         <Send className="w-3.5 h-3.5" strokeWidth={2.5} />
-                        メールを作成する
+                        お問い合わせフォームへ
                       </a>
                     </div>
                   </div>

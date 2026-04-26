@@ -345,7 +345,7 @@ export default async function MyPage({
           hasActiveSubscription={hasActiveSubscription}
         />
 
-        {/* βフィードバック / お問い合わせ誘導 */}
+        {/* お問い合わせ誘導カード（フォーム経由） */}
         <FeedbackCard />
       </main>
     </div>

@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "配信停止リンクが無効です。お手元のメールから再度リンクを開くか、kenmitsu.support@gmail.com までご連絡ください。",
+          "配信停止リンクが無効です。お手元のメールから再度リンクを開くか、お問い合わせフォーム（https://mitsumori-maker.com/construction/contact）よりご連絡ください。",
       },
       { status: 400 },
     );

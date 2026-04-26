@@ -65,11 +65,12 @@ export function mailFooterHtml(unsubscribeUrl: string): string {
 <div style="font-size: 11px; color: #9ca3af; line-height: 1.7; text-align: center;">
   <p style="margin: 0 0 8px 0;">
     <strong style="color: #6b7280;">ケンミツ</strong>（運営: 宇野 想一郎）<br>
-    〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F<br>
-    お問い合わせ: kenmitsu.support@gmail.com
+    〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F
   </p>
   <p style="margin: 8px 0 0 0;">
     <a href="https://mitsumori-maker.com/construction" style="color: #9ca3af; text-decoration: underline;">サービスサイト</a>
+    ｜
+    <a href="https://mitsumori-maker.com/construction/contact" style="color: #9ca3af; text-decoration: underline;">お問い合わせ</a>
     ｜
     <a href="${unsubscribeUrl}" style="color: #9ca3af; text-decoration: underline;">配信停止</a>
     ｜
@@ -83,8 +84,8 @@ export function mailFooterText(unsubscribeUrl: string): string {
 --
 ケンミツ（運営: 宇野 想一郎）
 〒150-0021 東京都渋谷区恵比寿西2丁目4番8号 ウィンド恵比寿ビル8F
-お問い合わせ: kenmitsu.support@gmail.com
 
+お問い合わせ: https://mitsumori-maker.com/construction/contact
 配信停止: ${unsubscribeUrl}
 サービスサイト: https://mitsumori-maker.com/construction
 特定商取引法: https://mitsumori-maker.com/construction/tokushoho`;
