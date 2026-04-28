@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
         const userId = session.metadata?.user_id || session.client_reference_id;
         if (!userId || !session.customer) break;
 
-        await supabase
+        const { error } = await supabase
           .from("profiles")
           .update({
             stripe_customer_id:
@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
                 : session.customer.id,
           })
           .eq("id", userId);
+        if (error) throw new Error(`profiles.update (checkout) failed: ${error.message}`);
         break;
       }
 
@@ -92,7 +93,7 @@ export async function POST(request: NextRequest) {
               `🚨 課金されたがプラン特定不能: user=${userId}, priceId=${priceId}. 環境変数を確認してください。`
             );
           }
-          await supabase
+          const { error } = await supabase
             .from("profiles")
             .update({
               stripe_subscription_id: sub.id,
@@ -104,6 +105,7 @@ export async function POST(request: NextRequest) {
               current_period_end: currentPeriodEnd(sub),
             })
             .eq("id", userId);
+          if (error) throw new Error(`profiles.update (subscription) failed: ${error.message}`);
         } else {
           console.warn(
             `Stripe Webhook: subscription ${sub.id} に user_id metadata がありません。`
@@ -116,7 +118,7 @@ export async function POST(request: NextRequest) {
         const sub = event.data.object as Stripe.Subscription;
         const userId = sub.metadata?.user_id;
         if (userId) {
-          await supabase
+          const { error } = await supabase
             .from("profiles")
             .update({
               subscription_status: "canceled",
@@ -125,6 +127,7 @@ export async function POST(request: NextRequest) {
               stripe_subscription_id: null,
             })
             .eq("id", userId);
+          if (error) throw new Error(`profiles.update (cancel) failed: ${error.message}`);
         }
         break;
       }
