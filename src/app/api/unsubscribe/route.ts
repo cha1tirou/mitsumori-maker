@@ -57,11 +57,19 @@ export async function POST(request: NextRequest) {
 
   // 2. profiles.drip_sent に __unsubscribed__ フラグを立てて以降のドリップを停止
   //    （対応する profiles が無ければ何もせず成功扱い）
-  const { data: profile } = await supabase
+  const { data: profile, error: profileErr } = await supabase
     .from("profiles")
     .select("id, drip_sent")
     .eq("email", normalized)
     .maybeSingle<{ id: string; drip_sent: Record<string, boolean> | null }>();
+
+  if (profileErr) {
+    console.error("[unsubscribe] profiles SELECT failed:", profileErr);
+    return NextResponse.json(
+      { error: "profiles query failed", message: profileErr.message },
+      { status: 500 },
+    );
+  }
 
   if (profile) {
     const dripSent = profile.drip_sent ?? {};

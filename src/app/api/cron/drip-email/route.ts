@@ -84,15 +84,29 @@ export async function GET(request: NextRequest) {
   const eightDaysAgo = new Date(
     Date.now() - 8 * 24 * 60 * 60 * 1000,
   ).toISOString();
-  const { data: users } = await supabase
+  const { data: users, error: usersErr } = await supabase
     .from("profiles")
     .select("id, email, plan, created_at, drip_sent, stripe_customer_id")
     .eq("plan", "free")
     .is("stripe_customer_id", null) // 一度も課金していないユーザーのみ
     .gte("created_at", eightDaysAgo);
 
+  // SELECT エラーは 500 で落として Vercel cron 失敗扱いにする（silent fail 防止）
+  if (usersErr) {
+    console.error("[drip-email] profiles SELECT failed:", usersErr);
+    return NextResponse.json(
+      {
+        error: "profiles query failed",
+        message: usersErr.message,
+        details: usersErr,
+        hint: "schema drift の可能性。/api/admin/data?q=schema_check で確認",
+      },
+      { status: 500 },
+    );
+  }
+
   if (!users || users.length === 0) {
-    return NextResponse.json({ sent: 0 });
+    return NextResponse.json({ sent: 0, note: "no eligible users" });
   }
 
   const origin = new URL(request.url).origin;

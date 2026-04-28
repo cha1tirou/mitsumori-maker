@@ -1,9 +1,47 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { createServerClient } from "@supabase/ssr";
+import { isSupabaseConfigured, getSupabaseEnv } from "@/lib/supabase/env";
 import { fetchAdminStats } from "@/lib/supabase/admin-queries";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+/** profiles テーブルで死んでると業務影響が大きい必須列。週次で全部 probe する。 */
+const REQUIRED_PROFILE_COLUMNS = [
+  "id",
+  "email",
+  "plan",
+  "created_at",
+  "drip_sent",
+  "stripe_customer_id",
+  "subscription_status",
+] as const;
+
+/**
+ * profiles テーブルの必須列が prod DB に存在するかをプローブ。
+ * 欠落列のリストを返す（empty なら正常）。
+ */
+async function detectSchemaDrift(): Promise<string[]> {
+  const { url } = getSupabaseEnv();
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) return [];
+  const supabase = createServerClient(url, serviceKey, {
+    cookies: { getAll: () => [], setAll: () => {} },
+  });
+  const missing: string[] = [];
+  await Promise.all(
+    REQUIRED_PROFILE_COLUMNS.map(async (col) => {
+      const { error } = await supabase
+        .from("profiles")
+        .select(`id, ${col}`)
+        .limit(1);
+      if (error && /column .+ does not exist/i.test(error.message)) {
+        missing.push(col);
+      }
+    }),
+  );
+  return missing;
+}
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
@@ -18,6 +56,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Not configured" }, { status: 503 });
   }
 
+  const missingColumns = await detectSchemaDrift();
   const stats = await fetchAdminStats();
 
   const totalUsers = stats.users.total;
@@ -25,7 +64,17 @@ export async function GET(request: NextRequest) {
   const cvr = totalUsers > 0 ? ((paidUsers / totalUsers) * 100).toFixed(1) : "0";
   const mrr = stats.revenue.mrr;
 
+  const driftHeader =
+    missingColumns.length > 0
+      ? [
+          `🚨 *Schema drift 検出*: profiles に列欠落 → ${missingColumns.join(", ")}`,
+          `→ supabase/schema.sql の ALTER を Supabase SQL Editor で実行してください`,
+          "",
+        ]
+      : [];
+
   const text = [
+    ...driftHeader,
     "📊 *ケンミツ 週次レポート*",
     "",
     `👤 ユーザー: ${totalUsers}名（今週 +${stats.users.thisWeek}）`,
