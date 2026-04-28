@@ -76,22 +76,45 @@ type Supabase = ReturnType<typeof createServerClient>;
 async function recentSignups(supabase: Supabase, params: URLSearchParams) {
   const limit = Math.min(parseInt(params.get("limit") ?? "20", 10) || 20, 100);
 
-  const { data: signups } = await supabase
+  // profiles テーブル直接 select（email・plan・created_at・drip_sent）
+  const { data: signups, error: signupsErr } = await supabase
     .from("profiles")
     .select("id, email, plan, created_at, drip_sent")
     .order("created_at", { ascending: false })
     .limit(limit);
 
+  if (signupsErr) {
+    return NextResponse.json(
+      {
+        error: "profiles query failed",
+        message: signupsErr.message,
+        details: signupsErr,
+      },
+      { status: 500 },
+    );
+  }
+
   if (!signups || signups.length === 0) {
-    return NextResponse.json({ count: 0, users: [] });
+    return NextResponse.json({ count: 0, users: [], note: "profiles 0 rows returned" });
   }
 
   const ids = signups.map((s: { id: string }) => s.id);
-  const { data: quotes } = await supabase
+  const { data: quotes, error: quotesErr } = await supabase
     .from("construction_quotes")
     .select("user_id, updated_at")
     .in("user_id", ids)
     .is("deleted_at", null);
+
+  if (quotesErr) {
+    return NextResponse.json(
+      {
+        error: "quotes query failed",
+        message: quotesErr.message,
+        signups_count: signups.length,
+      },
+      { status: 500 },
+    );
+  }
 
   const map = new Map<string, { count: number; lastActive: string | null }>();
   (quotes ?? []).forEach((q: { user_id: string; updated_at: string }) => {
@@ -106,13 +129,14 @@ async function recentSignups(supabase: Supabase, params: URLSearchParams) {
   const users = signups.map(
     (s: {
       id: string;
-      email: string;
+      email: string | null;
       plan: string;
       created_at: string;
       drip_sent: unknown;
     }) => {
       const a = map.get(s.id) ?? { count: 0, lastActive: null };
       return {
+        id: s.id,
         email: s.email,
         plan: s.plan,
         created_at: s.created_at,
@@ -136,7 +160,8 @@ async function userDetail(supabase: Supabase, params: URLSearchParams) {
     );
   }
 
-  const { data: profile } = await supabase
+  // 1) profiles.email で検索
+  let { data: profile, error: profileErr } = await supabase
     .from("profiles")
     .select(
       "id, email, plan, subscription_status, created_at, drip_sent, stripe_customer_id, current_period_end, company_info, referred_by",
@@ -144,8 +169,50 @@ async function userDetail(supabase: Supabase, params: URLSearchParams) {
     .eq("email", email)
     .maybeSingle();
 
+  if (profileErr) {
+    return NextResponse.json(
+      { error: "profiles query failed", message: profileErr.message },
+      { status: 500 },
+    );
+  }
+
+  // 2) 見つからなければ auth.admin から id を引いて profiles を取得
   if (!profile) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+    const { data: authData, error: authErr } =
+      await supabase.auth.admin.listUsers();
+    if (authErr) {
+      return NextResponse.json(
+        {
+          error: "User not found in profiles, and auth.admin lookup failed",
+          message: authErr.message,
+        },
+        { status: 500 },
+      );
+    }
+    const authUser = authData.users.find(
+      (u: { email?: string | null }) =>
+        u.email?.toLowerCase() === email.toLowerCase(),
+    );
+    if (!authUser) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+    const { data: profileById } = await supabase
+      .from("profiles")
+      .select(
+        "id, email, plan, subscription_status, created_at, drip_sent, stripe_customer_id, current_period_end, company_info, referred_by",
+      )
+      .eq("id", authUser.id)
+      .maybeSingle();
+    profile = profileById;
+    if (!profile) {
+      return NextResponse.json(
+        {
+          error: "User found in auth.users but no profiles row",
+          auth_user_id: authUser.id,
+        },
+        { status: 404 },
+      );
+    }
   }
 
   const { data: quotes } = await supabase
