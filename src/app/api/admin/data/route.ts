@@ -164,13 +164,14 @@ async function userDetail(supabase: Supabase, params: URLSearchParams) {
   }
 
   // 1) profiles.email で検索
-  let { data: profile, error: profileErr } = await supabase
+  const { data: profileByEmail, error: profileErr } = await supabase
     .from("profiles")
     .select(
       "id, email, plan, subscription_status, created_at, drip_sent, stripe_customer_id, current_period_end, company_info, referred_by",
     )
     .eq("email", email)
     .maybeSingle();
+  let profile = profileByEmail;
 
   if (profileErr) {
     return NextResponse.json(
