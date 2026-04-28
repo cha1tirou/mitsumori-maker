@@ -14,6 +14,41 @@ function getAdminClient() {
   });
 }
 
+/**
+ * profiles テーブルの必須列が prod DB に存在するかをプローブ。
+ * 欠落列のリストを返す（empty なら正常）。
+ *
+ * 用途: admin ダッシュボードで schema drift を可視化。
+ * schema.sql 側で alter table add column if not exists を書いていても、
+ * Supabase に SQL Editor で適用し忘れると silent fail するので、毎回確認。
+ */
+const REQUIRED_PROFILE_COLUMNS = [
+  "id",
+  "email",
+  "plan",
+  "created_at",
+  "drip_sent",
+  "stripe_customer_id",
+  "subscription_status",
+] as const;
+
+export async function detectSchemaDrift(): Promise<string[]> {
+  const supabase = getAdminClient();
+  const missing: string[] = [];
+  await Promise.all(
+    REQUIRED_PROFILE_COLUMNS.map(async (col) => {
+      const { error } = await supabase
+        .from("profiles")
+        .select(`id, ${col}`)
+        .limit(1);
+      if (error && /column .+ does not exist/i.test(error.message)) {
+        missing.push(col);
+      }
+    }),
+  );
+  return missing;
+}
+
 export interface RevenueKpi {
   mrr: number;
   soloCount: number;

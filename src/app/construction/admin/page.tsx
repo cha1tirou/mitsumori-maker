@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { fetchAdminStats } from "@/lib/supabase/admin-queries";
+import { fetchAdminStats, detectSchemaDrift } from "@/lib/supabase/admin-queries";
 import {
   HardHat,
   Users,
@@ -39,7 +39,10 @@ export default async function AdminPage() {
     );
   }
 
-  const stats = await fetchAdminStats();
+  const [stats, missingColumns] = await Promise.all([
+    fetchAdminStats(),
+    detectSchemaDrift(),
+  ]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -59,6 +62,20 @@ export default async function AdminPage() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+        {missingColumns.length > 0 && (
+          <div className="bg-red-50 border-2 border-red-300 rounded-xl p-4">
+            <p className="font-bold text-red-900 text-sm mb-1">
+              🚨 Schema drift 検出: profiles に列欠落
+            </p>
+            <p className="text-xs text-red-800 mb-2">
+              欠落列: <code className="bg-red-100 px-1.5 py-0.5 rounded">{missingColumns.join(", ")}</code>
+            </p>
+            <p className="text-xs text-red-800">
+              対処: <code>supabase/schema.sql</code> 該当の <code>alter table ... add column if not exists</code> を Supabase SQL Editor で実行してください。
+            </p>
+          </div>
+        )}
+
         {/* KPI カード */}
         <section className="grid md:grid-cols-4 gap-4">
           <KpiCard

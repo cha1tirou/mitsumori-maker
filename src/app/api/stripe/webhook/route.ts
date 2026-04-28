@@ -86,11 +86,9 @@ export async function POST(request: NextRequest) {
             (sub.status === "active" || sub.status === "trialing") &&
             !planInfo
           ) {
+            // Vercel function log + Stripe Dashboard で確認
             console.error(
-              `Stripe Webhook: Price ID ${priceId} がどのプランにも一致しません。環境変数 STRIPE_PRICE_SOLO_MONTHLY 等を確認してください。`
-            );
-            await notifySlack(
-              `🚨 課金されたがプラン特定不能: user=${userId}, priceId=${priceId}. 環境変数を確認してください。`
+              `[stripe/webhook] Price ID ${priceId} がプラン未一致 user=${userId}. 環境変数 STRIPE_PRICE_* を確認`
             );
           }
           const { error } = await supabase
@@ -138,28 +136,14 @@ export async function POST(request: NextRequest) {
     }
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);
-    console.error("Webhook 処理エラー:", err);
-    await notifySlack(
-      `⚠️ Stripe Webhook 処理失敗: ${event.type}\nエラー: ${errorMsg}\nevent ID: ${event.id}`
+    // 5xx で返すと Stripe が自動リトライ + Stripe Dashboard で失敗一覧が見える
+    console.error(
+      `[stripe/webhook] handler failed event=${event.type} id=${event.id}: ${errorMsg}`
     );
     return NextResponse.json({ error: "handler_failed" }, { status: 500 });
   }
 
   return NextResponse.json({ received: true });
-}
-
-async function notifySlack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_URL;
-  if (!url) return;
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-  } catch {
-    // Slackエラーで本体処理を止めない
-  }
 }
 
 function currentPeriodEnd(sub: Stripe.Subscription): string | null {
