@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { getCurrentUserProfile } from "@/lib/supabase/queries";
 import { fetchAdminStats } from "@/lib/supabase/admin-queries";
-import { isAdmin } from "@/lib/admin";
 import {
   HardHat,
   Users,
@@ -27,6 +24,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
+  // 認証は Edge Middleware の Basic 認証のみ（ADMIN_BASIC_AUTH_USER/PASS）
+  // Supabase ログイン + ADMIN_EMAILS の二重ガードは 2026-04-28 に撤廃（運用負荷
+  // 軽減のため）。Basic 認証の ID/PW を強固に保つこと。
   if (!isSupabaseConfigured()) {
     return (
       <div className="min-h-screen bg-gray-50 p-8">
@@ -34,31 +34,6 @@ export default async function AdminPage() {
           <p className="text-sm text-gray-600">
             管理画面は Supabase 連携後にご利用いただけます。
           </p>
-        </div>
-      </div>
-    );
-  }
-
-  const { user } = await getCurrentUserProfile();
-  if (!user) {
-    redirect("/construction/login?redirect=/construction/admin");
-  }
-  if (!isAdmin(user.email)) {
-    return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-2xl mx-auto bg-white rounded-2xl border border-gray-100 p-8 text-center">
-          <p className="text-sm text-red-700 font-bold mb-2">
-            管理者権限がありません
-          </p>
-          <p className="text-xs text-gray-500">
-            ADMIN_EMAILS 環境変数に登録されたメールアドレスのみアクセス可能です。
-          </p>
-          <Link
-            href="/construction/mypage"
-            className="inline-block mt-4 text-xs text-kenmitsu-navy hover:underline"
-          >
-            マイページへ戻る
-          </Link>
         </div>
       </div>
     );
@@ -79,7 +54,7 @@ export default async function AdminPage() {
               管理ダッシュボード <span className="text-kenmitsu-orange">(Admin)</span>
             </span>
           </Link>
-          <div className="text-xs text-gray-400">{user.email}</div>
+          <div className="text-xs text-gray-400">Basic Auth 経由</div>
         </div>
       </header>
 
