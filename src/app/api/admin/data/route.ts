@@ -51,6 +51,8 @@ export async function GET(request: NextRequest) {
       return await quotesRecent(supabase, searchParams);
     case "drip_status":
       return await dripStatus(supabase, searchParams);
+    case "schema_check":
+      return await schemaCheck(supabase);
     case "help":
     case null:
       return NextResponse.json({
@@ -60,6 +62,7 @@ export async function GET(request: NextRequest) {
           summary: "?q=summary — 集計指標（KPI）",
           quotes_recent: "?q=quotes_recent&limit=20 — 最新見積書一覧",
           drip_status: "?q=drip_status&limit=20 — ドリップメール送信状況",
+          schema_check: "?q=schema_check — profiles の列ごとに select 試行",
         },
       });
     default:
@@ -328,7 +331,7 @@ async function summary(supabase: Supabase) {
 async function quotesRecent(supabase: Supabase, params: URLSearchParams) {
   const limit = Math.min(parseInt(params.get("limit") ?? "20", 10) || 20, 100);
 
-  const { data: quotes } = await supabase
+  const { data: quotes, error: quotesErr } = await supabase
     .from("construction_quotes")
     .select(
       "id, user_id, quote_number, client_name, subject, total, created_at, updated_at",
@@ -337,18 +340,35 @@ async function quotesRecent(supabase: Supabase, params: URLSearchParams) {
     .order("created_at", { ascending: false })
     .limit(limit);
 
+  if (quotesErr) {
+    return NextResponse.json(
+      { error: "quotes query failed", message: quotesErr.message, details: quotesErr },
+      { status: 500 },
+    );
+  }
+
   if (!quotes || quotes.length === 0) {
-    return NextResponse.json({ count: 0, quotes: [] });
+    return NextResponse.json({ count: 0, quotes: [], note: "construction_quotes 0 rows" });
   }
 
   // user_id → email を引いて見やすく
   const userIds = Array.from(
     new Set(quotes.map((q: { user_id: string }) => q.user_id)),
   );
-  const { data: users } = await supabase
+  const { data: users, error: usersErr } = await supabase
     .from("profiles")
     .select("id, email")
     .in("id", userIds);
+  if (usersErr) {
+    return NextResponse.json(
+      {
+        error: "profiles lookup failed",
+        message: usersErr.message,
+        quotes_count: quotes.length,
+      },
+      { status: 500 },
+    );
+  }
   const emailMap = new Map<string, string>();
   (users ?? []).forEach((u: { id: string; email: string }) => {
     emailMap.set(u.id, u.email);
@@ -366,14 +386,57 @@ async function quotesRecent(supabase: Supabase, params: URLSearchParams) {
 async function dripStatus(supabase: Supabase, params: URLSearchParams) {
   const limit = Math.min(parseInt(params.get("limit") ?? "20", 10) || 20, 100);
 
-  const { data: profiles } = await supabase
+  const { data: profiles, error: profilesErr } = await supabase
     .from("profiles")
     .select("email, created_at, plan, drip_sent")
     .order("created_at", { ascending: false })
     .limit(limit);
 
+  if (profilesErr) {
+    return NextResponse.json(
+      { error: "profiles query failed", message: profilesErr.message, details: profilesErr },
+      { status: 500 },
+    );
+  }
+
   return NextResponse.json({
     count: (profiles ?? []).length,
     users: profiles ?? [],
+    note: (profiles ?? []).length === 0 ? "0 rows returned" : undefined,
   });
+}
+
+/** profiles の列ごとに select を試して、どの列で壊れるか切り分ける */
+async function schemaCheck(supabase: Supabase) {
+  const probes: Array<{ label: string; columns: string }> = [
+    { label: "id_only", columns: "id" },
+    { label: "id_email", columns: "id, email" },
+    { label: "id_plan", columns: "id, plan" },
+    { label: "id_created_at", columns: "id, created_at" },
+    { label: "id_drip_sent", columns: "id, drip_sent" },
+    { label: "id_referral_code", columns: "id, referral_code" },
+    { label: "id_referred_by", columns: "id, referred_by" },
+    { label: "id_subscription_status", columns: "id, subscription_status" },
+    { label: "id_company_info", columns: "id, company_info" },
+    { label: "all_combined", columns: "id, email, plan, created_at, drip_sent" },
+  ];
+
+  const results = await Promise.all(
+    probes.map(async (p) => {
+      const { data, error, count } = await supabase
+        .from("profiles")
+        .select(p.columns, { count: "exact" })
+        .limit(1);
+      return {
+        label: p.label,
+        columns: p.columns,
+        ok: !error,
+        rows_returned: data?.length ?? 0,
+        total_count: count ?? null,
+        error: error?.message ?? null,
+      };
+    }),
+  );
+
+  return NextResponse.json({ results });
 }
