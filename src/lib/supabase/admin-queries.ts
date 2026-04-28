@@ -57,6 +57,10 @@ export interface AdminStats {
     email: string;
     plan: string;
     created_at: string;
+    /** その人が作成した見積書数（deleted_at is null のみ） */
+    quotes_count: number;
+    /** その人の最終見積書更新日時（活動の最新タイムスタンプ） */
+    last_active: string | null;
   }>;
 }
 
@@ -201,12 +205,44 @@ export async function fetchAdminStats(): Promise<AdminStats> {
     .sort((a, b) => b.invited_count - a.invited_count)
     .slice(0, 10);
 
-  // Recent signups
-  const { data: recentSignups } = await supabase
+  // Recent signups（直近 10 名・各人の見積書活動付き）
+  const { data: recentSignupsRaw } = await supabase
     .from("profiles")
-    .select("email, plan, created_at")
+    .select("id, email, plan, created_at")
     .order("created_at", { ascending: false })
     .limit(10);
+
+  const recentSignupIds = (recentSignupsRaw ?? []).map((r) => r.id as string);
+  const { data: quotesByUser } = recentSignupIds.length > 0
+    ? await supabase
+        .from("construction_quotes")
+        .select("user_id, updated_at")
+        .in("user_id", recentSignupIds)
+        .is("deleted_at", null)
+    : { data: [] };
+
+  const quotesMap = new Map<string, { count: number; lastActive: string | null }>();
+  (quotesByUser ?? []).forEach((q: { user_id: string; updated_at: string }) => {
+    const cur = quotesMap.get(q.user_id) ?? { count: 0, lastActive: null };
+    cur.count += 1;
+    if (!cur.lastActive || q.updated_at > cur.lastActive) {
+      cur.lastActive = q.updated_at;
+    }
+    quotesMap.set(q.user_id, cur);
+  });
+
+  const recentSignups = (recentSignupsRaw ?? []).map(
+    (r: { id: string; email: string; plan: string; created_at: string }) => {
+      const activity = quotesMap.get(r.id) ?? { count: 0, lastActive: null };
+      return {
+        email: r.email,
+        plan: r.plan,
+        created_at: r.created_at,
+        quotes_count: activity.count,
+        last_active: activity.lastActive,
+      };
+    },
+  );
 
   return {
     users: {
@@ -248,7 +284,6 @@ export async function fetchAdminStats(): Promise<AdminStats> {
         : null,
     },
     referralLeaderboard,
-    recentSignups:
-      (recentSignups as { email: string; plan: string; created_at: string }[]) ?? [],
+    recentSignups,
   };
 }

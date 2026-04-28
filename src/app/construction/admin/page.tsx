@@ -125,24 +125,47 @@ export default async function AdminPage() {
 
         {/* 最近の登録 & リファラルリーダーボード */}
         <section className="grid md:grid-cols-2 gap-6">
-          <Panel title="最近のユーザー登録">
+          <Panel title="最近のユーザー登録（見積書活動付き）">
             {stats.recentSignups.length === 0 ? (
               <p className="text-xs text-gray-500 py-4 text-center">
                 まだ登録がありません
               </p>
             ) : (
               <ul className="divide-y divide-gray-100 text-sm">
-                {stats.recentSignups.map((u, i) => (
-                  <li key={i} className="py-2 flex items-center justify-between">
-                    <span className="truncate flex-1">{u.email}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded mx-2 bg-gray-100 text-gray-700">
-                      {u.plan.toUpperCase()}
-                    </span>
-                    <span className="text-[11px] text-gray-500">
-                      {new Date(u.created_at).toLocaleDateString("ja-JP")}
-                    </span>
-                  </li>
-                ))}
+                {stats.recentSignups.map((u, i) => {
+                  const isActive = u.quotes_count > 0;
+                  return (
+                    <li key={i} className="py-2.5">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="truncate flex-1 text-[13px]">
+                          {u.email}
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-700">
+                          {u.plan.toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 text-[10.5px] text-gray-500 pl-1">
+                        <span>
+                          登録: {new Date(u.created_at).toLocaleDateString("ja-JP")}
+                        </span>
+                        <span
+                          className={
+                            isActive
+                              ? "font-bold text-kenmitsu-ok"
+                              : "text-gray-400"
+                          }
+                        >
+                          見積書: {u.quotes_count}件
+                        </span>
+                        {u.last_active && (
+                          <span className="text-gray-400">
+                            最終: {new Date(u.last_active).toLocaleDateString("ja-JP")}
+                          </span>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </Panel>
