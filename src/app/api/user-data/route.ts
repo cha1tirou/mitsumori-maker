@@ -21,11 +21,18 @@ export async function GET() {
     return NextResponse.json({ error: "ログインが必要です" }, { status: 401 });
   }
 
-  const { data: profile } = await supabase
+  const { data: profile, error } = await supabase
     .from("profiles")
     .select("company_info, price_master, customer_master")
     .eq("id", user.id)
     .maybeSingle();
+
+  if (error) {
+    return NextResponse.json(
+      { error: "プロフィール取得に失敗しました", message: error.message },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({
     companyInfo: profile?.company_info ?? null,

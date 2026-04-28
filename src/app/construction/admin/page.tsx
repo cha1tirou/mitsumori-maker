@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { fetchAdminStats, detectSchemaDrift } from "@/lib/supabase/admin-queries";
+import { fetchAdminStats, detectSchemaDrift, checkConfigHealth } from "@/lib/supabase/admin-queries";
 import {
   HardHat,
   Users,
@@ -43,6 +43,8 @@ export default async function AdminPage() {
     fetchAdminStats(),
     detectSchemaDrift(),
   ]);
+  const configItems = checkConfigHealth();
+  const missingConfig = configItems.filter((c) => !c.ok);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -75,6 +77,48 @@ export default async function AdminPage() {
             </p>
           </div>
         )}
+
+        {/* Config health: 環境変数欠落 */}
+        <section className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="text-base font-bold text-gray-900">
+              設定ヘルス
+              {missingConfig.length > 0 ? (
+                <span className="ml-2 text-xs font-bold text-red-600">
+                  ⚠️ {missingConfig.length} 件欠落
+                </span>
+              ) : (
+                <span className="ml-2 text-xs font-bold text-kenmitsu-ok">
+                  ✓ 全項目 OK
+                </span>
+              )}
+            </h2>
+            <span className="text-xs text-gray-500">広告 / 課金 / メールに必須</span>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+            {(["core", "billing", "email", "ads"] as const).map((cat) => {
+              const items = configItems.filter((c) => c.category === cat);
+              const catLabel = { core: "コア", billing: "課金", email: "メール", ads: "広告計測" }[cat];
+              return (
+                <div key={cat} className="py-1">
+                  <p className="font-bold text-gray-700 mb-1">{catLabel}</p>
+                  <ul className="space-y-0.5">
+                    {items.map((c) => (
+                      <li key={c.key} className={c.ok ? "text-gray-600" : "text-red-700 font-medium"}>
+                        {c.ok ? "✓" : "✗"} <span className="font-mono text-[11px]">{c.key}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+          {missingConfig.some((c) => c.category === "ads") && (
+            <p className="text-xs text-red-700 mt-3">
+              ⚠️ 広告 conversion 計測の env 欠落 → Google Ads が課金成立を学習できず、広告費が無駄になります。Vercel の環境変数を確認してください。
+            </p>
+          )}
+        </section>
 
         {/* KPI カード */}
         <section className="grid md:grid-cols-4 gap-4">

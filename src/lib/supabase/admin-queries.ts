@@ -49,6 +49,48 @@ export async function detectSchemaDrift(): Promise<string[]> {
   return missing;
 }
 
+/**
+ * 広告ファネル・課金に必須の環境変数をチェック。
+ * 不足があると ad spend が無駄になる（conversion 計測されない・checkout 失敗）。
+ *
+ * カテゴリ:
+ * - core: サービス起動に必須
+ * - billing: Stripe 課金導線に必須
+ * - email: ドリップメール・登録メールに必須
+ * - ads: 広告 conversion 計測に必須
+ */
+export interface ConfigHealthItem {
+  key: string;
+  label: string;
+  category: "core" | "billing" | "email" | "ads";
+  ok: boolean;
+}
+
+export function checkConfigHealth(): ConfigHealthItem[] {
+  const has = (k: string) => Boolean(process.env[k]?.trim());
+  return [
+    { key: "NEXT_PUBLIC_SUPABASE_URL", label: "Supabase URL (public)", category: "core", ok: has("NEXT_PUBLIC_SUPABASE_URL") },
+    { key: "NEXT_PUBLIC_SUPABASE_ANON_KEY", label: "Supabase anon key", category: "core", ok: has("NEXT_PUBLIC_SUPABASE_ANON_KEY") },
+    { key: "SUPABASE_SERVICE_ROLE_KEY", label: "Supabase service role", category: "core", ok: has("SUPABASE_SERVICE_ROLE_KEY") },
+    { key: "CRON_SECRET", label: "Cron secret", category: "core", ok: has("CRON_SECRET") },
+    { key: "ADMIN_BASIC_AUTH_USER", label: "Admin Basic Auth user", category: "core", ok: has("ADMIN_BASIC_AUTH_USER") },
+    { key: "ADMIN_BASIC_AUTH_PASS", label: "Admin Basic Auth pass", category: "core", ok: has("ADMIN_BASIC_AUTH_PASS") },
+
+    { key: "STRIPE_SECRET_KEY", label: "Stripe secret key", category: "billing", ok: has("STRIPE_SECRET_KEY") },
+    { key: "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY", label: "Stripe publishable key", category: "billing", ok: has("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY") },
+    { key: "STRIPE_WEBHOOK_SECRET", label: "Stripe webhook secret", category: "billing", ok: has("STRIPE_WEBHOOK_SECRET") },
+    { key: "STRIPE_PRICE_SOLO_MONTHLY", label: "Stripe Solo 月額 Price ID", category: "billing", ok: has("STRIPE_PRICE_SOLO_MONTHLY") },
+    { key: "STRIPE_PRICE_SOLO_YEARLY", label: "Stripe Solo 年額 Price ID", category: "billing", ok: has("STRIPE_PRICE_SOLO_YEARLY") },
+
+    { key: "RESEND_API_KEY", label: "Resend API key", category: "email", ok: has("RESEND_API_KEY") },
+    { key: "RESEND_FROM_EMAIL", label: "Resend 送信元メール", category: "email", ok: has("RESEND_FROM_EMAIL") },
+
+    { key: "NEXT_PUBLIC_GOOGLE_ADS_ID", label: "Google Ads コンバージョン ID", category: "ads", ok: has("NEXT_PUBLIC_GOOGLE_ADS_ID") },
+    { key: "NEXT_PUBLIC_GADS_CONV_SIGNUP", label: "Google Ads: 登録 conversion", category: "ads", ok: has("NEXT_PUBLIC_GADS_CONV_SIGNUP") },
+    { key: "NEXT_PUBLIC_GADS_CONV_SUB_SOLO", label: "Google Ads: 課金 conversion", category: "ads", ok: has("NEXT_PUBLIC_GADS_CONV_SUB_SOLO") },
+  ];
+}
+
 export interface RevenueKpi {
   mrr: number;
   soloCount: number;

@@ -41,11 +41,19 @@ export async function DELETE() {
   // 有料サブスクが active な間はアカウント削除をブロック
   // 自動キャンセル経路は採用しない（Stripe API 失敗で課金継続するリスクを排除する設計）。
   // ユーザーは Stripe Customer Portal で先に解約する必要がある。
-  const { data: profile } = await admin
+  const { data: profile, error: profileErr } = await admin
     .from("profiles")
     .select("stripe_subscription_id, subscription_status")
     .eq("id", user.id)
     .maybeSingle();
+
+  if (profileErr) {
+    // 有料判定が失敗した状態で auth.users を消すと、Stripe 課金が継続するリスクあり
+    return NextResponse.json(
+      { error: "プロフィール取得に失敗。サポートにお問い合わせください。" },
+      { status: 500 },
+    );
+  }
 
   const ACTIVE_STATES = ["active", "trialing", "past_due", "unpaid"];
   if (
