@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
 
 export const metadata: Metadata = {
   title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則 | ケンミツ",
@@ -308,6 +309,8 @@ export default function KaiseiKensetsuPage() {
               </li>
             </ul>
           </div>
+
+          <ConstructionAuthor />
         </article>
       </main>
     </div>

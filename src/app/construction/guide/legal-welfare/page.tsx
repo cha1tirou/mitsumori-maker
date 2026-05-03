@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
 
 export const metadata: Metadata = {
   title: "法定福利費の計算方法と業界標準料率【建設業向け】見積書への書き方 | ケンミツ",
@@ -280,6 +281,8 @@ export default function LegalWelfarePage() {
               </li>
             </ul>
           </div>
+
+          <ConstructionAuthor />
         </article>
       </main>
     </div>

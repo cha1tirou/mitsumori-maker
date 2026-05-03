@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
 
 export const metadata: Metadata = {
   title: "フリーランス新法と建設業一人親方への影響【2026年版】見積書・契約書の対応 | ケンミツ",
@@ -251,6 +252,8 @@ export default function FreelanceLawPage() {
               </li>
             </ul>
           </div>
+
+          <ConstructionAuthor />
         </article>
       </main>
     </div>

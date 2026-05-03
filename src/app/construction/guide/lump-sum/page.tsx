@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
 
 export const metadata: Metadata = {
   title: "見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】 | ケンミツ",
@@ -345,6 +346,8 @@ export default function LumpSumGuidePage() {
               </li>
             </ul>
           </div>
+
+          <ConstructionAuthor />
         </article>
       </main>
     </div>

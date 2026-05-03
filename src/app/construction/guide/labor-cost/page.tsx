@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
+import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
 
 export const metadata: Metadata = {
   title: "見積書の人件費（労務費）の書き方｜建設業の工数・単価の記載例 | ケンミツ",
@@ -290,6 +291,8 @@ export default function LaborCostGuidePage() {
               </li>
             </ul>
           </div>
+
+          <ConstructionAuthor />
         </article>
       </main>
     </div>
