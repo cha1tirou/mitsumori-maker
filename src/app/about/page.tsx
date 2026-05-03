@@ -37,13 +37,13 @@ export default function AboutPage() {
               見積書メーカーを作った理由
             </h2>
             <p className="mb-4">
-              中小企業の経理業務に携わる中で、「見積書を1枚作るためだけに有料ソフトを契約するのは負担が大きい」という声を数多く耳にしました。Excelテンプレートは計算ミスが起きやすく、フォーマットの統一も難しい。かといって、既存のクラウドサービスは会員登録が必須で、無料プランには制限がある。
+              「見積書を1枚作るためだけに有料ソフトを契約するのは負担が大きい」「Excelテンプレートは計算ミスが起きやすい」「既存のクラウドサービスは会員登録が必須で無料プランに制限がある」——こうした課題を解決する、登録不要・完全無料で使えるブラウザ完結型のツールがあれば便利だと考え、2026年3月に見積書メーカーを公開しました。
             </p>
             <p className="mb-4">
-              「登録不要・完全無料で、ブラウザだけで見積書が完成するツールがあれば」——その思いから、2026年3月に見積書メーカーを公開しました。入力データはサーバーに保存せず、すべてブラウザ上で処理する設計にすることで、セキュリティ面の不安なく安心してご利用いただけます。
+              入力データはサーバーに保存せず、すべてブラウザ上で処理する設計にすることで、セキュリティ面の不安なくご利用いただけます。
             </p>
             <p>
-              開発者自身が経理実務で感じた不便を解消するために作ったツールだからこそ、実務で本当に必要な機能を優先的に実装しています。ガイド記事も、現場でよくある疑問や失敗例をもとに執筆しています。
+              ガイド記事は、ツール開発の過程で調査した内容と、国税庁・中小企業庁・国土交通省などが公開する一次情報をもとに執筆しています。記載内容は一般的な情報提供を目的としており、業界での実務経験に基づくものではありません。実際の業務上の判断は、税理士・会計士・行政書士など各分野の専門家にご確認ください。
             </p>
           </section>
 
@@ -56,24 +56,24 @@ export default function AboutPage() {
                 <span className="text-white font-bold text-xl">M</span>
               </div>
               <div>
-                <p className="font-semibold text-gray-900">見積書メーカー 編集部</p>
+                <p className="font-semibold text-gray-900">見積書メーカー（個人運営）</p>
                 <p className="text-sm text-gray-600 mt-1">
-                  中小企業の経理・バックオフィス業務の経験をもとに、帳票作成の効率化ツールとノウハウを提供しています。
+                  Webアプリケーション開発を主業務とする個人開発者が運営しています。業界での実務経験はありません。
                 </p>
               </div>
             </div>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start">
                 <span className="text-gray-400 mr-2 mt-0.5">-</span>
-                <span>中小企業の経理実務経験（見積書・請求書・納品書の作成・管理）</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-gray-400 mr-2 mt-0.5">-</span>
                 <span>Webアプリケーション開発（Next.js / TypeScript）</span>
               </li>
               <li className="flex items-start">
                 <span className="text-gray-400 mr-2 mt-0.5">-</span>
-                <span>インボイス制度・電子帳簿保存法の実務対応経験</span>
+                <span>記事は公的機関（国税庁・中小企業庁・国土交通省など）の公開情報を参照して執筆</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-gray-400 mr-2 mt-0.5">-</span>
+                <span>業界実務経験はなく、本サイトの記事は一般的な情報提供を目的としています</span>
               </li>
             </ul>
           </section>
