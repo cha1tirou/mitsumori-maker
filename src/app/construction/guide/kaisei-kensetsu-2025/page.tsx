@@ -3,6 +3,9 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
 import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
+import GuideDisclaimer from "@/components/construction/guide/GuideDisclaimer";
+import GuideReferences from "@/components/construction/guide/GuideReferences";
+import GuideScreenshotSlot from "@/components/construction/guide/GuideScreenshotSlot";
 
 export const metadata: Metadata = {
   title: "改正建設業法2025【完全ガイド】見積書の書き方・対応事項・罰則 | ケンミツ",
@@ -65,9 +68,16 @@ export default function KaiseiKensetsuPage() {
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
 
+          <GuideDisclaimer />
+
           <p className="text-gray-700 leading-relaxed mb-8">
             2025年12月1日、改正建設業法が全面施行されました。中小建設業者を含むすべての建設業者にとって、見積書の書き方・契約書の記載事項・労務費の扱いに大きな変更が入っています。本記事では、見積書作成の観点から「何が変わり、どう対応すべきか」を実務レベルで徹底解説します。
           </p>
+
+          <GuideScreenshotSlot
+            alt="ケンミツの改正建設業法チェッカーが「一式」表記・労務費未入力を警告している画面"
+            caption="ケンミツの法令チェッカーは、改正建設業法 2025 で求められる項目を自動で警告します"
+          />
 
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 my-8 text-sm">
             <p className="font-bold text-amber-900 mb-2">この記事でわかること</p>
@@ -309,6 +319,26 @@ export default function KaiseiKensetsuPage() {
               </li>
             </ul>
           </div>
+
+          <GuideReferences
+            items={[
+              {
+                label: "国土交通省（建設業に関する公開情報）",
+                href: "https://www.mlit.go.jp/",
+                note: "改正建設業法・標準見積書・労務費単価などの一次情報",
+              },
+              {
+                label: "e-Gov 法令検索（建設業法 条文）",
+                href: "https://elaws.e-gov.jp/",
+                note: "建設業法の条文を直接参照できます",
+              },
+              {
+                label: "厚生労働省（社会保険・労働保険）",
+                href: "https://www.mhlw.go.jp/",
+                note: "法定福利費・社会保険加入対策の関連情報",
+              },
+            ]}
+          />
 
           <ConstructionAuthor />
         </article>

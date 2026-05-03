@@ -3,6 +3,8 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
 import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
+import GuideDisclaimer from "@/components/construction/guide/GuideDisclaimer";
+import GuideReferences from "@/components/construction/guide/GuideReferences";
 
 export const metadata: Metadata = {
   title: "フリーランス新法と建設業一人親方への影響【2026年版】見積書・契約書の対応 | ケンミツ",
@@ -64,6 +66,8 @@ export default function FreelanceLawPage() {
             フリーランス新法と建設業一人親方への影響【2026年版】見積書・契約書の対応
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
+
+          <GuideDisclaimer />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             2024年11月1日、フリーランス新法（正式名称：特定受託事業者に係る取引の適正化等に関する法律）が施行されました。この法律は建設業の一人親方も適用対象となり、発注者との取引に新しいルールが加わっています。全建総連をはじめとする建設業界団体も注意喚起を行っており、見積書・請求書の書き方にも影響が出ています。本記事では、建設業一人親方が知っておくべきフリーランス新法のポイントを実務レベルで解説します。
@@ -252,6 +256,26 @@ export default function FreelanceLawPage() {
               </li>
             </ul>
           </div>
+
+          <GuideReferences
+            items={[
+              {
+                label: "公正取引委員会（フリーランス新法 公開情報）",
+                href: "https://www.jftc.go.jp/",
+                note: "特定受託事業者に係る取引の適正化等に関する法律の公式情報",
+              },
+              {
+                label: "厚生労働省（フリーランス・業務委託の関連情報）",
+                href: "https://www.mhlw.go.jp/",
+                note: "建設業一人親方の社会保険・労働環境に関する公開情報",
+              },
+              {
+                label: "e-Gov 法令検索（フリーランス新法・建設業法）",
+                href: "https://elaws.e-gov.jp/",
+                note: "フリーランス新法・建設業法の条文",
+              },
+            ]}
+          />
 
           <ConstructionAuthor />
         </article>

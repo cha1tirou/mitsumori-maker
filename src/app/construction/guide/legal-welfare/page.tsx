@@ -3,6 +3,8 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
 import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
+import GuideDisclaimer from "@/components/construction/guide/GuideDisclaimer";
+import GuideReferences from "@/components/construction/guide/GuideReferences";
 
 export const metadata: Metadata = {
   title: "法定福利費の計算方法と業界標準料率【建設業向け】見積書への書き方 | ケンミツ",
@@ -63,6 +65,8 @@ export default function LegalWelfarePage() {
             法定福利費の計算方法と業界標準料率【建設業向け】見積書への書き方
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
+
+          <GuideDisclaimer />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             建設業の見積書において、法定福利費を独立項目として明示することが求められるようになりました。特に2025年12月全面施行の改正建設業法では、労務費と並んで法定福利費の内訳明示が重要視されています。本記事では、法定福利費の計算方法・業界標準料率・見積書への書き方を実務レベルで解説します。
@@ -281,6 +285,26 @@ export default function LegalWelfarePage() {
               </li>
             </ul>
           </div>
+
+          <GuideReferences
+            items={[
+              {
+                label: "厚生労働省（社会保険・労働保険の公開情報）",
+                href: "https://www.mhlw.go.jp/",
+                note: "健康保険・厚生年金・雇用保険・労災保険の最新料率",
+              },
+              {
+                label: "国土交通省（建設業に関する公開情報）",
+                href: "https://www.mlit.go.jp/",
+                note: "標準見積書・社会保険加入対策の公式資料",
+              },
+              {
+                label: "e-Gov 法令検索（建設業法 条文）",
+                href: "https://elaws.e-gov.jp/",
+                note: "建設業法・関連法令の条文",
+              },
+            ]}
+          />
 
           <ConstructionAuthor />
         </article>

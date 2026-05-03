@@ -3,6 +3,8 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
 import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
+import GuideDisclaimer from "@/components/construction/guide/GuideDisclaimer";
+import GuideReferences from "@/components/construction/guide/GuideReferences";
 
 export const metadata: Metadata = {
   title: "見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】 | ケンミツ",
@@ -81,6 +83,8 @@ export default function LumpSumGuidePage() {
             見積書・請求書の「一式」の書き方・使い方ガイド【記載例付き】
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
+
+          <GuideDisclaimer />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             見積書を作成する際、明細欄に「一式」と記載するケースがあります。建設業では特に、工事費用やサービスをまとめて提示する場面で広く使われています。しかし改正建設業法 2025 の施行後、「一式」表記の使い方を誤ると元請や発注者からの差し戻し・信頼低下を招くこともあります。この記事では、見積書における「一式」の正しい書き方、使う場面、メリット・デメリット、改正建設業法との関係を解説します。
@@ -346,6 +350,21 @@ export default function LumpSumGuidePage() {
               </li>
             </ul>
           </div>
+
+          <GuideReferences
+            items={[
+              {
+                label: "国土交通省（建設業に関する公開情報）",
+                href: "https://www.mlit.go.jp/",
+                note: "改正建設業法・標準見積書・「一式」表記に関する公的資料",
+              },
+              {
+                label: "e-Gov 法令検索（建設業法 条文）",
+                href: "https://elaws.e-gov.jp/",
+                note: "建設業法 第19条・第20条など見積条件書関連の条文",
+              },
+            ]}
+          />
 
           <ConstructionAuthor />
         </article>

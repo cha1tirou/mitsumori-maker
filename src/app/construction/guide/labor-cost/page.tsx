@@ -3,6 +3,8 @@ import Link from "next/link";
 import { HardHat } from "lucide-react";
 import KenmitsuGuideJsonLd from "@/components/construction/KenmitsuGuideJsonLd";
 import ConstructionAuthor from "@/components/construction/ConstructionAuthor";
+import GuideDisclaimer from "@/components/construction/guide/GuideDisclaimer";
+import GuideReferences from "@/components/construction/guide/GuideReferences";
 
 export const metadata: Metadata = {
   title: "見積書の人件費（労務費）の書き方｜建設業の工数・単価の記載例 | ケンミツ",
@@ -62,6 +64,8 @@ export default function LaborCostGuidePage() {
             見積書の人件費（労務費）の書き方｜建設業の工数・単価の記載例
           </h1>
           <p className="text-gray-500 text-sm mb-8">更新日: 2026年4月26日</p>
+
+          <GuideDisclaimer />
 
           <p className="text-gray-700 leading-relaxed mb-8">
             建設業の見積書では、労務費（人件費）の記載が中核です。改正建設業法 2025 では「労務費の内訳明示」が努力義務化され、これまで「一式」でまとめていた業者も、職種・工数・単価を明示する必要が高まっています。本記事では、建設業の見積書における労務費の計算方法・単価設定・記載例を実務レベルで解説します。
@@ -291,6 +295,26 @@ export default function LaborCostGuidePage() {
               </li>
             </ul>
           </div>
+
+          <GuideReferences
+            items={[
+              {
+                label: "国土交通省（公共工事設計労務単価ほか）",
+                href: "https://www.mlit.go.jp/",
+                note: "建設業の労務単価・標準見積書の公式資料",
+              },
+              {
+                label: "厚生労働省（最低賃金・社会保険）",
+                href: "https://www.mhlw.go.jp/",
+                note: "労務費に関連する最低賃金・社会保険の最新情報",
+              },
+              {
+                label: "e-Gov 法令検索（建設業法 条文）",
+                href: "https://elaws.e-gov.jp/",
+                note: "建設業法・関連法令の条文",
+              },
+            ]}
+          />
 
           <ConstructionAuthor />
         </article>
