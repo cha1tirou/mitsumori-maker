@@ -254,7 +254,7 @@ export default function ChecklistPage() {
             <strong>8セクション・全30項目</strong>のチェックリスト。
           </p>
           <p className="text-xs text-gray-500">
-            最終更新: 2026年4月18日 / ケンミツ編集部
+            最終更新: 2026年4月18日 / ケンミツ運営
           </p>
         </div>
 
@@ -399,7 +399,7 @@ export default function ChecklistPage() {
 
           <div className="mt-10 pt-6 border-t border-gray-200 text-center">
             <p className="text-xs text-gray-500 mb-2">
-              © 2026 ケンミツ 編集部 / mitsumori-maker.com
+              © 2026 ケンミツ / mitsumori-maker.com
             </p>
             <p className="text-[11px] text-gray-400">
               本チェックリストは情報提供を目的としています。法令の最終的な解釈は所属団体・専門家にご確認ください。
