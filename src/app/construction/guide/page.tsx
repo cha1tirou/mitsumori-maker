@@ -44,6 +44,11 @@ const guides = [
     title: "建設業の見積書テンプレート【無料】2025年法改正後の選び方",
     body: "改正建設業法 2025 後にテンプレートに必須の 5 項目、Excel・PDF・クラウド型の比較、よくある失敗例まで。",
   },
+  {
+    href: "/construction/guide/hitorioyakata-mitsumori-soft-free",
+    title: "一人親方の見積書ソフト【無料】2025年法改正対応の選び方",
+    body: "「無料」の 3 タイプ・必要な 5 つの最低要件・月の発行件数別の選び方・よくある失敗例まで。",
+  },
 ];
 
 export default function GuideIndexPage() {

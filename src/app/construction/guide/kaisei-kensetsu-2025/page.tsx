@@ -197,6 +197,51 @@ export default function KaiseiKensetsuPage() {
               公共工事を含め、発注側からの信用失墜リスク
             </li>
           </ul>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6 mb-3">
+            監督処分と罰則の違い
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            建設業法に基づく不利益は、大きく「監督処分」と「罰則」の2系統に分かれます。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              <strong>監督処分</strong>
+              ——国土交通大臣または都道府県知事による行政処分。指示処分・営業停止処分・許可取消処分の3段階で、建設業法第28条以下に規定されています。
+            </li>
+            <li>
+              <strong>罰則</strong>
+              ——刑罰として科される懲役・罰金。建設業法第47条以下に規定されており、許可なしでの請負・虚偽申請などが対象です。具体的な罰則金額・懲役年数は条文で定められており、改正のたびに見直されます。最新情報は e-Gov 法令検索で建設業法の条文を確認してください。
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6 mb-3">
+            見積書まわりで問題になりやすい行為
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            中小建設業者・一人親方が見積書作成の場面で陥りやすい違反・リスク行為としては、以下があります。
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 leading-relaxed mb-4 space-y-2">
+            <li>
+              建設業許可が必要な金額の工事を、許可なしで請け負って見積書を発行する
+            </li>
+            <li>
+              建設業許可番号を見積書に虚偽記載する
+            </li>
+            <li>
+              元請として下請に発注する際、見積条件書の必須項目（工事内容・工期・支払条件など）を欠いた状態で見積依頼を行う
+            </li>
+            <li>
+              労務費・法定福利費を不当に低く見積もり、下請に「買いたたき」と評価される金額を提示する
+            </li>
+            <li>
+              「一式」の多用により、内訳の透明性を欠いた見積書を提示する（改正法では努力義務）
+            </li>
+          </ul>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            行為の性質や金額・反復性によって、適用される処分や罰則は異なります。判断が難しいケースは、行政書士・所属する建設業組合・国土交通省の建設業課などに照会するのが安全です。
+          </p>
+
           <p className="text-gray-700 leading-relaxed mb-4">
             「努力義務」だからと放置していると、元請や発注者から「法令遵守していない業者」と判断され、継続取引に影響する可能性があります。
           </p>
