@@ -39,6 +39,11 @@ const guides = [
     title: "フリーランス新法と建設業一人親方",
     body: "2024 年 11 月施行のフリーランス新法が建設業一人親方に与える影響と、見積書での対応。",
   },
+  {
+    href: "/construction/guide/kensetsu-mitsumori-template-free",
+    title: "建設業の見積書テンプレート【無料】2025年法改正後の選び方",
+    body: "改正建設業法 2025 後にテンプレートに必須の 5 項目、Excel・PDF・クラウド型の比較、よくある失敗例まで。",
+  },
 ];
 
 export default function GuideIndexPage() {
